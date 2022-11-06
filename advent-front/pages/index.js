@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <Layout>
+    <div className="
+      flex flex-col items-center h-screen
+      overflow-auto
+      bg-[url('../public/img/wood_pattern.jpg')]
+    ">
 
       <Head>
         <title>서비스 명</title>
@@ -12,11 +17,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head> 
 
-      {/* 아래 h1 css 테스트용으로 추가한것임*/}
-      <h1 className='text-2xl font-bold text-sky-400'>
-        시작화면
-      </h1>
+      <div className="flex flex-col">
+        <h1 className="
+          flex flex-col items-center
+          mt-40
+          text-center text-4xl font-bold
+        ">
+          서비스 이름
+        </h1>
+        <div className="grid place-items-center">
+          <Image src='/img/wreath.png' alt="" width='400%' height='400%' className=""/>
+          <Link href='/main'>
+            <a className ="flex flex-col items-center mt-20 text-2xl">
+                시작하기
+            </a>
+          </Link>
+        </div>
+        <Layout/>
+      </div>
 
-    </Layout>
+    </div>
   )
 }
