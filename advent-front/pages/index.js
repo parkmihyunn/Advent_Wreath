@@ -13,7 +13,7 @@ export default function Home() {
       </Head> 
 
       {/* 아래 h1 css 테스트용으로 추가한것임*/}
-      <h1 className='text-2xl font-bold text-violet-500'>
+      <h1 className='text-2xl font-bold text-sky-400'>
         시작화면
       </h1>
 
