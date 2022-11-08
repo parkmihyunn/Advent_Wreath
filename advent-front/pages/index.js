@@ -21,12 +21,11 @@ export default function Home() {
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>
         </div>
-        <div className="grid place-items-center flex-1">
-          <div className="grid place-items-center flex-1">
-            <Image src='/img/wreath.png' width='275' height='280'/>
-          </div>
+        <div className="flex flex-col place-items-center flex-1">
+            <Image src='/img/wreath.png' width='280' height='280'/>
+
           <h1 className="
-            grid place-items-center items-center mt-10
+            place-items-center items-center pt-10
             text-center text-3xl text-white
           ">
             서비스 이름
