@@ -6,9 +6,9 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className="
-      flex flex-col items-center h-screen
-      overflow-auto
-      bg-[url('../public/img/wood_pattern.jpg')]
+      flex flex-col items-center h-screen max-w-max
+      overflow-auto bg-cover bg-local
+      bg-[url('../public/img/wood_pattern.png')]
     ">
 
       <Head>
@@ -18,24 +18,32 @@ export default function Home() {
       </Head> 
 
       <div className="flex flex-col h-full">
-        <h1 className="
-          flex flex-col items-center
-          mt-40
-          text-center text-4xl font-bold
-        ">
-          서비스 이름
-        </h1>
-        <div className="grid place-items-center flex-1">
-          <Image src='/img/wreath.png' alt="" width='400%' height='400%' className=""/>
-          <Link href='/main'>
-            <a className ="flex flex-col items-center mt-20 text-2xl">
-                시작하기
-            </a>
-          </Link>
+        <div className="top-0">
+          <Image src='/img/start_top.png' width='435' height='287'/>
         </div>
+        <div className="grid place-items-center flex-1">
+          <div className="grid place-items-center flex-1">
+            <Image src='/img/wreath.png' width='275' height='280'/>
+          </div>
+          <h1 className="
+            grid place-items-center items-center mt-10
+            text-center text-3xl text-white
+          ">
+            서비스 이름
+          </h1>
+        </div>
+        <div className="w-full relative mt-10">
+            <div className="w-full text-center m-auto relative">
+              <Image src='/img/start_btn.png' width='245' height='62'/>
+            </div>
+            <Link href='/main'>
+              <a className ="start-text flex flex-col items-center text-white">
+                  시작하기
+              </a>
+            </Link>
+          </div>
         <Layout/>
       </div>
-
     </div>
   )
 }
