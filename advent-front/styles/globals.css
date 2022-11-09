@@ -42,3 +42,61 @@
 	transform: translate( -50%, -50% );
     text-align:center;
 }
+
+.door-top {
+	position: absolute;
+	top: 43%;
+	left: 50%;
+	width: 100%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.sock-1{
+	position: absolute;
+	top: 180%;
+	left: 25%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.sock-2{
+	position: absolute;
+	top: 200%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.sock-3{
+	position: absolute;
+	top: 180%;
+	left: 70%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.wreath-text{
+	position: absolute;
+	top: 66%;
+	left: 50%;
+	width: 100%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.door-handle{
+	position: absolute;
+	top: 90%;
+	left: 17%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.collection{
+	position: absolute;
+	top: 97%;
+	left: 74%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
