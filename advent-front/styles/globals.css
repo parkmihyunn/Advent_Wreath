@@ -47,7 +47,6 @@
 	position: absolute;
 	top: 43%;
 	left: 50%;
-	width: 100%;
 	transform: translate( -50%, -50% );
     text-align:center;
 }
@@ -70,8 +69,8 @@
 
 .sock-3{
 	position: absolute;
-	top: 180%;
-	left: 70%;
+	top: 172%;
+	left: 75%;
 	transform: translate( -50%, -50% );
     text-align:center;
 }
@@ -89,14 +88,18 @@
 	position: absolute;
 	top: 90%;
 	left: 10%;
+	width: 76px;
+	height: 103px;
 	transform: translate( -50%, -50% );
     text-align:center;
 }
 
 .collection{
 	position: absolute;
-	top: 98%;
-	left: 80%;
+	width: 95px;
+	height: 131px;
+	top: 96%;
+	left: 78%;
 	transform: translate( -50%, -50% );
     text-align:center;
 }

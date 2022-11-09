@@ -22,7 +22,7 @@ export default function Home() {
           <Image src='/img/start_top.png' width='435' height='287'/>
         </div>
         <div className="flex flex-col place-items-center flex-1">
-            <Image src='/img/wreath.png' width='280' height='280'/>
+            <Image src='/img/wreath.png' width='259' height='282'/>
 
           <h1 className="
             place-items-center items-center pt-10
