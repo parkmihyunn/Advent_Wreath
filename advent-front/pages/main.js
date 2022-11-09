@@ -96,8 +96,10 @@ export default function Main(){
                     <div className="absolute top-3 right-20">
                         <Image src='/img/quiz_red.png' width='22' height='22'/>
                     </div>
-                    <div className="absolute top-8">
-                        <Image src='/img/quiz_text.png' width='80' height='16'/>
+                    <div className="quiz-text">
+                    <h1 className="text-center text-xl text-black">
+                        오늘의 퀴즈
+                    </h1>
                     </div>
                     <div className="absolute bottom-5">
                         <Image src='/img/quiz_deco.png' width='272' height='89'/>
