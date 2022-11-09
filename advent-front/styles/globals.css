@@ -88,15 +88,15 @@
 .door-handle{
 	position: absolute;
 	top: 90%;
-	left: 17%;
+	left: 10%;
 	transform: translate( -50%, -50% );
     text-align:center;
 }
 
 .collection{
 	position: absolute;
-	top: 97%;
-	left: 74%;
+	top: 98%;
+	left: 80%;
 	transform: translate( -50%, -50% );
     text-align:center;
 }

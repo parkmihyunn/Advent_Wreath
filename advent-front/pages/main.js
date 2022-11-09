@@ -26,8 +26,8 @@ export default function Main(){
             <div className="flex flex-col h-full">
 
                 <h1 className="
-                    flex flex-col ml-3 mt-3
-                    text-2xl text-left text-white pt-10 px-5
+                    flex flex-col ml-2
+                    text-2xl text-left text-white pt-8
                 ">서비스 이름</h1>
 
                 <div className="relative">
@@ -37,11 +37,11 @@ export default function Main(){
                     <div className="door-top">
                         <div className="flex justify-between mt-4 mb-1">
                             <h1 className="
-                                ml-14 
+                                ml-8
                                 text-white align-bottom
                             ">OOO님의 소원양말</h1>
                             <Link href='/wish-socks'>
-                                <h1 className="mr-14 mt-1 text-gray-500 text-xs align-bottom">
+                                <h1 className="mr-8 mt-1 text-gray-500 text-xs align-bottom">
                                     편집하기
                                 </h1>
                             </Link>
@@ -74,13 +74,11 @@ export default function Main(){
                                 편집하기
                             </h1>
                         </Link>
-                        <div className="flex justify-between px-10" >
-                            <div className="door-handle">
-                                <Image src='/img/handle.png' width='76' height='103'/>
-                            </div>
-                            <div className="collection">
-                                <Image src='/img/collection.png' width='95' height='131'/>
-                            </div>
+                        <div className="door-handle">
+                            <Image src='/img/handle.png' width='76' height='103'/>
+                        </div>
+                        <div className="collection">
+                            <Image src='/img/collection.png' width='95' height='131'/>
                         </div>
                     </div>
                 </div>
@@ -105,8 +103,8 @@ export default function Main(){
                         <Image src='/img/quiz_deco.png' width='272' height='89'/>
                     </div>
                 </div>
-                <Layout/>
             </div>
+            <Layout/>
         </div>
     );
 }
