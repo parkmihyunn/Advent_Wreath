@@ -41,13 +41,19 @@ export default function Main(){
                         </div>
                     </div>
                 </div>
-                <div className="grid place-items-center flex-1 bg-none relative">
+                <div className="grid place-items-center flex-1 relative" height='400'>
                     <Image src='/img/wreath_non.png' width='300' height='280'/>
                     <div className="absolute">
                         <Image src='/img/christmas_text.png' width='120' height='40'/>
                         <h1 className="text-center text-2xl">
                           D-15
                         </h1>
+                    </div>
+                    <div className="absolute left-5 bottom-0">
+                        <Image src='/img/handle.png' width='90' height='120'/>
+                    </div>
+                    <div className="px-10 absolute bottom-0 right-0">
+                        <Image src="/img/collection2.png" width='90' height='120'/>
                     </div>
                 </div>    
                 <div>
@@ -57,17 +63,26 @@ export default function Main(){
                     </h1>
                 </Link>
                 </div>
-                <div className="grid grid-rows-1 grid-flow-col gap-20 px-10" >
-                    <Image src='/img/handle.png' width='40' height='140'/>
-                    <Image src='/img/collection.png' width='80' height='140'/>
-                </div> 
-                {/* <div className="px-10 place-items-center grid">
-                    <Image src='/img/quiz_deco.png' width='300' height='100'/>
-                </div> */}
-                <div className="w-full text-center m-auto relative">
-                    <div className="px-10 place-items-center grid">
-                         <Image src='/img/quiz_deco.png' width='300' height='100'/>
-                    </div>
+
+                <div className="grid place-items-center relative top-5">
+                    <Image src='/img/quiz_line.png' width='307' height='165'/>
+                        <div className="absolute top-11">
+                            <Image src='/img/quiz_black.png' width='191' height='10'/>
+                        </div>
+                        <div className="absolute top-5">
+                            <Link href='/quiz'>
+                            <Image src='/img/quiz_white.png' width='149' height='40'/>
+                            </Link>
+                        </div>
+                        <div className="absolute top-3 right-20">
+                            <Image src='/img/quiz_red.png' width='22' height='22'/>
+                        </div>
+                        <div className="absolute top-8">
+                            <Image src='/img/quiz_text.png' width='80' height='16'/>
+                        </div>
+                        <div className="absolute bottom-5">
+                            <Image src='/img/quiz_deco.png' width='272' height='89'/>
+                        </div>
                 </div>
                 <Layout/>
             </div>
