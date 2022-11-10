@@ -83,30 +83,35 @@ export default function Main(){
                     </div>
                 </div>
 
-                <div className="grid place-items-center relative top-5">
-                    <Image src='/img/quiz_line.png' width='307' height='165'/>
-                    <div className="absolute top-11">
+                <div className="w-full relative top-5">
+                    <div className="w-full text-center m-auto relative">
+                        <Image src='/img/door-dorder_2.png' width='307' height='165'/>
+                    </div>
+                    <div className="quiz-black">
                         <Image src='/img/quiz_black.png' width='191' height='10'/>
                     </div>
-                    <div className="absolute top-5">
+                    <div className="quiz-white">
                         <Link href='/quiz'>
-                        <Image src='/img/quiz_white.png' width='149' height='40'/>
+                            <Image src='/img/quiz_white.png' width='149' height='40'/>
                         </Link>
                     </div>
-                    <div className="absolute top-3 right-20">
+                    <div className="quiz-red">
                         <Image src='/img/quiz_red.png' width='22' height='22'/>
                     </div>
                     <div className="quiz-text">
-                    <h1 className="text-center text-xl text-black">
-                        오늘의 퀴즈
-                    </h1>
+                        <Link href='/quiz'>
+                        <h1 className="text-center text-xl text-black">
+                            오늘의 퀴즈
+                        </h1></Link>
                     </div>
-                    <div className="absolute bottom-5">
+                    <div className="quiz-deco">
                         <Image src='/img/quiz_deco.png' width='272' height='89'/>
                     </div>
                 </div>
+                <div className="flex-1">
+                </div>
+                <Layout/>
             </div>
-            <Layout/>
         </div>
     );
 }
