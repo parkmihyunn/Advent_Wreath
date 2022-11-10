@@ -80,7 +80,7 @@
     text-align:center;
 }
 
-.quiz-red{
+.quiz-notification{
 	position: absolute;
 	top: 12%;
 	left: 72%;
@@ -92,7 +92,7 @@
 
 .quiz-text{
 	position: absolute;
-	top: 25%;
+	top: 24%;
 	left: 50%;
 	transform: translate( -50%, -50% );
     text-align:center;

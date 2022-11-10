@@ -4,7 +4,6 @@ import Layout from '../components/layout'
 import Link from 'next/link'
 
 export default function Main(){
-
     // 디데이 계산
     var today = new Date();
     var dDay = new Date(2022,11,25);
@@ -13,7 +12,7 @@ export default function Main(){
 
     return (
         <div className="
-            flex flex-col items-center h-screen max-w-md
+            flex flex-col items-center h-screen
             overflow-auto bg-cover bg-local
             bg-[url('../public/img/wood_pattern.png')]
         ">
@@ -22,11 +21,10 @@ export default function Main(){
             <meta name="description" content="콘텐트 내용" />
             <link rel="icon" href="/favicon.ico" />
             </Head> 
-        
-            <div className="flex flex-col h-full">
 
+            <div className="flex flex-col h-full">
                 <h1 className="
-                    flex flex-col ml-2
+                    flex flex-col ml-2 relative
                     text-2xl text-left text-white pt-8
                 ">서비스 이름</h1>
 
@@ -35,7 +33,7 @@ export default function Main(){
                         <Image src='/img/door-border_1.png' width='307' height='537'/>
                     </div>
                     <div className="door-top">
-                        <div className="flex justify-between mt-4 mb-1">
+                        <div className="flex justify-between mt-4 mb-1">  
                             <h1 className="
                                 ml-8
                                 text-white align-bottom
@@ -50,15 +48,9 @@ export default function Main(){
                             <div className="w-60 text-center m-auto relative">
                                 <Image src='/img/socks_line.png' width='350' height='50'/>
                             </div>
-                            <div className="sock-1">
-                                <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
-                            </div>
-                            <div className="sock-2">
-                                <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
-                            </div>
-                            <div className="sock-3">
-                                <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
-                            </div>
+                            <div className="sock-1"><Image src='/img/sock_1.png' width='83.95' height='102.5'/></div>
+                            <div className="sock-2"><Image src='/img/sock_2.png' width='79.07' height='109.33p'/></div>
+                            <div className="sock-3"><Image src='/img/sock_3.png' width='82.98' height='107.38'/></div>
                         </div>
                         <div className="pt-16 mt-6 place-items-center flex-1">
                             <Image src='/img/wreath_non_2.png' width='280' height='280'/>
@@ -74,12 +66,8 @@ export default function Main(){
                                 편집하기
                             </h1>
                         </Link>
-                        <div className="door-handle">
-                            <Image src='/img/handle.png' width='76' height='103'/>
-                        </div>
-                        <div className="collection">
-                            <Image src='/img/collection.png' width='95' height='131'/>
-                        </div>
+                        <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
+                        <div className="collection"><Image src='/img/collection.png' width='95' height='131'/></div>
                     </div>
                 </div>
 
@@ -91,25 +79,19 @@ export default function Main(){
                         <Image src='/img/quiz_black.png' width='191' height='10'/>
                     </div>
                     <div className="quiz-white">
-                        <Link href='/quiz'>
-                            <Image src='/img/quiz_white.png' width='149' height='40'/>
-                        </Link>
-                    </div>
-                    <div className="quiz-red">
-                        <Image src='/img/quiz_red.png' width='22' height='22'/>
+                        <Image src='/img/quiz_white.png' width='149' height='40'/>
                     </div>
                     <div className="quiz-text">
-                        <Link href='/quiz'>
-                        <h1 className="text-center text-xl text-black">
-                            오늘의 퀴즈
-                        </h1></Link>
+                        <button>
+                            <h1 className="text-center text-xl">오늘의 퀴즈</h1>
+                        </button>
                     </div>
-                    <div className="quiz-deco">
-                        <Image src='/img/quiz_deco.png' width='272' height='89'/>
+                    <div className="quiz-notification">
+                        <Image src='/img/quiz_red.png' width='22' height='22'/>
                     </div>
+                    <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
                 </div>
-                <div className="flex-1">
-                </div>
+                <div className="flex-1"></div>
                 <Layout/>
             </div>
         </div>
