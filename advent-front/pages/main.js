@@ -2,8 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import Link from 'next/link'
+import { Fragment, useState } from 'react'
+import QuizModal from '../components/quizModals'
 
 export default function Main(){
+    const [showModal, setShowModal] = useState(false);
+
     // 디데이 계산
     var today = new Date();
     var dDay = new Date(2022,11,25);
@@ -11,6 +15,7 @@ export default function Main(){
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
 
     return (
+        <Fragment>
         <div className="
             flex flex-col items-center h-screen
             overflow-auto bg-cover bg-local
@@ -82,7 +87,7 @@ export default function Main(){
                         <Image src='/img/quiz_white.png' width='149' height='40'/>
                     </div>
                     <div className="quiz-text">
-                        <button>
+                        <button onClick={()=> setShowModal(true)}>
                             <h1 className="text-center text-xl">오늘의 퀴즈</h1>
                         </button>
                     </div>
@@ -93,7 +98,9 @@ export default function Main(){
                 </div>
                 <div className="flex-1"></div>
                 <Layout/>
+                <QuizModal isVisible={showModal}/>
             </div>
         </div>
+        </Fragment>
     );
 }
