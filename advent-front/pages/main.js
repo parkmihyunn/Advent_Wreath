@@ -6,7 +6,7 @@ import { Fragment, useState } from 'react'
 import QuizModal from '../components/quizModals'
 
 export default function Main(){
-    const [showModal, setShowModal] = useState(false);
+    const [showQ_Modal, setShowQ_Modal] = useState(false);
 
     // 디데이 계산
     var today = new Date();
@@ -87,7 +87,7 @@ export default function Main(){
                         <Image src='/img/quiz_white.png' width='149' height='40'/>
                     </div>
                     <div className="quiz-text">
-                        <button onClick={()=> setShowModal(true)}>
+                        <button onClick={()=> setShowQ_Modal(true)}>
                             <h1 className="text-center text-xl">오늘의 퀴즈</h1>
                         </button>
                     </div>
@@ -98,7 +98,7 @@ export default function Main(){
                 </div>
                 <div className="flex-1"></div>
                 <Layout/>
-                <QuizModal isVisible={showModal}/>
+                <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
             </div>
         </div>
         </Fragment>

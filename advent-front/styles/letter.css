@@ -1,8 +1,8 @@
 .wrapper {
-    height: 99.35px;
-    width: 149px;
+    width: 204px;
+    height: 136px;
     display: flex;
-    background-color: #3760C9;
+    background-color: #b30000;
     position: absolute;
     justify-content: center;
     z-index: 0;
@@ -14,16 +14,16 @@
     width: 100%;
     top: 0;
     left: 0;
-    border-right: 74.5px solid transparent;
-    border-bottom: 49.675px solid transparent;
-    border-left: 74.5px solid transparent;
+    border-right: 102px solid transparent;
+    border-bottom: 68px solid transparent;
+    border-left: 102px solid transparent;
     transform-origin: top;
     transition: transform 0.25s linear;
 }
 
 /* Lid when closed */
 .lid.one {
-    border-top: 100px solid #658ced;
+    border-top: 100px solid #b30000;
     transform: rotateX(0deg);
     z-index: 3;
     transition-delay: 0.75s;
@@ -31,7 +31,7 @@
 
 /* Lid when opened */
 .lid.two {
-    border-top: 49.675px solid #3760C9;
+    border-top: 68px solid #b30000;
     transform: rotateX(90deg);
     z-index: 1;
     transition-delay: 0.5s;
@@ -43,10 +43,10 @@
     width: 100%;
     top: 0;
     left: 0;
-    border-top: 49.675px solid transparent;
-    border-right: 74.5px solid #C4DFF0;
-    border-bottom: 49.675px solid #C4DFF0;
-    border-left: 74.5px solid #a4d4f2;
+    border-top: 68px solid transparent;
+    border-right: 102px solid #cc0000;
+    border-bottom: 68px solid #b30000;
+    border-left: 102px solid #cc0000;
     z-index: 3;
 }
 
@@ -60,7 +60,7 @@
     z-index: 2;
     transition: 0.5s;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .wrapper:hover .lid.one {
@@ -74,12 +74,17 @@
 }
 
 .wrapper:hover .letter {
-    transform: translateY(-30px);
+    transform: translateY(-40px);
     transition-delay: 0.5s;
 }
 
 .wrapper:hover .letter-text {
-    transform: translateY(-30px);
+    transform: translateY(-40px);
     transition-delay: 0.5s;
 }
 
+.x-btn {
+    color : white;
+    position : absolute;
+    margin-top : 300px;
+}
