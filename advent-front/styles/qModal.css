@@ -89,15 +89,36 @@
     margin-top : 300px;
 }
 
+.hint-btn{ 
+    left: 50%;
+    transform: translate( -50%, -50% );
+    text-align:center;
+    justify-content : center;
+    align-items : center;
+}
+
+.hint-btn-img{
+    padding-right: 110px;
+    text-align:center;
+}
+
+.letter-wrapper {
+    align-items: center;
+    justify-content: center;
+    text-align : center;
+}
+
 .letter-img {
     position: absolute;
+    align-items: center;
+    justify-content: center;
+    text-align : center;
 }
 
 .letter-text1 {
     position : absolute;
-    top: 50%;
+    width : 280px;
     align-items: center;
     justify-content: center;
     text-align : center;
-    
 }
