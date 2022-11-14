@@ -1,0 +1,172 @@
+.socks_back {
+    width: 335px;
+    height: 624px;
+    display: flex;
+    background-color: #990000;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 22px;
+}
+
+.socks_head {
+    position: absolute;
+    height: 20px;
+    width: 180px;
+    top: 120px;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    /* border-right: 102px solid transparent;
+    border-bottom: 68px solid transparent;
+    border-left: 102px solid transparent;
+    transform-origin: top;
+    transition: transform 0.25s linear; */
+}
+
+.socks_img {
+    position: absolute;
+    top: -83px;
+    transform: rotate(5deg);
+}
+
+.socks_img2 {
+    position: absolute;
+    top: -83px;
+    transform: scaleX(-1) rotate(-20deg);
+}
+
+.socks_img3 {
+    position: absolute;
+    top: -83px;
+    transform: rotate(20deg);
+}
+
+.socks_giftImg {
+    position: absolute;
+    top: 47px;
+}
+
+.socks_center {
+    width: 234px;
+    height: 214px;
+    display: flex;
+    background-color: #FF929D;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 30px;
+    border-color: #9BAFFF;
+    border-width: 6px;
+}
+
+.socks_center2 {
+    width: 234px;
+    height: 214px;
+    display: flex;
+    background-color: #FF929D;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 30px;
+    border-color: #C84343;
+    border-width: 6px;
+}
+
+.socks_center3 {
+    width: 234px;
+    height: 214px;
+    display: flex;
+    /* background-color: #FF929D; */
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 30px;
+    border-color: #25AEA6;
+    border-width: 6px;
+}
+
+.socks_giftName {
+    position: absolute;
+    height: 23px;
+    width: 169px;
+    top: 500px;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+
+.socks_eyeNview {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    width: 169px;
+    height: 23px;
+    top: 533px;
+}
+
+.socks_eye {
+    top: 530px;
+    left: 340px;
+    display: flex;
+    color: white;
+    font-size: 18px;
+}
+
+.socks_view {
+    top: 530px;
+    left: 375px;
+    margin-left: 8px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.socks_closeBtn {
+    width: 262px;
+    height: 49px;
+    top: 588px;
+    display: flex;
+    background-color: black;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+.socks_closeWord {
+    font-size: 21px;
+    color: white;
+    text-align: center;
+}
+
+.x-btn {
+    color : white;
+    position: absolute;
+    display: flex;
+    top: 30px;
+    right: 25px;
+    bottom: 681px;
+    margin: 0;
+}
+
+.socks_teong {
+    position: absolute;
+    width: 89px;
+    height: 109.5px;
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    top: 73px;
+}
+
+.socks_worry {
+    position: absolute;
+    width: 143px;
+    height: 13px;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    top: 123px;
+}

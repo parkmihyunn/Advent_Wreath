@@ -4,9 +4,15 @@ import Layout from '../components/layout'
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import QuizModal from '../components/quizModals'
+import SocksModal_1 from '../components/socksModal_1'
+import SocksModal_2 from '../components/socksModal_2'
+import SocksModal_3 from '../components/socksModal_3'
 
 export default function Main(){
     const [showQ_Modal, setShowQ_Modal] = useState(false);
+    const [showS1_Modal, setShowS1_Modal] = useState(false);
+    const [showS2_Modal, setShowS2_Modal] = useState(false);
+    const [showS3_Modal, setShowS3_Modal] = useState(false);
 
     // 디데이 계산
     var today = new Date();
@@ -53,9 +59,21 @@ export default function Main(){
                             <div className="w-60 text-center m-auto relative">
                                 <Image src='/img/socks_line.png' width='350' height='50'/>
                             </div>
-                            <div className="sock-1"><Image src='/img/sock_1.png' width='83.95' height='102.5'/></div>
-                            <div className="sock-2"><Image src='/img/sock_2.png' width='79.07' height='109.33p'/></div>
-                            <div className="sock-3"><Image src='/img/sock_3.png' width='82.98' height='107.38'/></div>
+                            <div className="sock-1">
+                                <button onClick={()=> setShowS1_Modal(true)}>
+                                    <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
+                                </button>
+                            </div>
+                            <div className="sock-2">
+                                <button onClick={()=> setShowS2_Modal(true)}>
+                                    <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
+                                </button>
+                            </div>
+                            <div className="sock-3">
+                                <button onClick={()=> setShowS3_Modal(true)}>
+                                    <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
+                                </button>
+                            </div>
                         </div>
                         <div className="pt-16 mt-6 place-items-center flex-1">
                             <Image src='/img/wreath_non_2.png' width='280' height='280'/>
@@ -99,6 +117,9 @@ export default function Main(){
                 <div className="flex-1"></div>
                 <Layout/>
                 <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
+                <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
+                <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
+                <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
             </div>
         </div>
         </Fragment>
