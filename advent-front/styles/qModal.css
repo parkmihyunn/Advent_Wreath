@@ -1,3 +1,6 @@
+input:focus {outline: none;}
+button:focus {outline: none;}
+
 .wrapper {
     width: 204px;
     height: 136px;
@@ -117,8 +120,45 @@
 
 .letter-text1 {
     position : absolute;
-    width : 280px;
+    width : 250px;
     align-items: center;
     justify-content: center;
     text-align : center;
 }
+
+.quiz_answer {
+    margin: 40px auto 210px auto;
+    border-radius: 40px;
+    background: transparent;
+    position: relative;
+}
+
+.quiz_input {
+    width: 215px;
+    height: 20px;
+    padding: 20px 15px;
+    float: left;
+    border: 0;
+    border-radius: 40px;
+    border-top-style: none;
+    color: black;
+    background: #D3D3D3;
+}
+
+.submit {
+    overflow: visible;
+    position: absolute;
+    float: right;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 72px;
+    color: #fff;
+    text-transform: lowercase;
+    background: black;
+    border-radius: 40px;
+    right: 0px;
+    -webkit-tap-highlight-color : transparent !important;
+}  
+
