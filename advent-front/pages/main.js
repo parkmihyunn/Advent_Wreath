@@ -7,12 +7,14 @@ import QuizModal from '../components/quizModals'
 import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
+import SocksEditModal from '../components/socksEditModal'
 
 export default function Main(){
     const [showQ_Modal, setShowQ_Modal] = useState(false);
     const [showS1_Modal, setShowS1_Modal] = useState(false);
     const [showS2_Modal, setShowS2_Modal] = useState(false);
     const [showS3_Modal, setShowS3_Modal] = useState(false);
+    const [showSE_Modal, setShowSE_Modal] = useState(false);
 
     // 디데이 계산
     var today = new Date();
@@ -49,11 +51,11 @@ export default function Main(){
                                 ml-8
                                 text-white align-bottom
                             ">OOO님의 소원양말</h1>
-                            <Link href='/wish-socks'>
+                            <button onClick={()=> setShowSE_Modal(true)}>
                                 <h1 className="mr-8 mt-1 text-gray-500 text-xs align-bottom">
                                     편집하기
                                 </h1>
-                            </Link>
+                            </button>
                         </div>
                         <div className="px-10 relative">
                             <div className="w-60 text-center m-auto relative">
@@ -120,6 +122,7 @@ export default function Main(){
                 <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
                 <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
                 <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
+                <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)}/>
             </div>
         </div>
         </Fragment>
