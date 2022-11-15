@@ -13,7 +13,7 @@
     position: absolute;
     height: 20px;
     width: 180px;
-    top: 120px;
+    top: 73px;
     color: white;
     text-align: center;
     font-size: 18px;
@@ -50,6 +50,7 @@
 .socks_center {
     width: 234px;
     height: 214px;
+    top: 193px;
     display: flex;
     background-color: #FF929D;
     position: absolute;
@@ -63,6 +64,7 @@
 .socks_center2 {
     width: 234px;
     height: 214px;
+    top: 193px;
     display: flex;
     background-color: #FF929D;
     position: absolute;
@@ -76,6 +78,7 @@
 .socks_center3 {
     width: 234px;
     height: 214px;
+    top: 193px;
     display: flex;
     /* background-color: #FF929D; */
     position: absolute;
@@ -90,7 +93,7 @@
     position: absolute;
     height: 23px;
     width: 169px;
-    top: 500px;
+    top: 443px;
     color: white;
     text-align: center;
     font-size: 18px;
@@ -103,7 +106,7 @@
     z-index: 0;
     width: 169px;
     height: 23px;
-    top: 533px;
+    top: 479px;
 }
 
 .socks_eye {
@@ -126,7 +129,7 @@
 .socks_closeBtn {
     width: 262px;
     height: 49px;
-    top: 588px;
+    top: 538px;
     display: flex;
     background-color: black;
     position: absolute;
