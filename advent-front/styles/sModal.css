@@ -1,4 +1,5 @@
 .socks_back {
+    top: 20px;
     width: 335px;
     height: 624px;
     display: flex;
@@ -171,6 +172,8 @@
 
 /* 여기서부터 socksEdit */
 .socks_edit_back {
+    top: 20px;
+    bottom: 20px;
     width: 389px;
     height: 781px;
     display: flex;

@@ -8,7 +8,8 @@ const SocksEditModal = ({ isVisible, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 
-                        flex justify-center items-center z-0">
+                        flex justify-center items-center z-0 h-screen flex-col 
+                        overflow-auto">
             <div className="socks_edit_back">
                 <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
                 <div className="socks_edit">조승현님의 소원양말 수정</div>
@@ -30,7 +31,19 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <h1>첫 번째 소원 양말</h1>
                             </div>
                         </div>
-                        <div className="socks_edit_picBox">
+                        <div className="socks_edit_noneBox">
+                            <div className="socks_edit_plus">
+                                <h1 className="font-light text-4xl">+</h1>
+                            </div>
+                            <div className="socks_edit_reg">
+                                <h1 className="font-bold">사진등록</h1>
+                            </div>
+                        </div>
+                        <div className="socks_edit_giftName">
+                            <h1>품목명:</h1>
+                        </div>
+                        <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
+                        {/* <div className="socks_edit_picBox">
                             <div className="socks_edit_giftImg">
                                 <Image src='/img/nintendo.png' width='62.5' height='36.46'></Image>
                             </div>
@@ -47,7 +60,7 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                             <div className="socks_edit_ImgChgText">
                                 <h1>사진변경</h1>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="socks_edit_box2">
                         <div className="socks_edit_smSocks">

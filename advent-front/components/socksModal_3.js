@@ -8,7 +8,8 @@ const SocksModal_3 = ({ isVisible, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 
-                        flex justify-center items-center z-0">
+                        flex justify-center items-center z-0
+                        overflow-auto">
             <div className="socks_back">
                 <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
                 <div className="socks_head">조승현님의 소원양말 3</div>
