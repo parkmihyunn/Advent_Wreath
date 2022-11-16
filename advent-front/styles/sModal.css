@@ -347,12 +347,20 @@
     justify-content: center;
     z-index: 0;
     border-radius: 4px;
+
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 12px;
+    color: #FFFFFF;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .socks_edit_giftNameText {
     position: absolute;
     width: 100.82px;
     height: 19.77px;
+    left: 10px;
     top: 3px;
     font-weight: 400;
     font-size: 11px;

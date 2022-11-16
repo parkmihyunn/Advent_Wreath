@@ -74,11 +74,12 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                         <div className="socks_edit_giftName">
                             <h1>품목명:</h1>
                         </div>
-                        <div className="socks_edit_textBox">
+                        <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
+                        {/* <div className="socks_edit_textBox">
                             <div className="socks_edit_giftNameText">
                                 <h1>입력해주세요.</h1>
                             </div>
-                        </div>
+                        </div> */}
                         {/* <div className="socks_edit_ImgChg">
                             <div className="socks_edit_ImgChgText">
                                 <h1>사진변경</h1>
@@ -110,11 +111,12 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                             <div className="socks_edit_giftName">
                                 <h1>품목명:</h1>
                             </div>
-                            <div className="socks_edit_textBox">
+                            <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
+                            {/* <div className="socks_edit_textBox">
                                 <div className="socks_edit_giftNameText">
                                     <h1>입력해주세요.</h1>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* <div className="socks_edit_ImgChg">
                                 <div className="socks_edit_ImgChgText">
                                     <h1>사진변경</h1>
