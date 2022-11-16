@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
 
 export default function quiz(){
 
@@ -8,69 +7,40 @@ export default function quiz(){
     const now = new Date();
     const month = now.getMonth() + 1;
     const day = now.getDate();
-
-    // const [quiz_check, setQuiz_check] = useState(false);
-    // // 사용자 정답 가져오기
-    // let answer;
-    // if (typeof document !== "undefined" && answer !== null) {
-    //     answer = document.getElementById('u_anw').value.toLowerCase().trim();;
-    // }
-
-    // if(answer === quizData[0].answers) {
-    //     setQuiz_check(true);
-    // } else {
-    // }
     
-    // 임시로 사용할 quiz data
+    // 임시로 사용할 quiz data array
     const quizData = [
         {
             quizNum : 0,
-            question : '북극에 사는 OOO는 식량난에 고통받고 있다.',
+            question : '북극에 사는 OOO은/는 식량난에 고통받고 있다.',
             answers : {},
             correct : '북극곰',
             hints : 'https://www.greenpeace.org/korea/update/5973/blog-arctic-rescue-polar-bears-in-global-warming/'
         },
     ]
 
-    /* const quizAsk = document.querySelector(".quiz__question .ask");             // 퀴즈 질문
-    const quizconfirm = document.querySelector(".quiz__answer .confirm");       // 정답 확인 버튼
-    const quizResult = document.querySelector(".quiz__answer .result");         // 정답 결과
-    const quizInput = document.querySelector(".quiz__answer .input");           // 사용자 정답
-    const quizView = document.querySelector(".quiz__view");                 // 결과창
-
     // 문제 정보
     const answerNum = quizData[0].quizNum;
     const answerAsk = quizData[0].question;
-    let answerResult = quizData[0].correct;
+    let answerResult = quizData[0].correct.toLowerCase().trim();
 
-    // 문제 출력
-    quizAsk.innerText = answerAsk;
-    quizResult.innerText = "정답은 [ " + answerResult + " ] 입니다.";
-
-    // 정답 숨기기
-    quizResult.style.display = "none";
-    
     // 정답 확인
-    quizconfirm.addEventListener("click", () => {
-        quizInput.style.display = "none";
-        quizResult.style.display = "block";
-        quizconfirm.style.display = "none";
-
-        // 사용자 정답 가져옴   // tolowercase() -> 소문자 변환 // trim->여백제거
-        const userWord = quizInput.value.toLowerCase().trim();
-        answerResult = answerResult.toLowerCase().trim();
-
-        // 사용자 정답 vs 문제 정답 
-        if (userWord == answerResult) {
+    function quizConfirm() {
+        console.log("입력 받아오기 실행");
+        // 사용자 입력 받아오기
+        if(typeof document !== 'undefined') {
+            const quizInput = document.querySelector("u_anw");
+            console.log(quizInput);
+        } else { const quizInput = "입력을 불러오지 못했습니다."; }
+        
+        /* if (quizInput == answerResult && typeof window !== 'undefined') {
             // 정답 
-            // alert("정답입니다");
-            quizView.classList.add("like");
+            document.getElementById('quiz_view_t').className = 'block';
         } else {
             // 오답 
-            // alert("오답입니다");
-            quizView.classList.add("dislike");
-        }
-    }); */
+            document.getElementById('quiz_view_f').className = 'block';
+        } */
+    }
 
     return (
         <div className="
@@ -84,7 +54,7 @@ export default function quiz(){
             <link rel="icon" href="/favicon.ico" />
             </Head> 
 
-            <h1 className="text-white pt-20 pb-4 text-xl">{month}월 {day}일 n번째 퀴즈</h1>
+            <h1 className="text-white pt-12 pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</h1>
 
             <div className="flex-1 w-full text-center m-auto relative">
                 <div className="absolute mt-5 hint-btn">
@@ -95,15 +65,20 @@ export default function quiz(){
                 </div>
             </div>
 
-            <div className="flex letter-wrapper mt-16">
+            <div className="flex letter-wrapper mt-12">
                 <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
                 <div className="flex flex-col letter-text1 px-5 relative ">
-                    <div className="flex text-rose-800 mb-6 max-[374px]:mb-2.5">~ 오늘의 퀴즈 ~</div>
-                    <div className="flex text-xl max-[374px]:text-base">{quizData[0].question}</div>
-                    <div class="quiz_answer">
+                    <div className="flex text-rose-800 mb-6 max-[374px]:mb-2 max-[374px]:mt-4">~ 오늘의 퀴즈 ~</div>
+                    <div id="quiz_view_t" className="hidden">
+                        <div>정답입니다!</div>
+                    </div>
+                    <div id="quiz_view_f" className="hidden">
+                        <div>땡! 다시 생각해보세요.</div>
+                    </div>
+                    <div className="flex text-xl max-[374px]:text-base">{answerAsk}</div>
+                    <div className="quiz_answer">
                         <input type="text" className="quiz_input" id="u_anw" placeholder="정답 입력하기" />
-                        <button className="submit">제출</button>
-                        <div className="result"></div>
+                        <button className="submit" onClick={()=>quizConfirm()}>제출</button>
                     </div>
                 </div>
             </div>
