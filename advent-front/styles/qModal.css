@@ -1,4 +1,9 @@
-input:focus {outline: none;}
+input:focus {
+    outline: none;
+    -webkit-tap-highlight-color : transparent;
+}
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #D3D3D3 inset ; -webkit-text-fill-color: #000; }
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }
 button:focus {outline: none;}
 
 .wrapper {
@@ -162,3 +167,9 @@ button:focus {outline: none;}
     -webkit-tap-highlight-color : transparent !important;
 }  
 
+.quiz_view_t {
+}
+
+.quiz_view_f {
+    
+}

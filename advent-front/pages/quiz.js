@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRef, useState } from 'react';
 
 export default function quiz(){
-
     //오늘 날짜 함수
     const now = new Date();
     const month = now.getMonth() + 1;
@@ -13,7 +13,6 @@ export default function quiz(){
         {
             quizNum : 0,
             question : '북극에 사는 OOO은/는 식량난에 고통받고 있다.',
-            answers : {},
             correct : '북극곰',
             hints : 'https://www.greenpeace.org/korea/update/5973/blog-arctic-rescue-polar-bears-in-global-warming/'
         },
@@ -24,22 +23,26 @@ export default function quiz(){
     const answerAsk = quizData[0].question;
     let answerResult = quizData[0].correct.toLowerCase().trim();
 
+    // 사용자 입력 값
+    const quizInput = useRef()
     // 정답 확인
     function quizConfirm() {
-        console.log("입력 받아오기 실행");
-        // 사용자 입력 받아오기
-        if(typeof document !== 'undefined') {
-            const quizInput = document.querySelector("u_anw");
-            console.log(quizInput);
-        } else { const quizInput = "입력을 불러오지 못했습니다."; }
-        
-        /* if (quizInput == answerResult && typeof window !== 'undefined') {
+        const quizInput_t = quizInput.current.value.toLowerCase().trim();
+        if (quizInput_t == answerResult && typeof window !== 'undefined') {
             // 정답 
-            document.getElementById('quiz_view_t').className = 'block';
+            document.getElementById('quiz_view_f').classList.remove('block');
+            document.getElementById('quiz_view_f').classList.add('hidden');
+            document.getElementById('quiz').classList.add('hidden');    // 문제 가리기
+            document.getElementById('quiz_view_t').classList.remove('hidden');
+            document.getElementById('quiz_view_t').classList.add('block');
+            document.getElementById('u_anw').readOnly = true;   // input readonly 활성화
         } else {
             // 오답 
-            document.getElementById('quiz_view_f').className = 'block';
-        } */
+            document.getElementById('quiz_view_t').classList.remove('block');
+            document.getElementById('quiz_view_t').classList.add('hidden');
+            document.getElementById('quiz_view_f').classList.remove('hidden');
+            document.getElementById('quiz_view_f').classList.add('block');
+        }
     }
 
     return (
@@ -69,15 +72,16 @@ export default function quiz(){
                 <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
                 <div className="flex flex-col letter-text1 px-5 relative ">
                     <div className="flex text-rose-800 mb-6 max-[374px]:mb-2 max-[374px]:mt-4">~ 오늘의 퀴즈 ~</div>
-                    <div id="quiz_view_t" className="hidden">
-                        <div>정답입니다!</div>
+                    <div id="quiz_view_t" className="quiz_view_t hidden">
+                    <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
+                        <div className="">정답입니다 !</div>
                     </div>
-                    <div id="quiz_view_f" className="hidden">
+                    <div id="quiz_view_f" className="quiz_view_f hidden">
                         <div>땡! 다시 생각해보세요.</div>
                     </div>
-                    <div className="flex text-xl max-[374px]:text-base">{answerAsk}</div>
+                    <div id="quiz" className="flex text-xl max-[374px]:text-base">{answerAsk}</div>
                     <div className="quiz_answer">
-                        <input type="text" className="quiz_input" id="u_anw" placeholder="정답 입력하기" />
+                        <input type="text" ref={quizInput} className="quiz_input" id="u_anw" placeholder="정답 입력하기"/>
                         <button className="submit" onClick={()=>quizConfirm()}>제출</button>
                     </div>
                 </div>
@@ -85,3 +89,4 @@ export default function quiz(){
         </div>
     );
 }
+
