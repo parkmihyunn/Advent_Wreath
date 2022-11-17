@@ -1,3 +1,4 @@
+npm install -> npm run dev
 *****
 작업 기록을 올려주세용  
   
