@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import '../styles/main.css'
-import '../styles/qModal.css'
+import '../styles/quiz.css'
 import '../styles/sModal.css'
 
 function MyApp({ Component, pageProps }) {
