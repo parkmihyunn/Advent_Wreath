@@ -1,15 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
+import ReinModal from "../components/reindeerModal";
 
 export default function quiz(){
-    //오늘 날짜 함수
+    /* 오늘 날짜 */
     const now = new Date();
     const month = now.getMonth() + 1;
     const day = now.getDate();
 
-    // 임시로 사용할 quiz data array
+    /* 임시로 사용할 quiz data */
     const quizData = [
         {
             quizNum : 0,
@@ -19,20 +21,24 @@ export default function quiz(){
         },
     ]
 
+    /* 정답 컨페티 관리 */
+    const [showConfetti, setShowConfetti] = useState(false);
     useEffect(() => {
-        const confettiSettings = { target: 'my-canvas' };
-        const confetti = new ConfettiGenerator(confettiSettings);
-        confetti.render();
-        return () => confetti.clear();
-      }, []) // add the var dependencies or not
-      
-    // 문제 정보
+        if(showConfetti){
+            const confettiSettings = { target: 'my-canvas', clock: 40, props:['square'], size:1.3, rotate:true };
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+        }
+      }, [showConfetti])
+    
+    /* 문제 가져오기 */
     const answerNum = quizData[0].quizNum;
     const answerAsk = quizData[0].question;
     let answerResult = quizData[0].correct.toLowerCase().trim();
-    // 사용자 입력 값
-    const quizInput = useRef()
-    // 정답 확인
+    /* 사용자 입력 값 */
+    const quizInput = useRef();
+
+    /* 정답 확인 후 css 수정 */
     function quizConfirm() {
         const quizInput_t = quizInput.current.value.toLowerCase().trim();
         if (quizInput_t == answerResult && typeof window !== 'undefined') {
@@ -43,7 +49,9 @@ export default function quiz(){
             document.getElementById('quiz_view_t').classList.remove('hidden');
             document.getElementById('quiz_view_t').classList.add('block');
             document.getElementById('u_anw').readOnly = true;   // input readonly 활성화
-            
+            document.getElementById('rd_arrive').classList.remove('hidden');
+            document.getElementById('rd_arrive').classList.add('block');
+            setShowConfetti(true);  // confetti 활성화
         } else {
             // 오답 
             document.getElementById('quiz_view_t').classList.remove('block');
@@ -53,20 +61,29 @@ export default function quiz(){
         }
     }
 
+    /* 순록 모달 상태 */
+    const [showR_Modal, setShowR_Modal] = useState(false);
+
     return (
         <div className="
-            flex flex-col items-center h-screen relative
-            overflow-auto bg-cover bg-local place-items-center
+            flex flex-col h-screen relative
+            overflow-auto bg-cover bg-local
             bg-[url('../public/img/wood_pattern_dark.png')]
         ">
             <Head>
             <title>서비스 명</title>
             <meta name="description" content="콘텐트 내용" />
             <link rel="icon" href="/favicon.ico" />
-            </Head> 
+            </Head>
             
-            <h1 className="text-white pt-12 pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</h1>
-
+            <canvas id="my-canvas" className="absolute"></canvas>
+            <div className="back-btn pl-2 pt-2">
+                <Link href="/main">
+                    <Image src="/img/back_white.png" width='40' height='40'/>
+                </Link>
+            </div>
+            
+            <div className="day-text text-white pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</div>
             <div className="flex-1 w-full text-center m-auto relative">
                 <div className="absolute mt-5 hint-btn">
                     <a href={quizData[0].hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
@@ -75,8 +92,7 @@ export default function quiz(){
                     <Image src="/img/hint_btn.png" width='31' height='36'/>
                 </div>
             </div>
-            <canvas id="my-canvas" className="absolute"></canvas>
-            <div className="flex letter-wrapper mt-12">
+            <div className="flex letter-wrapper mt-10">
                 <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
                 <div className="flex flex-col letter-text1 px-5 relative ">
                     <div className="flex text-rose-800 mb-6 max-[374px]:mb-2 max-[374px]:mt-4">~ 오늘의 퀴즈 ~</div>
@@ -93,7 +109,16 @@ export default function quiz(){
                         <button className="submit" onClick={()=>quizConfirm()}>제출</button>
                     </div>
                 </div>
+                <div id="rd_arrive" className="absolute rd-arrive hidden">
+                    <div className="absolute">
+                        <button onClick={()=> setShowR_Modal(true)} className="rd-arrive-btn py-1 px-4 mb-1 rounded-md">ㅤ순록이 돌아왔어요o&#40;≧∇≦o&#41;</button>
+                    </div>
+                    <div className="arrive-btn-img">
+                        <Image src="/img/rd_arrive.png" width='48' height='71'/>
+                    </div>
+                </div>
             </div>
+            <ReinModal isVisible={showR_Modal}/>
         </div>
     );
 }

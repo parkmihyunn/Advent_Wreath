@@ -1,11 +1,4 @@
-input:focus {
-    outline: none;
-    -webkit-tap-highlight-color : transparent;
-}
-input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #D3D3D3 inset ; -webkit-text-fill-color: #000; }
-input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }
-button:focus {outline: none;}
-
+//////////////////////////////// qModal
 .wrapper {
     width: 204px;
     height: 136px;
@@ -97,6 +90,20 @@ button:focus {outline: none;}
     margin-top : 300px;
 }
 
+//////////////////////////////// quiz
+
+.back-btn{
+    position: absolute;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
+
+.day-text{
+    text-align:center;
+    justify-content : center;
+    align-items : center;
+}
+
 .hint-btn{ 
     left: 50%;
     transform: translate( -50%, -50% );
@@ -166,3 +173,29 @@ button:focus {outline: none;}
     right: 0px;
     -webkit-tap-highlight-color : transparent !important;
 }  
+.rd-arrive {
+    transform: translate( -10%, 220% );
+    padding-right: 138px;
+}
+
+.rd-arrive-btn {
+    color: white;
+    background: black;
+    width: 250px;
+    text-align:center;
+    justify-content : center;
+    align-items : center;
+}
+
+.arrive-btn-img{
+    text-align:center;
+    transform: translate( -53%, -30% );
+}
+
+//////////////////////////////// rModal
+
+.r-modal-back{
+    align-items: center;
+    justify-content: center;
+    text-align : center;
+}

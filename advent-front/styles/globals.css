@@ -34,6 +34,23 @@
 	font-family: 'ELAND_Choice_M';
 }
 
+div {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+}
+div::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+input:focus {
+    outline: none;
+    -webkit-tap-highlight-color : transparent;
+}
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #D3D3D3 inset ; -webkit-text-fill-color: #000; }
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }
+button:focus {outline: none;}
+
 .start-text {
 	position: absolute;
 	top: 45%;
