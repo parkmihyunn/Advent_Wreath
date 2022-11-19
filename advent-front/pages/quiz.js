@@ -77,13 +77,13 @@ export default function quiz(){
             </Head>
             
             <canvas id="my-canvas" className="absolute"></canvas>
-            <div className="back-btn pl-2 pt-2">
+            <div className="back-btn pl-16 pt-16">
                 <Link href="/main">
                     <Image src="/img/back_white.png" width='40' height='40'/>
                 </Link>
             </div>
             
-            <div className="day-text text-white pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</div>
+            <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</div>
             <div className="flex-1 w-full text-center m-auto relative">
                 <div className="absolute mt-5 hint-btn">
                     <a href={quizData[0].hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
@@ -118,7 +118,7 @@ export default function quiz(){
                     </div>
                 </div>
             </div>
-            <ReinModal isVisible={showR_Modal}/>
+            <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)}/>
         </div>
     );
 }

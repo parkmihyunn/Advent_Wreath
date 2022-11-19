@@ -24,12 +24,9 @@ export default function Home() {
         <div className="flex flex-col place-items-center flex-1">
             <Image src='/img/wreath.png' width='259' height='282'/>
 
-          <h1 className="
-            place-items-center items-center pt-10
-            text-center text-3xl text-white
-          ">
+          <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
             서비스 이름
-          </h1>
+          </div>
         </div>
         <div className="w-full relative mt-10">
           <div className="w-full text-center m-auto relative">
