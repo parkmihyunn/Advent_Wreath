@@ -6,55 +6,20 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
 
     return (
         <div>
-        <Modal noPadding open={isVisible} onClose={onRClose}>
-            <Modal.Header
-            css={{ position: "absolute", zIndex: "$1", top: 5, right: 8 }}
-            >
-            <Text color="#363449">
-                Photo by{" "}
-                <Link
-                color
-                rel="noopener noreferrer"
-                target="_blank"
-                href="https://unsplash.com/@anniespratt"
-                >
-                Annie Spratt
-                </Link>{" "}
-                on{" "}
-                <Link
-                rel="noopener noreferrer"
-                target="_blank"
-                href="https://unsplash.com/s/visual/ef7937f3-0d44-43eb-b992-28050748f999?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                >
-                Unsplash
-                </Link>
-            </Text>
+        <Modal css={{background:"transparent"}} noPadding open={isVisible} onClose={onRClose} width={300} height={563} animated={false}>
+            <Modal.Header className="flex flex-col items-center text-center w-full mt-36" css={{ position: "absolute", zIndex: "$1"}}>
+                <div className="flex flex-col items-center text-center w-full">
+                    <Image src="/img/rd_temp.png" width={91} height={136} css={{ position: "absolute" }}/> 
+                    <div className="pt-10 font-bold text-xl">N번째 순록이 도착했어요 ♥</div>
+                    <div className="pt-8 text-sm">OOO님만의 특별한 순록이예요.</div>
+                    <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
+                    <Link href="/main"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
+                </div>
             </Modal.Header>
-            <Modal.Body>
-            <Image
-                showSkeleton
-                src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-                width={400}
-                height={490}
-            />
-            </Modal.Body>
+            <Image src="/img/r_modal_bg.png" width={300} height={563}/>
         </Modal>
         </div>
     );
 }
 
 export default ReindeerModal
-
-/*
-<div className="r-modal-text w-full flex flex-col justify-center items-center absolute">
-            <div className="absolute">
-                <Image className="overflow-y-scroll absolute" src='/img/r_modal_bg.png' width='300' height='563'/>
-            </div>
-            <div className="mt-40">
-                    N번째 순록이 도착했어요 ♥
-            </div>
-            <div>OOO님만의 특별한 순록이예요.</div>              
-            <div>방문 앞의 순록도감에서 확인할 수 있어요!</div>
-            <Link href="/main"><button>확인</button></Link>
-</div>
-*/
