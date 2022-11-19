@@ -32,11 +32,10 @@ export default function Home() {
           <div className="w-full text-center m-auto relative">
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>
-          <Link href='/login'>
+          {/* 시작하기 누르면 카카로 로그인으로 바로 넘어가도록 할 것임*/}
             <a className ="start-text flex flex-col items-center text-white">
                 시작하기
             </a>
-          </Link>
         </div>
         <Layout/>
       </div>
