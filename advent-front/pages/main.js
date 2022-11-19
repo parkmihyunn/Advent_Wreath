@@ -36,23 +36,16 @@ export default function Main(){
             </Head> 
 
             <div className="flex flex-col h-full">
-                <h1 className="
-                    flex flex-col ml-2 relative
-                    text-2xl text-left text-white pt-8
-                ">서비스 이름</h1>
-
+                <h1 className="flex flex-col ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
                 <div className="relative">
                     <div className="text-center m-auto relative">
                         <Image src='/img/door-border_1.png' width='307' height='537'/>
                     </div>
                     <div className="door-top">
-                        <div className="flex justify-between mt-4 mb-1">  
-                            <h1 className="
-                                ml-8
-                                text-white align-bottom
-                            ">OOO님의 소원양말</h1>
+                        <div className="flex justify-between mt-8">  
+                            <h1 className="ml-8 text-white text-base font-normal align-bottom">OOO님의 소원양말</h1>
                             <button onClick={()=> setShowSE_Modal(true)}>
-                                <h1 className="mr-8 mt-1 text-gray-500 text-xs align-bottom">
+                                <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
                                     편집하기
                                 </h1>
                             </button>
@@ -81,13 +74,13 @@ export default function Main(){
                             <Image src='/img/wreath_non_2.png' width='280' height='280'/>
                             <div className="wreath-text">
                                 <Image src='/img/christmas_text.png' width='97' height='25'/>
-                                <h1 className="text-center text-xl">
+                                <h1 className="text-center text-xl font-normal">
                                 D-{result}
                                 </h1>
                             </div>
                         </div>    
                         <Link href='/ornaments'>
-                            <h1 className="text-center text-xs text-gray-500">
+                            <h1 className="text-center text-xs font-normal text-gray-500">
                                 편집하기
                             </h1>
                         </Link>
@@ -95,7 +88,6 @@ export default function Main(){
                         <div className="collection"><Image src='/img/collection.png' width='95' height='131'/></div>
                     </div>
                 </div>
-
                 <div className="w-full relative top-5">
                     <div className="w-full text-center m-auto relative">
                         <Image src='/img/door-dorder_2.png' width='307' height='165'/>
@@ -108,7 +100,7 @@ export default function Main(){
                     </div>
                     <div className="quiz-text">
                         <button onClick={()=> setShowQ_Modal(true)}>
-                            <h1 className="text-center text-xl">오늘의 퀴즈</h1>
+                            <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
                         </button>
                     </div>
                     <div className="quiz-notification">

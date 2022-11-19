@@ -28,7 +28,7 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <Image src='/img/sock_1.png' width='35' height='35'/>
                             </div>
                             <div className="socks_edit_text">
-                                <h1>첫 번째 소원 양말</h1>
+                                <h1 className="font-normal text-base">첫 번째 소원 양말</h1>
                             </div>
                         </div>
                         <div className="socks_edit_noneBox">
@@ -36,11 +36,11 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <h1 className="font-light text-4xl">+</h1>
                             </div>
                             <div className="socks_edit_reg">
-                                <h1 className="font-bold">사진등록</h1>
+                                <h1 className="font-bold text-base">사진등록</h1>
                             </div>
                         </div>
                         <div className="socks_edit_giftName">
-                            <h1>품목명:</h1>
+                            <h1 className="font-normal text-xs">품목명:</h1>
                         </div>
                         <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
                         {/* <div className="socks_edit_picBox">
@@ -68,7 +68,7 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <Image src='/img/sock_2.png' width='35' height='35'/>
                             </div>
                             <div className="socks_edit_text">
-                                <h1>두 번째 소원 양말</h1>
+                                <h1 className="font-normal text-base">두 번째 소원 양말</h1>
                             </div>
                         </div>
                         {/* <div className="socks_edit_picBox">
@@ -81,11 +81,11 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <h1 className="font-light text-4xl">+</h1>
                             </div>
                             <div className="socks_edit_reg">
-                                <h1 className="font-bold">사진등록</h1>
+                                <h1 className="font-bold text-base">사진등록</h1>
                             </div>
                         </div>
                         <div className="socks_edit_giftName">
-                            <h1>품목명:</h1>
+                            <h1 className="font-normal text-xs">품목명:</h1>
                         </div>
                         <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
                         {/* <div className="socks_edit_textBox">
@@ -105,7 +105,7 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                 <Image src='/img/sock_3.png' width='35' height='35'/>
                             </div>
                             <div className="socks_edit_text">
-                                <h1>세 번째 소원 양말</h1>
+                                <h1 className="font-normal text-base">세 번째 소원 양말</h1>
                             </div>
                         </div>
                             {/* <div className="socks_edit_picBox">
@@ -118,11 +118,11 @@ const SocksEditModal = ({ isVisible, onClose }) => {
                                     <h1 className="font-light text-4xl">+</h1>
                                 </div>
                                 <div className="socks_edit_reg">
-                                    <h1 className="font-bold">사진등록</h1>
+                                    <h1 className="font-bold text-base">사진등록</h1>
                                 </div>
                             </div>
                             <div className="socks_edit_giftName">
-                                <h1>품목명:</h1>
+                                <h1 className="font-normal text-xs">품목명:</h1>
                             </div>
                             <input type="text" className="socks_edit_textBox" placeholder="입력해주세요."></input>
                             {/* <div className="socks_edit_textBox">
