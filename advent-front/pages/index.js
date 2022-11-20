@@ -1,9 +1,48 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 import Link from 'next/link'
 
+/*
+const kakaoResponse = async(response)=>{
+  console.log(response.response.access_token)
+  let res = await axios.get(
+      "http://localhost:8000/rest-auth/kakao/",
+      {
+        params: 
+        {
+            code:response.response.access_token
+          },
+      }
+    );
+    console.log(res)
+}
+ */
+
 export default function Home() {
+  
+  const [route, setRoute] = useState(false);
+  if(route){
+    const router = useRouter();
+    router.push('/main/[id]', "/main/1");
+  }
+
+  const loginFormWithKakao = () => {
+    window.Kakao.Auth.login({
+        success(authObj) {
+            console.log("login성공")
+            console.log(authObj);
+            window.localStorage.setItem('token', authObj.access_token);
+            setRoute(true); 
+        },
+        fail(err) {
+            console.log(err);
+        }
+    })
+  }
+  
   return (
     <div className="
       flex flex-col items-center h-screen
@@ -32,10 +71,9 @@ export default function Home() {
           <div className="w-full text-center m-auto relative">
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>
-          {/* 시작하기 누르면 카카로 로그인으로 바로 넘어가도록 할 것임*/}
-            <a className ="start-text flex flex-col items-center text-white">
-                시작하기
-            </a>
+          <button onClick={loginFormWithKakao} className ="start-text flex flex-col py-5 items-center text-white text-lg">
+              시작하기
+          </button>
         </div>
         <Layout/>
       </div>

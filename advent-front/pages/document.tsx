@@ -14,7 +14,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>{CssBaseline.flush()}</Head>
+        <Head>
+          {CssBaseline.flush()}
+        </Head>
         <body>
           <Main />
           <NextScript />
