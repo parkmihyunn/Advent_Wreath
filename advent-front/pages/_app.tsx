@@ -12,19 +12,20 @@ declare global {
   }
 }
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     try {
       if (!window.Kakao.isInitialized() && window.Kakao) {
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT);
+        console.log("Kakao.init()")
       }
     } catch(e) { console.log(e)}
-
   }, [])
-  
+
   return (
     <NextUIProvider>
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
       <Component {...pageProps} />
     </NextUIProvider>
   );

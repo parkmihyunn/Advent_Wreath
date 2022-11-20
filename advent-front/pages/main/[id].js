@@ -1,24 +1,32 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Layout from '../components/layout'
+import Layout from '../../components/layout'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Fragment, useState } from 'react'
-import QuizModal from '../components/quizModals'
-import SocksModal_1 from '../components/socksModal_1'
-import SocksModal_2 from '../components/socksModal_2'
-import SocksModal_3 from '../components/socksModal_3'
-import SocksEditModal from '../components/socksEditModal'
+import QuizModal from '../../components/quizModals'
+import SocksModal_1 from '../../components/socksModal_1'
+import SocksModal_2 from '../../components/socksModal_2'
+import SocksModal_3 from '../../components/socksModal_3'
+import SocksEditModal from '../../components/socksEditModal'
 
 export default function Main(){
-    /*
-    const kakoLogout = () => {
+    const [logout, setLogout] = useState(false);
+    const [route, setRoute] = useState(true);
+    const router = useRouter();
+    console.log({ query: router.query, router: router });
+
+    if(logout) {
         const { localStorage } = window;
         localStorage.removeItem('token');
         window.Kakao.Auth.logout(function() {
             console.log('로그아웃 성공');
         });
-    }
-    */
+        if(route){
+            router.push('/');
+        }
+    } else {console.log("logout false");}
+
     const [showQ_Modal, setShowQ_Modal] = useState(false);
     const [showS1_Modal, setShowS1_Modal] = useState(false);
     const [showS2_Modal, setShowS2_Modal] = useState(false);
@@ -47,14 +55,14 @@ export default function Main(){
             <div className="flex flex-col h-full">
                 <div className="flex flex-row justify-between items-end">
                 <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
-                <button className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
+                <button onClick={()=>setLogout(true)} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
                 </div>
                 <div className="relative">
                     <div className="text-center m-auto relative">
                         <Image src='/img/door-border_1.png' width='307' height='537'/>
                     </div>
                     <div className="door-top">
-                        <div className="flex justify-between mt-8">  
+                        <div className="flex justify-between">  
                             <h1 className="ml-8 text-white text-base font-normal align-bottom">OOO님의 소원양말</h1>
                             <button onClick={()=> setShowSE_Modal(true)}>
                                 <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
