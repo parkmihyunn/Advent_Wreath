@@ -14,7 +14,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>{CssBaseline.flush()}</Head>
+        <Head>
+          <script
+              defer
+              src="https://developers.kakao.com/sdk/js/kakao.js"
+          ></script>
+          {CssBaseline.flush()}
+        </Head>
         <body>
           <Main />
           <NextScript />

@@ -10,6 +10,15 @@ import SocksModal_3 from '../components/socksModal_3'
 import SocksEditModal from '../components/socksEditModal'
 
 export default function Main(){
+    /*
+    const kakoLogout = () => {
+        const { localStorage } = window;
+        localStorage.removeItem('token');
+        window.Kakao.Auth.logout(function() {
+            console.log('로그아웃 성공');
+        });
+    }
+    */
     const [showQ_Modal, setShowQ_Modal] = useState(false);
     const [showS1_Modal, setShowS1_Modal] = useState(false);
     const [showS2_Modal, setShowS2_Modal] = useState(false);
@@ -36,7 +45,10 @@ export default function Main(){
             </Head> 
 
             <div className="flex flex-col h-full">
-                <h1 className="flex flex-col ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
+                <div className="flex flex-row justify-between items-end">
+                <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
+                <button className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
+                </div>
                 <div className="relative">
                     <div className="text-center m-auto relative">
                         <Image src='/img/door-border_1.png' width='307' height='537'/>

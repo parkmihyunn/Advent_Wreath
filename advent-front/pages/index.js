@@ -4,6 +4,20 @@ import Layout from '../components/layout'
 import Link from 'next/link'
 
 export default function Home() {
+  /*
+  const loginFormWithKakao = () => {
+    window.Kakao.Auth.login({
+        success(authObj) {
+            console.log(authObj);
+            window.localStorage.setItem('token', authObj.access_token);
+            router.push('/main');
+        },
+        fail(err) {
+            console.log(err);
+        }
+    })
+  }
+  */
   return (
     <div className="
       flex flex-col items-center h-screen
@@ -33,9 +47,9 @@ export default function Home() {
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>
           {/* 시작하기 누르면 카카로 로그인으로 바로 넘어가도록 할 것임*/}
-            <a className ="start-text flex flex-col items-center text-white">
+            <button className ="start-text flex flex-col py-5 items-center text-white text-lg">
                 시작하기
-            </a>
+            </button>
         </div>
         <Layout/>
       </div>
