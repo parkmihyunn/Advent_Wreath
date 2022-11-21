@@ -96,8 +96,8 @@ export default function Main(){
                             <Image src='/img/wreath_non_2.png' width='280' height='280'/>
                             <div className="wreath-text">
                                 <Image src='/img/christmas_text.png' width='97' height='25'/>
-                                <h1 className="text-center text-xl font-normal">
-                                D-{result}
+                                <h1 className="text-center text-xl font-bold">
+                                D - {result}
                                 </h1>
                             </div>
                         </div>    
@@ -125,8 +125,8 @@ export default function Main(){
                             <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
                         </button>
                     </div>
-                    <div className="quiz-notification">
-                        <Image src='/img/quiz_red.png' width='22' height='22'/>
+                    <div className="quiz-notification bg-red-600 rounded-full">
+                        <div className="text-white text-xs align-text-top font-bold">2</div>
                     </div>
                     <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
                 </div>

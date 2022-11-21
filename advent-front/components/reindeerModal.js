@@ -13,7 +13,7 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
                     <div className="pt-10 font-bold text-xl">N번째 순록이 도착했어요 ♥</div>
                     <div className="pt-8 text-sm">OOO님만의 특별한 순록이예요.</div>
                     <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
-                    <Link href="/main"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
+                    <Link href="/main/1"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
                 </div>
             </Modal.Header>
             <Image src="/img/r_modal_bg.png" width={300} height={563}/>
