@@ -9,6 +9,7 @@ import SocksModal_1 from '../../components/socksModal_1'
 import SocksModal_2 from '../../components/socksModal_2'
 import SocksModal_3 from '../../components/socksModal_3'
 import SocksEditModal from '../../components/socksEditModal'
+import WreathModal from '../../components/wreathModal'
 
 export default function Main(){
     const [logout, setLogout] = useState(false);
@@ -32,6 +33,7 @@ export default function Main(){
     const [showS2_Modal, setShowS2_Modal] = useState(false);
     const [showS3_Modal, setShowS3_Modal] = useState(false);
     const [showSE_Modal, setShowSE_Modal] = useState(false);
+    const [showW_Modal, setShowW_Modal] = useState(false);
 
     // 디데이 계산
     var today = new Date();
@@ -99,11 +101,11 @@ export default function Main(){
                                 </h1>
                             </div>
                         </div>    
-                        <Link href='/ornaments'>
+                        <button onClick={()=> setShowW_Modal(true)}>
                             <h1 className="text-center text-xs font-normal text-gray-500">
                                 편집하기
                             </h1>
-                        </Link>
+                        </button>
                         <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
                         <div className="collection"><Image src='/img/collection.png' width='95' height='131'/></div>
                     </div>
@@ -135,6 +137,7 @@ export default function Main(){
                 <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
                 <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
                 <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)}/>
+                <WreathModal isVisible={showW_Modal} onClose={()=>setShowW_Modal(false)}/>
             </div>
         </div>
         </Fragment>

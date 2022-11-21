@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import '../styles/main.css'
 import '../styles/quiz.css'
 import '../styles/sModal.css'
+import '../styles/wreath.css'
 import type { AppProps } from "next/app";
 import { NextUIProvider } from '@nextui-org/react';
 import React, { useEffect } from 'react';
