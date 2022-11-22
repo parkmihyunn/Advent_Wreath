@@ -97,3 +97,10 @@
     text-align:center;
     transform: translate( -53%, -30% );
 }
+
+.reindeer1 {
+    position: absolute;
+    left: 50%;
+	transform: translate( -50%, -50% );
+    text-align:center;
+}
