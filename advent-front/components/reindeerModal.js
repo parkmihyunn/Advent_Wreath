@@ -1,9 +1,8 @@
 import React from "react";
 import { Modal, Image, Link } from "@nextui-org/react";
 
-const ReindeerModal = ({ isVisible, onRClose }) => {
+const ReindeerModal = ({ isVisible, onRClose, props }) => {
     if(!isVisible) return null;
-    
     // 임시 순록 정보
     const reinDeer = [
         {
@@ -20,7 +19,6 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             horn : 'horn_1'
         },
     ]
-
     const deerNum = reinDeer.length;
     const body = "/img/reindeer/" + reinDeer[deerNum-1].body + ".png";
     const bodydeco = "/img/reindeer/" + reinDeer[deerNum-1].bodydeco + ".png";
