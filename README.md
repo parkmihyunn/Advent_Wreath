@@ -17,3 +17,6 @@ npm install -> npm run dev
 ~ 22.10.18 미현 : quiz confetti 적용 완료, 뒤로가기 추가, 순록 모달 제작중 / 윤성 :  
 ~ 22.10.19 미현 : reindeerModal.js NextUI적용하여 완성, quizModals.js css 수정 / 윤성 :  
 ~ 22.10.20 미현 : _app.js, _document.js => tsx file 변환, 카카오 로그인 구현중, 동적 라우팅 구현중 / 윤성 :  
+~ 22.10.21 미현 : 카카오 로그인 토큰 백엔드 넘겨주기 이후 남음 / 윤성 :  
+~ 22.10.22 미현 : reindeerModal 수정 / 윤성 :  
+~ 22.10.23 미현 : / 윤성 :  
