@@ -2,9 +2,10 @@ from django.shortcuts import render
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view # function based 이기에 데코레이터를 사용한다.
-from wall.models import quiz
+from wall.models import quiz,hair,eye,body_color,body_deco,horn
 from wall.serializers import quizSerializer #models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
 
+import random
 
 @api_view(['GET'])
 def getquiz(request): 
@@ -24,6 +25,36 @@ def addquiz(request):
 		serializer.save() #save()가 데이터베이스에 새로운 데이터를 생선한다.
 	return Response(serializer.data) #그리고 새로 만들어진 데이터를 Response에 넣는다.
 
+def correct(user_answer):
+    quizzes = quiz.objects.first()
+    correct = quizzes.answer
+    
+    if(user_answer == correct):
+        mixDeer()
+        
+        
+def mixDeer():
+    
+    deer = []
+        
+    horn = horn.objects.get(id = random.randint(0,horn.objects.all().count()-1))
+    deer.append(horn);
+    hair = hair.objects.get(id = random.randint(0,hair.objects.all().count()-1))
+    deer.append(hair)
+    eye = eye.objects.get(id = random.randint(0,eye.objects.all().count()-1))
+    deer.append(eye)
+    body_color = body_color.objects.get(id = random.randint(0,body_color.objects.all().count()-1))
+    deer.append(body_color)
+    body_deco = body_deco.objects.get(id = random.randint(0,body_deco.objects.all().count()-1))
+    deer.append(body_deco)
+    
+    print(deer)
+    
+    return deer
+    
+        
+
+    
 
 from django.shortcuts import render
 from rest_framework import status

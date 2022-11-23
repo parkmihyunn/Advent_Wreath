@@ -8,5 +8,11 @@ urlpatterns = [
 	path('',quizList.as_view()),
 	path('<int:pk>/', quizDetail.as_view()),
 	path('get/',views.getquiz),
-	path('add/',views.addquiz),]
+	path('add/',views.addquiz),
+	path('decoration/',views.addDeer),
+ 
+ ]
+
+
+
 
