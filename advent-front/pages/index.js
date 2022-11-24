@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Link from 'next/link'
+import axios from 'axios';
 
 export default function Home() {
   
@@ -18,7 +19,16 @@ export default function Home() {
         success(authObj) {
             console.log("login성공")
             console.log(authObj);
-            window.localStorage.setItem('token', authObj.access_token);
+            //window.localStorage.setItem('token', authObj.access_token);
+            let res = axios.get(
+              "http://localhost:8000/rest-auth/kakao/",
+              {
+                params: 
+                {
+                    code:authObj.access_token
+                  },
+              }
+            );
             setRoute(true); 
         },
         fail(err) {
@@ -27,19 +37,20 @@ export default function Home() {
     })
   }
 
-  const kakaoResponse = async(response)=>{
-    console.log(response.response.access_token)
-    let res = await axios.get(
-        "http://localhost:8000/rest-auth/kakao/",
-        {
-          params: 
-          {
-              code:response.response.access_token
-            },
-        }
-      );
-      console.log(res)
-  }
+  // const kakaoResponse = async(response)=>{
+  //   console.log(response.response.access_token)
+  //   let res = await axios.get(
+  //       "http://localhost:8000/rest-auth/kakao/",
+  //       {
+  //         params: 
+  //         {
+  //             code:response.response.access_token
+  //           },
+  //       }
+  //     );
+  //     console.log("백엔드보냄")
+  //     setRoute(true); 
+  // }
   
   return (
     <div className="
