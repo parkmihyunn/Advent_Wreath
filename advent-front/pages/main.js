@@ -18,7 +18,7 @@ export default function Main(){
 
     const [route, setRoute] = useState(true);
     const router = useRouter();
-    console.log({ query: router.query, router: router });
+    // console.log({ query: router.query, router: router });
 
     const logoutHandler = () => {
         const { localStorage } = window;
