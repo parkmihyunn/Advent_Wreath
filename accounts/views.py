@@ -31,6 +31,8 @@ def kakao_callback(request):
         f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={rest_api_key}&redirect_uri={redirect_uri}&code={code}")
     token_req_json = token_req.json()
     
+    print(token_req_json) #받은 토큰 출력해보기
+
     error = token_req_json.get("error")
     if error is not None:
         raise JSONDecodeError(error)
