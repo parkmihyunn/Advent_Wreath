@@ -7,12 +7,7 @@ import Link from 'next/link'
 import axios from 'axios';
 
 export default function Home() {
-  
-  const [route, setRoute] = useState(false);
-  if(route){
-    const router = useRouter();
-    router.push('/main/[id]', "/main/1");
-  }
+  const router = useRouter();
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
@@ -20,7 +15,7 @@ export default function Home() {
             console.log("login성공")
             console.log(authObj);
             //window.localStorage.setItem('token', authObj.access_token);
-            let res = axios.get("http://localhost:8000/rest-auth/kakao/",
+            let res = axios.get("http://localhost:8000/accounts/kakao/login/finish/",
               {
                 params: 
                 {
@@ -29,28 +24,13 @@ export default function Home() {
               }
             );
             console.log(res);
-            setRoute(true); 
+            router.push('/main');
         },
         fail(err) {
             console.log(err);
         }
     })
   }
-
-  // const kakaoResponse = async(response)=>{
-  //   console.log(response.response.access_token)
-  //   let res = await axios.get(
-  //       "http://localhost:8000/rest-auth/kakao/",
-  //       {
-  //         params: 
-  //         {
-  //             code:response.response.access_token
-  //           },
-  //       }
-  //     );
-  //     console.log("백엔드보냄")
-  //     setRoute(true); 
-  // }
   
   return (
     <div className="

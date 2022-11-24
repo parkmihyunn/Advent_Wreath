@@ -32,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
                 quizNum : 0,
                 question : '몇몇 순록들은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 ___km까지 이동한다',
                 correct : '100',
-                hints : 'https://www.bbc.com/korean/features-59777860'
+                hints : 'https://www.bbc.com/korean/features-59777860',
             }, {
                 quizNum : 1,
                 question : '영국 감시단체, 오염으로 OOOOO 가까워져 경고',

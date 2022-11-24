@@ -11,7 +11,7 @@ export default function quiz(){
     const month = now.getMonth() + 1;
     const day = now.getDate();
 
-    /* 임시로 사용할 quiz data */
+    /* 임시로 사용할 quiz data*/
     const quizData = [
         {
             quizNum : 0,
@@ -20,6 +20,7 @@ export default function quiz(){
             hints : 'https://www.greenpeace.org/korea/update/5973/blog-arctic-rescue-polar-bears-in-global-warming/'
         },
     ]
+    
 
     /* 정답 컨페티 관리 */
     const [showConfetti, setShowConfetti] = useState(false);

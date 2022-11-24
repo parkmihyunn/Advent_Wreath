@@ -36,4 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 # backend clone files
-/Advent_Wreath_Back
+/Advent_Wreath_Front

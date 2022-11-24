@@ -1,23 +1,26 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Layout from '../../components/layout'
+import Layout from '../components/layout'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment, useState } from 'react'
-import QuizModal from '../../components/quizModals'
-import SocksModal_1 from '../../components/socksModal_1'
-import SocksModal_2 from '../../components/socksModal_2'
-import SocksModal_3 from '../../components/socksModal_3'
-import SocksEditModal from '../../components/socksEditModal'
-import WreathModal from '../../components/wreathModal'
+import QuizModal from '../components/quizModals'
+import SocksModal_1 from '../components/socksModal_1'
+import SocksModal_2 from '../components/socksModal_2'
+import SocksModal_3 from '../components/socksModal_3'
+import SocksEditModal from '../components/socksEditModal'
+import WreathModal from '../components/wreathModal'
 
 export default function Main(){
-    const [logout, setLogout] = useState(false);
+    const [값1, set값1] = useState([]);
+
+    // 위 까지 예시 코드
+
     const [route, setRoute] = useState(true);
     const router = useRouter();
     console.log({ query: router.query, router: router });
 
-    if(logout) {
+    const logoutHandler = () => {
         const { localStorage } = window;
         localStorage.removeItem('token');
         window.Kakao.Auth.logout(function() {
@@ -26,7 +29,7 @@ export default function Main(){
         if(route){
             router.push('/');
         }
-    } else {console.log("logout false");}
+    }
 
     const [showQ_Modal, setShowQ_Modal] = useState(false);
     const [showS1_Modal, setShowS1_Modal] = useState(false);
@@ -57,7 +60,7 @@ export default function Main(){
             <div className="flex flex-col h-full">
                 <div className="flex flex-row justify-between items-end">
                 <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
-                <button onClick={()=>setLogout(true)} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
+                <button onClick={logoutHandler} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
                 </div>
                 <div className="relative">
                     <div className="text-center m-auto relative">
@@ -136,7 +139,7 @@ export default function Main(){
                 <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
                 <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
                 <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
-                <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)}/>
+                <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} set값1={set값1}/>
                 <WreathModal isVisible={showW_Modal} onClose={()=>setShowW_Modal(false)}/>
             </div>
         </div>

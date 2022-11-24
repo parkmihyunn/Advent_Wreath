@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Image, Link } from "@nextui-org/react";
+import axios from 'axios';
 
-const ReindeerModal = ({ isVisible, onRClose, props }) => {
+const ReindeerModal = ({ isVisible, onRClose }) => {
     if(!isVisible) return null;
+    
+    useEffect(() => {
+        axios.get("http://localhost:3000/api/temp")
+        .then(res => {
+            console.log('성공');
+            console.log(res);
+            const data = res;
+        })
+        .catch(res => {
+            console.log('실패');
+            console.log(res);
+        })
+
+    }, []);
     // 임시 순록 정보
     const reinDeer = [
         {
@@ -19,6 +34,7 @@ const ReindeerModal = ({ isVisible, onRClose, props }) => {
             horn : 'horn_1'
         },
     ]
+    //const deerNum = data.data[0].reindeers.length;
     const deerNum = reinDeer.length;
     const body = "/img/reindeer/" + reinDeer[deerNum-1].body + ".png";
     const bodydeco = "/img/reindeer/" + reinDeer[deerNum-1].bodydeco + ".png";
@@ -43,7 +59,7 @@ const ReindeerModal = ({ isVisible, onRClose, props }) => {
                         <div className="pt-8 text-sm">OOO님만의 특별한 순록이예요.</div>
                         <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
                     </div>
-                    <Link href="/main/1"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
+                    <Link href="/main"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
                 </div>
             </Modal.Header>
             <Image src="/img/r_modal_bg.png" width={300} height={563}/>
@@ -51,5 +67,39 @@ const ReindeerModal = ({ isVisible, onRClose, props }) => {
         </div>
     );
 }
+
+// export async function getServerSideProps() {
+//     console.log('test');
+//     // try {
+//     //   const response = await axios.get(
+//     //     "http://localhost:3000/api/temp"
+//     //   );
+//     //   const data = response.data;
+//     //   console.log(response);
+//     //   return {
+//     //     props: {
+//     //         data
+//     //     },
+//     //   };
+//     // } catch (err) {
+//     //   console.log(err);
+//     // }
+//     axios.get("http://localhost:3000/api/temp")
+//         .then(res => {
+//             console.log('성공');
+//             console.log(res);
+//             const data = res;
+//         })
+//         .catch(res => {
+//             console.log('실패');
+//             console.log(res);
+//         })
+
+//         return {
+//             props: {
+//                 data
+//             }
+//         }
+// }
 
 export default ReindeerModal
