@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from accounts import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('wall.urls'),)
+    path('',include('wall.urls'),),
+    path('accounts/', include('dj_rest_auth.urls')),
+    path('accounts/', include('dj_rest_auth.registration.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('accounts/kakao/login/', views.kakao_login, name='kakao_login'),
+    path('accounts/kakao/callback/', views.kakao_callback, name='kakao_callback'),
+    path('accounts/kakao/login/finish/', views.KakaoLogin.as_view(), name='kakao_login_todjango'),
 ]
