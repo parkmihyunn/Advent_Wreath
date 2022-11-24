@@ -20,7 +20,6 @@ export default function quiz(){
             hints : 'https://www.greenpeace.org/korea/update/5973/blog-arctic-rescue-polar-bears-in-global-warming/'
         },
     ]
-    
 
     /* 정답 컨페티 관리 */
     const [showConfetti, setShowConfetti] = useState(false);
@@ -29,8 +28,9 @@ export default function quiz(){
             const confettiSettings = { target: 'my-canvas', clock: 40, props:['square'], size:1.3, rotate:true };
             const confetti = new ConfettiGenerator(confettiSettings);
             confetti.render();
+            console.log("컨페티")
         }
-      }, [showConfetti])
+    }, [showConfetti])
     
     /* 문제 가져오기 */
     const answerNum = quizData[0].quizNum;

@@ -1,24 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Image, Link } from "@nextui-org/react";
 import axios from 'axios';
 
 const ReindeerModal = ({ isVisible, onRClose }) => {
     if(!isVisible) return null;
-    
+    const [refinedData, setRefinedData] = useState({});
+    const [data, setData] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:3000/api/temp")
         .then(res => {
             console.log('성공');
-            console.log(res);
-            const data = res;
+            console.log(res.data);
+            setData(res.data);
+            const deerNum = res.data[0].reindeers.length;
+            const tmp = {
+                body: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].body + ".png",
+                bodydeco: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].bodydeco + ".png",
+                eye: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].eye + ".png",
+                headdeco: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].headdeco + ".png",
+                horn: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].horn + ".png",
+            }
+            setRefinedData(tmp);
         })
         .catch(res => {
             console.log('실패');
             console.log(res);
         })
-
     }, []);
-    // 임시 순록 정보
+    /* 임시 순록 정보 */
     const reinDeer = [
         {
             body: 'body_0',
@@ -34,13 +43,20 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             horn : 'horn_1'
         },
     ]
-    //const deerNum = data.data[0].reindeers.length;
-    const deerNum = reinDeer.length;
-    const body = "/img/reindeer/" + reinDeer[deerNum-1].body + ".png";
-    const bodydeco = "/img/reindeer/" + reinDeer[deerNum-1].bodydeco + ".png";
-    const eye = "/img/reindeer/" + reinDeer[deerNum-1].eye + ".png";
-    const headdeco = "/img/reindeer/" + reinDeer[deerNum-1].headdeco + ".png";
-    const horn = "/img/reindeer/" + reinDeer[deerNum-1].horn + ".png";
+    
+    const testFn = () => {
+        console.log('click');
+        console.log(refinedData);
+    }
+
+    //const deerNum = data[0].reindeers.length;
+    //console.log(data[0].reindeers);
+    // const deerNum = reinDeer.length;
+    // const body = "/img/reindeer/" + reinDeer[deerNum-1].body + ".png";
+    // const bodydeco = "/img/reindeer/" + reinDeer[deerNum-1].bodydeco + ".png";
+    // const eye = "/img/reindeer/" + reinDeer[deerNum-1].eye + ".png";
+    // const headdeco = "/img/reindeer/" + reinDeer[deerNum-1].headdeco + ".png";
+    // const horn = "/img/reindeer/" + reinDeer[deerNum-1].horn + ".png";
 
     return (
         <div>
@@ -48,11 +64,11 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             <Modal.Header className="flex flex-col items-center text-center w-full mt-36" css={{ position: "absolute", zIndex: "$1"}}>
                 <div className="flex flex-col items-center text-center w-full">
                     <div className="relative w-full mt-10">
-                        <div className="relative"><Image src={body} width={93} height={103}/></div>
-                        <div className="reindeer1 top-[63%] absolute"><Image src={bodydeco} width={45} height={25}/></div>
-                        <div className="reindeer1 top-[28%] absolute"><Image src={eye} width={37} height={8}/></div>
-                        <div className="reindeer1 top-[-13%] absolute"><Image src={horn} width={67} height={39}/></div>
-                        <div className="reindeer1 top-[-2%] absolute"><Image src={headdeco} width={23} height={14}/></div>
+                        <div className="relative"><Image src={refinedData.body} width={93} height={103}/></div>
+                        <div className="reindeer1 top-[63%] absolute"><Image src={refinedData.bodydeco} width={45} height={25}/></div>
+                        <div className="reindeer1 top-[28%] absolute"><Image src={refinedData.eye} width={37} height={8}/></div>
+                        <div className="reindeer1 top-[-13%] absolute"><Image src={refinedData.horn} width={67} height={39}/></div>
+                        <div className="reindeer1 top-[-2%] absolute"><Image src={refinedData.headdeco} width={23} height={14}/></div>
                     </div>
                     <div className="relative">
                         <div className="pt-10 font-bold text-xl">N번째 순록이 도착했어요 ♥</div>

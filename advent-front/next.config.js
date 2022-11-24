@@ -3,7 +3,7 @@
 const withImages = require('next-images');
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 }
 
