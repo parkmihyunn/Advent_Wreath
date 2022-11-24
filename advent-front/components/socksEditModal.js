@@ -3,7 +3,7 @@ import { useRef } from "react";
 import Link from 'next/link'
 import Image from 'next/image';
 
-const SocksEditModal = ({ isVisible, onClose }) => {
+const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
     //이미지 이름 가져오기
     const [giftName, setGiftName] = useState('');
     //이미지 사진 가져오기
