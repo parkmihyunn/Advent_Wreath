@@ -5,22 +5,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Link from 'next/link'
 
-/*
-const kakaoResponse = async(response)=>{
-  console.log(response.response.access_token)
-  let res = await axios.get(
-      "http://localhost:8000/rest-auth/kakao/",
-      {
-        params: 
-        {
-            code:response.response.access_token
-          },
-      }
-    );
-    console.log(res)
-}
- */
-
 export default function Home() {
   
   const [route, setRoute] = useState(false);
@@ -41,6 +25,20 @@ export default function Home() {
             console.log(err);
         }
     })
+  }
+
+  const kakaoResponse = async(response)=>{
+    console.log(response.response.access_token)
+    let res = await axios.get(
+        "http://localhost:8000/rest-auth/kakao/",
+        {
+          params: 
+          {
+              code:response.response.access_token
+            },
+        }
+      );
+      console.log(res)
   }
   
   return (
