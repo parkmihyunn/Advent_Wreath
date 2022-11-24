@@ -20,8 +20,7 @@ export default function Home() {
             console.log("login성공")
             console.log(authObj);
             //window.localStorage.setItem('token', authObj.access_token);
-            let res = axios.get(
-              "http://localhost:8000/rest-auth/kakao/",
+            let res = axios.get("http://localhost:8000/rest-auth/kakao/",
               {
                 params: 
                 {
@@ -29,6 +28,7 @@ export default function Home() {
                   },
               }
             );
+            console.log(res);
             setRoute(true); 
         },
         fail(err) {
