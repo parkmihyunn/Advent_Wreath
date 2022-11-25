@@ -13,7 +13,6 @@ import WreathModal from '../components/wreathModal'
 
 export default function Main(){
     const [값1, set값1] = useState([]);
-
     // 위 까지 예시 코드
 
     const [route, setRoute] = useState(true);
@@ -96,7 +95,7 @@ export default function Main(){
                             </div>
                         </div>
                         <div className="pt-16 mt-6 place-items-center flex-1">
-                            <Image src='/img/wreath_non_2.png' width='280' height='280'/>
+                            <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
                             <div className="wreath-text">
                                 <Image src='/img/christmas_text.png' width='97' height='25'/>
                                 <h1 className="text-center text-xl font-bold">
@@ -110,7 +109,11 @@ export default function Main(){
                             </h1>
                         </button>
                         <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
-                        <div className="collection"><Image src='/img/collection.png' width='95' height='131'/></div>
+                        <div className="collection">
+                            <Link href="/reindeerCollection" >
+                                <Image src='/img/collection.png' quality='80' width='95' height='131'/>
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div className="w-full relative top-5">
