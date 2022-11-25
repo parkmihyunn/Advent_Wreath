@@ -6,17 +6,13 @@ from .managers import CustomUserManager
 
 
 class User(AbstractUser):
-    username = None
-    email = models.EmailField(_('email address'), unique=True)
+    #username = models.CharField(max_length=100, unique=True)
+    uid = models.CharField(blank=False, null=True, unique=True, max_length=100)
+    #user_email = models.EmailField(_('email address'), unique=True, null=True)
+    name = models.CharField(max_length=100,null=True)
+    #gender = models.CharField(max_length=100,null=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = CustomUserManager()
-
-    spouse_name = models.CharField(blank=True, max_length=100)
-    date_of_birth = models.DateField(blank=True, null=True)
+    #2objects = CustomUserManager()
     
-
     def __str__(self):
-        return self.email
+        return self.uid

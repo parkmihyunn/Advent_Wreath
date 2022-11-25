@@ -26,7 +26,8 @@ urlpatterns = [
     path('accounts/', include('dj_rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('accounts.urls')),
-    path('accounts/kakao/login/', views.kakao_login, name='kakao_login'),
-    path('accounts/kakao/callback/', views.kakao_callback, name='kakao_callback'),
-    path('accounts/kakao/login/finish/', views.KakaoLogin.as_view(), name='kakao_login_todjango'),
+    # path('accounts/kakao/login/', views.kakao_login, name='kakao_login'),
+    # path('accounts/kakao/callback/', views.kakao_callback, name='kakao_callback'),
+    # path('accounts/kakao/login/finish/', views.KakaoLogin.as_view(), name='kakao_login_todjango'),
+    path('rest-auth/kakao/', views.KakaoLogin2.as_view(), name='kakao_login2')
 ]
