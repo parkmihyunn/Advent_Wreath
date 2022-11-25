@@ -4,14 +4,13 @@ import axios from 'axios';
 
 const ReindeerModal = ({ isVisible, onRClose }) => {
     if(!isVisible) return null;
+    // 순록 데이터를 저장시킬 refinedData 
     const [refinedData, setRefinedData] = useState({});
-    const [data, setData] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:3000/api/temp")
         .then(res => {
             console.log('성공');
             console.log(res.data);
-            setData(res.data);
             const deerNum = res.data[0].reindeers.length;
             const tmp = {
                 body: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].body + ".png",
@@ -27,36 +26,6 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             console.log(res);
         })
     }, []);
-    /* 임시 순록 정보 */
-    const reinDeer = [
-        {
-            body: 'body_0',
-            bodydeco : 'bodydeco_0',
-            eye : 'eye_0',
-            headdeco : 'headdeco_0',
-            horn : 'horn_0'
-        },{
-            body: 'body_1',
-            bodydeco : 'bodydeco_1',
-            eye : 'eye_1',
-            headdeco : 'headdeco_1',
-            horn : 'horn_1'
-        },
-    ]
-    
-    const testFn = () => {
-        console.log('click');
-        console.log(refinedData);
-    }
-
-    //const deerNum = data[0].reindeers.length;
-    //console.log(data[0].reindeers);
-    // const deerNum = reinDeer.length;
-    // const body = "/img/reindeer/" + reinDeer[deerNum-1].body + ".png";
-    // const bodydeco = "/img/reindeer/" + reinDeer[deerNum-1].bodydeco + ".png";
-    // const eye = "/img/reindeer/" + reinDeer[deerNum-1].eye + ".png";
-    // const headdeco = "/img/reindeer/" + reinDeer[deerNum-1].headdeco + ".png";
-    // const horn = "/img/reindeer/" + reinDeer[deerNum-1].horn + ".png";
 
     return (
         <div>
