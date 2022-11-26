@@ -23,4 +23,5 @@ class Migration(migrations.Migration):
             field=models.CharField(default=django.utils.timezone.now, max_length=200),
             preserve_default=False,
         ),
+        
     ]
