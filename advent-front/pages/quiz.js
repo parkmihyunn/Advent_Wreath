@@ -37,37 +37,23 @@ export default function quiz(){
     axios.get('http://localhost:3000/api/temp').then(
       res => {
         console.log(res.data);
-        setData(res.data);
+        const tmp = {
+          quizNum : res.data[0].quizzes[0].quizNum,
+          question : res.data[0].quizzes[0].question,
+          correct : res.data[0].quizzes[0].correct,
+          hints : res.data[0].quizzes[0].hints
+        }
+        setData(tmp);
     });
   },[])
 
-  /*
-  console.log(data);
-  console.log("=================================");
-  console.log((data.quizzes)[0]);
-   */
-
-  /* 임시로 사용할 quiz data*/
-  const quizData = [
-    {
-      quizNum : 0,
-      question : '북극에 사는 OOO은/는 식량난에 고통받고 있다.',
-      correct : '북극곰',
-      hints : 'https://www.greenpeace.org/korea/update/5973/blog-arctic-rescue-polar-bears-in-global-warming/'
-    },
-  ]
-
-  /* 문제 가져오기 */
-  const answerNum = data[0].quizzes[0].quizNum;
-  //const answerNum = quizData[0].quizNum;
-  const answerAsk = quizData[0].question;
-  let answerResult = quizData[0].correct.toLowerCase().trim();
   /* 사용자 입력 값 */
   const quizInput = useRef();
 
   /* 정답 확인 후 css 수정 */
   function quizConfirm() {
     const quizInput_t = quizInput.current.value.toLowerCase().trim();
+    let answerResult = data.correct.toLowerCase().trim();
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       document.getElementById('quiz_view_f').classList.remove('block');
@@ -110,10 +96,10 @@ export default function quiz(){
             </Link>
         </div>
         
-        <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {answerNum+1}번째 퀴즈</div>
+        <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {data.quizNum+1}번째 퀴즈</div>
         <div className="flex-1 w-full text-center m-auto relative">
             <div className="absolute mt-5 hint-btn">
-                <a href={quizData[0].hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
+                <a href={data.hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
             </div>
             <div className="hint-btn-img">
                 <Image src="/img/hint_btn.png" width='31' height='36'/>
@@ -122,13 +108,13 @@ export default function quiz(){
         <div className="flex letter-wrapper mt-10">
             <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
             <div className="flex flex-col letter-text1 px-5 relative ">
-                <div className="flex text-rose-800 mb-6 max-[374px]:mb-2 max-[374px]:mt-4">~ 오늘의 퀴즈 ~</div>
-                <div id="quiz" className="flex text-xl max-[374px]:text-base">{answerAsk}</div>
+                <div className="flex text-rose-800 mb-3 max-[374px]:text-xs max-[374px]:mb-0.5 max-[374px]:mt-8">~ 오늘의 퀴즈 ~</div>
+                <div id="quiz" className="flex text-base max-[374px]:text-sm">{data.question}</div>
                 <div id="quiz_view_t" className="absolute mb-56 quiz_view_t hidden">
                     <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
                     <div className="">정답입니다 !</div>
                 </div>
-                <div id="quiz_view_f" className="absolute mb-36 bg-rose-800 text-white hidden">
+                <div id="quiz_view_f" className="absolute mb-32 bg-rose-800 text-white hidden max-[374px]:mb-32">
                     <div className="text-xs pt-0.5 px-2 ">땡! 다시 생각해보세요.</div>
                 </div>
                 <div className="quiz_answer">

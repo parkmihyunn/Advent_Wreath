@@ -63,156 +63,158 @@ export default function Main(){
 
       <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between items-end">
-        <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
-        <button onClick={logoutHandler} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
+          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
+          <button onClick={logoutHandler} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
         </div>
         <div className="relative">
-            <div className="text-center m-auto relative">
-                <Image src='/img/door-border_1.png' width='307' height='537'/>
+          <div className="text-center m-auto relative">
+            <Image src='/img/door-border_1.png' width='307' height='537'/>
+          </div>
+          <div className="door-top">
+            <div className="flex justify-between">  
+              <h1 className="ml-8 text-white text-base font-normal align-bottom">OOO님의 소원양말</h1>
+              <button onClick={()=> setShowSE_Modal(true)}>
+                <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
+                  편집하기
+                </h1>
+              </button>
             </div>
-            <div className="door-top">
-                <div className="flex justify-between">  
-                    <h1 className="ml-8 text-white text-base font-normal align-bottom">OOO님의 소원양말</h1>
-                    <button onClick={()=> setShowSE_Modal(true)}>
-                        <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
-                            편집하기
-                        </h1>
-                    </button>
-                </div>
-                <div className="px-10 relative">
-                    <div className="w-60 text-center m-auto relative">
-                        <Image src='/img/socks_line.png' width='350' height='50'/>
-                    </div>
-                    <div className="sock-1">
-                        <button onClick={()=> setShowS1_Modal(true)}>
-                            <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
-                        </button>
-                    </div>
-                    <div className="sock-2">
-                        <button onClick={()=> setShowS2_Modal(true)}>
-                            <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
-                        </button>
-                    </div>
-                    <div className="sock-3">
-                        <button onClick={()=> setShowS3_Modal(true)}>
-                            <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
-                        </button>
-                    </div>
-                </div>
-                <div className="pt-16 mt-6 place-items-center flex-1">
-                    <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
-                    <div className="wreath-text">
-                        <Image src='/img/christmas_text.png' width='97' height='25'/>
-                        <h1 className="text-center text-xl font-bold">
-                        D - {result}
-                        </h1>
-                    </div>
+            <div className="px-10 relative">
+              <div className="w-60 text-center m-auto relative">
+                <Image src='/img/socks_line.png' width='350' height='50'/>
+              </div>
+              <div className="sock-1">
+                <button onClick={()=> setShowS1_Modal(true)}>
+                  <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
+                </button>
+              </div>
+              <div className="sock-2">
+                <button onClick={()=> setShowS2_Modal(true)}>
+                  <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
+                </button>
+              </div>
+              <div className="sock-3">
+                <button onClick={()=> setShowS3_Modal(true)}>
+                  <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
+                </button>
+              </div>
+            </div>
+            <div className="pt-16 mt-6 place-items-center flex-1">
+              <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
+              <div className="wreath-text">
+                <Image src='/img/christmas_text.png' width='97' height='25'/>
+                <h1 className="text-center text-xl font-bold">
+                D - {result}
+                </h1>
+              </div>
 
-                    <div className="wreath_edit_center">
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q1">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q2">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q3">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q4">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q5">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q6">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
-                        <Popover>
-                            <Popover.Trigger>
-                                <div className="wreath_orna_q7">
-                                    <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
-                                </div>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                <WreathEditModal/>
-                            </Popover.Content>
-                        </Popover>
+              <div className="wreath_edit_center">
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q1">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
                     </div>
-                </div>    
-                {/* <button onClick={()=> setShowW_Modal(true)}>
-                    <h1 className="text-center text-xs font-normal text-gray-500">
-                        편집하기
-                    </h1>
-                </button> */}
-                <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
-                <div className="collection">
-                    <Link href="/reindeerCollection" >
-                        <Image src='/img/collection.png' quality='80' width='95' height='131'/>
-                    </Link>
-                </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q2">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q3">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q4">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q5">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q6">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+                <Popover>
+                  <Popover.Trigger>
+                    <div className="wreath_orna_q7">
+                      <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                    </div>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <WreathEditModal/>
+                  </Popover.Content>
+                </Popover>
+              </div>
+            </div>    
+            {/* 
+            <button onClick={()=> setShowW_Modal(true)}>
+              <h1 className="text-center text-xs font-normal text-gray-500">
+                편집하기
+              </h1>
+            </button>
+            */}
+            <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
+            <div className="collection">
+              <Link href="/reindeerCollection" >
+                <Image src='/img/collection.png' quality='80' width='95' height='131'/>
+              </Link>
             </div>
+          </div>
         </div>
         <div className="w-full relative top-5">
-            <div className="w-full text-center m-auto relative">
-                <Image src='/img/door-dorder_2.png' width='307' height='165'/>
-            </div>
-            <div className="quiz-black">
-                <Image src='/img/quiz_black.png' width='191' height='10'/>
-            </div>
-            <div className="quiz-white">
-                <Image src='/img/quiz_white.png' width='149' height='40'/>
-            </div>
-            <div className="quiz-text">
-                <button onClick={()=> setShowQ_Modal(true)}>
-                    <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
-                </button>
-            </div>
-            <div className="quiz-notification bg-red-600 rounded-full">
-                <div className="text-white text-xs align-text-top font-bold">2</div>
-            </div>
-            <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
+          <div className="w-full text-center m-auto relative">
+            <Image src='/img/door-dorder_2.png' width='307' height='165'/>
+          </div>
+          <div className="quiz-black">
+            <Image src='/img/quiz_black.png' width='191' height='10'/>
+          </div>
+          <div className="quiz-white">
+            <Image src='/img/quiz_white.png' width='149' height='40'/>
+          </div>
+          <div className="quiz-text">
+            <button onClick={()=> setShowQ_Modal(true)}>
+              <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
+            </button>
+          </div>
+          <div className="quiz-notification bg-red-600 rounded-full">
+            <div className="text-white text-xs align-text-top font-bold">2</div>
+          </div>
+          <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
         <div className="flex-1"></div>
         <Layout/>
