@@ -37,7 +37,7 @@ export default function quiz(){
     axios.get('http://localhost:3000/api/temp').then(
       res => {
         console.log(res.data);
-        setData({...res.data[0]});
+        setData(res.data);
     });
   },[])
 
@@ -58,8 +58,8 @@ export default function quiz(){
   ]
 
   /* 문제 가져오기 */
-  //const answerNum = data.quizzes[0].quizNum;
-  const answerNum = quizData[0].quizNum;
+  const answerNum = data[0].quizzes[0].quizNum;
+  //const answerNum = quizData[0].quizNum;
   const answerAsk = quizData[0].question;
   let answerResult = quizData[0].correct.toLowerCase().trim();
   /* 사용자 입력 값 */
