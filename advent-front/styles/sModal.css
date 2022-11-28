@@ -172,7 +172,7 @@
 /* 여기서부터 socksEdit */
 .socks_edit_back {
     width: 389px;
-    height: 781px;
+    height: 740px;
     display: flex;
     background-color: #7E1313;
     position: absolute;
@@ -181,18 +181,24 @@
     border-radius: 22px;
 }
 
+/* @media (min-height: 781px) {
+    .socks_edit_back {
+        height: 781px;
+    }
+} */
+
 .socks_edit {
     position: absolute;
     height: 20px;
     width: 197px;
-    top: 26px;
+    top: 16px;
     color: white;
     text-align: center;
     font-size: 18px;
 }
 
 .socks_edit_socks {
-    top: 69px;
+    top: 49px;
     display: flex;
     position: absolute;
     justify-content: center;
@@ -215,7 +221,7 @@
 .socks_edit_box1 {
     width: 319px;
     height: 147.37px;
-    top: 147px;
+    top: 127px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -227,7 +233,7 @@
 .socks_edit_box2 {
     width: 319px;
     height: 147.37px;
-    top: 309px;
+    top: 289px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -239,7 +245,7 @@
 .socks_edit_box3 {
     width: 319px;
     height: 147.37px;
-    top: 473px;
+    top: 453px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -393,7 +399,7 @@
 .socks_edit_closeBtn {
     width: 215px;
     height: 44.95px;
-    top: 713px;
+    top: 673px;
     display: flex;
     background-color: black;
     position: absolute;
@@ -407,5 +413,5 @@
     width: 56px;
     height: 58px;
     left: 73px;
-    top: 700px;
+    top: 660px;
 }
