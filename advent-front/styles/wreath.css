@@ -9,6 +9,40 @@
     border-radius: 24px;
 }
 
+.wreath_edit_back {
+    width: 332px;
+    height: 414px;
+    display: flex;
+    background-color: #990000;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 24px;
+}
+
+.wreath_edit_orna_group {
+    width: 297px;
+    height: 312px;
+    display: flex;
+    background-color: #871C1C;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 12px;
+}
+
+.wreath_edit_center {
+    width: 267px;
+    height: 253px;
+    /* top: 138px; */
+    top: 170px;
+    left: 20px;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    z-index: 0;
+}
+
 .wreath_head {
     position: absolute;
     height: 20px;

@@ -4,12 +4,13 @@ import Layout from '../components/layout'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment, useState } from 'react'
+import { Popover, Text } from '@nextui-org/react';
 import QuizModal from '../components/quizModals'
 import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
 import SocksEditModal from '../components/socksEditModal'
-import WreathModal from '../components/wreathModal'
+import { WreathEditModal } from '../components/wreathEditModal'
 
 export default function Main(){
     const [값1, set값1] = useState([]);
@@ -102,12 +103,85 @@ export default function Main(){
                                 D - {result}
                                 </h1>
                             </div>
+
+                            <div className="wreath_edit_center">
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q1">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q2">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q3">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q4">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q5">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q6">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                                <Popover>
+                                    <Popover.Trigger>
+                                        <div className="wreath_orna_q7">
+                                            <Image src='/img/ornaments/orna_q.png' width='29' height='30'></Image>
+                                        </div>
+                                    </Popover.Trigger>
+                                    <Popover.Content>
+                                        <WreathEditModal/>
+                                    </Popover.Content>
+                                </Popover>
+                            </div>
                         </div>    
-                        <button onClick={()=> setShowW_Modal(true)}>
+                        {/* <button onClick={()=> setShowW_Modal(true)}>
                             <h1 className="text-center text-xs font-normal text-gray-500">
                                 편집하기
                             </h1>
-                        </button>
+                        </button> */}
                         <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
                         <div className="collection">
                             <Link href="/reindeerCollection" >
@@ -143,7 +217,7 @@ export default function Main(){
                 <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
                 <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
                 <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} set값1={set값1}/>
-                <WreathModal isVisible={showW_Modal} onClose={()=>setShowW_Modal(false)}/>
+                {/* <WreathEditModal isVisible={showW_Modal} onClose={()=>setShowW_Modal(false)}/> */}
             </div>
         </div>
         </Fragment>
