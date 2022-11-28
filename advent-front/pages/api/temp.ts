@@ -15,12 +15,17 @@ interface ReinDeer {
     horn : string;
 }
 
+interface Wreath { 
+    src: string;
+    width : string;
+}
+
 type Data = {
   name: string;
   quizzes: Quiz[];
   socks: string;
   reindeers: ReinDeer[];
-  wreath: string;
+  wreath: Wreath[];
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]>){
@@ -61,7 +66,43 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
                 horn : 'horn_1'
             },
         ],
-        wreath : "어떻게 필요한지 몰라서 텍스트로 대충 채워놓겠습니다 ~,~ 윤성씨 수정해주세요"
+        wreath : [
+            {
+                src : '/img/ornaments/candy.png',
+                width : '27'
+            },
+            {
+                src : '/img/ornaments/santa.png',
+                width : '48'
+            },
+            {
+                src : '/img/ornaments/dia.png',
+                width : '50'
+            },
+            {
+                src : '/img/ornaments/socks.png',
+                width : '33'
+            },
+            {
+                src : '/img/ornaments/snowman.png',
+                width : '45'
+            },
+            {
+                src : '/img/ornaments/bird.png',
+                width : '54'
+            },
+            {
+                src : '/img/ornaments/star.png',
+                width : '54'
+            },{
+                src : '/img/ornaments/bear.png',
+                width : '54'
+            },
+            {
+                src : '/img/ornaments/ball.png',
+                width : '43'
+            }
+        ]
     }
   ]);
 }
