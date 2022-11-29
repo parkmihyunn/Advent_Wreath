@@ -6,37 +6,31 @@ import { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 
-/* 
-  index.js 에서 해야 할 남은 일
-  1. 백엔드에서 사용자 id값 가져와서 main.js 동적라우팅 시켜주기
-*/
-
 export default function Home() {
-  const [user_id, setUserId] = useState();
-  const [nickName, setNickName] = useState();
+  // const [user_id, setUserId] = useState();
+  // const [nickName, setNickName] = useState();
   const router = useRouter();
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
-        success(authObj) {
-            console.log("login성공")
-            //토큰
-            console.log(authObj);
-            //window.localStorage.setItem('token', authObj.access_token);
-            let res = axios.get("http://localhost:8000/rest-auth/kakao/",
-              {
-                params: 
-                {
-                    code:authObj.access_token
-                  },
-              }
-            );
-            console.log(res);
-            router.push('/main');
-        },
-        fail(err) {
-            console.log(err);
-        }
+      success(authObj) {
+        console.log("login성공")
+        console.log(authObj);
+        //window.localStorage.setItem('token', authObj.access_token);
+        let res = axios.get("http://localhost:8000/rest-auth/kakao/",
+          {
+            params: {
+              code:authObj.access_token
+            },
+          }
+        );
+        console.log(res);
+        /* 백엔드 서버에서 사용자 정보 받아와서 main으로 넘기기 */
+        router.push('/main');
+      },
+      fail(err) {
+        console.log(err);
+      }
     })
   }
   
