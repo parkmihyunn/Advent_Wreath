@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+/* 유저는 두가지의 Ornaments를 관리할 interface가 필요할 것으로 생각됨.
+   보유하고 있는 ornaments를 관리하는 interface, main에 띄워야 할 ornaments를 관리할 interface*/
+
 interface Quiz {
     quizNum : number;
     question : string;

@@ -3,9 +3,12 @@ import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
 import axios from 'axios';
 
+/* 문제점... button 인식이 안되네? */
+
 export const WreathEditModal = () => {
 
     const [refinedData, setRefinedData] = useState([]);
+    const [isSelect, setIsSelect] =  useState({});
 
     useEffect(() => {
         axios.get("http://localhost:3000/api/temp")
@@ -19,6 +22,17 @@ export const WreathEditModal = () => {
         });
     }, []);
 
+    useEffect(()=>{
+        console.log(isSelect)
+    },[isSelect])
+
+    const onClickHandler = (t1, t2) => {
+        setIsSelect=({
+            src : t1,
+            width : t2
+        })
+    }
+
     return (
         <Grid.Container
             css={{ borderRadius: "13px", minWidth: "297px", minHeight: "312px" }}>
@@ -26,13 +40,12 @@ export const WreathEditModal = () => {
                 <div className="wreath_edit_orna_group overflow-auto">
                     <div className="grid grid-cols-3 gap-2">
                         {refinedData.map((el) =>
-                        <div className="wreath_edit_orna_box">
+                        <button onClick={onClickHandler(el.src, el.width)} className="wreath_edit_orna_box">
                             <div className="py-4">
-                                    <Image src={el.src} width={el.width} height='54'/>
+                                <Image src={el.src} width={el.width} height='54'/>
                             </div>
-                        </div>
+                        </button>
                         )}
-
                         {/* <div className="wreath_orna_box mt-4">
                             <div className="py-4"><Image src='/img/ornaments/candy.png' width='27' height='54'></Image></div>
                         </div>
@@ -66,5 +79,5 @@ export const WreathEditModal = () => {
         </Grid.Container>
     );
 };
-//
+
 export default WreathEditModal

@@ -12,20 +12,12 @@ import SocksModal_3 from '../components/socksModal_3'
 import SocksEditModal from '../components/socksEditModal'
 import { WreathEditModal } from '../components/wreathEditModal'
 
-/* 
-  main.js 에서 해야 할 남은 일
-    1. index.js에서 가져온 사용자 id값으로 
-      1) nickname 받아와서 OOO님 대신 집어넣기
-      2) 사용자가 지정한 리스오너먼트 위치에 맞게 띄우기
-      3) 오늘의 퀴즈 남은 수 보여주기(안푼게 있거나, 늦게 참여한 경우에도 누적해서 보일 수 있도록)
-    2. 로그인이 되지 않은 상태에서 접근하면 '/'으로 push시켜버리기
-    3. 새로고침시에 로그인 해제되는지 확인꼭 해보기!
-*/
-
 export default function Main(){
   const [값1, set값1] = useState([]);
   // 위 까지 예시 코드
   // console.log({ query: router.query, router: router });
+
+  const [isLogin, setIsLogin] = useState(false);
 
   const router = useRouter();
   const logoutHandler = () => {
@@ -72,7 +64,7 @@ export default function Main(){
           </div>
           <div className="door-top">
             <div className="flex justify-between">  
-              <h1 className="ml-8 text-white text-base font-normal align-bottom">OOO님의 소원양말</h1>
+              <h1 className="ml-8 text-white text-base font-normal align-bottom">nickname님의 소원양말</h1>
               <button onClick={()=> setShowSE_Modal(true)}>
                 <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
                   편집하기
@@ -99,7 +91,7 @@ export default function Main(){
                 </button>
               </div>
             </div>
-            <div className="pt-16 mt-6 place-items-center flex-1">
+            <div className="pt-16 mb-4 mt-8 place-items-center flex-1">
               <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
               <div className="wreath-text">
                 <Image src='/img/christmas_text.png' width='97' height='25'/>
