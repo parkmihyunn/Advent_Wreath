@@ -24,6 +24,7 @@ export default function Home() {
             },
           }
         );
+        console.log("res===================");
         console.log(res);
         /* 백엔드 서버에서 사용자 정보 받아와서 main으로 넘기기 */
         router.push('/main');
@@ -41,7 +42,7 @@ export default function Home() {
       bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
-        <title>서비스 명</title>
+        <title>돌아와! 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
@@ -54,7 +55,7 @@ export default function Home() {
             <Image src='/img/wreath.png' width='259' height='282'/>
 
           <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
-            서비스 이름
+            돌아와! 순록!
           </div>
         </div>
         <div className="w-full relative mt-10">

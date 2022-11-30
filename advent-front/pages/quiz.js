@@ -38,10 +38,10 @@ export default function quiz(){
       res => {
         console.log(res.data);
         const tmp = {
-          quizNum : res.data[0].quizzes[0].quizNum,
-          question : res.data[0].quizzes[0].question,
-          correct : res.data[0].quizzes[0].correct,
-          hints : res.data[0].quizzes[0].hints
+          quizNum : res.data[0].quizzes[8].quizNum,
+          question : res.data[0].quizzes[8].question,
+          correct : res.data[0].quizzes[8].correct,
+          hints : res.data[0].quizzes[8].hints
         }
         setData(tmp);
     });
@@ -84,7 +84,7 @@ export default function quiz(){
         bg-[url('../public/img/wood_pattern_dark.png')]
     ">
         <Head>
-        <title>서비스 명</title>
+        <title>돌아와! 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
         </Head>
