@@ -48,14 +48,14 @@ export default function Main(){
         bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
-      <title>서비스 명</title>
+      <title>돌아와! 순록!</title>
       <meta name="description" content="콘텐트 내용" />
       <link rel="icon" href="/favicon.ico" />
       </Head> 
 
       <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between items-end">
-          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
+          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
           <button onClick={logoutHandler} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
         </div>
         <div className="relative">

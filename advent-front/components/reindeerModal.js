@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Modal, Image, Link } from "@nextui-org/react";
 import axios from 'axios';
 
+
 const ReindeerModal = ({ isVisible, onRClose }) => {
   if(!isVisible) return null;
   // 순록 데이터를 저장시킬 refinedData 
   const [refinedData, setRefinedData] = useState({});
+  const [numDeer, setNumDeer] = useState();
+
   useEffect(() => {
     axios.get("http://localhost:3000/api/temp")
     .then(res => {
@@ -20,6 +23,7 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
         horn: "/img/reindeer/" + res.data[0].reindeers[deerNum-1].horn + ".png",
       }
       setRefinedData(tmp);
+      setNumDeer(deerNum);
     })
     .catch(res => {
       console.log('실패');
@@ -40,7 +44,7 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
               <div className="reindeer1 top-[-2%] absolute"><Image src={refinedData.headdeco} width={23} height={14}/></div>
             </div>
             <div className="relative">
-              <div className="pt-10 font-bold text-xl">N번째 순록이 도착했어요 ♥</div>
+              <div className="pt-10 font-bold text-xl">{numDeer}번째 순록이 도착했어요 ♥</div>
               <div className="pt-8 text-sm">OOO님만의 특별한 순록이예요.</div>
               <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
             </div>

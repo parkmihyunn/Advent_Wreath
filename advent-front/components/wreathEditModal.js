@@ -23,14 +23,16 @@ export const WreathEditModal = () => {
     }, []);
 
     useEffect(()=>{
-        console.log(isSelect)
+        console.log("isSelect : ", isSelect);
+
     },[isSelect])
 
     const onClickHandler = (t1, t2) => {
-        setIsSelect=({
+        setIsSelect({
             src : t1,
             width : t2
         })
+        // console.log(isSelect)
     }
 
     return (
@@ -40,11 +42,14 @@ export const WreathEditModal = () => {
                 <div className="wreath_edit_orna_group overflow-auto">
                     <div className="grid grid-cols-3 gap-2">
                         {refinedData.map((el) =>
-                        <button onClick={onClickHandler(el.src, el.width)} className="wreath_edit_orna_box">
-                            <div className="py-4">
+                        <div className="wreath_edit_orna_box">
+                            <button onClick={() => {
+                                onClickHandler(el.src,el.width);
+                                console.log("click");
+                            }} className="py-4">
                                 <Image src={el.src} width={el.width} height='54'/>
-                            </div>
-                        </button>
+                            </button>
+                        </div>
                         )}
                         {/* <div className="wreath_orna_box mt-4">
                             <div className="py-4"><Image src='/img/ornaments/candy.png' width='27' height='54'></Image></div>
