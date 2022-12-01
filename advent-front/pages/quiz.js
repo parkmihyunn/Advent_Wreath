@@ -84,9 +84,9 @@ export default function quiz(){
         bg-[url('../public/img/wood_pattern_dark.png')]
     ">
         <Head>
-        <title>돌아와! 순록!</title>
-        <meta name="description" content="콘텐트 내용" />
-        <link rel="icon" href="/favicon.ico" />
+          <title>돌아와! 순록!</title>
+          <meta name="description" content="콘텐트 내용" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         
         <canvas id="my-canvas" className="absolute"></canvas>
@@ -98,38 +98,38 @@ export default function quiz(){
         
         <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {data.quizNum+1}번째 퀴즈</div>
         <div className="flex-1 w-full text-center m-auto relative">
-            <div className="absolute mt-5 hint-btn">
-                <a href={data.hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
-            </div>
-            <div className="hint-btn-img">
-                <Image src="/img/hint_btn.png" width='31' height='36'/>
-            </div>
+          <div className="absolute mt-5 hint-btn">
+            <a href={data.hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
+          </div>
+          <div className="hint-btn-img">
+            <Image src="/img/hint_btn.png" width='31' height='36'/>
+          </div>
         </div>
         <div className="flex letter-wrapper mt-10">
-            <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
-            <div className="flex flex-col letter-text1 px-5 relative ">
-                <div className="flex text-rose-800 mb-3 max-[374px]:text-xs max-[374px]:mb-0.5 max-[374px]:mt-8">~ 오늘의 퀴즈 ~</div>
-                <div id="quiz" className="flex text-base max-[374px]:text-sm">{data.question}</div>
-                <div id="quiz_view_t" className="absolute mb-56 quiz_view_t hidden">
-                    <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
-                    <div className="">정답입니다 !</div>
-                </div>
-                <div id="quiz_view_f" className="absolute mb-32 bg-rose-800 text-white hidden max-[374px]:mb-32">
-                    <div className="text-xs pt-0.5 px-2 ">땡! 다시 생각해보세요.</div>
-                </div>
-                <div className="quiz_answer">
-                    <input type="text" ref={quizInput} className="quiz_input" id="u_anw" placeholder="정답 입력하기"/>
-                    <button className="submit" onClick={()=>quizConfirm()}>제출</button>
-                </div>
+          <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
+          <div className="flex flex-col letter-text1 px-5 relative ">
+            <div className="flex text-rose-800 mb-3 max-[374px]:text-xs max-[374px]:mb-0.5 max-[374px]:mt-8">~ 오늘의 퀴즈 ~</div>
+            <div id="quiz" className="flex text-base max-[374px]:text-sm">{data.question}</div>
+            <div id="quiz_view_t" className="absolute mb-56 quiz_view_t hidden">
+              <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
+              <div className="">정답입니다 !</div>
             </div>
-            <div id="rd_arrive" className="absolute rd-arrive hidden">
-                <div className="absolute">
-                    <button onClick={()=> setShowR_Modal(true)} className="rd-arrive-btn py-1 px-4 mb-1 rounded-md">ㅤ순록이 돌아왔어요o&#40;≧∇≦o&#41;</button>
-                </div>
-                <div className="arrive-btn-img">
-                    <Image src="/img/rd_arrive.png" width='48' height='71'/>
-                </div>
+            <div id="quiz_view_f" className="absolute mb-32 bg-rose-800 text-white hidden max-[374px]:mb-32">
+              <div className="text-xs pt-0.5 px-2 ">땡! 다시 생각해보세요.</div>
             </div>
+            <div className="quiz_answer">
+              <input type="text" ref={quizInput} className="quiz_input" id="u_anw" placeholder="정답 입력하기"/>
+              <button className="submit" onClick={()=>quizConfirm()}>제출</button>
+            </div>
+          </div>
+          <div id="rd_arrive" className="absolute rd-arrive hidden">
+            <div className="absolute">
+              <button onClick={()=> setShowR_Modal(true)} className="rd-arrive-btn py-1 px-4 mb-1 rounded-md">ㅤ순록이 돌아왔어요o&#40;≧∇≦o&#41;</button>
+            </div>
+            <div className="arrive-btn-img">
+              <Image src="/img/rd_arrive.png" width='48' height='71'/>
+            </div>
+          </div>
         </div>
         <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)}/>
     </div>
