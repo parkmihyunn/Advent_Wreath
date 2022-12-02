@@ -1,6 +1,7 @@
 import requests
 import json
 import jwt
+
 from django.shortcuts import redirect
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -16,6 +17,7 @@ from django.conf import settings
 
 from accounts.models import User
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 SECRET_PRE = "christmas"
 ALGORITHM ="HS256"
@@ -23,6 +25,17 @@ ALGORITHM ="HS256"
 
 from django.http import HttpResponse 
 
+@api_view(['GET'])
+def validate_token(token, kakao_access_code):
+    try:# payload 에 복호화한 값을 넣는다. 즉, id값이 나올 것이다.
+        payload = jwt.decode(token, SECRET_PRE+kakao_access_code, algorithms='HS256')
+        return payload
+    except jwt.ExpiredSignatureError:
+        return status.HTTP_401_UNAUTHORIZED
+    except jwt.InvalidTokenError:
+        return status.HTTP_401_UNAUTHORIZED
+    else:
+        return True
 
 class KakaoLogin2(APIView):
     def get(self, request):
@@ -36,12 +49,17 @@ class KakaoLogin2(APIView):
         kakao_response=requests.post(url,headers=headers)
         kakao_response=json.loads(kakao_response.text)
         
-
+        print(str(kakao_response))
         if User.objects.filter(uid=kakao_response['id']).exists():
             user    = User.objects.get(uid=kakao_response['id'])
             jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
-
-            return HttpResponse(f'id:{user.id}, name:{user.name}, token:{jwt_token}, exist:true')
+            datadict = {
+                "id" : user.id,
+                "name" : user.name,
+                "token" : jwt_token,
+                "exist" : False
+            }
+            return JsonResponse(datadict)
         else: 
             
             # if kakao_response['kakao_account']['gender']=="male":
@@ -58,7 +76,13 @@ class KakaoLogin2(APIView):
             ).save()
             user    = User.objects.get(uid=kakao_response['id'])
             jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code, ALGORITHM)
-            return HttpResponse(f'id:{user.id}, name:{user.name}, token:{jwt_token}, exist:false')
+            datadict = {
+                "id" : user.id,
+                "name" : user.name,
+                "token" : jwt_token,
+                "exist" : False
+            }
+            return JsonResponse(datadict)
 
             
 #BASE_URL = 'http://localhost:8000/'
