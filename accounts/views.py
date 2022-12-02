@@ -86,7 +86,7 @@ class KakaoLogin2(APIView):
             datadict = {
                 "id" : user.id,
                 "name" : user.name,
-                "token" : jwt_token,
+                "token" : jwt_token.decode('utf-8'),
                 "exist" : False
             }
             return JsonResponse(datadict)
