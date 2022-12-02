@@ -53,10 +53,14 @@ class KakaoLogin2(APIView):
         if User.objects.filter(uid=kakao_response['id']).exists():
             user    = User.objects.get(uid=kakao_response['id'])
             jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
+            
+            print(user.id)
+            print(user.name)
+            print(jwt_token)
             datadict = {
                 "id" : user.id,
                 "name" : user.name,
-                "token" : jwt_token,
+                "token" : jwt_token.decode('utf-8'),
                 "exist" : False
             }
             return JsonResponse(datadict)
@@ -76,6 +80,9 @@ class KakaoLogin2(APIView):
             ).save()
             user    = User.objects.get(uid=kakao_response['id'])
             jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code, ALGORITHM)
+            print(user.id)
+            print(user.name)
+            print(jwt_token)
             datadict = {
                 "id" : user.id,
                 "name" : user.name,
