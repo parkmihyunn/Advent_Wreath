@@ -13,28 +13,35 @@ export default function Home() {
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
-      success(authObj) {
-        console.log("login성공")
-        console.log(authObj);
-        //window.localStorage.setItem('token', authObj.access_token);
-        let res = axios.get("http://localhost:8000/rest-auth/kakao/",
-          {
-            params: {
-              code:authObj.access_token
-            },
-          }
-        );
-        console.log("res===================");
-        console.log(res);
-        /* 백엔드 서버에서 사용자 정보 받아와서 main으로 넘기기 */
-        router.push('/main');
-      },
-      fail(err) {
-        console.log(err);
-      }
+        success(authObj) {
+            console.log("login성공")
+            console.log(authObj);
+            //window.localStorage.setItem('token', authObj.access_token);
+            kakaoResponse(authObj);
+        },
+        fail(err) {
+            console.log(err);
+        }
     })
   }
-  
+
+  const kakaoResponse = async(authObj)=>{
+    console.log(authObj.access_token);
+    console.log("카카오 로그인 토큰(프런트) 를 백에 보내기 전");
+    let res = await axios.get("http://localhost:8000/rest-auth/kakao/",
+      {
+        params: 
+        {
+          code:authObj.access_token
+        },
+      });
+      console.log("카카오 로그인 토큰(프런트) 를 백에 보내고 난 후");
+      var datajson = res.data;
+      console.log(res.data);
+      console.log(datajson.name);
+      router.push('/main');
+  }
+
   return (
     <div className="
       flex flex-col items-center h-screen
