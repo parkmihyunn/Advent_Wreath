@@ -10,24 +10,23 @@ export default function Home() {
   // const [user_id, setUserId] = useState();
   // const [nickName, setNickName] = useState();
   const router = useRouter();
+  //const [isLogin, setIsLogin] = useState(false);
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
-        success(authObj) {
-            console.log("login성공")
-            console.log(authObj);
-            //window.localStorage.setItem('token', authObj.access_token);
-            kakaoResponse(authObj);
-        },
-        fail(err) {
-            console.log(err);
-        }
+      success(authObj) {
+        console.log("login성공")
+        console.log("로그인 토큰 정보 =======");
+        console.log(authObj);
+        kakaoResponse(authObj);
+      },
+      fail(err) {
+        console.log(err);
+      }
     })
   }
 
   const kakaoResponse = async(authObj)=>{
-    console.log(authObj.access_token);
-    console.log("카카오 로그인 토큰(프런트) 를 백에 보내기 전");
     let res = await axios.get("http://localhost:8000/rest-auth/kakao/",
       {
         params: 
@@ -35,11 +34,20 @@ export default function Home() {
           code:authObj.access_token
         },
       });
-      console.log("카카오 로그인 토큰(프런트) 를 백에 보내고 난 후");
       var datajson = res.data;
-      console.log(res.data);
-      console.log(datajson.name);
-      router.push('/main');
+      console.log("백서버에서 받아온 사용자 정보 =======");
+      console.log(datajson);
+      //setIsLogin(true);
+      window.sessionStorage.setItem('login', datajson.token);
+      console.log("index.js sessionStorage =======");
+      console.log(window.sessionStorage);
+      router.push({
+        pathname: '/main',
+        query: { id: datajson.id,
+                 name: datajson.name,
+                 token: datajson.token},
+      },'/main');
+      router.push('/main')
   }
 
   return (
@@ -78,3 +86,18 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps(){
+//   // api 이용해서 데이터 불러오기 (async, await으로 기다려주기)
+//   const res = await fetch("https://example_site.com/user_data")
+  
+//   // page에 props로 전달하기위해, json 형식으로 변경해주기
+//   const data = res.json()
+  
+//   // 페이지 props로 전달하기 (json 형식만 가능)
+//   return {
+//     props: {
+//       user_data: data
+//     },
+//   }
+// }
