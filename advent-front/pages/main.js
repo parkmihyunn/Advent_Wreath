@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { Fragment, useState, useEffect } from 'react'
 import { Popover, Text } from '@nextui-org/react';
 import QuizModal from '../components/quizModals'
+import ReindeerCollectionModal from '../components/reindeerCollectionModal'
 import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
@@ -27,7 +28,7 @@ export default function Main(){
       }
     }
   },[])
-  
+
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
       console.log('로그아웃');
@@ -37,6 +38,7 @@ export default function Main(){
   }
 
   const [showQ_Modal, setShowQ_Modal] = useState(false);
+  const [showCollectionModal, setCollectionModal] = useState(false);
   const [showS1_Modal, setShowS1_Modal] = useState(false);
   const [showS2_Modal, setShowS2_Modal] = useState(false);
   const [showS3_Modal, setShowS3_Modal] = useState(false);
@@ -181,19 +183,12 @@ export default function Main(){
                   </Popover.Content>
                 </Popover>
               </div>
-            </div>    
-            {/* 
-            <button onClick={()=> setShowW_Modal(true)}>
-              <h1 className="text-center text-xs font-normal text-gray-500">
-                편집하기
-              </h1>
-            </button>
-            */}
+            </div>
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
             <div className="collection">
-              <Link href="/reindeerCollection" >
+              <button onClick={()=> setCollectionModal(true)} >
                 <Image src='/img/collection.png' quality='80' width='95' height='131'/>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -220,6 +215,7 @@ export default function Main(){
         <div className="flex-1"></div>
         <Layout/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)}/>
         <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
         <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
         <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
