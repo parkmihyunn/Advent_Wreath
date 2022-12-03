@@ -91,17 +91,53 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
         socks : "a",
         reindeers: [
             {
-                body: 'body_0',
-                bodydeco : 'bodydeco_0',
-                eye : 'eye_0',
-                headdeco : 'headdeco_0',
-                horn : 'horn_0'
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
             },{
-                body: 'body_1',
-                bodydeco : 'bodydeco_1',
-                eye : 'eye_1',
-                headdeco : 'headdeco_1',
-                horn : 'horn_1'
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
+            },{
+                body: '/img/reindeer/body_1.png',
+                bodydeco : '/img/reindeer/bodydeco_1.png',
+                eye : '/img/reindeer/eye_1.png',
+                headdeco : '/img/reindeer/headdeco_1.png',
+                horn : '/img/reindeer/horn_1.png'
             },
         ],
         wreath : [
