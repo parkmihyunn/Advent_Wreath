@@ -2,8 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import Link from 'next/link'
-import { useRouter, withRouter } from 'next/router'
-import { Fragment, useState } from 'react'
+import { useRouter } from 'next/router'
+import { Fragment, useState, useEffect } from 'react'
 import { Popover, Text } from '@nextui-org/react';
 import QuizModal from '../components/quizModals'
 import SocksModal_1 from '../components/socksModal_1'
@@ -15,28 +15,23 @@ import { WreathEditModal } from '../components/wreathEditModal'
 export default function Main(){
   // 예시 코드
   const [값1, set값1] = useState([]);
-
+  const [user, setUser] = useState([]);
   const router = useRouter();
-  console.log("main.js router =======");
-  console.log(router);
-  if(typeof window !== 'undefined') {
-    console.log("main.js sessionStorage =======");
-    console.log(window.sessionStorage);
-    if(window.sessionStorage.getItem('login') === null || router.query.token === null){
-      alert("로그인 후 이용해주세요.")
-      router.push('/');
+  useEffect(() => {
+    if(typeof window !== 'undefined') {
+      if(window.sessionStorage.getItem('user') === null){
+        router.push('/');
+        alert("로그인 후 이용해주세요.");
+      } else {
+        setUser(JSON.parse(window.sessionStorage.user))
+      }
     }
-  }
-  /*
-  if(router.query.token === null ){
-    alert("로그인 후 이용해주세요.")
-    router.push('/')
-  }
-  */
+  },[])
+  
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
-      console.log('로그아웃 성공');
-      window.sessionStorage.removeItem('login');
+      console.log('로그아웃');
+      window.sessionStorage.removeItem('user');
       router.push('/');
     });
   }
@@ -78,10 +73,10 @@ export default function Main(){
           </div>
           <div className="door-top">
             <div className="flex justify-between">  
-              <h1 className="ml-8 text-white text-base font-normal align-bottom">{router.query.name}님의 소원양말</h1>
+              <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.name}님의 소원양말</h1>
               <button onClick={()=> setShowSE_Modal(true)}>
                 <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
-                  편집하기
+                  편집하기      
                 </h1>
               </button>
             </div>

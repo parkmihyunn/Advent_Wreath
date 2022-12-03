@@ -38,15 +38,15 @@ export default function Home() {
       console.log("백서버에서 받아온 사용자 정보 =======");
       console.log(datajson);
       //setIsLogin(true);
-      window.sessionStorage.setItem('login', datajson.token);
+      window.sessionStorage.user = JSON.stringify(datajson);
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
-      router.push({
-        pathname: '/main',
-        query: { id: datajson.id,
-                 name: datajson.name,
-                 token: datajson.token},
-      },'/main');
+      // router.push({
+      //   pathname: '/main',
+      //   query: { id: datajson.id,
+      //            name: datajson.name,
+      //            token: datajson.token},
+      // },'/main');
       router.push('/main')
   }
 
