@@ -8,6 +8,14 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
   // 순록 데이터를 저장시킬 refinedData 
   const [refinedData, setRefinedData] = useState({});
   const [numDeer, setNumDeer] = useState();
+  
+  /* user 정보 가져오기 */
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    if(typeof window !== 'undefined') {
+      setUser(JSON.parse(window.sessionStorage.user))
+    }
+  },[])
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/temp")
@@ -45,7 +53,7 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             </div>
             <div className="relative">
               <div className="pt-10 font-bold text-xl">{numDeer}번째 순록이 도착했어요 ♥</div>
-              <div className="pt-8 text-sm">OOO님만의 특별한 순록이예요.</div>
+              <div className="pt-8 text-sm">{user.name}님만의 특별한 순록이예요.</div>
               <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
             </div>
               <Link href="/main"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>

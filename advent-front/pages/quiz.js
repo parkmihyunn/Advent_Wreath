@@ -1,20 +1,44 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter, withRouter } from 'next/router'
 import { useRef, useState, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
 import ReinModal from "../components/reindeerModal";
 import axios from 'axios';
 
-/* 
-  quiz.js 에서 해야 할 남은 일
-    1. main.js에서 넘겨온 사용자 id값으로 
-      1) 0번째에 있는 퀴즈 데이터 가져오기
-      2) 입력된 사용자 답이 정답이라면, 사용자 정답 넘겨주기 ( 그럼 백에서 맞춘 문제 삭제해주겠지..? )
-      3) 뒤로가기 id값을 바탕으로 main.js 넘어가게 해야함...?
-*/
-
 export default function quiz(){
+  
+  /* user 정보 가져오기 */
+  const [user, setUser] = useState([]);
+  const router = useRouter();
+  useEffect(() => {
+    if(typeof window !== 'undefined') {
+      if(window.sessionStorage.getItem('user') === null){
+        router.push('/');
+        alert("로그인 후 이용해주세요.");
+      } else {
+        setUser(JSON.parse(window.sessionStorage.user))
+      }
+    }
+  },[])
+  
+  /* 데이터 가져올때 쓸겨 */
+  const [data, setData] = useState({});
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/temp').then(
+      res => {
+        console.log(res.data);
+        const tmp = {
+          quizNum : res.data[0].quizzes[0].quizNum,
+          question : res.data[0].quizzes[0].question,
+          correct : res.data[0].quizzes[0].correct,
+          hints : res.data[0].quizzes[0].hints
+        }
+        setData(tmp);
+    });
+  },[])
+
   /* 오늘 날짜 */
   const now = new Date();
   const month = now.getMonth() + 1;
@@ -30,22 +54,6 @@ export default function quiz(){
       console.log("컨페티")
     }
   },[showConfetti])
-
-  /* 데이터 가져올때 쓸겨 */
-  const [data, setData] = useState({});
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/temp').then(
-      res => {
-        console.log(res.data);
-        const tmp = {
-          quizNum : res.data[0].quizzes[8].quizNum,
-          question : res.data[0].quizzes[8].question,
-          correct : res.data[0].quizzes[8].correct,
-          hints : res.data[0].quizzes[8].hints
-        }
-        setData(tmp);
-    });
-  },[])
 
   /* 사용자 입력 값 */
   const quizInput = useRef();
