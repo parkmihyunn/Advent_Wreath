@@ -1,21 +1,24 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment, useState, useEffect } from 'react'
-import { Popover, Text } from '@nextui-org/react';
+import { Popover } from '@nextui-org/react';
 import QuizModal from '../components/quizModals'
+import NoQuizModal from '../components/noQuizModal'
 import ReindeerCollectionModal from '../components/reindeerCollectionModal'
 import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
 import SocksEditModal from '../components/socksEditModal'
 import { WreathEditModal } from '../components/wreathEditModal'
+import axios from 'axios';
 
 export default function Main(){
   // 예시 코드
   const [값1, set값1] = useState([]);
+
+  /* 로그인 확인후 유저정보 저장 */
   const [user, setUser] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -29,6 +32,7 @@ export default function Main(){
     }
   },[])
 
+  /* 로그아웃 함수 */
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
       console.log('로그아웃');
@@ -37,19 +41,42 @@ export default function Main(){
     });
   }
 
+  /* 디데이 계산, 퀴즈 데이터 불러오기 */
+  const [quizzesNum, setQuizzesNum] = useState();
+  const [d_Day, setD_Day] = useState();
+  useEffect(() => {
+    var today = new Date();
+    /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
+    var dDay = new Date(2022,11,25);
+    var gap = dDay.getTime() - today.getTime();
+    var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+    setD_Day(result);
+
+    axios.get("http://localhost:3000/api/temp")
+    .then(res => {
+      console.log('성공');
+      console.log(res.data);
+      const quizNum = res.data[0].quizzes.length;
+      if(quizNum<=result){
+        setQuizzesNum(0)
+      } else {
+        setQuizzesNum(quizNum-result)
+      }
+    })
+    .catch(res => {
+      console.log('실패');
+      console.log(res);
+    })
+  }, []);
+
   const [showQ_Modal, setShowQ_Modal] = useState(false);
+  const [showNq_Modal, setShowNq_Modal] = useState(false);
   const [showCollectionModal, setCollectionModal] = useState(false);
   const [showS1_Modal, setShowS1_Modal] = useState(false);
   const [showS2_Modal, setShowS2_Modal] = useState(false);
   const [showS3_Modal, setShowS3_Modal] = useState(false);
   const [showSE_Modal, setShowSE_Modal] = useState(false);
   const [showW_Modal, setShowW_Modal] = useState(false);
-
-  // 디데이 계산
-  var today = new Date();
-  var dDay = new Date(2022,11,25);
-  var gap = dDay.getTime() - today.getTime();
-  var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
 
   return (
     <Fragment>
@@ -106,11 +133,17 @@ export default function Main(){
               <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
               <div className="wreath-text">
                 <Image src='/img/christmas_text.png' width='97' height='25'/>
-                <h1 className="text-center text-xl font-bold">
-                D - {result}
-                </h1>
+                {d_Day !== 0
+                ?
+                  <h1 className="text-center text-xl font-bold">
+                    D - {d_Day}
+                  </h1>
+                :
+                  <h1 className="text-center text-xl font-bold">
+                    D - Day
+                  </h1>
+                }
               </div>
-
               <div className="wreath_edit_center">
                 <Popover>
                   <Popover.Trigger>
@@ -187,7 +220,7 @@ export default function Main(){
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
             <div className="collection">
               <button onClick={()=> setCollectionModal(true)} >
-                <Image src='/img/collection.png' quality='80' width='95' height='131'/>
+                <Image src='/img/collection.png' quality='100' width='95' height='131'/>
               </button>
             </div>
           </div>
@@ -203,18 +236,22 @@ export default function Main(){
             <Image src='/img/quiz_white.png' width='149' height='40'/>
           </div>
           <div className="quiz-text">
-            <button onClick={()=> setShowQ_Modal(true)}>
+            <button onClick={quizzesNum!==0 ? ()=> setShowQ_Modal(true) : ()=> setShowNq_Modal(true)}>
               <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
             </button>
           </div>
-          <div className="quiz-notification bg-red-600 rounded-full">
-            <div className="text-white text-xs align-text-top font-bold">2</div>
-          </div>
+          {quizzesNum !== 0 ? 
+            <div className="quiz-notification bg-red-600 rounded-full">
+              <div className="text-white text-sm font-normal">{quizzesNum}</div>
+            </div> :
+            null
+          }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
         <div className="flex-1"></div>
         <Layout/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
+        <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
         <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)}/>
         <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
         <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>

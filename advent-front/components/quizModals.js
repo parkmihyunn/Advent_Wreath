@@ -19,7 +19,7 @@ const QuizModal = ({ isVisible, onClose }) => {
                     </div>
                 </Link>
             </div>
-            <div className="qmodal-text font-base text-xs text-white">편지를 눌러주세요</div>
+            <div className="qmodal-text font-normal text-sm text-white">편지를 눌러주세요</div>
             <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
             <style jsx>{`
                 * {
@@ -115,7 +115,7 @@ const QuizModal = ({ isVisible, onClose }) => {
                 }
                 .qmodal-text {
                     position : absolute;
-                    top: 60%;
+                    top: 65%;
                 }
             `}</style>
         </div>
