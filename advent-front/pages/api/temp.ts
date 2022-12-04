@@ -39,7 +39,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
           question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
           correct : '100',
           hints : 'https://www.bbc.com/korean/features-59777860',
-        }, {
+        }, 
+        {
           quizNum : 1,
           question : '영국 감시단체는 오염으로 OOOOO 가까워진다고 경고하였다',
           correct : '회복불가능',

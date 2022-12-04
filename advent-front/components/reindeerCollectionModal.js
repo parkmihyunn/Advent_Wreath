@@ -48,12 +48,12 @@ const ReindeerCollectionModal = ({ isVisible, onClose }) => {
 				<div id="collection-top" className="text-base font-[600] mt-16 mb-3.5">
 					{user.name}님의 순록 도감
 				</div>
-				<div id="reindeer-set" className="max-h-[440px] overflow-y-scroll grid grid-cols-2 gap-2 justify-items-center">
+				<div id="reindeer-set" className="max-h-[440px] overflow-y-scroll grid grid-cols-2 gap-3 justify-items-center">
 					{refinedData.map((v) =>
 						<div id="one-white-box" className="bg-white p-2 rounded-md relative">
 							<div id="inner-white-box" className="bg-[#D4C7AD] px-[22px] pt-3.5 relative">
 								<div className="max-w-[60px] max-h-[90px] min-w-[60px] min-h-[90px]">
-									<div className="reindeer1 top-[23%] absolute drop-shadow-xl"><Image src={v.horn} width={43} height={25}/></div>
+									<div className="reindeer1 top-[20%] absolute drop-shadow-xl"><Image src={v.horn} width={43} height={25}/></div>
 									<div className="reindeer1 top-[60%] absolute drop-shadow-xl"><Image src={v.body} width={60} height={67}/></div>
 									<div className="reindeer1 top-[66%] absolute"><Image src={v.bodydeco} width={22} height={12}/></div>
 									<div className="reindeer1 top-[47%] absolute"><Image src={v.eye} width={23} height={5}/></div>
