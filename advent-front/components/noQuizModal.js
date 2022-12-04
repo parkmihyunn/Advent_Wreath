@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Image, Link } from "@nextui-org/react";
-import axios from 'axios';
+import { Modal } from "@nextui-org/react";
 
 const noQuizModal = ({ isVisible, onClose }) => {
   if(!isVisible) return null;

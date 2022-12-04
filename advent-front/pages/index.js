@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 
@@ -49,6 +49,32 @@ export default function Home() {
       // },'/main');
       router.push('/main')
   }
+  const [backAudio] = useState(typeof Audio !== "undefined" && new Audio('/audio/Christmas_Is_Coming.mp3'));
+  const [playing, setPlaying] = useState(false);
+  const [stop, setStop] = useState(false);
+
+  const handleSwitchPlaying = () => {
+    backAudio.volume = 0.4;
+    backAudio.loop=true;
+    if (!playing) {
+      setPlaying(true);
+      setStop(false);
+    } else {
+      setPlaying(false);
+      setStop(true);
+    }
+  };
+
+  useEffect(() => {
+    if(playing){
+      backAudio.currentTime = 0;
+      backAudio.play();
+    }
+    if(stop){
+      backAudio.pause();
+      backAudio.currentTime = 0;
+    }
+  })
 
   return (
     <div className="
@@ -61,7 +87,6 @@ export default function Home() {
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
-
       <div className="flex flex-col h-full">
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>
@@ -72,6 +97,9 @@ export default function Home() {
           <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
             돌아와! 순록!
           </div>
+          <button onClick={handleSwitchPlaying}>
+            {playing?<div className="text-3xl">🔈</div>:<div className="text-3xl">🔇</div>}
+          </button>
         </div>
         <div className="w-full relative mt-10">
           <div className="w-full text-center m-auto relative">
