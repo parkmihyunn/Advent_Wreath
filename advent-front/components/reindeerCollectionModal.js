@@ -8,9 +8,9 @@ const ReindeerCollectionModal = ({ isVisible, onClose }) => {
 	/* user 정보 가져오기 */
   const [user, setUser] = useState([]);
   useEffect(() => {
-    if(typeof window !== 'undefined') {
-      setUser(JSON.parse(window.sessionStorage.user))
-    }
+	if(typeof window !== 'undefined') {
+	  setUser(JSON.parse(window.sessionStorage.user))
+	}
   },[])
 
 	/* reindeer data 불러오기 */
@@ -22,32 +22,55 @@ const ReindeerCollectionModal = ({ isVisible, onClose }) => {
 		});
 	}, []);
 
+	/* 순록 없는 부분 그림자 출력 */
+	const rendering = () => {
+    const result = [];
+    for (let i = 0; i < 10-refinedData.length; i++) {
+      result.push(
+				<div id="one-white-box" className="bg-white p-2 rounded-md relative">
+					<div id="inner-white-box" className="bg-[#D4C7AD] px-[22px] pt-3.5 relative">
+						<div className="max-w-[60px] max-h-[90px] min-w-[60px] min-h-[90px]">
+							<div className="reindeer1 top-[50%] absolute"><Image src="/img/collection_shadow.png" width={60} height={90}/></div>
+						</div>
+					</div>
+				</div>
+			);
+    }
+    return result;
+  };
+
 	return (
 		<div>
-		<Modal css={{background:"transparent"}} noPadding open={isVisible} onClose={onClose} width={300} height={460} animated={false}>
-			<div className="flex flex-col items-center h-[460px] w-[300px] overflow-scroll bg-cover bg-scroll
+		<Modal css={{background:"transparent",}} noPadding open={isVisible} onClose={onClose} width={300} height={464} animated={false}>
+			<div className="flex flex-col items-center h-[464px] w-[300px] overflow-scroll bg-cover bg-scroll
 											bg-[url('../public/img/collection_bg.png')]"
 			>
-				<div id="collection-top" className="bg-neutral-300 rounded-3xl py-1.5 px-4 text-base font-normal mt-16 mb-4">
+				<div id="collection-top" className="text-base font-[600] mt-16 mb-3.5">
 					{user.name}님의 순록 도감
 				</div>
-				<div id="reindeer-set" className="max-h-[400px] overflow-y-scroll grid grid-cols-2 gap-2 justify-items-center">
+				<div id="reindeer-set" className="max-h-[440px] overflow-y-scroll grid grid-cols-2 gap-2 justify-items-center">
 					{refinedData.map((v) =>
-						<div className="bg-neutral-100 p-2 relative">
-							<div className="bg-neutral-300 px-5 pt-10 relative">
-								<div className="max-w-[74px] max-h-[111px] min-w-[74px] min-h-[111px]">
-									<div className="reindeer1 top-[20%] absolute drop-shadow-xl"><Image src={v.horn} width={67} height={39}/></div>
-									<div className="reindeer1 top-[60%] absolute drop-shadow-xl"><Image src={v.body} width={93} height={103}/></div>
-									<div className="reindeer1 top-[68%] absolute"><Image src={v.bodydeco} width={45} height={25}/></div>
-									<div className="reindeer1 top-[44%] absolute"><Image src={v.eye} width={37} height={8}/></div>
-									<div className="reindeer1 top-[24%] absolute"><Image src={v.headdeco} width={23} height={14}/></div>
+						<div id="one-white-box" className="bg-white p-2 rounded-md relative">
+							<div id="inner-white-box" className="bg-[#D4C7AD] px-[22px] pt-3.5 relative">
+								<div className="max-w-[60px] max-h-[90px] min-w-[60px] min-h-[90px]">
+									<div className="reindeer1 top-[23%] absolute drop-shadow-xl"><Image src={v.horn} width={43} height={25}/></div>
+									<div className="reindeer1 top-[60%] absolute drop-shadow-xl"><Image src={v.body} width={60} height={67}/></div>
+									<div className="reindeer1 top-[66%] absolute"><Image src={v.bodydeco} width={22} height={12}/></div>
+									<div className="reindeer1 top-[47%] absolute"><Image src={v.eye} width={23} height={5}/></div>
+									<div className="reindeer1 top-[26%] absolute"><Image src={v.headdeco} width={17} height={10}/></div>
 								</div>
 							</div>
 						</div>
 					)}
+					{rendering()}
 				</div>
-				<div id="collection-bottom" className="py-2"/>
+				<div id="collection-bottom" className="py-[4.6px]"/>
 			</div>
+			<Modal.Footer css={{ margin:"7px 0 0 0", }} justify='center'>
+				<button onClick={()=>onClose()} className="rounded-xl font-base text-xl text-white bg-black py-1 px-[120px]">
+					닫기
+				</button>
+			</Modal.Footer>
 		</Modal>
 		</div>
 	);
