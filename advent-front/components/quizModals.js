@@ -7,8 +7,8 @@ const QuizModal = ({ isVisible, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 
-                        flex justify-center items-center z-0">
-            <div className="wrapper">
+                        flex flex-col justify-center items-center z-0">
+            <div className="wrapper mb-8">
                 <div className="lid one"></div>
                 <div className="lid two"></div>
                 <div className="envelope"></div>
@@ -19,6 +19,7 @@ const QuizModal = ({ isVisible, onClose }) => {
                     </div>
                 </Link>
             </div>
+            <div className="qmodal-text font-normal text-sm text-white">편지를 눌러주세요</div>
             <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
             <style jsx>{`
                 * {
@@ -111,6 +112,10 @@ const QuizModal = ({ isVisible, onClose }) => {
                 .x-btn {
                     color : white;
                     position : absolute;
+                }
+                .qmodal-text {
+                    position : absolute;
+                    top: 65%;
                 }
             `}</style>
         </div>

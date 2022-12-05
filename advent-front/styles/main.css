@@ -33,7 +33,7 @@
 
 .wreath-text{
 	position: absolute;
-	top: 69%;
+	top: 67%;
 	left: 50%;
 	width: 100%;
 	transform: translate( -50%, -50% );
@@ -77,7 +77,7 @@
 	width: 149px;
 	height: 40px;
 	transform: translate( -50%, -50% );
-    text-align:center;
+  text-align:center;
 }
 
 .quiz-notification{
@@ -88,7 +88,7 @@
 	height: 22px;
 	transform: translate( -50%, -50% );
     text-align:center;
-	padding-top: 3px;
+	padding-top: 2px;
 }
 
 .quiz-text{

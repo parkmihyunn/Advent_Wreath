@@ -57,5 +57,5 @@ export const WreathEditModal = ({ wreathSrc, wreathWidth, getData }) => {
         
     );
 };
-//
+
 export default WreathEditModal

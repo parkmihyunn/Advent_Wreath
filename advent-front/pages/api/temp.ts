@@ -1,23 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+/* 유저는 두가지의 Ornaments를 관리할 interface가 필요할 것으로 생각됨.
+   보유하고 있는 ornaments를 관리하는 interface, main에 띄워야 할 ornaments를 관리할 interface*/
+
 interface Quiz {
-    quizNum : number;
-    question : string;
-    correct : string;
-    hints : string;
+  quizNum : number;
+  question : string;
+  correct : string;
+  hints : string;
 }
 
 interface ReinDeer { 
-    body: string;
-    bodydeco : string;
-    eye : string;
-    headdeco : string;
-    horn : string;
+  body: string;
+  bodydeco : string;
+  eye : string;
+  headdeco : string;
+  horn : string;
 }
 
 interface Wreath { 
-    src: string;
-    width : string;
+  src: string;
+  width : string;
 }
 
 interface Ornaments {
@@ -27,7 +30,6 @@ interface Ornaments {
 }
 
 type Data = {
-  name: string;
   quizzes: Quiz[];
   socks: string;
   reindeers: ReinDeer[];
@@ -94,19 +96,55 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
         ],
         socks : "a",
         reindeers: [
-            {
-                body: 'body_0',
-                bodydeco : 'bodydeco_0',
-                eye : 'eye_0',
-                headdeco : 'headdeco_0',
-                horn : 'horn_0'
-            },{
-                body: 'body_1',
-                bodydeco : 'bodydeco_1',
-                eye : 'eye_1',
-                headdeco : 'headdeco_1',
-                horn : 'horn_1'
-            },
+           {
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },{
+              body: '/img/reindeer/body_1.png',
+              bodydeco : '/img/reindeer/bodydeco_1.png',
+              eye : '/img/reindeer/eye_1.png',
+              headdeco : '/img/reindeer/headdeco_1.png',
+              horn : '/img/reindeer/horn_1.png'
+          },
         ],
         wreath : [
             {

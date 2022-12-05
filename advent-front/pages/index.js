@@ -2,49 +2,91 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 
 export default function Home() {
+  // const [user_id, setUserId] = useState();
+  // const [nickName, setNickName] = useState();
   const router = useRouter();
+  //const [isLogin, setIsLogin] = useState(false);
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
-        success(authObj) {
-            console.log("login성공")
-            console.log(authObj);
-            //window.localStorage.setItem('token', authObj.access_token);
-            let res = axios.get("http://localhost:8000/accounts/kakao/login/finish/",
-              {
-                params: 
-                {
-                    code:authObj.access_token
-                  },
-              }
-            );
-            console.log(res);
-            router.push('/main');
-        },
-        fail(err) {
-            console.log(err);
-        }
+      success(authObj) {
+        console.log("login성공")
+        console.log("로그인 토큰 정보 =======");
+        console.log(authObj);
+        kakaoResponse(authObj);
+      },
+      fail(err) {
+        console.log(err);
+      }
     })
   }
-  
+
+  const kakaoResponse = async(authObj)=>{
+    let res = await axios.get("http://localhost:8000/rest-auth/kakao/",
+      {
+        params: 
+        {
+          code:authObj.access_token
+        },
+      });
+      var datajson = res.data;
+      console.log("백서버에서 받아온 사용자 정보 =======");
+      console.log(datajson);
+      //setIsLogin(true);
+      window.sessionStorage.user = JSON.stringify(datajson);
+      console.log("index.js sessionStorage =======");
+      console.log(window.sessionStorage);
+      // router.push({
+      //   pathname: '/main',
+      //   query: { id: datajson.id,
+      //            name: datajson.name,
+      //            token: datajson.token},
+      // },'/main');
+      router.push('/main')
+  }
+  const [backAudio] = useState(typeof Audio !== "undefined" && new Audio('/audio/Christmas_Is_Coming.mp3'));
+  const [playing, setPlaying] = useState(false);
+  const [stop, setStop] = useState(false);
+
+  const handleSwitchPlaying = () => {
+    backAudio.volume = 0.4;
+    backAudio.loop=true;
+    if (!playing) {
+      setPlaying(true);
+      setStop(false);
+    } else {
+      setPlaying(false);
+      setStop(true);
+    }
+  };
+
+  useEffect(() => {
+    if(playing){
+      backAudio.currentTime = 0;
+      backAudio.play();
+    }
+    if(stop){
+      backAudio.pause();
+      backAudio.currentTime = 0;
+    }
+  })
+
   return (
     <div className="
       flex flex-col items-center h-screen
       overflow-auto bg-cover bg-local
       bg-[url('../public/img/wood_pattern.png')]
     ">
-
       <Head>
-        <title>서비스 명</title>
+        <title>돌아와! 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
-
       <div className="flex flex-col h-full">
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>
@@ -53,8 +95,11 @@ export default function Home() {
             <Image src='/img/wreath.png' width='259' height='282'/>
 
           <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
-            서비스 이름
+            돌아와! 순록!
           </div>
+          <button onClick={handleSwitchPlaying}>
+            {playing?<div className="text-3xl">🔈</div>:<div className="text-3xl">🔇</div>}
+          </button>
         </div>
         <div className="w-full relative mt-10">
           <div className="w-full text-center m-auto relative">
@@ -69,3 +114,18 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps(){
+//   // api 이용해서 데이터 불러오기 (async, await으로 기다려주기)
+//   const res = await fetch("https://example_site.com/user_data")
+  
+//   // page에 props로 전달하기위해, json 형식으로 변경해주기
+//   const data = res.json()
+  
+//   // 페이지 props로 전달하기 (json 형식만 가능)
+//   return {
+//     props: {
+//       user_data: data
+//     },
+//   }
+// }
