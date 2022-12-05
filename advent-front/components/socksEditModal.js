@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRef } from "react";
-import Link from 'next/link'
 import Image from 'next/image';
+import { Modal, useModal, Button, Text } from "@nextui-org/react";
 
 const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
     //이미지 이름 가져오기
@@ -49,9 +49,9 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                     </div>
 
                     <div className="socks_edit1">
-                        <Image src='/img/sock_1.png' width='76.44' height='93.33'/>
-                        <Image src='/img/sock_2.png' width='72' height='99.56'/>
-                        <Image src='/img/sock_3.png' width='75.56' height='97.78'/>
+                        <Image src='/img/sock_1.png' width='66.44' height='83.33'/>
+                        <Image src='/img/sock_2.png' width='62' height='89.56'/>
+                        <Image src='/img/sock_3.png' width='65.56' height='87.78'/>
                     </div>
                     <div className="socks_edit_box1">
                         <div className="socks_edit_smSocks">
@@ -180,7 +180,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                     <button className="socks_closeWord" onClick={()=>onClose()}>저장하기</button>
                 </div>
                 <div className="socks_edit_closeSanta">
-                    <Image src='/img/closeBtn_Santa.png' width='56' height='58'></Image>
+                    <Image src='/img/closeBtn_Santa.png' width='46' height='48'></Image>
                 </div>
             </div>
         </div>
