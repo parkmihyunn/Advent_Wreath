@@ -83,7 +83,7 @@ class KakaoLogin2(APIView):
             user    = User.objects.get(uid=kakao_response['id'])
             
             print(user.id)
-            print(user.name)
+            print(user.username)
             print(user.jwt)
             datadict = {
                 "id" : user.id,
