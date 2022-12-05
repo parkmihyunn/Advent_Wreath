@@ -171,8 +171,8 @@
 
 /* 여기서부터 socksEdit */
 .socks_edit_back {
-    width: 389px;
-    height: 740px;
+    width: 340px;
+    height: 624px;
     display: flex;
     background-color: #7E1313;
     position: absolute;
@@ -216,12 +216,13 @@
     width: 224px;
     height: 118.22px;
     top: 11px;
+    margin-left: 20px;
 }
 
 .socks_edit_box1 {
     width: 319px;
-    height: 147.37px;
-    top: 127px;
+    height: 127.37px;
+    top: 107px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -232,8 +233,8 @@
 
 .socks_edit_box2 {
     width: 319px;
-    height: 147.37px;
-    top: 289px;
+    height: 127.37px;
+    top: 249px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -244,8 +245,8 @@
 
 .socks_edit_box3 {
     width: 319px;
-    height: 147.37px;
-    top: 453px;
+    height: 127.37px;
+    top: 391px;
     display: flex;
     background-color: #990000;
     position: absolute;
@@ -257,7 +258,7 @@
 .socks_edit_smSocks {
     position: absolute;
     left: 17px;
-    top: 30px;
+    top: 20px;
     display: flex;
 }
 
@@ -289,7 +290,7 @@
     position: absolute;
     width: 74.58px;
     height: 67.39px;
-    top: 36px;
+    top: 16px;
     left: 221px;
     display: flex;
     background-color: #FF929D;
@@ -302,7 +303,7 @@
     position: absolute;
     width: 74.58px;
     height: 67.39px;
-    top: 36px;
+    top: 16px;
     left: 221px;
     display: flex;
     background-color: #ffffff;
@@ -335,7 +336,7 @@
     width: 39px;
     height: 15px;
     left: 35px;
-    top: 88px;
+    top: 78px;
     font-weight: 400;
     font-size: 12px;
     line-height: 13px;
@@ -346,7 +347,7 @@
     position: absolute;
     width: 116.82px;
     height: 19.77px;
-    top: 84px;
+    top: 74px;
     left: 79px;
     display: flex;
     background-color: #670D0D;
@@ -399,7 +400,7 @@
 .socks_edit_closeBtn {
     width: 215px;
     height: 44.95px;
-    top: 673px;
+    top: 573px;
     display: flex;
     background-color: black;
     position: absolute;
@@ -413,5 +414,5 @@
     width: 56px;
     height: 58px;
     left: 73px;
-    top: 660px;
+    top: 570px;
 }
