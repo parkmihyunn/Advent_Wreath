@@ -16,10 +16,6 @@ export const WreathEditModal = ({ wreathSrc, wreathWidth, getData }) => {
         });
     }, []);
 
-    useEffect(()=>{
-        console.log("isSelect:", isSelect);
-    },[isSelect])
-
     const onClickHandler = (t1, t2) => {
         setIsSelect({
             src : t1,
