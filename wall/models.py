@@ -27,3 +27,7 @@ class mixDeer(models.Model):
     m_body_color = models.CharField(max_length=200)
     m_body_deco = models.CharField(max_length=200)
     
+    
+class wreath(models.Model):
+    width = models.CharField(max_length=200)
+    src = models.CharField(max_length=200)
