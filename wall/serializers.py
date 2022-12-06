@@ -22,5 +22,9 @@ class mixdeerSerializer(serializers.ModelSerializer):
         fields = ('m_horn','m_hair','m_eye','m_body_color','m_body_deco')
 
         
+class wreathSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = wreath
+        field = ('src','width')
         
         

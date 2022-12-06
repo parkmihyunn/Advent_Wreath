@@ -27,3 +27,10 @@ class mixDeer(models.Model):
     m_body_color = models.CharField(max_length=200)
     m_body_deco = models.CharField(max_length=200)
     
+
+
+    
+class writhess (models.Model):
+    src = models.CharField(max_length = 200)
+    width = models.CharField(max_length = 50)
+    

@@ -2,24 +2,14 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view # function based 이기에 데코레이터를 사용한다.
 from wall.models import quiz,deer,mixDeer,user_A
-from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer #models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
+from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer,wreathSerializer#models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
 import random
 
-def ox(pk,request):
-
-    
-    solution = quiz.objects.get(pk=pk)
-    
-    if(solution.answer == request):
-        mixDeer()
-    else:
-        print("다시 풀어주세요")
-        ox()
-        
+ 
 
 # def post(self, request):
 #         print("asdf")
@@ -29,8 +19,43 @@ def ox(pk,request):
 #             serializer.save()
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def sendwreath(request):
     
-           
+    def get(self, request):
+        
+        serializer = 
+        whreathes = wreath.objects.all()
+        serializer = deerSerializer(deers, many=True)
+        return Response(serializer.data)
+    
+    
+
+
+
+    
+    num = 9
+    
+    ran = random.randint(1,num)
+    
+    wreathes = wreath.objects.get(id = ran)
+    
+    serializer = wreathSerializer(data = wreathes)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+    
+    
+    
+    
+
 def sendMixdeer(): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
     
     # count = 필드 개수
@@ -89,7 +114,6 @@ class deerList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        print("asdf")
         serializer = deerSerializer(
             data=request.data)
         if serializer.is_valid():
@@ -114,6 +138,7 @@ def quizDetail(request, pk):
     
     if (quizz.answer == user_answer.answer):
         print("맞았습니다.")
+        sendWreath()
         return sendMixdeer()
     
     else:
@@ -155,6 +180,9 @@ def quizDetail(request, pk):
 #         review.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
     
+
+
+
 
 class deerDetail(APIView):
     def get_object(self, pk):

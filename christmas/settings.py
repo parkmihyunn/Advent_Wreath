@@ -60,8 +60,8 @@ INSTALLED_APPS = [
     #django-allauth
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.kakao',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.kakao',
 
     'corsheaders',
 ]

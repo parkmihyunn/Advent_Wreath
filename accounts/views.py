@@ -1,6 +1,7 @@
 import requests
 import json
 import jwt
+
 from django.shortcuts import redirect
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -8,14 +9,15 @@ from django.http import JsonResponse
 from json.decoder import JSONDecodeError
 from rest_framework import status
 from rest_framework.response import Response
-from dj_rest_auth.registration.views import SocialLoginView
-from allauth.socialaccount.providers.kakao import views as kakao_view
-from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from allauth.socialaccount.models import SocialAccount
+# from dj_rest_auth.registration.views import SocialLoginView
+# from allauth.socialaccount.providers.kakao import views as kakao_view
+# from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+# from allauth.socialaccount.models import SocialAccount
 from django.conf import settings
 
 from accounts.models import User
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 SECRET_PRE = "christmas"
 ALGORITHM ="HS256"
@@ -23,11 +25,22 @@ ALGORITHM ="HS256"
 
 from django.http import HttpResponse 
 
+# @api_view(['GET'])
+# def validate_token(token, kakao_access_code):
+#     try:# payload 에 복호화한 값을 넣는다. 즉, id값이 나올 것이다.
+#         payload = jwt.decode(token, SECRET_PRE+kakao_access_code, algorithms='HS256')
+#         return payload
+#     except jwt.ExpiredSignatureError:
+#         return status.HTTP_401_UNAUTHORIZED
+#     except jwt.InvalidTokenError:
+#         return status.HTTP_401_UNAUTHORIZED
+#     else:
+#         return True
 
 class KakaoLogin2(APIView):
     def get(self, request):
         kakao_access_code=request.GET.get('code',None)
-        
+        print("\nkakaologin2 get함수 들어왔습니다!\n")
         url="https://kapi.kakao.com/v2/user/me"
         headers={
                 "Authorization":f"Bearer {kakao_access_code}",
@@ -36,29 +49,49 @@ class KakaoLogin2(APIView):
         kakao_response=requests.post(url,headers=headers)
         kakao_response=json.loads(kakao_response.text)
         
-
+        print("\nkakao_response : "+str(kakao_response)+"\n")
         if User.objects.filter(uid=kakao_response['id']).exists():
+            print("User.objects.filter if문안으로 들어왔습니다!")
             user    = User.objects.get(uid=kakao_response['id'])
-            jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
-
-            return HttpResponse(f'id:{user.id}, name:{user.name}, token:{jwt_token}, exist:true')
-        else: 
+            #jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
             
-            # if kakao_response['kakao_account']['gender']=="male":
-            #     gender=0
-            # else:
-            #     gender=1            
+            #print("user id : "+user.id+"\n")
+            print("user name: "+user.username+"\n")
+            #print(jwt_token)
+            datadict = {
+                "id" : user.id,
+                "name" : user.username,
+#                "token" : jwt_token.decode('utf-8'),
+                "token" : user.jwt,
+                "exist" : True
+            }
+            return JsonResponse(datadict)
+        else: 
+            print("\nelse문안으로 들어왔습니다!\n")
+            
+            #jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code, ALGORITHM)
+            jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_PRE+kakao_access_code, ALGORITHM)
+       
             User(
                 uid=kakao_response['id'],
-                #platform="1",
                 #user_email=kakao_response['kakao_account'].get('email',None),
-                name=kakao_response['properties']['nickname'],
-                #gender=gender,
+                username=kakao_response['properties']['nickname'],
+                jwt=jwt_token
                 
             ).save()
+
             user    = User.objects.get(uid=kakao_response['id'])
-            jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code, ALGORITHM)
-            return HttpResponse(f'id:{user.id}, name:{user.name}, token:{jwt_token}, exist:false')
+            
+            print(user.id)
+            print(user.username)
+            print(user.jwt)
+            datadict = {
+                "id" : user.id,
+                "name" : user.name,
+                "token" : jwt_token.decode('utf-8'),
+                "exist" : False
+            }
+            return JsonResponse(datadict)
 
             
 #BASE_URL = 'http://localhost:8000/'
@@ -110,7 +143,7 @@ class KakaoLogin2(APIView):
 #         user = User.objects.get(email=email)
 #         # 기존에 가입된 유저의 Provider가 kakao가 아니면 에러 발생, 맞으면 로그인
 #         # 다른 SNS로 가입된 유저
-#         social_user = SocialAccount.objects.get(user=user)
+#         c_user = SocialAccount.objects.get(user=user)
 #         if social_user is None:
 #             return JsonResponse({'err_msg': 'email exists but not social user'}, status=status.HTTP_400_BAD_REQUEST)
 #         if social_user.provider != 'kakao':
