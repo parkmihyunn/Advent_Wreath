@@ -15,7 +15,7 @@ class user_ASerializer(serializers.ModelSerializer):
     class Meta:
         model = user_A
         fields = ('answer',)
-  
+        
 class mixdeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = mixDeer
