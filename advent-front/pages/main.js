@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { Fragment, useState, useRef, useEffect } from 'react'
-import { Popover, Modal, useModal } from '@nextui-org/react';
+import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
+import {Howl, Howler} from 'howler';
 import axios from 'axios';
 
 import Layout from '../components/layout'
@@ -18,8 +19,6 @@ import { WreathEditModal } from '../components/wreathEditModal'
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function Main(){
-  // 예시 코드
-  const [값1, set값1] = useState([]);
 
   /* 로그인 확인후 유저정보 저장 */
   const [user, setUser] = useState([]);
@@ -35,9 +34,67 @@ export default function Main(){
     }
   },[])
 
+  /* 로그아웃 함수 */
+  const logoutHandler = () => {
+    window.Kakao.Auth.logout(function() {
+      console.log('로그아웃');
+      window.sessionStorage.removeItem('user');
+      router.push('/');
+    });
+  }
+
+  /* 디데이 계산, 퀴즈 데이터 불러오기 */
+  const [quizzesNum, setQuizzesNum] = useState();
+  const [d_Day, setD_Day] = useState();
+  useEffect(() => {
+    var today = new Date();
+    /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
+    var dDay = new Date(2022,11,13);
+    var gap = dDay.getTime() - today.getTime();
+    var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+    setD_Day(result);
+    axios.get("http://localhost:3000/api/temp")
+    .then(res => {
+      console.log('성공');
+      console.log(res.data);
+      console.log(res.data[0].ornaments);
+      setUserData(res.data[0].ornaments);
+      const quizNum = res.data[0].quizzes.length;
+      if(quizNum<=result){
+        setQuizzesNum(0)
+      } else {
+        setQuizzesNum(quizNum-result)
+      }
+    })
+    .catch(res => {
+      console.log('실패');
+      console.log(res);
+    })
+  }, []);
+
+  /* Audio */
+  const [play, setPlay] = useState(false);
+  let snd = new Howl({
+    src: ['/audio/Christmas_Is_Coming.mp3'],
+    loop: true,
+    volume: 0.3,
+  });
+  useEffect(() => {
+    if(play) {  
+      snd.play();
+      console.log("play실행")
+    }
+    if(!play){
+      Howler.stop();
+      console.log("stop실행")
+    }
+  }, [play]);
+
+  // 예시 코드
+  const [값1, set값1] = useState([]);
+
   //리스에 있는 데이터
   const [userData, setUserData] = useState({});
-
   //양말편집창 모달
   const { setVisible, bindings } = useModal();
   //이미지 이름 가져오기
@@ -61,44 +118,6 @@ export default function Main(){
   const onCickImageUpload = () => {
       imageInput.current.click();
   };
-
-  /* 로그아웃 함수 */
-  const logoutHandler = () => {
-    window.Kakao.Auth.logout(function() {
-      console.log('로그아웃');
-      window.sessionStorage.removeItem('user');
-      router.push('/');
-    });
-  }
-
-  /* 디데이 계산, 퀴즈 데이터 불러오기 */
-  const [quizzesNum, setQuizzesNum] = useState();
-  const [d_Day, setD_Day] = useState();
-  useEffect(() => {
-    var today = new Date();
-    /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,25);
-    var gap = dDay.getTime() - today.getTime();
-    var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    setD_Day(result);
-    axios.get("http://localhost:3000/api/temp")
-    .then(res => {
-      console.log('성공');
-      console.log(res.data);
-      console.log(res.data[0].ornaments);
-      setUserData(res.data[0].ornaments);
-      const quizNum = res.data[0].quizzes.length;
-      if(quizNum<=result){
-        setQuizzesNum(0)
-      } else {
-        setQuizzesNum(quizNum-result)
-      }
-    })
-    .catch(res => {
-      console.log('실패');
-      console.log(res);
-    })
-  }, []);
 
   const [showQ_Modal, setShowQ_Modal] = useState(false);
   const [showNq_Modal, setShowNq_Modal] = useState(false);
@@ -131,11 +150,15 @@ export default function Main(){
 
       <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between items-end">
-          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">서비스 이름</h1>
-          <button onClick={logoutHandler} className="flex mr-2 text-gray-500 text-sm font-normal">로그아웃</button>
-        </div>
+          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
+          <div id="bgm-toggle" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
+            <div className="max-h-[10px]"><Image src='/img/sound_mute.png' width='13' height='10'/></div>
+            <div className="text-white text-sm px-1.5 pt-[1.5px]">Music</div>
+            <Switch checked={false} size="xs" color="success" onChange={(e) => setPlay(!play)}/>
+          </div>
+        </div>            
         <div className="relative">
-          <div className="text-center m-auto relative">
+          <div className="text-center m-auto relative"> 
             <Image src='/img/door-border_1.png' width='307' height='537'/>
           </div>
           <div className="door-top">
@@ -444,7 +467,7 @@ export default function Main(){
           }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
-        <div className="flex-1"></div>
+        <button onClick={logoutHandler} className="flex flex-1 justify-center items-end mt-6 text-white"><p className="text-sm">로그아웃</p></button>
         <Layout/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>

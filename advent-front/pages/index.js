@@ -49,32 +49,6 @@ export default function Home() {
       // },'/main');
       router.push('/main')
   }
-  const [backAudio] = useState(typeof Audio !== "undefined" && new Audio('/audio/Christmas_Is_Coming.mp3'));
-  const [playing, setPlaying] = useState(false);
-  const [stop, setStop] = useState(false);
-
-  const handleSwitchPlaying = () => {
-    backAudio.volume = 0.4;
-    backAudio.loop=true;
-    if (!playing) {
-      setPlaying(true);
-      setStop(false);
-    } else {
-      setPlaying(false);
-      setStop(true);
-    }
-  };
-
-  useEffect(() => {
-    if(playing){
-      backAudio.currentTime = 0;
-      backAudio.play();
-    }
-    if(stop){
-      backAudio.pause();
-      backAudio.currentTime = 0;
-    }
-  })
 
   return (
     <div className="
@@ -93,15 +67,11 @@ export default function Home() {
         </div>
         <div className="flex flex-col place-items-center flex-1">
             <Image src='/img/wreath.png' width='259' height='282'/>
-
           <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
             돌아와! 순록!
           </div>
-          <button onClick={handleSwitchPlaying}>
-            {playing?<div className="text-3xl">🔈</div>:<div className="text-3xl">🔇</div>}
-          </button>
         </div>
-        <div className="w-full relative mt-10">
+        <div className="w-full relative my-4">
           <div className="w-full text-center m-auto relative">
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>

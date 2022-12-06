@@ -1,7 +1,7 @@
 
 .door-top {
 	position: absolute;
-	top: 46%;
+	top: 44%;
 	left: 50%;
 	transform: translate( -50%, -50% );
     text-align:center;
@@ -33,11 +33,11 @@
 
 .wreath-text{
 	position: absolute;
-	top: 67%;
+	top: 68.5%;
 	left: 50%;
 	width: 100%;
 	transform: translate( -50%, -50% );
-    text-align:center;
+  text-align:center;
 }
 
 .door-handle{
