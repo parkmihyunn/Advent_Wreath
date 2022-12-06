@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from wall.models import quiz,deer,mixDeer,user_A
+from wall.models import quiz,deer,mixDeer,user_A,wreath
 
 class quizSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,7 +15,11 @@ class user_ASerializer(serializers.ModelSerializer):
     class Meta:
         model = user_A
         fields = ('answer',)
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> back_sehyun
 class mixdeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = mixDeer
