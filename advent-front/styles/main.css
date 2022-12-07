@@ -120,4 +120,10 @@
   font-size: 0;
 }
 
+.share-go-index {
+	position: absolute;
+  transform: translate( -50%, -50% );
+	text-align:center;
+}
+
 /*<div className="share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>*/
