@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { Fragment, useState, useRef, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
@@ -17,12 +17,20 @@ export default function Main(){
 
   /* 로그인 확인후 유저정보 저장 */
   const [user, setUser] = useState([]);
+  const [clickGo, setClickGo] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     if(typeof window !== 'undefined') {
         setUser(JSON.parse(window.sessionStorage.user))
     }
   },[])
+
+  useEffect(() => {
+    if(clickGo) {
+      router.push('/');
+    }
+  },[clickGo])
 
   /* 디데이 계산, 오너먼트 데이터 불러오기 */
   const [userData, setUserData] = useState({});
@@ -160,10 +168,10 @@ export default function Main(){
             </div>
           </div>
         </div>
-        <div className="relative min-w-[320px]">
-          <button className="text-xs px-6 py-2.5 text-white bg-[#B30000] m-auto block relative">저도 크리스마스 방문 꾸미러 갈래요!</button>
-          <div className="reindeer1 top-[55%] left-[13%]"><Image src='/img/ornaments/santa.png' width='39' height='44'/></div>
-          <div className="reindeer1 top-[49%] left-[86%]"><Image src='/img/ornaments/socks.png' width='35' height='57'/></div>
+        <div id="go-index" className="relative min-w-[320px]">
+          <button onClick={()=>setClickGo(true)} className="text-xs px-6 py-2.5 text-white bg-[#B30000] m-auto block relative">저도 크리스마스 방문 꾸미러 갈래요!</button>
+          <div className="share-go-index top-[55%] left-[13%]"><Image src='/img/ornaments/santa.png' width='39' height='44'/></div>
+          <div className="share-go-index top-[49%] left-[86%]"><Image src='/img/ornaments/socks.png' width='35' height='57'/></div>
         </div>
         <div className="flex-1"></div>
         <div className="flex share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>

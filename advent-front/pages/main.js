@@ -25,11 +25,11 @@ export default function Main(){
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      if(window.sessionStorage.getItem('user') === null){
+      if(window.sessionStorage.getItem('user') !== null){
+        setUser(JSON.parse(window.sessionStorage.user))
+      } else {
         router.push('/');
         alert("로그인 후 이용해주세요.");
-      } else {
-        setUser(JSON.parse(window.sessionStorage.user))
       }
     }
   },[])
