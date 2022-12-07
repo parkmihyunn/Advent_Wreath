@@ -147,12 +147,16 @@ export default function Main(){
       <meta name="description" content="콘텐트 내용" />
       <link rel="icon" href="/favicon.ico" />
       </Head> 
-
       <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between items-end">
-          <h1 className="flex ml-2 mb-0 relative text-2xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
+          <h1 className="flex ml-2 mb-0 relative text-xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
           <div id="bgm-toggle" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
-            <div className="max-h-[10px]"><Image src='/img/sound_mute.png' width='13' height='10'/></div>
+            <div className="max-h-[10px]">
+              { !play ? 
+              <Image src='/img/sound_mute.png' width='13' height='10'/> :
+              <Image src='/img/sound_play.png' width='13' height='10'/>
+              }
+            </div>
             <div className="text-white text-sm px-1.5 pt-[1.5px]">Music</div>
             <Switch checked={false} size="xs" color="success" onChange={(e) => setPlay(!play)}/>
           </div>
@@ -351,7 +355,7 @@ export default function Main(){
               <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
               <div className="wreath-text">
                   <Image src='/img/christmas_text.png' width='97' height='25'/>
-                  {d_Day !== 0
+                  {d_Day > 0
                   ?
                     <h1 className="text-center text-xl font-bold">
                       D - {d_Day}
