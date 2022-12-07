@@ -1,3 +1,8 @@
+.img-wrapper {
+  letter-spacing: 0;
+  word-spacing: 0;
+  font-size: 0;
+}
 
 .door-top {
 	position: absolute;
@@ -87,7 +92,7 @@
 	width: 22px;
 	height: 22px;
 	transform: translate( -50%, -50% );
-    text-align:center;
+  text-align:center;
 	padding-top: 2px;
 }
 
@@ -96,7 +101,7 @@
 	top: 24%;
 	left: 50%;
 	transform: translate( -50%, -50% );
-    text-align:center;
+  text-align:center;
 }
 
 .quiz-deco{
@@ -106,5 +111,13 @@
 	width: 272px;
 	height: 89px;
 	transform: translate( -50%, -50% );
-    text-align:center;
+  text-align:center;
 }
+
+.share-btm{
+	letter-spacing: 0;
+  word-spacing: 0;
+  font-size: 0;
+}
+
+/*<div className="share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>*/

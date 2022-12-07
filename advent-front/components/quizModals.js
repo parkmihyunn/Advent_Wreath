@@ -106,7 +106,7 @@ const QuizModal = ({ isVisible, onClose }) => {
                 }
 
                 .wrapper:hover .letter {
-                    transform: translateY(-50px);
+                    transform: translateY(-60px);
                     transition-delay: 0.5s;
                 }
                 .x-btn {
