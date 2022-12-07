@@ -5,16 +5,13 @@ from django.utils.translation import gettext_lazy as _
 #from .managers import CustomUserManager
 
 
+
+
 class User(AbstractUser):
+    u_id = models.CharField(blank=False, primary_key = True, null=False,unique=True, max_length=100)
     username = models.CharField(max_length=100, unique=True)
-    uid = models.CharField(blank=False, null=True, unique=True, max_length=100)
-    #user_email = models.EmailField(_('email address'), unique=True, null=True)
-    #name = models.CharField(max_length=100,null=True)
-    #gender = models.CharField(max_length=100,null=True)
-    #USERNAME_FIELD = 'uid'
-    #2objects = CustomUserManager()
     jwt = models.CharField(blank=False, null=True, unique=True,max_length=100)
 
 
     def __str__(self):
-        return str(self.uid)
+        return str(self.u_id)

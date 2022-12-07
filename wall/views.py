@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view # function based 이기에 데코레이터를 사용한다.
-from wall.models import quiz,deer,mixDeer,user_A
+from wall.models import quiz,deer,mixDeer,user_A,wreath
 from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer,wreathSerializer#models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
 from rest_framework import status
 from rest_framework.views import APIView
@@ -23,26 +23,11 @@ import random
 
 
 @api_view(['GET'])
-def sendwreath(request):
-    
-    def get(self, request):
-        
-        serializer = 
-        whreathes = wreath.objects.all()
-        serializer = deerSerializer(deers, many=True)
-        return Response(serializer.data)
-    
-    
-
-
-
+def sendWreath(request):
     
     num = 9
-    
     ran = random.randint(1,num)
-    
-    wreathes = wreath.objects.get(id = ran)
-    
+    wreathes = wreath.objects.get(id = ran) # 오너먼트 테이블에서 아무렇게나 하나 뽑는거
     serializer = wreathSerializer(data = wreathes)
     
     if serializer.is_valid():
@@ -50,9 +35,6 @@ def sendwreath(request):
         return Response(serializer.data, status = status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-    
-    
     
     
 
@@ -87,9 +69,13 @@ def sendMixdeer(): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구
             m_body_color = _body_color,
             m_body_deco = _body_deco
         )
+    
+    
     mixDeers = mixDeer.objects.last()
     
     serializer = mixdeerSerializer(mixDeers,many = False)
+    
+    
     return Response(serializer.data) 
 
 
