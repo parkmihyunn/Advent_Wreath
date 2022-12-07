@@ -5,7 +5,6 @@ import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
-
 import Layout from '../components/layout'
 import QuizModal from '../components/quizModals'
 import NoQuizModal from '../components/noQuizModal'
@@ -31,7 +30,7 @@ export default function Main(){
         router.push('/');
         alert("로그인 후 이용해주세요.");
       }
-    }
+    } 
   },[])
 
   /* 로그아웃 함수 */

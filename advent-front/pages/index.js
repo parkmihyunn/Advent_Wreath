@@ -21,7 +21,7 @@ export default function Home() {
         kakaoResponse(authObj);
       },
       fail(err) {
-        console.log(err);
+        console.log(err);   
       }
     })
   }
@@ -41,13 +41,15 @@ export default function Home() {
       window.sessionStorage.user = JSON.stringify(datajson);
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
-      // router.push({
-      //   pathname: '/main',
-      //   query: { id: datajson.id,
-      //            name: datajson.name,
-      //            token: datajson.token},
-      // },'/main');
-      router.push('/main')
+      router.push({
+        pathname: '/main',
+        query: { 
+          //id: datajson.id,
+          name: datajson.name,
+          //token: datajson.token
+        },
+      },);
+      //router.push('/main')
   }
 
   return (
