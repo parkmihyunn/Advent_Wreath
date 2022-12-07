@@ -15,17 +15,19 @@ const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function Main(){
 
-  /* 로그인 확인후 유저정보 저장 */
-  const [user, setUser] = useState([]);
-  const [clickGo, setClickGo] = useState(false);
+  /* 링크의 사용자 정보 불러오기 */
+  const [user, setUser] = useState();
   const router = useRouter();
-
   useEffect(() => {
     if(typeof window !== 'undefined') {
-        setUser(JSON.parse(window.sessionStorage.user))
+      const params = new URLSearchParams(window.location.search);
+      const uName = params.get("name");
+      console.log(params.get("name"))
+      setUser(uName);
     }
   },[])
 
+  const [clickGo, setClickGo] = useState(false);
   useEffect(() => {
     if(clickGo) {
       router.push('/');
@@ -122,7 +124,9 @@ export default function Main(){
           </div>
           <div className="door-top">
             <div className="flex justify-between">  
-              <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.name}님의 소원양말을 열어보세요</h1>
+              <h1 className="ml-8 text-white text-base font-normal align-bottom">
+                {user}님의 소원양말을 열어보세요
+              </h1>
             </div>
             <div className="px-10 relative">
               <div className="w-60 text-center m-auto relative">
