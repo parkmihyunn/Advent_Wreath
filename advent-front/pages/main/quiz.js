@@ -4,12 +4,14 @@ import Link from 'next/link'
 import { useRouter, withRouter } from 'next/router'
 import { useRef, useState, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
-import ReinModal from "../components/reindeerModal";
+import ReinModal from "../../components/reindeerModal";
 import axios from 'axios';
+
+const BASE_URL = "http://localhost:8000/"
 
 export default function quiz(){
   /* quiz data */
-  const quizzes = [
+  var quizzes = [
     {
       question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
       correct : '100',
@@ -66,23 +68,29 @@ export default function quiz(){
       }
     }
   },[])
-  
+
   /* 유저 퀴즈 갯수 가져오기, quizzes에서 해당하는 퀴즈 꺼내기 */
   const [sNum, setSNum] = useState();
   const [data, setData] = useState();
   useEffect(() => {
-    axios.get('http://localhost:3000/api/temp').then(
-      res => {
-        console.log(res.data);
-        setSNum(res.data.solvedNum);
-    });
-    const tmp = {
-      question : quizzes[sNum].question,
-      correct : quizzes[sNum].correct,
-      hints : quizzes[sNum].hints
-    }
-    setData(tmp);
+    axios.get('http://localhost:3000/api/temp')
+    .then( res => {
+      console.log("res.data")
+      console.log(res.data)
+      setSNum(res.data[0].solvedNum);
+    })
+    .catch(res => {
+      console.log('실패');
+      console.log(res);
+    })
   },[])
+  
+  useEffect(() => {
+    const tmp = quizzes[sNum];
+    setData(tmp);
+    console.log("====quizData====")
+    console.log(quizzes[sNum])
+  },[sNum])
 
   /* 오늘 날짜 */
   const now = new Date();
@@ -153,7 +161,7 @@ export default function quiz(){
         <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {sNum+1}번째 퀴즈</div>
         <div className="flex-1 w-full text-center m-auto relative">
           <div className="absolute mt-5 hint-btn">
-            <a href={data.hints} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
+            <a href={data ? data.hints : null} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
           </div>
           <div className="hint-btn-img">
             <Image src="/img/hint_btn.png" width='31' height='36'/>
@@ -163,7 +171,7 @@ export default function quiz(){
           <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
           <div className="flex flex-col letter-text1 px-5 relative ">
             <div className="flex text-rose-800 mb-3 max-[374px]:text-xs max-[374px]:mb-0.5 max-[374px]:mt-8">~ 오늘의 퀴즈 ~</div>
-            <div id="quiz" className="flex text-base max-[374px]:text-sm">{data.question}</div>
+            <div id="quiz" className="flex text-base max-[374px]:text-sm">{data ? data.question: null}</div>
             <div id="quiz_view_t" className="absolute mb-56 quiz_view_t hidden">
               <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
               <div className="">정답입니다 !</div>

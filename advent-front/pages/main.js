@@ -15,11 +15,12 @@ import SocksModal_3 from '../components/socksModal_3'
 import SocksEditModal from '../components/socksEditModal'
 import { WreathEditModal } from '../components/wreathEditModal'
 
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function Main(){
 
-  /* 로그인 확인후 유저정보 저장 */
+  /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 */
   const [user, setUser] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Main(){
     } 
   },[])
 
-  /* 로그아웃 함수 */
+  /* 로그아웃 */
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
       console.log('로그아웃');
@@ -42,7 +43,7 @@ export default function Main(){
     });
   }
 
-  /* 디데이 계산, 퀴즈 데이터 불러오기 */
+  /* 디데이 계산, 사용자가 푼 퀴즈 갯수 불러오기 */
   const [quizzesNum, setQuizzesNum] = useState();
   const [d_Day, setD_Day] = useState();
   useEffect(() => {
@@ -52,17 +53,19 @@ export default function Main(){
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
+    /* (수정필)params로 token주고 res 받아오기로 수정해야함 */
     axios.get("http://localhost:3000/api/temp")
     .then(res => {
       console.log('성공');
       console.log(res.data);
       console.log(res.data[0].ornaments);
       setUserData(res.data[0].ornaments);
-      const quizNum = res.data[0].quizzes.length;
-      if(quizNum<=result){
+      /* (수정필)사용자가 완료한 문제 갯수 가져오기 */
+      const solvedNum = res.data[0].solvedNum;
+      if(solvedNum+result>=10){
         setQuizzesNum(0)
       } else {
-        setQuizzesNum(quizNum-result)
+        setQuizzesNum(10-solvedNum-result)
       }
     })
     .catch(res => {

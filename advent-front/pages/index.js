@@ -2,15 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import axios from 'axios';
 
+const BASE_URL = "http://localhost:8000/"
+
 export default function Home() {
-  // const [user_id, setUserId] = useState();
-  // const [nickName, setNickName] = useState();
   const router = useRouter();
-  //const [isLogin, setIsLogin] = useState(false);
 
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
@@ -27,7 +24,7 @@ export default function Home() {
   }
 
   const kakaoResponse = async(authObj)=>{
-    let res = await axios.get("http://localhost:8000/rest-auth/kakao/",
+    let res = await axios.get(BASE_URL+"rest-auth/kakao/",
       {
         params: 
         {
@@ -37,19 +34,17 @@ export default function Home() {
       var datajson = res.data;
       console.log("백서버에서 받아온 사용자 정보 =======");
       console.log(datajson);
-      //setIsLogin(true);
       window.sessionStorage.user = JSON.stringify(datajson);
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
       router.push({
-        pathname: '/main',
+        pathname: '/setName',
         query: { 
           //id: datajson.id,
-          name: datajson.name,
-          //token: datajson.token
+          //name: datajson.name,
+          value: datajson.token
         },
       },);
-      //router.push('/main')
   }
 
   return (
@@ -78,7 +73,7 @@ export default function Home() {
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>
           <button onClick={loginFormWithKakao} className ="start-text flex flex-col py-5 items-center text-white text-lg">
-              시작하기
+              순록 구하러 가기
           </button>
         </div>
         <Layout/>
