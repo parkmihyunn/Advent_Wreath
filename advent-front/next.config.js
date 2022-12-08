@@ -11,7 +11,15 @@ module.exports = nextConfig
 module.exports = withImages();
 
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/:path*',
+  //       destination: 'http://localhost:8000/:path*'
+  //     },
+  //   ];
+  // },
   webpackDevMiddleware: (config) => {
     config.watchOptions = {
       poll: 1000,
