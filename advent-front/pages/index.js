@@ -54,7 +54,7 @@ export default function Home() {
       bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
-        <title>돌아와! 순록!</title>
+        <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
@@ -62,13 +62,13 @@ export default function Home() {
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>
         </div>
-        <div className="flex flex-col place-items-center flex-1">
+        <div className="flex flex-col place-items-center">
             <Image src='/img/wreath.png' width='259' height='282'/>
-          <div className="place-items-center items-center pt-10 text-center text-3xl text-white ">
-            돌아와! 순록!
+          <div className="place-items-center items-center pt-10 text-center text-2xl font-bold text-[#2E2D2D]">
+            돌아와 순록!
           </div>
         </div>
-        <div className="w-full relative my-4">
+        <div className="w-full relative my-10">
           <div className="w-full text-center m-auto relative">
             <Image src='/img/start_btn.png' width='245' height='62'/>
           </div>
@@ -76,6 +76,7 @@ export default function Home() {
               순록 구하러 가기
           </button>
         </div>
+        <div className="flex-1"></div>
         <Layout/>
       </div>
     </div>

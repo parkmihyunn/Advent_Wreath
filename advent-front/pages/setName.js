@@ -27,7 +27,7 @@ export default function setName() {
   /* 등록 및 시작하기 버튼 클릭 함수 */
   const onSubmit = async()=>{
     const nicknameInput_t = nicknameInput.current.value;
-    let res = await axios.get(BASE_URL+"rest-auth/kakao/",
+    let res = await axios.get(BASE_URL+"changenickname/",
       {
         params: 
         {
@@ -59,7 +59,7 @@ export default function setName() {
       bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
-        <title>돌아와! 순록!</title>
+        <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
@@ -70,7 +70,7 @@ export default function setName() {
         <div className="flex flex-col place-items-center">
             <Image src='/img/wreath.png' width='259' height='282'/>
           <div className="place-items-center items-center pt-10 text-center text-2xl font-bold text-[#2E2D2D] ">
-            돌아와! 순록!
+            돌아와 순록!
           </div>
         </div>
         <div className="flex flex-col text-center m-auto my-10 justify-center w-[300px]">
@@ -81,7 +81,7 @@ export default function setName() {
           <div className="text-xs text-white mt-2">최대 6자까지 입력 가능하며, 추후에 변경 가능합니다.</div>
         </div>
         <div className="flex justify-center">
-          <button onClick={onSubmit} className ="bg-[#BD2E2E] rounded-xl drop-shadow text-white py-2 px-8 mb-10">
+          <button onClick={onSubmit} className ="bg-[#BD2E2E] rounded-xl drop-shadow text-white py-2 px-16 mb-10">
             등록 및 시작하기
           </button>
         </div>

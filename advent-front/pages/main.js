@@ -188,13 +188,14 @@ export default function Main(){
         bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
-      <title>돌아와! 순록!</title>
+      <title>돌아와 순록!</title>
       <meta name="description" content="콘텐트 내용" />
       <link rel="icon" href="/favicon.ico" />
       </Head> 
       <div className="flex flex-col h-full">
-        <div className="flex flex-row justify-between items-end">
-          <h1 className="flex ml-2 mb-0 relative text-xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
+        <div className="flex flex-row justify-between items-end mb-[5px]">
+          <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
+          <div className="items-center"><button id="guide" className="rounded-full bg-[#BA0A0A] w-[16px] text-xs font-bold text-white block">?</button></div>
           <div id="bgm-toggle" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
             <div className="max-h-[10px]">
               { !play ? 
@@ -215,7 +216,7 @@ export default function Main(){
               <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.name}님의 소원양말</h1>
               {/* 양말편집창 모달 */}
               <button onClick={()=> setShowSE_Modal(true)}>
-                <h1 className="mr-8 mt-1 text-gray-500 text-xs font-normal align-bottom">
+                <h1 className="mr-8 mt-1 text-black/[0.4] text-xs font-bold align-bottom">
                   편집하기
                 </h1>
               </button>
@@ -581,7 +582,7 @@ export default function Main(){
           </div>
           <div className="quiz-text">
             <button onClick={quizzesNum!==0 ? ()=> setShowQ_Modal(true) : ()=> setShowNq_Modal(true)}>
-              <h1 className="pt-2 text-center font-normal text-xl">오늘의 퀴즈</h1>
+              <h1 className="pt-2 text-center font-bold text-base">오늘의 퀴즈</h1>
             </button>
           </div>
           {quizzesNum !== 0 ? 
@@ -592,7 +593,7 @@ export default function Main(){
           }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
-        <button onClick={logoutHandler} className="flex flex-1 justify-center items-end mt-6 text-white"><p className="text-sm">로그아웃</p></button>
+        <button onClick={logoutHandler} className="flex flex-1 justify-center items-end mt-6 text-white text-sm">로그아웃</button>
         <Layout/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
