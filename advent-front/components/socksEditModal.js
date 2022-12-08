@@ -1,9 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRef } from "react";
 import Image from 'next/image';
-import { Modal, useModal, Button, Text } from "@nextui-org/react";
+import { useRouter } from 'next/router'
 
 const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
+    /* 로그인 확인후 유저정보 저장 */
+    const [user, setUser] = useState([]);
+    const router = useRouter();
+    useEffect(() => {
+        if(typeof window !== 'undefined') {
+        if(window.sessionStorage.getItem('user') !== null){
+            setUser(JSON.parse(window.sessionStorage.user))
+        } else {
+            router.push('/');
+            alert("로그인 후 이용해주세요.");
+        }
+        } 
+    },[])
+
     //이미지 이름 가져오기
     const [giftName, setGiftName] = useState('');
     //이미지 사진 가져오기
@@ -25,14 +39,14 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
         imageInput.current.click();
     };
 
-    function imgRegist() {
-        if (imageSrc == null) {
-            document.getElementById('pic_box').classList.add('hidden');
-        }
-        else {
-            document.getElementById('none_box').classList.add('hidden');
-        }
-    }
+    // function imgRegist() {
+    //     if (imageSrc == null) {
+    //         document.getElementById('pic_box').classList.add('hidden');
+    //     }
+    //     else {
+    //         document.getElementById('none_box').classList.add('hidden');
+    //     }
+    // }
 
     if(!isVisible) return null;
 
@@ -42,7 +56,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                 overflow-auto">
             <div className="socks_edit_back">
                 <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
-                <div className="socks_edit">조승현님의 소원양말 수정</div>
+                <div className="socks_edit">{user.name}님의 소원양말 수정</div>
                 <div className="socks_edit_socks">
                     <div className="socks_edit_line">
                         <Image src='/img/socks_line.png' width='350' height='50'/>
