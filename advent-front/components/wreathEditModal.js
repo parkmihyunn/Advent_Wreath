@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
 import axios from 'axios';
 
-export const WreathEditModal = ({ wreathSrc, wreathWidth, getData }) => {
+export const WreathEditModal = ({ wreathSrc, wreathSrc2, wreathSrc3, getData, getData2, getData3 }) => {
 
     const [refinedData, setRefinedData] = useState([]);
     const [isSelect, setIsSelect] = useState([]);
@@ -25,8 +25,8 @@ export const WreathEditModal = ({ wreathSrc, wreathWidth, getData }) => {
 
     useEffect(() => {
         wreathSrc = isSelect.src
-        wreathWidth = isSelect.width
-        getData(wreathSrc, wreathWidth)
+        // wreathWidth = isSelect.width
+        getData(wreathSrc)
     })
 
     return (
