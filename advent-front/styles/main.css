@@ -126,4 +126,8 @@
 	text-align:center;
 }
 
-/*<div className="share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>*/
+.grid-guide-1{
+	display: grid;
+	grid-template-columns: 20px 271px;
+	grid-template-rows: 33px 33px 33px 33px;
+}

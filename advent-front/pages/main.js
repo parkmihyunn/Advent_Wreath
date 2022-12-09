@@ -6,6 +6,7 @@ import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
 import Layout from '../components/layout'
+import GuideModal from '../components/guideModal'
 import QuizModal from '../components/quizModals'
 import NoQuizModal from '../components/noQuizModal'
 import ReindeerCollectionModal from '../components/reindeerCollectionModal'
@@ -19,13 +20,15 @@ const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function Main(){
-
+  
   /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 query 없는경우도 '/'로 push해 버리기 */
   const [user, setUser] = useState([]);
   const router = useRouter();
+  const queries = router.query;
+  console.log(queries)
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      if(window.sessionStorage.getItem('user') !== null){
+      if(window.sessionStorage.getItem('user') !== null || queries.length == 0){
         setUser(JSON.parse(window.sessionStorage.user))
       } else {
         router.push('/');
@@ -44,7 +47,6 @@ export default function Main(){
   }
 
   /* 링크복사 */
-  const queries = router.query;
   const [urlForm, setUrlForm] = useState();
   useEffect(() => {
     if(!router.isReady) return;
@@ -138,6 +140,7 @@ export default function Main(){
       imageInput.current.click();
   };
 
+  const [showG_Modal, setShowG_Modal] = useState(false);
   const [showQ_Modal, setShowQ_Modal] = useState(false);
   const [showNq_Modal, setShowNq_Modal] = useState(false);
   const [showCollectionModal, setCollectionModal] = useState(false);
@@ -213,7 +216,7 @@ export default function Main(){
         <div id="title-quide-switch" className="flex flex-row justify-between items-end mb-[5px]">
           <div id="title-quide" className="flex flex-row items-end">
             <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
-            <div id="guide" className="items-center pl-1.5 pb-1.5"><button className="drop-shadow-md rounded-full bg-[#BA0A0A] w-[16px] text-xs text-white block pt-[1px] px-[1px]">?</button></div>
+            <div id="guide" className="items-center pl-1.5 pb-1.5"><button onClick={()=>setShowG_Modal(true)} className="drop-shadow-md rounded-full bg-[#BA0A0A] w-[16px] text-xs text-white block pt-[1px] px-[1px]">?</button></div>
           </div>
           <div id="bgm-switch" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
             <div className="max-h-[10px]">
@@ -615,6 +618,7 @@ export default function Main(){
         <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
         <div className="flex-1"></div>
         <Layout/>
+        <GuideModal isVisible={showG_Modal} onClose={()=>setShowG_Modal(false)}/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
         <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)}/>

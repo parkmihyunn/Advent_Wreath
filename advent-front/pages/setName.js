@@ -27,13 +27,11 @@ export default function setName() {
   /* 등록 및 시작하기 버튼 클릭 함수 */
   const onSubmit = async()=>{
     const nicknameInput_t = nicknameInput.current.value;
-    let res = await axios.get(BASE_URL+"changenickname/",
+    const token = user.token
+    let res = await axios.post(BASE_URL+"changenickname/",
       {
-        params: 
-        {
-          nickname:nicknameInput_t,
-          jwt:user.token,
-        },
+        nickname:nicknameInput_t,
+        jwt:user.token,
       });
       var datajson = res.data;
       console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
@@ -46,27 +44,11 @@ export default function setName() {
         query: { 
           //id: datajson.id,
           //name: datajson.name,
-          //name: datajson.nickname,
-          value: datajson.token
+          name: datajson.nickname,
+          value: token
         },
     },);
   }
-
-  /* 링크복사 Test */
-  // const queries = router.query;
-  // const [urlForm, setUrlForm] = useState();
-  // useEffect(() => {
-  //   if(!router.isReady) return;
-  //   setUrlForm("http://localhost:3000/share?value="+queries.value)
-  // }, [router.isReady])
-  // const copyLinkHandler = async() => {
-  //   try {
-  //     await navigator.clipboard.writeText(urlForm);
-  //     alert('링크가 복사되었습니다.');
-  //   } catch (e) {
-  //     alert('복사에 실패하였습니다');
-  //   }
-  // }
 
   return (
     <div className="

@@ -12,7 +12,6 @@ export default function Home() {
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
       success(authObj) {
-        console.log("login성공")
         console.log("로그인 토큰 정보 =======");
         console.log(authObj);
         kakaoResponse(authObj);
@@ -43,7 +42,7 @@ export default function Home() {
         query: { 
           //id: datajson.id,
           //name: datajson.name,
-          value: datajson.token 
+          value: datajson.token
         },
       },);
   }
