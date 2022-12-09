@@ -38,7 +38,7 @@ export default function Home() {
       console.log(window.sessionStorage);
       /* nickname !== null 이면 /main으로 push로 수정 */
       router.push({
-        pathname: '/setName',
+        pathname: '/nickname',
         query: { 
           //id: datajson.id,
           //name: datajson.name,

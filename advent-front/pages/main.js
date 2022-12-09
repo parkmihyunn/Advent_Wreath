@@ -235,7 +235,7 @@ export default function Main(){
           </div>
           <div className="door-top">
             <div className="flex justify-between">  
-              <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.name}님의 소원양말</h1>
+              <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.nickname}님의 소원양말</h1>
               <button id="wish-edit-btn" onClick={()=> setShowSE_Modal(true)}>
                 <h1 className="mr-8 mt-1 text-black/[0.4] text-xs font-bold align-bottom">
                   편집하기

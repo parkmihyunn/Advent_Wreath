@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter, withRouter } from 'next/router'
 import { useRef, useState, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
-import ReinModal from "../../components/reindeerModal";
+import ReinModal from "../components/reindeerModal";
 import axios from 'axios';
 
 const BASE_URL = "http://localhost:8000/"
@@ -69,7 +69,7 @@ export default function quiz(){
     }
   },[])
 
-  /* 유저 퀴즈 갯수 가져오기, quizzes에서 해당하는 퀴즈 꺼내기 */
+  /* 유저가 지금까지 푼 퀴즈 갯수 가져오기, quizzes에서 해당하는 퀴즈 꺼내기 */
   const [sNum, setSNum] = useState();
   const [data, setData] = useState();
   useEffect(() => {
@@ -117,7 +117,17 @@ export default function quiz(){
     let answerResult = data.correct.toLowerCase().trim();
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
-      /* 백엔드 서버로 solvedQuiz 갯수 증가시킬 post나 get 필요 */
+      /* 백엔드 서버로 solvedQuiz 갯수 증가 */
+      axios.post(BASE_URL+"solvequestion/",
+      {
+        jwt:user.token,
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(res => {
+        console.log(res);
+      });
       document.getElementById('quiz_view_f').classList.remove('block');
       document.getElementById('quiz_view_f').classList.add('hidden');
       document.getElementById('quiz').classList.add('invisible');    // 문제 가리기
@@ -153,15 +163,15 @@ export default function quiz(){
         
         <canvas id="my-canvas" className="absolute"></canvas>
         <div className="back-btn pl-16 pt-16">
-            <Link href="/main">
-                <Image src="/img/back_white.png" width='40' height='40'/>
-            </Link>
+          <Link href="/main">
+            <Image src="/img/back_white.png" width='40' height='40'/>
+          </Link>
         </div>
         
         <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {sNum+1}번째 퀴즈</div>
         <div className="flex-1 w-full text-center m-auto relative">
           <div className="absolute mt-5 hint-btn">
-            <a href={data ? data.hints : null} className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a>
+            <Link href={data ? data.hints : "/main"}><a target="_blank" className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a></Link>
           </div>
           <div className="hint-btn-img">
             <Image src="/img/hint_btn.png" width='31' height='36'/>
