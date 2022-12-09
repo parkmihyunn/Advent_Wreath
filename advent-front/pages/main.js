@@ -20,7 +20,7 @@ const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function Main(){
 
-  /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 */
+  /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 query 없는경우도 '/'로 push해 버리기 */
   const [user, setUser] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Main(){
         alert("로그인 후 이용해주세요.");
       }
     } 
-  },[])
+  },[])     
 
   /* 로그아웃 */
   const logoutHandler = () => {
@@ -41,6 +41,23 @@ export default function Main(){
       window.sessionStorage.removeItem('user');
       router.push('/');
     });
+  }
+
+  /* 링크복사 */
+  const queries = router.query;
+  const [urlForm, setUrlForm] = useState();
+  useEffect(() => {
+    if(!router.isReady) return;
+    setUrlForm("http://localhost:3000/share?value="+queries.value)
+  }, [router.isReady])
+
+  const copyLinkHandler = async() => {
+    try {
+      await navigator.clipboard.writeText(urlForm);
+      alert('링크가 복사되었습니다.');
+    } catch (e) {
+      alert('복사에 실패하였습니다');
+    }
   }
 
   /* 디데이 계산, 사용자가 푼 퀴즈 갯수 불러오기 */
@@ -92,7 +109,7 @@ export default function Main(){
     }
   }, [play]);
 
-  // 예시 코드
+  // 예시 코드 ==============================
   const [값1, set값1] = useState([]);
 
   //리스에 있는 데이터
@@ -193,10 +210,12 @@ export default function Main(){
       <link rel="icon" href="/favicon.ico" />
       </Head> 
       <div className="flex flex-col h-full">
-        <div className="flex flex-row justify-between items-end mb-[5px]">
-          <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
-          <div className="items-center"><button id="guide" className="rounded-full bg-[#BA0A0A] w-[16px] text-xs font-bold text-white block">?</button></div>
-          <div id="bgm-toggle" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
+        <div id="title-quide-switch" className="flex flex-row justify-between items-end mb-[5px]">
+          <div id="title-quide" className="flex flex-row items-end">
+            <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
+            <div id="guide" className="items-center pl-1.5 pb-1.5"><button className="drop-shadow-md rounded-full bg-[#BA0A0A] w-[16px] text-xs text-white block pt-[1px] px-[1px]">?</button></div>
+          </div>
+          <div id="bgm-switch" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
             <div className="max-h-[10px]">
               { !play ? 
               <Image src='/img/sound_mute.png' width='13' height='10'/> :
@@ -214,8 +233,7 @@ export default function Main(){
           <div className="door-top">
             <div className="flex justify-between">  
               <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.name}님의 소원양말</h1>
-              {/* 양말편집창 모달 */}
-              <button onClick={()=> setShowSE_Modal(true)}>
+              <button id="wish-edit-btn" onClick={()=> setShowSE_Modal(true)}>
                 <h1 className="mr-8 mt-1 text-black/[0.4] text-xs font-bold align-bottom">
                   편집하기
                 </h1>
@@ -593,7 +611,9 @@ export default function Main(){
           }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
-        <button onClick={logoutHandler} className="flex flex-1 justify-center items-end mt-6 text-white text-sm">로그아웃</button>
+        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 방 문 공유링크 복사하기</button></div>
+        <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
+        <div className="flex-1"></div>
         <Layout/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>

@@ -14,12 +14,12 @@ export default function setName() {
   
   /* 로그인 확인 */
   useEffect(() => {
-  if(typeof window !== 'undefined') {
-    if(window.sessionStorage.getItem('user') !== null){
-      setUser(JSON.parse(window.sessionStorage.user))
-      } else {
-      router.push('/');
-      alert("로그인 후 이용해주세요.");
+    if(typeof window !== 'undefined') {
+      if(window.sessionStorage.getItem('user') !== null){
+        setUser(JSON.parse(window.sessionStorage.user))
+        } else {
+        router.push('/');
+        alert("로그인 후 이용해주세요.");
       }
     } 
   },[])
@@ -46,11 +46,27 @@ export default function setName() {
         query: { 
           //id: datajson.id,
           //name: datajson.name,
-          name: datajson.nickname,
+          //name: datajson.nickname,
           value: datajson.token
         },
     },);
   }
+
+  /* 링크복사 Test */
+  // const queries = router.query;
+  // const [urlForm, setUrlForm] = useState();
+  // useEffect(() => {
+  //   if(!router.isReady) return;
+  //   setUrlForm("http://localhost:3000/share?value="+queries.value)
+  // }, [router.isReady])
+  // const copyLinkHandler = async() => {
+  //   try {
+  //     await navigator.clipboard.writeText(urlForm);
+  //     alert('링크가 복사되었습니다.');
+  //   } catch (e) {
+  //     alert('복사에 실패하였습니다');
+  //   }
+  // }
 
   return (
     <div className="
@@ -63,6 +79,7 @@ export default function setName() {
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
+      {/* <button onClick={copyLinkHandler} className="flex justify-center mt-6 text-white text-sm bg-[#BD2E2E] rounded-lg py-2 px-4">공유링크 복사하기</button> */}
       <div className="flex flex-col h-full">
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>

@@ -18,15 +18,14 @@ export default function Main(){
   /* 링크의 사용자 정보 불러오기 */
   const [user, setUser] = useState();
   const router = useRouter();
+  const queries = router.query;
   useEffect(() => {
-    if(typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const uName = params.get("name");
-      console.log(params.get("name"))
-      setUser(uName);
-    }
-  },[])
+    if(!router.isReady) return;
+    /* (수정필) name => token으로 변경하고 백에서 데이터 불러오기 */
+    setUser(queries.name)
+  }, [router.isReady])
 
+  /* 시작화면으로 돌아가기 */
   const [clickGo, setClickGo] = useState(false);
   useEffect(() => {
     if(clickGo) {
@@ -106,7 +105,7 @@ export default function Main(){
       </Head> 
       <div className="flex flex-col items-center h-full">
         <div className="flex flex-row max-w-[300px] min-w-[300px] justify-between items-end">
-          <h1 className="flex ml-2 mb-0 relative text-xl font-normal text-left text-white pt-4">돌아와! 순록!</h1>
+          <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
           <div id="bgm-toggle" className="bg-stone-600/50 flex pl-2.5 pr-1 pb-[3px] rounded-xl mb-1">
             <div className="max-h-[10px]">
               { !play ? 
