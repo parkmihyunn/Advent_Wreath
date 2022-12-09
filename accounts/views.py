@@ -18,7 +18,7 @@ class KakaoLogin(APIView):
         print("\nkakaologin2 get함수 들어왔습니다!\n")
         url="https://kapi.kakao.com/v2/user/me"
         headers={
-                "Authorization":"Bearer {kakao_access_code}",
+                "Authorization":f"Bearer {kakao_access_code}",
                 "Content-type":"application/x-www-form-urlencoded; charset=utf-8"
             }
         kakao_response=requests.post(url,headers=headers)
