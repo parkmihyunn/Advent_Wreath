@@ -79,23 +79,24 @@ class KakaoLogin(APIView):
 
 # 미현누나 부탁
 class ChangeNickName(APIView):
-    def get(self, request):
-        user_jwt = request.data.get('jwt',None) # 토큰 받기
-        new_nickname = request.data.get('nickname',None) # 새로운 닉네임 입력받기
-        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM) # jwt토큰 디코드 한거 --> user_id
-        user = User.objects.get(u_id = user_id['id']) # user 가져오기
+    def post(self, request):
+        user_jwt = request.data.get('jwt',None)
+        new_nickname = request.data.get('nickname',None)
+
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        user = User.objects.get(u_id = user_id['id'])
         user.nickname = new_nickname
         user.save()
-        
-        datadic = {
-            "id" : user_id,
-            "name" : user.name,
-            "token" : user_jwt,
-            "exist" : True,
-            "solve_count" : user.solve_count,
-        }
 
-        return JsonResponse(datadic)
+        datadict = {
+                "uid" : user.u_id,
+                "name" : user.username,
+                "exist" : True,
+                "solve_count" : user.solve_count,
+                "nickname" : user.nickname,
+            }
+
+        return JsonResponse(datadict)
 
 
 class SolveQuestion(APIView):
