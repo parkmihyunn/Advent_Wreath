@@ -18,7 +18,7 @@ class KakaoLogin(APIView):
         print("\nkakaologin2 get함수 들어왔습니다!\n")
         url="https://kapi.kakao.com/v2/user/me"
         headers={
-                "Authorization":f"Bearer {kakao_access_code}",
+                "Authorization":"Bearer {kakao_access_code}",
                 "Content-type":"application/x-www-form-urlencoded; charset=utf-8"
             }
         kakao_response=requests.post(url,headers=headers)
@@ -27,7 +27,7 @@ class KakaoLogin(APIView):
         print("\nkakao_response : "+str(kakao_response)+"\n")
         if User.objects.filter(u_id=kakao_response['id']).exists():
             print("User.objects.filter if문안으로 들어왔습니다!")
-            user    = User.objects.get(u_id=kakao_response['id'])
+            user= User.objects.get(u_id=kakao_response['id'])
             #jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
             #print("user id : "+user.id+"\n")
             print("user name: "+user.username+"\n")
@@ -56,7 +56,7 @@ class KakaoLogin(APIView):
                 
             ).save()
 
-            user    = User.objects.get(u_id=kakao_response['id'])
+            user = User.objects.get(u_id=kakao_response['id'])
             
             print(user.u_id)
             print(user.username)
@@ -77,23 +77,30 @@ class KakaoLogin(APIView):
 
             return JsonResponse(datadict)
 
+# 미현누나 부탁
 class ChangeNickName(APIView):
-    def post(self, request):
-        user_jwt = request.data.get('jwt',None)
-        new_nickname = request.data.get('nickname',None)
-
-        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
-        user = User.objects.get(u_id = user_id['id'])
+    def get(self, request):
+        user_jwt = request.data.get('jwt',None) # 토큰 받기
+        new_nickname = request.data.get('nickname',None) # 새로운 닉네임 입력받기
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM) # jwt토큰 디코드 한거 --> user_id
+        user = User.objects.get(u_id = user_id['id']) # user 가져오기
         user.nickname = new_nickname
         user.save()
+        
+        datadic = {
+            "id" : user_id,
+            "name" : user.name,
+            "token" : user_jwt,
+            "exist" : True,
+            "solve_count" : user.solve_count,
+        }
 
-        return JsonResponse({"응답":"닉넴 저장성공!"})
+        return JsonResponse(datadic)
 
 
 class SolveQuestion(APIView):
     def post(self, request):
         user_jwt = request.data.get('jwt',None)
-
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
         user.solve_count += 1
