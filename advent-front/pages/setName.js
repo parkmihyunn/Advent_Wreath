@@ -14,12 +14,12 @@ export default function setName() {
   
   /* 로그인 확인 */
   useEffect(() => {
-  if(typeof window !== 'undefined') {
-    if(window.sessionStorage.getItem('user') !== null){
-      setUser(JSON.parse(window.sessionStorage.user))
-      } else {
-      router.push('/');
-      alert("로그인 후 이용해주세요.");
+    if(typeof window !== 'undefined') {
+      if(window.sessionStorage.getItem('user') !== null){
+        setUser(JSON.parse(window.sessionStorage.user))
+        } else {
+        router.push('/');
+        alert("로그인 후 이용해주세요.");
       }
     } 
   },[])
@@ -27,13 +27,11 @@ export default function setName() {
   /* 등록 및 시작하기 버튼 클릭 함수 */
   const onSubmit = async()=>{
     const nicknameInput_t = nicknameInput.current.value;
-    let res = await axios.get(BASE_URL+"changenickname/",
+    const token = user.token
+    let res = await axios.post(BASE_URL+"changenickname/",
       {
-        params: 
-        {
-          nickname:nicknameInput_t,
-          jwt:user.token,
-        },
+        nickname:nicknameInput_t,
+        jwt:user.token,
       });
       var datajson = res.data;
       console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
@@ -47,7 +45,7 @@ export default function setName() {
           //id: datajson.id,
           //name: datajson.name,
           name: datajson.nickname,
-          value: datajson.token
+          value: token
         },
     },);
   }
@@ -63,6 +61,7 @@ export default function setName() {
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
+      {/* <button onClick={copyLinkHandler} className="flex justify-center mt-6 text-white text-sm bg-[#BD2E2E] rounded-lg py-2 px-4">공유링크 복사하기</button> */}
       <div className="flex flex-col h-full">
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>

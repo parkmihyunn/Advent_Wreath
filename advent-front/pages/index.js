@@ -12,7 +12,6 @@ export default function Home() {
   const loginFormWithKakao = () => {
     window.Kakao.Auth.login({
       success(authObj) {
-        console.log("login성공")
         console.log("로그인 토큰 정보 =======");
         console.log(authObj);
         kakaoResponse(authObj);
@@ -37,6 +36,7 @@ export default function Home() {
       window.sessionStorage.user = JSON.stringify(datajson);
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
+      /* nickname !== null 이면 /main으로 push로 수정 */
       router.push({
         pathname: '/setName',
         query: { 
