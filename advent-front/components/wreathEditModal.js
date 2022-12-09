@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
 import axios from 'axios';
 
-export const WreathEditModal = ({ wreathSrc, wreathSrc2, wreathSrc3, getData, getData2, getData3 }) => {
+export const WreathEditModal = ({ wreathSrc, getData }) => {
 
     const [refinedData, setRefinedData] = useState([]);
     const [isSelect, setIsSelect] = useState([]);
@@ -16,10 +16,9 @@ export const WreathEditModal = ({ wreathSrc, wreathSrc2, wreathSrc3, getData, ge
         });
     }, []);
 
-    const onClickHandler = (t1, t2) => {
+    const onClickHandler = (t1) => {
         setIsSelect({
-            src : t1,
-            width : t2
+            src : t1
         })
     }
 
@@ -38,11 +37,11 @@ export const WreathEditModal = ({ wreathSrc, wreathSrc2, wreathSrc3, getData, ge
                         {refinedData.map((el) =>
                         <div className="wreath_edit_orna_box">
                             <button onClick={() => {
-                                onClickHandler(el.src, el.width);
+                                onClickHandler(el.src);
                                 console.log("click");
                             }} 
                             className="py-4">
-                                <Image src={el.src} width={el.width} height='54'/>
+                                <Image src={el.src} width='54' height='54'/>
                             </button>
                         </div>
                         )}

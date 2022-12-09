@@ -13,13 +13,10 @@ interface ReinDeer {
 
 interface Wreath { 
   src: string;
-  width : string;
 }
 
 interface Ornaments {
     src: string;
-    width : string;
-    height : string;
 }
 
 type Data = {
@@ -88,70 +85,47 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
       ],
       wreath : [
           {
-              src : '/img/ornaments/candy.png',
-              width : '27'
+              src : '/img/ornaments/1.png'
           },
           {
-              src : '/img/ornaments/santa.png',
-              width : '48'
+              src : '/img/ornaments/2.png'
           },
           {
-              src : '/img/ornaments/dia.png',
-              width : '50'
+              src : '/img/ornaments/3.png'
           },
           {
-              src : '/img/ornaments/socks.png',
-              width : '33'
+              src : '/img/ornaments/4.png'
           },
           {
-              src : '/img/ornaments/snowman.png',
-              width : '45'
+              src : '/img/ornaments/5.png'
           },
           {
-              src : '/img/ornaments/bird.png',
-              width : '54'
+              src : '/img/ornaments/6.png'
           },
           {
-              src : '/img/ornaments/star.png',
-              width : '54'
+              src : '/img/ornaments/7.png'
           },{
-              src : '/img/ornaments/bear.png',
-              width : '54'
+              src : '/img/ornaments/8.png'
+          },
+          {
+              src : '/img/ornaments/9.png'
           }
-          // {
-          //     src : '/img/ornaments/ball.png',
-          //     width : '43'
-          // }
       ],
       ornaments : [
           {
-              src:null,
-              width:null,
-              height:null
+              src:""
           },{
-              src: '/img/ornaments/bear.png',
-              width: '54',
-              height : '54'
+              src:""
           },{
-              src:"",
-              width:"",
-              height : ''
+              src:""
           },{
-              src:"",
-              width:"",
-              height : ''
+              src:""
           },{
-              src:"",
-              width:"",
-              height : ''
+              src:""
           },{
-              src:"",
-              width:"",
-              height : ''
+              src:""
           },{
-              src:"",
-              width:"",
-              height : ''
+              src:""
           }
       ]
     }

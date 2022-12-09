@@ -438,7 +438,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg" onClick={removeQ} className="wreath_orna_q1">
-                              <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width={userData[0]?.width ? userData[0]?.width : 29} height={userData[0]?.height ? userData[0]?.height : 30}/>
+                              <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -459,7 +459,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg2" onClick={removeQ2} className="wreath_orna_q2">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -480,7 +480,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg3" onClick={removeQ3} className="wreath_orna_q3">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -501,7 +501,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg4" onClick={removeQ4} className="wreath_orna_q4">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -522,7 +522,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg5" onClick={removeQ5} className="wreath_orna_q5">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -543,7 +543,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg6" onClick={removeQ6} className="wreath_orna_q6">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -564,7 +564,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg7" onClick={removeQ7} className="wreath_orna_q7">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width={userData[1]?.width ? userData[1]?.width : 29} height={userData[1]?.height ? userData[1]?.height : 30}/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
