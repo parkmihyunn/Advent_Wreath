@@ -37,6 +37,7 @@ export default function setName() {
       console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
       console.log(datajson);
       window.sessionStorage.user = JSON.stringify(datajson);
+      window.sessionStorage.token = token;
       console.log("setName.js sessionStorage =======");
       console.log(window.sessionStorage);
       router.push({
@@ -44,7 +45,7 @@ export default function setName() {
         query: { 
           //id: datajson.id,
           //name: datajson.name,
-          name: datajson.nickname,
+          //name: datajson.nickname,
           value: token
         },
     },);
@@ -60,8 +61,7 @@ export default function setName() {
         <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
-      </Head> 
-      {/* <button onClick={copyLinkHandler} className="flex justify-center mt-6 text-white text-sm bg-[#BD2E2E] rounded-lg py-2 px-4">공유링크 복사하기</button> */}
+      </Head>
       <div className="flex flex-col h-full">
         <div className="top-0">
           <Image src='/img/start_top.png' width='435' height='287'/>

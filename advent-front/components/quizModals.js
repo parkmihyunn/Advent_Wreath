@@ -1,18 +1,20 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 
 const QuizModal = ({ isVisible, onClose }) => {  
 
   if(!isVisible) return null;
 
-  const [user, setUser] = useState([]);
-  const [numIdx, setNumIdx] = useState();
+  const [user, setUser] = useState();
   const router = useRouter();
+
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      setUser(JSON.parse(window.sessionStorage.user.token))
+      const tmp = window.sessionStorage.token
+      console.log(tmp);
+      setUser(window.sessionStorage.token)
     }
-    
   },[])
 
   return (
@@ -22,8 +24,14 @@ const QuizModal = ({ isVisible, onClose }) => {
         <div className="lid one"></div>
         <div className="lid two"></div>
         <div className="envelope"></div>
+        {/* <Link href={{
+            pathname: '/quiz',
+            query: { value:user }, }} as={`/quiz?value=${user}`}
+        > */}
         <Link href="/quiz">
           <div className="letter">
+          {/* <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">퀴즈가</a></Link>
+          <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">도착했어요!</a></Link> */}
           <Link href="/quiz"><a className="flex flex-col text-black">퀴즈가</a></Link>
           <Link href="/quiz"><a className="flex flex-col text-black">도착했어요!</a></Link>
           </div>
