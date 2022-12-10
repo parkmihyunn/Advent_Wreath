@@ -50,35 +50,47 @@ export default function Home() {
   return (
     <div className="
       flex flex-col items-center h-screen
-      overflow-auto bg-cover bg-local
-      bg-[url('../public/img/wood_pattern.png')]
+      overflow-auto bg-auto bg-center bg-local pt-[54px]
+      bg-[url('../public/img/start_bg.png')]
     ">
       <Head>
         <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
       </Head> 
-      <div className="flex flex-col h-full">
-        <div className="top-0">
-          <Image src='/img/start_top.png' width='435' height='287'/>
-        </div>
-        <div className="flex flex-col place-items-center">
-            <Image src='/img/wreath.png' width='259' height='282'/>
-          <div className="place-items-center items-center pt-10 text-center text-2xl font-bold text-[#2E2D2D]">
+
+      <div className="flex flex-col justify-between h-screen">
+
+        <div id="top-title" className="flex flex-col place-items-center h-[155px]">
+          <div className="absolute top-[21.5%] left-[6%]">
+            <Image src='/img/start_deco.png' width='320' height='121.72'/>
+          </div>
+          <div className="font-['yg-jalnan'] place-items-center items-center pt-[75px] text-center text-[41px] text-white">
             돌아와 순록!
           </div>
-        </div>
-        <div className="w-full relative my-10">
-          <div className="w-full text-center m-auto relative">
-            <Image src='/img/start_btn.png' width='245' height='62'/>
+          <div className="font-['GmarketSansMedium'] place-items-center items-center pt-2 text-center text-[13px] text-white font-light">
+            크리스마스를 기다리며 매일매일 퀴즈를 맞춰보세요!
           </div>
-          <button onClick={loginFormWithKakao} className ="start-text flex flex-col py-5 items-center text-white text-lg">
-              순록 구하러 가기
+        </div>
+
+        <div id="middle-artwork" className="mt-[47px] mb-[88px]">
+          <Image src='/img/start_artwork.png' width='320' height='339.51'/>
+          <div className="place-items-center items-center pt-3 text-center text-[17px] text-[#13277A] font-bold">
+            "사라진 순록을 찾아주세요!" 
+          </div>
+        </div>
+
+        <div id="start-btn" className="w-full flex justify-center mb-[88px] relative">
+          <div className="absolute top-[27%] left-[16.5%]">
+            <Image src='/img/kakao_logo.png' width='24' height='24'/>
+          </div>
+          <button onClick={loginFormWithKakao} className ="flex h-[55px] pl-14 pr-6 rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px]">
+              카카오톡으로 시작하기
           </button>
         </div>
-        <div className="flex-1"></div>
-        <Layout/>
       </div>
+      <div className="flex-1"></div>
+        <Layout/>
     </div>
   )
 }
