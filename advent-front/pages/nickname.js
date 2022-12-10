@@ -8,23 +8,30 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:8000/"
 
 export default function setName() {
-  const router = useRouter();
-  const [user, setUser] = useState([]);
-  const nicknameInput = useRef();
   
   /* 로그인 확인 */
+  const router = useRouter();
+  const [user, setUser] = useState([]);
+  const [windowGet, setWindowGet] = useState();
+  const [paramValue, setParamValue] = useState();
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      if(window.sessionStorage.getItem('user') !== null){
-        setUser(JSON.parse(window.sessionStorage.user))
-        } else {
+      setWindowGet(window.sessionStorage.getItem('user'));
+      const params = new URLSearchParams(location.search);
+      const t_paramvalue = params.get("value");
+      setParamValue(t_paramvalue)
+      if(windowGet !== null && t_paramvalue !== null){
+        setUser(JSON.parse(window.sessionStorage.user));
+      } else {
         router.push('/');
-        alert("로그인 후 이용해주세요.");
+        if(t_paramvalue == null) alert("잘못된 접근입니다.");
+        else alert("로그인 후 이용해주세요.");
       }
-    } 
+    }
   },[])
 
   /* 등록 및 시작하기 버튼 클릭 함수 */
+  const nicknameInput = useRef();
   const onSubmit = async()=>{
     const nicknameInput_t = nicknameInput.current.value;
     const token = user.token
@@ -34,6 +41,7 @@ export default function setName() {
         jwt:user.token,
       });
       var datajson = res.data;
+      /* changenickname 후에 token반환되는거로 고쳐지면 token으로 따로 저장할 필요 x */
       console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
       console.log(datajson);
       window.sessionStorage.user = JSON.stringify(datajson);
@@ -77,7 +85,7 @@ export default function setName() {
           </div>
         </div>
 
-        <div id="middle-artwork" className="mt-[47px] mb-[20px]">
+        <div id="middle-artwork" className="mt-[50px] mb-[20px]">
           <Image src='/img/start_artwork.png' width='320' height='339.51'/>
           <div className="place-items-center items-center pt-3 text-center text-[17px] text-[#13277A] font-bold">
             " 사라진 순록을 찾아주세요! " 

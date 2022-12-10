@@ -16,6 +16,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {CssBaseline.flush()}
+          <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
         </Head>
         <body>
           <Main />

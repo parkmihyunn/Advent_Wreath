@@ -12,23 +12,24 @@ const BASE_URL = "http://localhost:8000/"
 export default function quiz(){
   /* quiz data */
   var quizzes = [
+    // {
+    //   question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
+    //   correct : '100',
+    //   hints : 'https://www.bbc.com/korean/features-59777860',
+    // },{
+    //     question : '영국 감시단체는 오염으로 OOOOO 가까워진다고 경고하였다',
+    //     correct : '회복불가능',
+    //     hints : 'https://www.bbc.com/korean/news-61419228'
+    // }, {
+    //     question : '환경보호 중요성 알리기는 환경보호 실천 방법 리스트 중 몇 번째 목표인가요? ex) 10',
+    //     correct : '25',
+    //     hints : 'https://brunch.co.kr/@hantole/13'
+    // }, {
+    //     question : '지구의 날은 몇 월 며칠 인가요? ex) 0927',
+    //     correct : '0422',
+    //     hints : 'https://www.korea.kr/news/reporterView.do?newsId=148900968'
+    // },
     {
-      question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
-      correct : '100',
-      hints : 'https://www.bbc.com/korean/features-59777860',
-    },{
-        question : '영국 감시단체는 오염으로 OOOOO 가까워진다고 경고하였다',
-        correct : '회복불가능',
-        hints : 'https://www.bbc.com/korean/news-61419228'
-    }, {
-        question : '환경보호 중요성 알리기는 환경보호 실천 방법 리스트 중 몇 번째 목표인가요? ex) 10',
-        correct : '25',
-        hints : 'https://brunch.co.kr/@hantole/13'
-    }, {
-        question : '지구의 날은 몇 월 며칠 인가요? ex) 0927',
-        correct : '0422',
-        hints : 'https://www.korea.kr/news/reporterView.do?newsId=148900968'
-    }, {
         question : '32개의 글로벌 패션 기업이 체결한 패션 협약에서 0000년까지 온실가스 배출량 제로의 목표를 잡았다 ex) 2022',
         correct : '2050',
         hints : 'https://hypebeast.kr/2019/8/g-7-fashion-pact-kering-emmanuel-macron-prada-nike-hermes-burberry-chanel'
@@ -56,7 +57,7 @@ export default function quiz(){
   ]
 
   /* user 정보 가져오기 */
-  const [user, setUser] = useState([]);
+  const [usertoken, setUsertoken] = useState();
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
@@ -64,7 +65,7 @@ export default function quiz(){
         router.push('/');
         alert("로그인 후 이용해주세요.");
       } else {
-        setUser(JSON.parse(window.sessionStorage.user))
+        setUsertoken(window.sessionStorage.token)
       }
     }
   },[])
@@ -120,7 +121,7 @@ export default function quiz(){
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
       axios.post(BASE_URL+"solvequestion/",
       {
-        jwt:user.token,
+        jwt:usertoken,
       })
       .then(res => {
         console.log(res);
@@ -163,7 +164,10 @@ export default function quiz(){
         
         <canvas id="my-canvas" className="absolute"></canvas>
         <div className="back-btn pl-16 pt-16">
-          <Link href="/main">
+          <Link href={{
+              pathname: '/main',
+              query: { value:usertoken }, }} as={`/main?value=${usertoken}`}
+            >
             <Image src="/img/back_white.png" width='40' height='40'/>
           </Link>
         </div>
