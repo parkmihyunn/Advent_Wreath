@@ -33,6 +33,7 @@ export default function Home() {
       var datajson = res.data;
       console.log("백서버에서 받아온 사용자 정보 =======");
       console.log(datajson);
+      window.sessionStorage.token = JSON.stringify(datajson.token);
       window.sessionStorage.user = JSON.stringify(datajson);
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
@@ -61,8 +62,8 @@ export default function Home() {
 
       <div className="flex flex-col justify-between h-screen">
 
-        <div id="top-title" className="flex flex-col place-items-center h-[155px]">
-          <div className="absolute top-[21.5%] left-[6%]">
+        <div id="top-title" className="flex flex-col w-full justify-center h-[155px] relative">
+          <div className="absolute left-[-2%] top-[0%]">
             <Image src='/img/start_deco.png' width='320' height='121.72'/>
           </div>
           <div className="font-['yg-jalnan'] place-items-center items-center pt-[75px] text-center text-[41px] text-white">
@@ -73,24 +74,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div id="middle-artwork" className="mt-[47px] mb-[88px]">
+        <div id="middle-artwork" className="mt-[47px] mb-[80px]">
           <Image src='/img/start_artwork.png' width='320' height='339.51'/>
           <div className="place-items-center items-center pt-3 text-center text-[17px] text-[#13277A] font-bold">
-            "사라진 순록을 찾아주세요!" 
+            " 사라진 순록을 찾아주세요! " 
           </div>
         </div>
 
-        <div id="start-btn" className="w-full flex justify-center mb-[88px] relative">
-          <div className="absolute top-[27%] left-[16.5%]">
+        <div id="start-btn" className="w-full flex flex-col justify-center relative">
+          <div className="absolute top-[11.5%] left-[15%]">
             <Image src='/img/kakao_logo.png' width='24' height='24'/>
           </div>
-          <button onClick={loginFormWithKakao} className ="flex h-[55px] pl-14 pr-6 rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px]">
-              카카오톡으로 시작하기
+          <button onClick={loginFormWithKakao} className ="flex h-[55px] mb-[40px] pl-[90px] rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px]">
+            카카오톡으로 시작하기
           </button>
+          <Layout/>
         </div>
       </div>
-      <div className="flex-1"></div>
-        <Layout/>
     </div>
   )
 }

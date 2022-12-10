@@ -24,16 +24,16 @@ const QuizModal = ({ isVisible, onClose }) => {
         <div className="lid one"></div>
         <div className="lid two"></div>
         <div className="envelope"></div>
-        {/* <Link href={{
+        <Link href={{
             pathname: '/quiz',
             query: { value:user }, }} as={`/quiz?value=${user}`}
-        > */}
-        <Link href="/quiz">
+        >
+        {/* <Link href="/quiz"> */}
           <div className="letter">
-          {/* <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">퀴즈가</a></Link>
-          <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">도착했어요!</a></Link> */}
-          <Link href="/quiz"><a className="flex flex-col text-black">퀴즈가</a></Link>
-          <Link href="/quiz"><a className="flex flex-col text-black">도착했어요!</a></Link>
+          <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">퀴즈가</a></Link>
+          <Link href={{pathname: '/quiz', query: { value:user }, }} as={`/quiz?value=${user}`}><a className="flex flex-col text-black">도착했어요!</a></Link>
+          {/* <Link href="/quiz"><a className="flex flex-col text-black">퀴즈가</a></Link>
+          <Link href="/quiz"><a className="flex flex-col text-black">도착했어요!</a></Link> */}
           </div>
         </Link>
       </div>
