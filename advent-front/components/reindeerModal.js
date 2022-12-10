@@ -1,22 +1,24 @@
+import Link from 'next/link'
 import React, { useEffect, useState } from "react";
-import { Modal, Image, Link } from "@nextui-org/react";
+import { Modal, Image } from "@nextui-org/react";
 import axios from 'axios';
 
 
 const ReindeerModal = ({ isVisible, onRClose }) => {
   if(!isVisible) return null;
-  // 순록 데이터를 저장시킬 refinedData 
-  const [refinedData, setRefinedData] = useState({});
-  const [numDeer, setNumDeer] = useState();
   
-  /* user 정보 가져오기 */
+  /* user 정보와 순록 데이터 가져오기 */
+  const [usertoken, setUsertoken] = useState();
   const [user, setUser] = useState([]);
+  const [refinedData, setRefinedData] = useState({});
   useEffect(() => {
     if(typeof window !== 'undefined') {
+      setUsertoken(window.sessionStorage.token)
       setUser(JSON.parse(window.sessionStorage.user))
     }
   },[])
 
+  /* (!!!!!!!!!!!!!!!!!!수정 필!!!!!!!!!!!!!)가장 최근 순록 데이터 불러오기 */
   useEffect(() => {
     axios.get("http://localhost:3000/api/temp")
     .then(res => {
@@ -45,11 +47,16 @@ const ReindeerModal = ({ isVisible, onRClose }) => {
             <div className="reindeer1 top-[-2%] absolute"><Image src={ refinedData.headdeco} width={23} height={14}/></div>
           </div>
           <div className="relative">
-            <div className="pt-10 font-bold text-xl">{numDeer}번째 순록이 도착했어요 ♥</div>
-            <div className="pt-8 text-sm">{user.name}님만의 특별한 순록이예요.</div>
+            <div className="pt-10 font-bold text-xl">{user.solve_count}번째 순록이 도착했어요 ♥</div>
+            <div className="pt-8 text-sm">{user.nickname}님만의 특별한 순록이예요.</div>
             <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
           </div>
-            <Link href="/main"><button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button></Link>
+            <Link href={{
+              pathname: '/main',
+              query: { value:usertoken }, }} as={`/main?value=${usertoken}`}
+            >
+              <button className="mt-16 px-4 py-2 text-white text-base rounded-2xl bg-red-800">맘에 들어요!</button>
+            </Link>
         </div>
       </Modal.Header>
       <Image src="/img/r_modal_bg.png" width={300} height={563}/>

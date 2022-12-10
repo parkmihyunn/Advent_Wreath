@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
@@ -28,11 +29,13 @@ export default function Main(){
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
+      console.log(window.sessionStorage.user)
       setWindowGet(window.sessionStorage.getItem('user'));
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
-      if(window.sessionStorage.getItem('user') !== null && t_paramvalue !== null){
+      if(windowGet !== null && t_paramvalue !== null){
+        // (수정필) t_paramvalue !== user.token 이면 로그인 정보 유효 X 조건 추가
         setUser(JSON.parse(window.sessionStorage.user));
       } else {
         router.push('/');
@@ -77,14 +80,12 @@ export default function Main(){
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
-    /* (수정필)params로 token주고 res 받아오기로 수정해야함 */
+    /* (수정필) jwt(user.token)주고 받아오기로 수정해야함 */
     axios.get("http://localhost:3000/api/temp")
     .then(res => {
-      console.log('성공');
-      console.log(res.data);
-      console.log(res.data[0].ornaments);
       setUserData(res.data[0].ornaments);
-      /* (수정필)사용자가 완료한 문제 갯수 가져오기 */
+      /* (수정필) 사용자가 완료한 문제 갯수 user.solve_count에 저장되어있음
+      (axios해서 불러올 필요xx solve_count db수정하는 방법 들으면 그때 코드 수정하고 테스트하기) */
       const solvedNum = res.data[0].solvedNum;
       if(solvedNum+result>=10){
         setQuizzesNum(0)
@@ -116,7 +117,7 @@ export default function Main(){
     }
   }, [play]);
 
-  // 예시 코드 ==============================
+  // 예시 코드 =======================================================
   const [값1, set값1] = useState([]);
 
   //리스에 있는 데이터
@@ -220,8 +221,8 @@ export default function Main(){
       </Head> 
 
       <div className="flex flex-col h-full">
-        <div id="title-quide-switch" className="flex flex-row justify-between items-end mb-[5px]">
-          <div id="title-quide" className="flex flex-row items-end">
+        <div id="title-guide-switch" className="flex flex-row justify-between items-end mb-[5px]">
+          <div id="title-guide" className="flex flex-row items-end">
             <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
             <div id="guide" className="items-center pl-1.5 pb-1.5"><button onClick={()=>setShowG_Modal(true)} className="drop-shadow-md rounded-full bg-[#BA0A0A] w-[16px] text-xs text-white block pt-[1px] px-[1px]">?</button></div>
           </div>
@@ -241,8 +242,15 @@ export default function Main(){
             <Image src='/img/door-border_1.png' width='307' height='537'/>
           </div>
           <div className="door-top">
-            <div className="flex justify-between">  
-              <h1 className="ml-8 text-white text-base font-normal align-bottom">{user.nickname}님의 소원양말</h1>
+            <div className="flex flex-row justify-between"> 
+              <div className="flex flex-row"> 
+                <h1 className="ml-8 mr-1 text-white text-base font-normal align-bottom">{user.nickname}님의 소원양말</h1>
+                <Link href={{
+                  pathname: '/nickname',
+                  query: { value:paramValue }, }} as={`/nickname?value=${paramValue}`}>
+                  <div className="mt-[2px]"><Image src='/img/edit_name.png' width='12' height='12'/></div>
+                </Link>
+              </div>
               <button id="wish-edit-btn" onClick={()=> setShowSE_Modal(true)}>
                 <h1 className="mr-8 mt-1 text-black/[0.4] text-xs font-bold align-bottom">
                   편집하기

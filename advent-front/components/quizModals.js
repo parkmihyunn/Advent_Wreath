@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 
 const QuizModal = ({ isVisible, onClose }) => {  
@@ -7,12 +6,9 @@ const QuizModal = ({ isVisible, onClose }) => {
   if(!isVisible) return null;
 
   const [user, setUser] = useState();
-  const router = useRouter();
 
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      const tmp = window.sessionStorage.token
-      console.log(tmp);
       setUser(window.sessionStorage.token)
     }
   },[])
@@ -38,7 +34,7 @@ const QuizModal = ({ isVisible, onClose }) => {
         </Link>
       </div>
       <div className="qmodal-text font-normal text-sm text-white">편지를 눌러주세요</div>
-      <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
+      <button className="x-btn text-xl" onClick={()=>onClose()}>x</button>
       <style jsx>{`
           * {
               margin: 0;
