@@ -17,13 +17,21 @@ export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
   const [user, setUser] = useState();
+  const [paramValue, setParamValue] = useState();
   const router = useRouter();
-  const queries = router.query;
   useEffect(() => {
-    if(!router.isReady) return;
-    /* (수정필) name => token으로 변경하고 백에서 데이터 불러오기 */
-    setUser(queries.name)
-  }, [router.isReady])
+    if(typeof window !== 'undefined') {
+      const params = new URLSearchParams(location.search);
+      const t_paramvalue = params.get("value");
+      setParamValue(t_paramvalue)
+      if(t_paramvalue !== null){
+        /* t_paramvalue 로 백엔드에  */
+      } else {
+        router.push('/');
+        alert("잘못된 접근입니다.");
+      }
+    }
+  },[])
 
   /* 시작화면으로 돌아가기 */
   const [clickGo, setClickGo] = useState(false);
