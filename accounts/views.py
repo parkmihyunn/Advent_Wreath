@@ -33,12 +33,11 @@ class KakaoLogin(APIView):
             print("user name: "+user.username+"\n")
             #print(jwt_token)
             datadict = {
-                "id" : user.u_id,
                 "name" : user.username,
-#                "token" : jwt_token.decode('utf-8'),
                 "token" : user.jwt,
                 "exist" : True,
                 "solve_count": user.solve_count,
+                "nickname" : user.nickname,
             }
                
             return JsonResponse(datadict)
@@ -64,10 +63,10 @@ class KakaoLogin(APIView):
 
 
             datadict = {
-                "uid" : user.u_id,
                 "name" : user.username,
                 "exist" : False,
                 "solve_count" : user.solve_count,
+                "nickname" : user.nickname,
             }
 
             if type(jwt_token) != str:
@@ -89,7 +88,6 @@ class ChangeNickName(APIView):
         user.save()
 
         datadict = {
-                "uid" : user.u_id,
                 "name" : user.username,
                 "exist" : True,
                 "solve_count" : user.solve_count,
