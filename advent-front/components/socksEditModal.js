@@ -71,15 +71,6 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
         imageInput3.current.click();
     };
 
-    function imgRegist() {
-        if (imageSrc1 == null) {
-            document.getElementById('pic_box').classList.add('hidden');
-        }
-        else {
-            document.getElementById('none_box').classList.add('hidden');
-        }
-    }
-
     if(!isVisible) return null;
 
     return (
@@ -87,7 +78,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                 flex justify-center items-center z-0
                 overflow-auto">
             <div className="socks_edit_back">
-                <button className="edit_x-btn text-xl" onClick={()=>onClose()}>X</button>
+                <button className="edit_x-btn text-lg" onClick={()=>onClose()}>✕</button>
                 <div className="socks_edit">{user.name}님의 소원양말</div>
                 <div className="socks_edit_socks">
                     <div className="socks_edit_line">
@@ -119,8 +110,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                             </div> */}
                             <div id="none_box" className="socks_edit_noneBox"
                                 onClick={ ()=>
-                                {onCickImageUpload1()
-                                imgRegist()}}>
+                                {onCickImageUpload1()}}>
                                 <input type="file" onChange={(e) => {
                                     encodeFileToBase64_1(e.target.files[0]);
                                     }} style={{ display: "none" }} ref={imageInput1}/>
@@ -135,6 +125,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     <h1 className="font-bold text-xs" >사진등록</h1>
                                 </div>
                                 {imageSrc1 && <img src={imageSrc1} alt="preview-img"/>}
+                                {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
                             </div>
                             <div className="socks_edit_giftName">
                                 <h1 className="font-normal text-xs">품목명:</h1>
@@ -144,7 +135,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     value={giftName1}
                                     onChange={(e) => setGiftName1(e.target.value)} >
                             </input>
-                            {/* <p>{ giftName } </p>으로 인풋값 가져올 수 있음 */}
+                            {/* <p>{ giftName[번호] } </p>으로 작성한 품목명 가져올 수 있음 */}
                         </div>
                     </div>
                     
@@ -168,8 +159,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                             </div> */}
                             <div id="none_box" className="socks_edit_noneBox"
                                 onClick={ ()=>
-                                {onCickImageUpload2()
-                                imgRegist()}}>
+                                {onCickImageUpload2()}}>
                                 <input type="file" onChange={(e) => {
                                     encodeFileToBase64_2(e.target.files[0]);
                                     }} style={{ display: "none" }} ref={imageInput2}/>
@@ -184,6 +174,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     <h1 className="font-bold text-xs" >사진등록</h1>
                                 </div>
                                 {imageSrc2 && <img src={imageSrc2} alt="preview-img"/>}
+                                {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
                             </div>
                             <div className="socks_edit_giftName">
                                 <h1 className="font-normal text-xs">품목명:</h1>
@@ -193,7 +184,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     value={giftName2}
                                     onChange={(e) => setGiftName2(e.target.value)} >
                             </input>
-                            {/* <p>{ giftName } </p>으로 인풋값 가져올 수 있음 */}
+                            {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
                         </div>
                     </div>
                     <div className="socks_edit_box3">
@@ -216,8 +207,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                             </div> */}
                             <div id="none_box" className="socks_edit_noneBox"
                                 onClick={ ()=>
-                                {onCickImageUpload3()
-                                imgRegist()}}>
+                                {onCickImageUpload3()}}>
                                 <input type="file" onChange={(e) => {
                                     encodeFileToBase64_3(e.target.files[0]);
                                     }} style={{ display: "none" }} ref={imageInput3}/>
@@ -232,6 +222,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     <h1 className="font-bold text-xs" >사진등록</h1>
                                 </div>
                                 {imageSrc3 && <img src={imageSrc3} alt="preview-img"/>}
+                                {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
                             </div>
                             <div className="socks_edit_giftName">
                                 <h1 className="font-normal text-xs">품목명:</h1>
@@ -241,7 +232,7 @@ const SocksEditModal = ({ isVisible, onClose, set값1 }) => {
                                     value={giftName3}
                                     onChange={(e) => setGiftName3(e.target.value)} >
                             </input>
-                            {/* <p>{ giftName } </p>으로 인풋값 가져올 수 있음 */}
+                            {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
                         </div>
                     </div>
                 </div>

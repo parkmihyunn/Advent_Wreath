@@ -16,7 +16,7 @@ const SocksModal_3 = ({ isVisible, onClose }) => {
                     <div className="socks_flower">
                         <Image src='/img/ornaments/6.png' width='100' height='100'></Image>
                     </div>
-                    <button className="x-btn text-xl" onClick={()=>onClose()}>X</button>
+                    <button className="x-btn text-lg" onClick={()=>onClose()}>✕</button>
                     <div className="socks_head">{}님의 소원양말 3</div>
                     <div className="socks_center3">
                         <div className="socks_img3">
@@ -30,12 +30,12 @@ const SocksModal_3 = ({ isVisible, onClose }) => {
                             <Image src='/img/nintendo.png' width='192' height='112'></Image>
                         </div> */}
                     </div>
-                    <div className="socks_eyeNview">
+                    {/* <div className="socks_eyeNview">
                         <div className="socks_eye">
                             <Image src='/img/eye.png' width='24' height='24'></Image>
                         </div>
                         <div className="socks_view">5</div>
-                    </div>
+                    </div> */}
                     <div className="socks_giftName">비어 있는 소원양말</div>
                     <div className="socks_closeBtn">
                         <button className="socks_closeWord" onClick={()=>onClose()}>닫기</button>
