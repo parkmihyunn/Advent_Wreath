@@ -35,17 +35,24 @@ export default function Home() {
       console.log(datajson);
       window.sessionStorage.token = JSON.stringify(datajson.token);
       window.sessionStorage.user = JSON.stringify(datajson);
+      const t_name = datajson.nickname;
       console.log("index.js sessionStorage =======");
       console.log(window.sessionStorage);
-      /* nickname !== null 이면 /main으로 push로 수정 */
-      router.push({
-        pathname: '/nickname',
-        query: { 
-          //id: datajson.id,
-          //name: datajson.name,
-          value: datajson.token
-        },
-      },);
+      if(t_name == "undefined") {
+        router.push({
+          pathname: '/nickname',
+          query: {
+            value: datajson.token
+          },
+        },);
+      } else {
+        router.push({
+          pathname: '/main',
+          query: {
+            value: datajson.token
+          },
+        },);
+      }
   }
 
   return (
