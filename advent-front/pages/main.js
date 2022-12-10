@@ -449,7 +449,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg" onClick={removeQ} className="wreath_orna_q1">
-                              <Image src={wreathSrc} width='54' height='54'></Image>
+                              <Image src={wreathSrc} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -470,7 +470,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg2" onClick={removeQ2} className="wreath_orna_q2">
-                              <Image src={wreathSrc2} width='54' height='54'></Image>
+                              <Image src={wreathSrc2} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -491,7 +491,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg3" onClick={removeQ3} className="wreath_orna_q3">
-                              <Image src={wreathSrc3} width='54' height='54'></Image>
+                              <Image src={wreathSrc3} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -512,7 +512,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg4" onClick={removeQ4} className="wreath_orna_q4">
-                              <Image src={wreathSrc4} width='54' height='54'></Image>
+                              <Image src={wreathSrc4} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -533,7 +533,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg5" onClick={removeQ5} className="wreath_orna_q5">
-                              <Image src={wreathSrc5} width='54' height='54'></Image>
+                              <Image src={wreathSrc5} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -554,7 +554,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg6" onClick={removeQ6} className="wreath_orna_q6">
-                              <Image src={wreathSrc6} width='54' height='54'></Image>
+                              <Image src={wreathSrc6} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -575,7 +575,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg7" onClick={removeQ7} className="wreath_orna_q7">
-                              <Image src={wreathSrc7} width='54' height='54'></Image>
+                              <Image src={wreathSrc7} width='60' height='60'></Image>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>

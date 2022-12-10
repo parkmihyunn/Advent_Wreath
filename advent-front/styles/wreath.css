@@ -99,46 +99,90 @@
     top: 110px;
 }
 
+/* 리스에 달린 q */
 .wreath_orna_q1 {
     position: absolute;
-    top: 43px;
-    left: 40px;
+    top: 41px;
+    left: 30px;
 }
 
 .wreath_orna_q2 {
     position: absolute;
-    top: 10px;
-    left: 124px;
+    top: 2px;
+    left: 110px;
 }
 
 .wreath_orna_q3 {
     position: absolute;
-    top: 61px;
-    left: 201px;
+    top: 41px;
+    left: 191px;
 }
 
 .wreath_orna_q4 {
     position: absolute;
-    top: 138px;
+    top: 113px;
     left: 200px;
 }
 
 .wreath_orna_q5 {
     position: absolute;
-    top: 188px;
+    top: 168px;
     left: 146px;
 }
 
 .wreath_orna_q6 {
     position: absolute;
-    top: 183px;
+    top: 168px;
     left: 70px;
 }
 
 .wreath_orna_q7 {
     position: absolute;
-    top: 116px;
-    left: 25px;
+    top: 113px;
+    left:15px;
+}
+
+/* 리스에 달린 오너먼트 */
+.wreath_orna_1 {
+    position: absolute;
+    top: 41px;
+    left: 30px;
+}
+
+.wreath_orna_2 {
+    position: absolute;
+    top: 2px;
+    left: 110px;
+}
+
+.wreath_orna_3 {
+    position: absolute;
+    top: 41px;
+    left: 191px;
+}
+
+.wreath_orna_4 {
+    position: absolute;
+    top: 113px;
+    left: 200px;
+}
+
+.wreath_orna_5 {
+    position: absolute;
+    top: 168px;
+    left: 146px;
+}
+
+.wreath_orna_6 {
+    position: absolute;
+    top: 168px;
+    left: 70px;
+}
+
+.wreath_orna_7 {
+    position: absolute;
+    top: 113px;
+    left:15px;
 }
 
 .wreath_orna_group {
