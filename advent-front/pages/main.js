@@ -18,7 +18,7 @@ import SocksEditModal from '../components/socksEditModal'
 import { WreathEditModal } from '../components/wreathEditModal'
 
 const BASE_URL = "http://localhost:8000/"
-const DEFAULT_IMG = "/img/ornaments/orna_q.png"
+const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
   
@@ -447,7 +447,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg" onClick={removeQ} className="wreath_orna_q1">
-                              <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger> 
                       <Popover.Content>
@@ -468,7 +468,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg2" onClick={removeQ2} className="wreath_orna_q2">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -489,7 +489,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg3" onClick={removeQ3} className="wreath_orna_q3">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -510,7 +510,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg4" onClick={removeQ4} className="wreath_orna_q4">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -531,7 +531,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg5" onClick={removeQ5} className="wreath_orna_q5">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -552,7 +552,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg6" onClick={removeQ6} className="wreath_orna_q6">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
@@ -573,7 +573,7 @@ export default function Main(){
                   <Popover>
                       <Popover.Trigger>
                           <button id = "qimg7" onClick={removeQ7} className="wreath_orna_q7">
-                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='29' height='30'/>
+                              <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
                           </button>
                       </Popover.Trigger>
                       <Popover.Content>
