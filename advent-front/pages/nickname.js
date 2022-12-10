@@ -12,6 +12,7 @@ export default function setName() {
   /* 로그인 확인 */
   const router = useRouter();
   const [user, setUser] = useState([]);
+  const [usertoken, setUsertoken] =  useState();
   const [windowGet, setWindowGet] = useState();
   const [paramValue, setParamValue] = useState();
   useEffect(() => {
@@ -21,40 +22,38 @@ export default function setName() {
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
       if(windowGet !== null && t_paramvalue !== null){
-        setUser(JSON.parse(window.sessionStorage.user));
+        setUser(JSON.parse(window.sessionStorage.user))
+        setUsertoken(window.sessionStorage.token)
       } else {
         router.push('/');
         if(t_paramvalue == null) alert("잘못된 접근입니다.");
         else alert("로그인 후 이용해주세요.");
       }
     }
+    console.log("setName.js sessionStorage =======");
+    console.log(window.sessionStorage);
   },[])
 
   /* 등록 및 시작하기 버튼 클릭 함수 */
   const nicknameInput = useRef();
   const onSubmit = async()=>{
     const nicknameInput_t = nicknameInput.current.value;
-    const token = user.token
+    const token = usertoken;
+    console.log(token);
     let res = await axios.post(BASE_URL+"changenickname/",
       {
         nickname:nicknameInput_t,
-        jwt:user.token,
+        jwt:token,
       });
       var datajson = res.data;
       /* changenickname 후에 token반환되는거로 고쳐지면 token으로 따로 저장할 필요 x */
       console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
       console.log(datajson);
       window.sessionStorage.user = JSON.stringify(datajson);
-      window.sessionStorage.token = token;
-      console.log("setName.js sessionStorage =======");
-      console.log(window.sessionStorage);
       router.push({
         pathname: '/main',
-        query: { 
-          //id: datajson.id,
-          //name: datajson.name,
-          //name: datajson.nickname,
-          value: token
+        query: {
+          value:token
         },
     },);
   }
@@ -99,11 +98,10 @@ export default function setName() {
           />
           <div className="text-[12px] text[#747474] mt-2 mb-[20px] ml-4">최대 6자 까지 입력 가능하며, 추후에 변경 가능합니다.</div>
           <button onClick={onSubmit} className ="flex h-[55px] mb-[40px] rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px] justify-center margin-auto">
-            등록 및 시작하기
+            닉네임 등록하기
           </button>
           <Layout/>
         </div>
-
       </div>
     </div>
   )
