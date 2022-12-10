@@ -54,38 +54,48 @@ export default function setName() {
   return (
     <div className="
       flex flex-col items-center h-screen
-      overflow-auto bg-cover bg-local
-      bg-[url('../public/img/wood_pattern.png')]
+      overflow-auto bg-auto bg-center bg-local pt-[54px]
+      bg-[url('../public/img/start_bg.png')]
     ">
       <Head>
         <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className="flex flex-col h-full">
-        <div className="top-0">
-          <Image src='/img/start_top.png' width='435' height='287'/>
-        </div>
-        <div className="flex flex-col place-items-center">
-            <Image src='/img/wreath.png' width='259' height='282'/>
-          <div className="place-items-center items-center pt-10 text-center text-2xl font-bold text-[#2E2D2D] ">
+      </Head> 
+
+      <div className="flex flex-col justify-between h-screen">
+
+        <div id="top-title" className="flex flex-col w-full justify-center h-[155px] relative">
+          <div className="absolute left-[-2%] top-[0%]">
+            <Image src='/img/start_deco.png' width='320' height='121.72'/>
+          </div>
+          <div className="font-['yg-jalnan'] place-items-center items-center pt-[75px] text-center text-[41px] text-white">
             돌아와 순록!
           </div>
+          <div className="font-['GmarketSansMedium'] place-items-center items-center pt-2 text-center text-[13px] text-white font-light">
+            크리스마스를 기다리며 매일매일 퀴즈를 맞춰보세요!
+          </div>
         </div>
-        <div className="flex flex-col text-center m-auto my-10 justify-center w-[300px]">
+
+        <div id="middle-artwork" className="mt-[47px] mb-[20px]">
+          <Image src='/img/start_artwork.png' width='320' height='339.51'/>
+          <div className="place-items-center items-center pt-3 text-center text-[17px] text-[#13277A] font-bold">
+            " 사라진 순록을 찾아주세요! " 
+          </div>
+        </div>
+
+        <div id="set-name-box" className="w-full flex flex-col justify-center relative">
           <input type="text" id="nickname" ref={nicknameInput}
-                 className="h-[33px] w-full border-4 border-white bg-white/[0.3] placeholder:text-white py-5 px-4 rounded-lg"
+                 className="h-[33px] w-full border-4 bg-[#D9DFF8]/[0.3] placeholder:text-[#7789D3] py-5 px-4 rounded-lg"
                  placeholder="사용하실 닉네임을 입력해주세요."
           />
-          <div className="text-xs text-white mt-2">최대 6자까지 입력 가능하며, 추후에 변경 가능합니다.</div>
-        </div>
-        <div className="flex justify-center">
-          <button onClick={onSubmit} className ="bg-[#BD2E2E] rounded-xl drop-shadow text-white py-2 px-16 mb-10">
+          <div className="text-[12px] text[#747474] mt-2 mb-[20px] ml-4">최대 6자 까지 입력 가능하며, 추후에 변경 가능합니다.</div>
+          <button onClick={onSubmit} className ="flex h-[55px] mb-[40px] rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px] justify-center margin-auto">
             등록 및 시작하기
           </button>
+          <Layout/>
         </div>
-        <div className="flex flex-1 "></div>
-        <Layout/>
+
       </div>
     </div>
   )

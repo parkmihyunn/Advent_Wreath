@@ -23,18 +23,23 @@ export default function Main(){
   
   /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 query 없는경우도 '/'로 push해 버리기 */
   const [user, setUser] = useState([]);
+  const [windowGet, setWindowGet] = useState();
+  const [paramValue, setParamValue] = useState();
   const router = useRouter();
-  const queries = router.query;
-  console.log(queries)
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      if(window.sessionStorage.getItem('user') !== null || queries.length == 0){
-        setUser(JSON.parse(window.sessionStorage.user))
+      setWindowGet(window.sessionStorage.getItem('user'));
+      const params = new URLSearchParams(location.search);
+      const t_paramvalue = params.get("value");
+      setParamValue(t_paramvalue)
+      if(window.sessionStorage.getItem('user') !== null && t_paramvalue !== null){
+        setUser(JSON.parse(window.sessionStorage.user));
       } else {
         router.push('/');
-        alert("로그인 후 이용해주세요.");
+        if(t_paramvalue == null) alert("잘못된 접근입니다.");
+        else alert("로그인 후 이용해주세요.");
       }
-    } 
+    }
   },[])     
 
   /* 로그아웃 */
@@ -50,8 +55,8 @@ export default function Main(){
   const [urlForm, setUrlForm] = useState();
   useEffect(() => {
     if(!router.isReady) return;
-    setUrlForm("http://localhost:3000/share?value="+queries.value)
-  }, [router.isReady])
+    setUrlForm("http://localhost:3000/share?value=" + paramValue)
+  }, [router.isReady, paramValue])
 
   const copyLinkHandler = async() => {
     try {
@@ -202,16 +207,18 @@ export default function Main(){
   
   return (
     <Fragment>
+    { (windowGet !== null && paramValue !== null) && (
     <div className="
-        flex flex-col items-center h-screen
-        overflow-auto bg-cover bg-local
-        bg-[url('../public/img/wood_pattern.png')]
+    flex flex-col items-center h-screen
+    overflow-auto bg-cover bg-local
+    bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
       <title>돌아와 순록!</title>
       <meta name="description" content="콘텐트 내용" />
       <link rel="icon" href="/favicon.ico" />
       </Head> 
+
       <div className="flex flex-col h-full">
         <div id="title-quide-switch" className="flex flex-row justify-between items-end mb-[5px]">
           <div id="title-quide" className="flex flex-row items-end">
@@ -241,15 +248,9 @@ export default function Main(){
                   편집하기
                 </h1>
               </button>
-              <Modal
-                scroll
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-                {...bindings}
-              >
+              <Modal scroll aria-labelledby="modal-title" aria-describedby="modal-description" {...bindings} >
                 <div className="fixed inset-0 bg-black bg-opacity-75 
-                        flex justify-center items-center z-0
-                        overflow-auto">
+                                flex justify-center items-center z-0 overflow-auto">
                   <div className="socks_edit_back">
                     <Modal.Header>
                       <button className="x-btn text-xl" onClick={() => setVisible(false)}>X</button>
@@ -418,7 +419,7 @@ export default function Main(){
                 </button>
               </div>
             </div>
-            <div className="pt-16 mt-6 place-items-center flex-1">
+            <div id="wreath-all" className="pt-16 mt-6 place-items-center flex-1">
               <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
               <div className="wreath-text">
                   <Image src='/img/christmas_text.png' width='97' height='25'/>
@@ -433,7 +434,7 @@ export default function Main(){
                     </h1>
                   }
               </div>
-              <div className="wreath_edit_center">
+              <div id="wreath-ornaments-edit" className="wreath_edit_center">
                   {/* 1번 */}
                   <Popover>
                       <Popover.Trigger>
@@ -628,6 +629,7 @@ export default function Main(){
         <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} set값1={set값1}/>
       </div>
     </div>
+    )}
     </Fragment>
   );
 }

@@ -13,7 +13,7 @@ import SocksModal_3 from '../components/socksModal_3'
 
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
-export default function Main(){
+export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
   const [user, setUser] = useState();
