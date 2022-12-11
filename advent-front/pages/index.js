@@ -35,7 +35,7 @@ export default function Home() {
     console.log("index.js sessionStorage =======");
     window.sessionStorage.user = JSON.stringify(datajson);
     const t_name = datajson.nickname;
-    if(t_name == "undefined") {
+    if(t_name == "임시닉네임") {
       router.push({
         pathname: '/nickname',
         query: {
