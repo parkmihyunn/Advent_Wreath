@@ -1,8 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { useRef } from "react";
 import Image from 'next/image';
+import AWS from "aws-sdk"
 
 const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
+  // <input type="file" id="upload" className="image-upload" onChange = {(e)=>{handleFileInput(e.target.files[0])}} />
+  // <label htmlFor="upload" className="image-upload-wrapper"></label>
+  /* AWS 설정 객체 업데이트 */
+  AWS.config.update({
+    region: "ap-northeast-2", // 버킷이 존재하는 리전
+    credentials: new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: process.env.NEXT_PUBLIC__AWS_CONFIG, // cognito 인증 풀에서 받아온 키
+    }),
+  })
+
+  /*  이미지 가져오고 업로드 하는 핸들러 */
+  const handleFileInput = (fileBlob) => {
+    const file = fileBlob
+    const upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: "advent-reindeer-test",
+        Key: file.name,
+        Body: file,
+      },
+    })
+    const promise = upload.promise()
+    promise.then(
+      function (data) {
+        alert("이미지 업로드에 성공했습니다.")
+      },
+      function (err) {
+        return alert(err.message)
+      }
+    )
+  }
 
   //이미지 이름 가져오기
   const [giftName1, setGiftName1] = useState('');
@@ -25,6 +56,8 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
   /* 이미지 미리보기용 함수 1,2,3 */
   const [imageSrc1, setImageSrc1] = useState('');
   const encodeFileToBase64_1 = (fileBlob) => {
+    console.log(fileBlob);
+    console.log(fileBlob.name)
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
@@ -41,8 +74,8 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-          setImageSrc2(reader.result);
-          resolve();
+        setImageSrc2(reader.result);
+        resolve();
       };}
     );
   };
@@ -53,8 +86,8 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-          setImageSrc3(reader.result);
-          resolve();
+        setImageSrc3(reader.result);
+        resolve();
       };}
     );
   };
@@ -78,7 +111,6 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
                 <Image src='/img/sock_2.png' width='62' height='89.56'/>
                 <Image src='/img/sock_3.png' width='65.56' height='87.78'/>
             </div>
-
             <div className="socks_edit_box1">
               <div className="socks_edit_box1_inner">
                 <div className="socks_edit_smSocks">
@@ -89,11 +121,11 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
                     <h1 className="font-normal text-sm">첫 번째 소원 양말</h1>
                   </div>
                 </div>
+                
                 <div id="none_box" className="socks_edit_noneBox"
                      onClick={ ()=> {onCickImageUpload1()} }
                 >
-                  <input type="file" 
-                         onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
+                  <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
                          ref={imageInput1} style={{ display: "none" }} />
                   <div className="socks_edit_plus">
                     <h1 className="font-medium text-2xl">+</h1>
@@ -101,7 +133,7 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
                   <div className="socks_edit_reg"
                         onClick = { () => {onCickImageUpload1}}
                   >
-                    <input type="file" onChange={(e) => { encodeFileToBase64_1(e.target.files[0])} }
+                    <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
                            ref={imageInput1} style={{ display: "none" }} />
                     <h1 className="font-bold text-xs" >사진등록</h1>
                   </div>

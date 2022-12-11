@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
+    "aws-sdk": "^2.1272.0",
     "axios": "^1.2.0",
     "confetti-js": "^0.0.18",
     "cors": "^2.8.5",
