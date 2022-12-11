@@ -191,7 +191,7 @@
 /* 여기서부터 socksEdit */
 .socks_edit_back {
     width: 340px;
-    height: 624px;
+    height: 640px;
     display: flex;
     background-color: #BD2E2E;
     position: absolute;
@@ -511,7 +511,7 @@ input::placeholder {
 .socks_edit_closeBtn {
     width: 200px;
     height: 35px;
-    top: 578px;
+    top: 585px;
     display: flex;
     background-color: black;
     position: absolute;
@@ -531,5 +531,5 @@ input::placeholder {
     width: 56px;
     height: 58px;
     left: 65px;
-    top: 570px;
+    top: 575px;
 }

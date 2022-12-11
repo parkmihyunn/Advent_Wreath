@@ -32,7 +32,7 @@ export const WreathEditModal = ({ wreathSrc, getData }) => {
         <Grid.Container
             css={{ borderRadius: "13px", minWidth: "297px", minHeight: "312px" }}>
             <Grid>
-                <div className="wreath_edit_orna_group overflow-auto">
+                <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-cols-3 gap-2">
                         {refinedData.map((el) =>
                         <div className="wreath_edit_orna_box">
