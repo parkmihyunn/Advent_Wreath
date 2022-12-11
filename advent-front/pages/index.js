@@ -23,36 +23,33 @@ export default function Home() {
   }
 
   const kakaoResponse = async(authObj)=>{
-    let res = await axios.get(BASE_URL+"rest-auth/kakao/",
-      {
-        params: 
-        {
-          code:authObj.access_token
+    let res = await axios.get(BASE_URL+"rest-auth/kakao/", {
+      params: {
+        code:authObj.access_token
+      },
+    });
+    console.log("백서버에서 받아온 사용자 정보 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    console.log(datajson.token);
+    console.log("index.js sessionStorage =======");
+    window.sessionStorage.user = JSON.stringify(datajson);
+    const t_name = datajson.nickname;
+    if(t_name == "undefined") {
+      router.push({
+        pathname: '/nickname',
+        query: {
+          value: datajson.token
         },
-      });
-      var datajson = res.data;
-      console.log("백서버에서 받아온 사용자 정보 =======");
-      console.log(datajson);
-      window.sessionStorage.token = JSON.stringify(datajson.token);
-      window.sessionStorage.user = JSON.stringify(datajson);
-      const t_name = datajson.nickname;
-      console.log("index.js sessionStorage =======");
-      console.log(window.sessionStorage);
-      if(t_name == "undefined") {
-        router.push({
-          pathname: '/nickname',
-          query: {
-            value: datajson.token
-          },
-        },);
-      } else {
-        router.push({
-          pathname: '/main',
-          query: {
-            value: datajson.token
-          },
-        },);
-      }
+      },);
+    } else {
+      router.push({
+        pathname: '/main',
+        query: {
+          value: datajson.token
+        },
+      },);
+    }
   }
 
   return (

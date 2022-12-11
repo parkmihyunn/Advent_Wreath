@@ -23,7 +23,7 @@ export default function setName() {
       setParamValue(t_paramvalue)
       if(windowGet !== null && t_paramvalue !== null){
         setUser(JSON.parse(window.sessionStorage.user))
-        setUsertoken(window.sessionStorage.token)
+        setUsertoken(JSON.parse(window.sessionStorage.user).token)
       } else {
         router.push('/');
         if(t_paramvalue == null) alert("잘못된 접근입니다.");
@@ -45,16 +45,15 @@ export default function setName() {
         nickname:nicknameInput_t,
         jwt:token,
       });
-      var datajson = res.data;
-      /* changenickname 후에 token반환되는거로 고쳐지면 token으로 따로 저장할 필요 x */
-      console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
-      console.log(datajson);
-      window.sessionStorage.user = JSON.stringify(datajson);
-      router.push({
-        pathname: '/main',
-        query: {
-          value:token
-        },
+    var datajson = res.data;
+    console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
+    console.log(datajson);
+    window.sessionStorage.user = JSON.stringify(datajson);
+    router.push({
+      pathname: '/main',
+      query: {
+        value:token
+      },
     },);
   }
 
