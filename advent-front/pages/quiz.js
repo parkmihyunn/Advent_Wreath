@@ -56,16 +56,30 @@ export default function quiz(){
     }
   ]
 
-  /* user 정보 가져오기 */
-  const [usertoken, setUsertoken] = useState();
+  /* 로그인 확인 */
+  const [paramValue, setParamValue] = useState();  // url의 query :string
+  const [windowGet, setWindowGet] = useState();  // session에 user라는 이름의 key 있는지 확인 ( 없으면 null )
+  const [user, setUser] = useState([]);  // 토큰, 닉네임, solve_count :object
+  const [usertoken, setUsertoken] = useState(); // 유저 토큰 :string
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      if(window.sessionStorage.getItem('user') === null){
-        router.push('/');
-        alert("로그인 후 이용해주세요.");
+      const params = new URLSearchParams(location.search);
+      const t_paramvalue = params.get("value");
+      setParamValue(t_paramvalue)
+      const t_windowGet = window.sessionStorage.getItem('user');
+      setWindowGet( window.sessionStorage.getItem('user') );
+      console.log("============quiz.js============== t_windowGet, t_paramvalue, window.sesstion.token");
+      console.log(t_windowGet);
+      console.log(t_paramvalue);
+      console.log(JSON.parse(window.sessionStorage.user).token);
+      // user key가 session에 존재하고, url value와 token이 동일한 경우에만 로그인 허용
+      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.user).token){
+        setUser(JSON.parse(window.sessionStorage.user));
+        setUsertoken(JSON.parse(window.sessionStorage.user).token)
       } else {
-        setUsertoken(window.sessionStorage.token)
+        router.push('/');
+        alert("잘못된 접근입니다.");
       }
     }
   },[])
@@ -207,7 +221,7 @@ export default function quiz(){
             </div>
           </div>
         </div>
-        <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)}/>
+        <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)} usertoken={usertoken}/>
     </div>
   );
 }
