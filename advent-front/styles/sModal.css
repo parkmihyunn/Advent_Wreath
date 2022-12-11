@@ -367,21 +367,27 @@
 
 .socks_edit_noneBox {
     position: absolute;
-    width: 64.58px;
-    height: 57.39px;
-    top: 22px;
-    right: 20px;
+    width: 215px;
+    height: 195px;
+    top: -0.2%;
     display: flex;
     background-color: #FFBEC5;
     justify-content: center;
     z-index: 0;
-    border-radius: 6px;    
+    border-radius: 20px;    
 }
 
-.socks_edit_plus{
+.socks_edit_noneBox2 {
     position: absolute;
-    top: 5px;
-    color: #791818; 
+    width: 62px;
+    height: 21px;
+    top: 87px;
+    right: 20px;
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    z-index: 0;
+    border-radius: 100px;    
 }
 
 .socks_edit_reg {

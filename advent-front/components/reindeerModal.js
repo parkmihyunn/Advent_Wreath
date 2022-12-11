@@ -4,16 +4,14 @@ import { Modal, Image } from "@nextui-org/react";
 import axios from 'axios';
 
 
-const ReindeerModal = ({ isVisible, onRClose }) => {
+const ReindeerModal = ({ isVisible, onRClose, usertoken }) => {
   if(!isVisible) return null;
   
-  /* user 정보와 순록 데이터 가져오기 */
-  const [usertoken, setUsertoken] = useState();
+  /* 순록 데이터 가져오기 */
   const [user, setUser] = useState([]);
   const [refinedData, setRefinedData] = useState({});
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      setUsertoken(window.sessionStorage.token)
       setUser(JSON.parse(window.sessionStorage.user))
     }
   },[])
