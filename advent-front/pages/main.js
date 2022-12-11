@@ -21,36 +21,50 @@ const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
+  /* 모달 STATE */
+  const [showG_Modal, setShowG_Modal] = useState(false);  // 가이드
+  const [showQ_Modal, setShowQ_Modal] = useState(false);  // 퀴즈 있음
+  const [showNq_Modal, setShowNq_Modal] = useState(false);  // 퀴즈 없음
+  const [showCollectionModal, setCollectionModal] = useState(false);  // 순록도감
+  const [showS1_Modal, setShowS1_Modal] = useState(false);  // 양말1
+  const [showS2_Modal, setShowS2_Modal] = useState(false);  // 양말2
+  const [showS3_Modal, setShowS3_Modal] = useState(false);  // 양말3
+  const [showSE_Modal, setShowSE_Modal] = useState(false);  // 양말 편집
   
-  
-  /* 로그인 확인후 유저토큰 sessionStorage에서 가져오기 query 없는경우도 '/'로 push해 버리기 */
-  const [user, setUser] = useState([]);
-  const [windowGet, setWindowGet] = useState();
-  const [paramValue, setParamValue] = useState();
+  /* 로그인 확인 */
+  const [paramValue, setParamValue] = useState();  // url의 query :string
+  const [windowGet, setWindowGet] = useState();  // session에 user라는 이름의 key 있는지 확인 ( 없으면 null )
+  const [user, setUser] = useState([]);  // 토큰, 닉네임, solve_count :object
+  const [usertoken, setUsertoken] = useState(); // 유저 토큰 :string
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
-      console.log(window.sessionStorage.user)
-      setWindowGet(window.sessionStorage.getItem('user'));
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
-      if(windowGet !== null && t_paramvalue !== null){
-        // (수정필) t_paramvalue !== user.token 이면 로그인 정보 유효 X 조건 추가
+      const t_windowGet = window.sessionStorage.getItem('user');
+      setWindowGet( window.sessionStorage.getItem('user') );
+      console.log("============main.js============== t_windowGet, t_paramvalue, window.sesstion.token");
+      console.log(t_windowGet);
+      console.log(t_paramvalue);
+      console.log(JSON.parse(window.sessionStorage.user).token);
+      // user key가 session에 존재하고, url value와 token이 동일한 경우에만 로그인 허용
+      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.user).token){
         setUser(JSON.parse(window.sessionStorage.user));
+        setUsertoken(JSON.parse(window.sessionStorage.user).token)
       } else {
         router.push('/');
-        if(t_paramvalue == null) alert("잘못된 접근입니다.");
-        else alert("로그인 후 이용해주세요.");
+        alert("잘못된 접근입니다.");
       }
     }
-  },[])     
+  },[])
 
   /* 로그아웃 */
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
       console.log('로그아웃');
       window.sessionStorage.removeItem('user');
+      window.sessionStorage.removeItem('token');
       router.push('/');
     });
   }
@@ -118,11 +132,6 @@ export default function Main(){
     }
   }, [play]);
 
-  // 예시 코드 =======================================================
-  const [값1, set값1] = useState([]);
-
-  //리스에 있는 데이터
-  const [userData, setUserData] = useState({});
   //양말편집창 모달
   const { setVisible, bindings } = useModal();
   //이미지 이름 가져오기
@@ -139,7 +148,7 @@ export default function Main(){
       };
     });
   };
-  
+
   // useRef를 이용해 input태그에 접근하기
   const imageInput = useRef();
   // 버튼클릭시 input태그에 클릭이벤트를 걸어주기 
@@ -147,14 +156,11 @@ export default function Main(){
       imageInput.current.click();
   };
 
-  const [showG_Modal, setShowG_Modal] = useState(false);
-  const [showQ_Modal, setShowQ_Modal] = useState(false);
-  const [showNq_Modal, setShowNq_Modal] = useState(false);
-  const [showCollectionModal, setCollectionModal] = useState(false);
-  const [showS1_Modal, setShowS1_Modal] = useState(false);
-  const [showS2_Modal, setShowS2_Modal] = useState(false);
-  const [showS3_Modal, setShowS3_Modal] = useState(false);
-  const [showSE_Modal, setShowSE_Modal] = useState(false);
+  // 예시 코드 =======================================================
+  const [값1, set값1] = useState([]);
+
+  //리스에 있는 데이터
+  const [userData, setUserData] = useState({});
 
   //리스 오너먼트
   const [wreathSrc, setWreathSrc] = useState([]);
@@ -264,7 +270,7 @@ export default function Main(){
                 <Image src='/img/socks_line.png' width='350' height='50'/>
               </div>
               <div className="sock-1">
-                <button onClick={()=> setShowS1_Modal(true)} >
+                <button onClick={()=> setShowS1_Modal(true)}>
                   <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
                 </button>
               </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRef } from "react";
 import Image from 'next/image';
+import { Modal, Link } from "@nextui-org/react";
 import AWS from "aws-sdk"
 
 const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
@@ -95,153 +96,158 @@ const SocksEditModal = ({ isVisible, onClose, user, usertoken}) => {
   if(!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 
-                    flex justify-center items-center z-0 overflow-auto"
-    >
-      <div className="socks_edit_back">
-        <button className="edit_x-btn text-lg" onClick={()=>onClose()}>x</button>
-          <div className="socks_edit">{user.nickname}님의 소원양말</div>
-          <div className="socks_edit_socks">
-            <div className="socks_edit_line">
-                <Image src='/img/socks_line.png' width='350' height='50'/>
-            </div>
+    <div>
+    <Modal css={{background:"transparent",}} noPadding open={isVisible} onClose={onClose} width={340} height={640} animated={false}>
+        <div className="inset-0 bg-opacity-75 
+                        flex justify-center items-center z-0
+                        overflow-scroll bg-cover bg-scroll
+                        h-[640px] w-[340px]">
+        <div className="socks_edit_back">
+            <button className="edit_x-btn text-lg" onClick={()=>onClose()}>x</button>
+            <div className="socks_edit">{user.nickname}님의 소원양말</div>
+            <div className="socks_edit_socks">
+                <div className="socks_edit_line">
+                    <Image src='/img/socks_line.png' width='350' height='50'/>
+                </div>
 
-            <div className="socks_edit1">
-                <Image src='/img/sock_1.png' width='66.44' height='83.33'/>
-                <Image src='/img/sock_2.png' width='62' height='89.56'/>
-                <Image src='/img/sock_3.png' width='65.56' height='87.78'/>
-            </div>
-            <div className="socks_edit_box1">
-              <div className="socks_edit_box1_inner">
-                <div className="socks_edit_smSocks">
-                  <div className="socks_edit_img1">
-                    <Image src='/img/sock_1.png' width='30' height='40'/>
-                  </div>
-                  <div className="socks_edit_text">
-                    <h1 className="font-normal text-sm">첫 번째 소원 양말</h1>
-                  </div>
+                <div className="socks_edit1">
+                    <Image src='/img/sock_1.png' width='66.44' height='83.33'/>
+                    <Image src='/img/sock_2.png' width='62' height='89.56'/>
+                    <Image src='/img/sock_3.png' width='65.56' height='87.78'/>
+                </div>
+                <div className="socks_edit_box1">
+                <div className="socks_edit_box1_inner">
+                    <div className="socks_edit_smSocks">
+                    <div className="socks_edit_img1">
+                        <Image src='/img/sock_1.png' width='30' height='35'/>
+                    </div>
+                    <div className="socks_edit_text">
+                        <h1 className="font-normal text-sm">첫 번째 소원 양말</h1>
+                    </div>
+                    </div>
+                    
+                    <div id="none_box" className="socks_edit_noneBox"
+                        onClick={ ()=> {onCickImageUpload1()} }
+                    >
+                    <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
+                            ref={imageInput1} style={{ display: "none" }} />
+                    <div className="socks_edit_plus">
+                        <h1 className="font-medium text-2xl">+</h1>
+                    </div>
+                    <div className="socks_edit_reg"
+                            onClick = { () => {onCickImageUpload1}}
+                    >
+                        <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
+                            ref={imageInput1} style={{ display: "none" }} />
+                        <h1 className="font-bold text-xs" >사진등록</h1>
+                    </div>
+                    {imageSrc1 && <img src={imageSrc1} alt="preview-img"/>}
+                    {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음 */}
+                    </div>
+
+                    <div className="socks_edit_giftName">
+                    <h1 className="font-normal text-xs">품목명:</h1>
+                    </div>
+                    <input type="text" className="socks_edit_textBox1" placeholder="입력해주세요." required 
+                        value={giftName1}
+                        onChange={(e) => setGiftName1(e.target.value)} 
+                    />
+                    {/* <p>{ giftName[번호] } </p>으로 작성한 품목명 가져올 수 있음 */}
+                </div>
                 </div>
                 
-                <div id="none_box" className="socks_edit_noneBox"
-                     onClick={ ()=> {onCickImageUpload1()} }
-                >
-                  <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
-                         ref={imageInput1} style={{ display: "none" }} />
-                  <div className="socks_edit_plus">
-                    <h1 className="font-medium text-2xl">+</h1>
-                  </div>
-                  <div className="socks_edit_reg"
-                        onClick = { () => {onCickImageUpload1}}
-                  >
-                    <input type="file" onChange={(e) => {encodeFileToBase64_1(e.target.files[0])}}
-                           ref={imageInput1} style={{ display: "none" }} />
-                    <h1 className="font-bold text-xs" >사진등록</h1>
-                  </div>
-                  {imageSrc1 && <img src={imageSrc1} alt="preview-img"/>}
-                  {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음 */}
-                </div>
+                <div className="socks_edit_box2">
+                <div className="socks_edit_box2_inner">
 
-                <div className="socks_edit_giftName">
-                  <h1 className="font-normal text-xs">품목명:</h1>
-                </div>
-                <input type="text" className="socks_edit_textBox1" placeholder="입력해주세요." required 
-                       value={giftName1}
-                       onChange={(e) => setGiftName1(e.target.value)} 
-                />
-                {/* <p>{ giftName[번호] } </p>으로 작성한 품목명 가져올 수 있음 */}
-              </div>
-            </div>
-            
-            <div className="socks_edit_box2">
-              <div className="socks_edit_box2_inner">
+                    <div className="socks_edit_smSocks">
+                    <div className="socks_edit_img2">
+                        <Image src='/img/sock_2.png' width='30' height='40'/>
+                    </div>
+                    <div className="socks_edit_text">
+                        <h1 className="font-normal text-sm">두 번째 소원 양말</h1>
+                    </div>
+                    </div>
 
-                <div className="socks_edit_smSocks">
-                  <div className="socks_edit_img2">
-                    <Image src='/img/sock_2.png' width='30' height='40'/>
-                  </div>
-                  <div className="socks_edit_text">
-                    <h1 className="font-normal text-sm">두 번째 소원 양말</h1>
-                  </div>
-                </div>
-
-                <div id="none_box" className="socks_edit_noneBox"
-                     onClick={ ()=> {onCickImageUpload2()}}
-                >
-                  <input type="file" onChange={(e) => {encodeFileToBase64_2(e.target.files[0])}} 
-                                     ref={imageInput2} style={{ display: "none" }}
-                  />
-                  <div className="socks_edit_plus">
-                    <h1 className="font-medium text-2xl">+</h1>
-                  </div>
-                  <div className="socks_edit_reg"
-                       onClick = { () => {onCickImageUpload2}}
-                  >
+                    <div id="none_box" className="socks_edit_noneBox"
+                        onClick={ ()=> {onCickImageUpload2()}}
+                    >
                     <input type="file" onChange={(e) => {encodeFileToBase64_2(e.target.files[0])}} 
-                           ref={imageInput2} style={{ display: "none" }} 
+                                        ref={imageInput2} style={{ display: "none" }}
                     />
-                    <h1 className="font-bold text-xs">사진등록</h1>
-                  </div>
-                  {imageSrc2 && <img src={imageSrc2} alt="preview-img"/>}
-                  {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
+                    <div className="socks_edit_plus">
+                        <h1 className="font-medium text-2xl">+</h1>
+                    </div>
+                    <div className="socks_edit_reg"
+                        onClick = { () => {onCickImageUpload2}}
+                    >
+                        <input type="file" onChange={(e) => {encodeFileToBase64_2(e.target.files[0])}} 
+                            ref={imageInput2} style={{ display: "none" }} 
+                        />
+                        <h1 className="font-bold text-xs">사진등록</h1>
+                    </div>
+                    {imageSrc2 && <img src={imageSrc2} alt="preview-img"/>}
+                    {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
+                    </div>
+                    <div className="socks_edit_giftName">
+                    <h1 className="font-normal text-xs">품목명:</h1>
+                    </div>
+                    <input type="text" className="socks_edit_textBox2" placeholder="입력해주세요." required 
+                        value={giftName2}
+                        onChange={(e) => setGiftName2(e.target.value)}
+                    />
+                    {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
                 </div>
-                <div className="socks_edit_giftName">
-                  <h1 className="font-normal text-xs">품목명:</h1>
                 </div>
-                <input type="text" className="socks_edit_textBox2" placeholder="입력해주세요." required 
-                       value={giftName2}
-                       onChange={(e) => setGiftName2(e.target.value)}
-                />
-                {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
-              </div>
+
+                <div className="socks_edit_box3">
+                <div className="socks_edit_box3_inner">
+                    <div className="socks_edit_smSocks">
+                    <div className="socks_edit_img3">
+                        <Image src='/img/sock_3.png' width='30' height='40'/>
+                    </div>
+                    <div className="socks_edit_text">
+                        <h1 className="font-normal text-sm">세 번째 소원 양말</h1>
+                    </div>
+                    </div>
+                    <div id="none_box" className="socks_edit_noneBox"
+                        onClick={ ()=>{onCickImageUpload3()}}
+                    >
+                    <input type="file" onChange={(e) => {encodeFileToBase64_3(e.target.files[0])}} 
+                            ref={imageInput3} style={{ display: "none" }}
+                    />
+                    <div className="socks_edit_plus">
+                        <h1 className="font-medium text-2xl">+</h1>
+                    </div>
+                    <div className="socks_edit_reg" onClick = {() => {onCickImageUpload3}}>
+                        <input type="file" onChange={(e) => {encodeFileToBase64_3(e.target.files[0])}}
+                            ref={imageInput3} style={{ display: "none" }}
+                        />
+                        <h1 className="font-bold text-xs">사진등록</h1>
+                    </div>
+                    {imageSrc3 && <img src={imageSrc3} alt="preview-img"/>}
+                    {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
+                    </div>
+                    <div className="socks_edit_giftName">
+                    <h1 className="font-normal text-xs">품목명:</h1>
+                    </div>
+                    <input type="text" className="socks_edit_textBox3" placeholder="입력해주세요." required 
+                        value={giftName3}
+                        onChange={(e) => setGiftName3(e.target.value)}
+                    />
+                    {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
+                </div>
+                </div>
             </div>
 
-            <div className="socks_edit_box3">
-              <div className="socks_edit_box3_inner">
-                <div className="socks_edit_smSocks">
-                  <div className="socks_edit_img3">
-                    <Image src='/img/sock_3.png' width='30' height='40'/>
-                  </div>
-                  <div className="socks_edit_text">
-                    <h1 className="font-normal text-sm">세 번째 소원 양말</h1>
-                  </div>
-                </div>
-                <div id="none_box" className="socks_edit_noneBox"
-                     onClick={ ()=>{onCickImageUpload3()}}
-                >
-                  <input type="file" onChange={(e) => {encodeFileToBase64_3(e.target.files[0])}} 
-                         ref={imageInput3} style={{ display: "none" }}
-                  />
-                  <div className="socks_edit_plus">
-                    <h1 className="font-medium text-2xl">+</h1>
-                  </div>
-                  <div className="socks_edit_reg" onClick = {() => {onCickImageUpload3}}>
-                    <input type="file" onChange={(e) => {encodeFileToBase64_3(e.target.files[0])}}
-                           ref={imageInput3} style={{ display: "none" }}
-                    />
-                    <h1 className="font-bold text-xs">사진등록</h1>
-                  </div>
-                  {imageSrc3 && <img src={imageSrc3} alt="preview-img"/>}
-                  {/* 이미지 미리보기 기능. {imageSrc[번호]}로 이미지 경로 가져올 수 있음  */}
-                </div>
-                <div className="socks_edit_giftName">
-                  <h1 className="font-normal text-xs">품목명:</h1>
-                </div>
-                <input type="text" className="socks_edit_textBox3" placeholder="입력해주세요." required 
-                       value={giftName3}
-                       onChange={(e) => setGiftName3(e.target.value)}
-                />
-                {/* <p>{ giftName[번호] } </p>으로 인풋값 가져올 수 있음 */}
-              </div>
+            <div className="socks_edit_closeBtn">
+                <button className="socks_edit_closeWord" onClick={()=>onClose()}>저장하기</button>
             </div>
-          </div>
-
-          <div className="socks_edit_closeBtn">
-            <button className="socks_edit_closeWord" onClick={()=>onClose()}>저장하기</button>
-          </div>
-          <div className="socks_edit_closeSanta">
-            <Image src='/img/closeBtn_Santa.png' width='46' height='48'></Image>
-          </div>
-      </div>
+            <div className="socks_edit_closeSanta">
+                <Image src='/img/closeBtn_Santa.png' width='46' height='48'></Image>
+            </div>
+        </div>
+        </div>
+    </Modal>
     </div>
   )
 }
