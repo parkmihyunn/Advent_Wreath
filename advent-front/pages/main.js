@@ -217,8 +217,7 @@ export default function Main(){
     <Fragment>
     { (windowGet !== null && paramValue !== null) && (
     <div className="
-    flex flex-col items-center h-screen
-    overflow-auto bg-cover bg-local
+    flex flex-col items-center h-screen overflow-auto bg-cover bg-local
     bg-[url('../public/img/wood_pattern.png')]
     ">
       <Head>
@@ -244,12 +243,13 @@ export default function Main(){
             <Switch checked={false} size="xs" color="success" onChange={(e) => setPlay(!play)}/>
           </div>
         </div>            
-        <div className="relative">
-          <div className="text-center m-auto relative"> 
+        <div id="door-top-wrapper" className="relative">
+          <div id="door-top-border" className="text-center m-auto relative"> 
             <Image src='/img/door-border_1.png' width='307' height='537'/>
           </div>
-          <div className="door-top">
-            <div className="flex flex-row justify-between"> 
+
+          <div id="door-top-contents" className="door-top">
+            <div id='nickname-rename-edit' className="flex flex-row justify-between"> 
               <div className="flex flex-row"> 
                 <h1 className="ml-8 mr-1 text-white text-base font-normal align-bottom">{user.nickname}님의 소원양말</h1>
                 <Link href={{
@@ -263,9 +263,9 @@ export default function Main(){
                   편집하기
                 </h1>
               </button>
-              
             </div>
-            <div className="px-10 relative">
+
+            <div id="socks-1-to-3" className="px-10 relative">
               <div className="w-60 text-center m-auto relative">
                 <Image src='/img/socks_line.png' width='350' height='50'/>
               </div>
@@ -285,6 +285,7 @@ export default function Main(){
                 </button>
               </div>
             </div>
+
             <div id="wreath-all" className="pt-16 mt-6 place-items-center flex-1">
               <Image src='/img/wreath_non_2.png' quality='90' width='280' height='280'/>
               <div className="wreath-text">
@@ -450,6 +451,7 @@ export default function Main(){
                   </Popover>
               </div>
             </div>
+
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
             <div className="collection">
               <button onClick={()=> setCollectionModal(true)} >
@@ -458,7 +460,8 @@ export default function Main(){
             </div>
           </div>
         </div>
-        <div className="w-full relative top-5">
+
+        <div id="door-bottom-wrapper" className="w-full relative top-5">
           <div className="w-full text-center m-auto relative">
             <Image src='/img/door-dorder_2.png' width='307' height='165'/>
           </div>
@@ -481,18 +484,20 @@ export default function Main(){
           }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
+
         <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 방 문 공유링크 복사하기</button></div>
         <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
+        
         <div className="flex-1"></div>
         <Layout/>
         <GuideModal isVisible={showG_Modal} onClose={()=>setShowG_Modal(false)}/>
-        <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)}/>
+        <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
-        <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} set값1={set값1}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} user={user} usertoken={usertoken}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
+        <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} user={user} usertoken={usertoken}/>
       </div>
     </div>
     )}

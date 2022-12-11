@@ -11,7 +11,7 @@ export default function setName() {
   
   /* 로그인 확인 */
   const router = useRouter();
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [usertoken, setUsertoken] =  useState();
   const [windowGet, setWindowGet] = useState();
   const [paramValue, setParamValue] = useState();
@@ -22,7 +22,7 @@ export default function setName() {
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
       if(windowGet !== null && t_paramvalue !== null){
-        setUser(JSON.parse(window.sessionStorage.user))
+        //setUser(JSON.parse(window.sessionStorage.user))
         setUsertoken(JSON.parse(window.sessionStorage.user).token)
       } else {
         router.push('/');
@@ -65,6 +65,8 @@ export default function setName() {
   }
 
   return (
+    <div>
+    { (windowGet !== null && paramValue !== null) && (
     <div className="
       flex flex-col items-center h-screen
       overflow-auto bg-auto bg-center bg-local pt-[54px]
@@ -110,6 +112,8 @@ export default function setName() {
           <Layout/>
         </div>
       </div>
+    </div>
+    )}
     </div>
   )
 }
