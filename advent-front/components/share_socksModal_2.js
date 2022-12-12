@@ -8,7 +8,7 @@ const imgsrc = "https://advent-reindeer-test.s3.ap-northeast-2.amazonaws.com/eyJ
 const null_img = null;
 const null_sockname = null;
 
-const Share_SocksModal_1 = ({ isVisible, onClose, usertoken, nickname }) => {
+const Share_SocksModal_2 = ({ isVisible, onClose, usertoken, nickname }) => {
 	/* 백엔드에서 TOKEN, 양말번호 이용해서 양말 SRC, NAME 받아오기 */
 	if(!isVisible) return null;
 
@@ -22,8 +22,8 @@ const Share_SocksModal_1 = ({ isVisible, onClose, usertoken, nickname }) => {
 								<Image src='/img/ornaments/6.png' width='100' height='100'></Image>
 							</div>
 							<button className="text-white absolute flex top-[2%] right-[6%] text-[20px]" onClick={()=>onClose()}>x</button>
-							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{NICKNAME}님의 소원양말 1</div>
-							<div className="socks_center">
+							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{NICKNAME}님의 소원양말 2</div>
+							<div className="socks_center2">
 								<div className="socks_giftImg">
 									{ null_img !== null
 										?
@@ -46,10 +46,10 @@ const Share_SocksModal_1 = ({ isVisible, onClose, usertoken, nickname }) => {
 									}
 								</div>
 								<div className="socks_img">
-									<Image src='/img/sock_1.png' width='89' height='109.5'></Image>
+									<Image src='/img/sock_2.png' width='89' height='109.5'></Image>
 								</div>
 							</div>
-							<div className="absolute h-[23px] w-[300px] top-[453px] text-white text-center text-[18px]">{null_sockname}</div>
+							<div className="absolute h-[23px] w-[300px] top-[453px] text-white text-center text-[18px]">{SOCKNAME}</div>
 							<div className="socks_closeBtn">
 								<button className="socks_closeWord" onClick={()=>onClose()}>닫기</button>
 							</div>
@@ -60,4 +60,4 @@ const Share_SocksModal_1 = ({ isVisible, onClose, usertoken, nickname }) => {
 			</div>
 	);
 }
-export default Share_SocksModal_1
+export default Share_SocksModal_2

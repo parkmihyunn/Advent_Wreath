@@ -29,7 +29,6 @@ export default function Main(){
   const [showS1_Modal, setShowS1_Modal] = useState(false);  // 양말1
   const [showS2_Modal, setShowS2_Modal] = useState(false);  // 양말2
   const [showS3_Modal, setShowS3_Modal] = useState(false);  // 양말3
-  const [showSE_Modal, setShowSE_Modal] = useState(false);  // 양말 편집
   
   /* 로그인 확인 */
   const [paramValue, setParamValue] = useState();  // url의 query :string
@@ -249,7 +248,7 @@ export default function Main(){
           </div>
 
           <div id="door-top-contents" className="door-top">
-            <div id='nickname-rename-edit' className="flex flex-row justify-between"> 
+            <div id='nickname-rename' className="flex flex-row w-[307px]"> 
               <div className="flex flex-row"> 
                 <h1 className="ml-8 mr-1 text-white text-base font-normal align-bottom">{user.nickname}님의 소원양말</h1>
                 <Link href={{
@@ -258,11 +257,6 @@ export default function Main(){
                   <div className="mt-[2px]"><Image src='/img/edit_name.png' width='12' height='12'/></div>
                 </Link>
               </div>
-              <button id="wish-edit-btn" onClick={()=> setShowSE_Modal(true)}>
-                <h1 className="mr-8 mt-1 text-black/[0.4] text-xs font-bold align-bottom">
-                  편집하기
-                </h1>
-              </button>
             </div>
 
             <div id="socks-1-to-3" className="px-10 relative">
@@ -497,7 +491,6 @@ export default function Main(){
         <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
         <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
         <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
-        <SocksEditModal isVisible={showSE_Modal} onClose={()=>setShowSE_Modal(false)} user={user} usertoken={usertoken}/>
       </div>
     </div>
     )}

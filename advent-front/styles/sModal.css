@@ -371,7 +371,7 @@
     height: 195px;
     top: -0.2%;
     display: flex;
-    background-color: #FFBEC5;
+    background-color: transparent;
     justify-content: center;
     z-index: 0;
     border-radius: 20px;    
