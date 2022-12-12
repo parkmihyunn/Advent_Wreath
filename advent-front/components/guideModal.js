@@ -69,9 +69,11 @@ const guideModal = ({ isVisible, onClose }) => {
 							<div className="pl-[5px] pr-[8px] text-[#393333] text-[14px] font-bold">
 								돌아와 순록단
 							</div>
-							<Link href="https://www.instagram.com/esfpppppp/"><a target="_blank" className="pt-[1.5px]"><Image src="/img/guide/insta_icon.png" width={10} height={10}/></a></Link>
-							<Link href="https://www.instagram.com/esfpppppp/">
-							    <a target="_blank" className="pt-[3.5px] pl-[3px] text-[#393333] text-[10px] font-bold">insta_id_id</a>
+							<Link href="https://www.instagram.com/comeback_reindeer/"><a target="_blank" className="pt-[1.5px]">
+								<Image src="/img/guide/insta_icon.png" width={10} height={10}/></a>
+							</Link>
+							<Link href="https://www.instagram.com/comeback_reindeer/"><a target="_blank" className="pt-[3.5px] pl-[3px] text-[#393333] text-[10px] font-bold">
+								comeback_reindeer</a>
 							</Link>
 						</div>
 						<div id="content-2" className="flex flex-col justify-start pl-[20px] w-[277px] items-center text-left">

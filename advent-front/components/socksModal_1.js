@@ -4,7 +4,22 @@ import Image from 'next/image';
 import { Modal, Link } from "@nextui-org/react";
 import AWS from "aws-sdk"
 
+const SOCK_NUM = 1;
+
 const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
+
+	/*
+	=== 양말 모달 동작 로직 정리 ===
+	1. usertoken으로 백엔드에 get(post)요청 - usertoken, SOCK_NUM을 주고 URL과 WISHNAME을 받아와 STATE에 저장한다. 
+			input value는 언제나 WISHNAME
+			1) O -> 이미지 src로 URL
+			2) X -> 이미지 src가 null임을 판별하고 아래부분 렌더링 시킴
+							<div className="absolute text-[#791818] top-[36%]">
+								<h1 className="font-medium text-[40px]">+</h1>
+							</div>
+	2. 미리보기 업로드
+	3. 저장하기 버튼 클릭시 s3 버킷에 이미지 업로드 / 백엔드에 이미지 url, name, SOCK_NUM post 해주기
+	*/
 
 	/* AWS 설정 객체 업데이트 */
   AWS.config.update({
@@ -13,9 +28,6 @@ const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
       IdentityPoolId: process.env.NEXT_PUBLIC__AWS_CONFIG, // cognito 인증 풀에서 받아온 키
     }),
   })
-
-	/* 백엔드에 이미지 url 달라고 요청, 해당 부분 null(혹은 초기값)이면 미리보기 이미지 출력되도록 */
-	/* 백엔드에서 받아온 url로 aws s3접근 */
 
 	/* 클라이언트 단에서 임시로 저장시켜서 띄워줄 부분 */
 	const [imageSrc, setImageSrc] = useState('');
