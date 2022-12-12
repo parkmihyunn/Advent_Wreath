@@ -90,13 +90,18 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
     return Response(serializer.data) 
 
 class present(APIView):
-    def get(self, req):
+    def get(self, request):
         #req.jwt를 디코드 해서 user_id로 저장
-        if(req.num == 1):
+        
+        print(111111111111111111111111111111111111111111111111)
+        
+        print(request.get('num'))
+        
+        if(num == 1):
             
-            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+            if(Sock.objects.filter(u_id = request.user_id).exists() == False):
                 Sock.objects.create (
-                    u_id = req.user_id,
+                    u_id = request.user_id,
                     sock1_name = req.name,
                     sock1_img = req.img,
                     sock2_name = "null",
@@ -149,17 +154,10 @@ class present(APIView):
                 sock.sock3_img = req.img
                 sock.save()
     def post(self, req):
+        print(req.data.get('user_id',None))
         #jwt를 디코드 해서 user_id로 저장
-        sock = Sock.objects.get(pk = req.user_id)
-        
-        # datadict = {
-        #         "name" : user.username,
-        #         "exist" : True,
-        #         "solve_count" : user.solve_count,
-        #         "nickname" : user.nickname,
-
-        #     }
-        if(req.num == 1):
+        sock = Sock.objects.get(pk = req.data.get('user_id',None))
+        if(req.data.get('num',None) == 1):
             datadict = {
                 "name" : sock.sock1_name,
                 "url" : sock.sock1_img,
@@ -167,7 +165,7 @@ class present(APIView):
             }
             return JsonResponse(datadict)
             
-        elif(req.num == 2):
+        elif(req.data.get('num',None) == 2):
             datadict = {
                 "name" : sock.sock2_name,
                 "url" : sock.sock2_img,
@@ -175,15 +173,23 @@ class present(APIView):
             }
             return JsonResponse(datadict)
             
-        elif(req.num == 3):
+        elif(req.data.get('num',None) == 3):
             datadict = {
                 "name" : sock.sock3_name,
                 "url" : sock.sock3_img,
                 
             }
             return JsonResponse(datadict)
+
+        
+        else: 
+            print("잘못된 접근")
+        
         
 
+    
+    
+    
 #         - register : post (or get) 했을때, 프론트에서는 param으로 jwt, img_url, 소원이름, 양말번호를 주면 → 백엔드에서는 해당 유저의 양말 객체에 저장시킨다. 반환필요 X
 # - information :  post (or get) 했을때, 프론트에서는 param으로 jwt와 양말번호를 주면 → 백엔드에서는 해당 유저의 양말 url와 소원이름을 반환해준다.
     
