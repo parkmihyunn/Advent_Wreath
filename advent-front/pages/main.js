@@ -17,6 +17,7 @@ import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
 
 const BASE_URL = "http://localhost:8000/"
+const SHARE_URL = "http://localhost:3000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
@@ -31,10 +32,12 @@ export default function Main(){
   
   /* 로그인 확인 */
   const [paramValue, setParamValue] = useState();  // url의 query :string
-  const [windowGet, setWindowGet] = useState();  // session에 user라는 이름의 key 있는지 확인 ( 없으면 null )
+  const [windowGet, setWindowGet] = useState();  // session에 user라는 이름의 key 있는지 확인용 ( 없으면 null )
   const [user, setUser] = useState([]);  // 토큰, 닉네임, solve_count :object
   const [usertoken, setUsertoken] = useState(); // 유저 토큰 :string
+  const [solvedNum, setSolvedNum] = useState(); // 유저가 푼 문제 갯수
   const router = useRouter();
+
   useEffect(() => {
     if(typeof window !== 'undefined') {
       const params = new URLSearchParams(location.search);
@@ -46,10 +49,11 @@ export default function Main(){
       console.log(t_windowGet);
       console.log(t_paramvalue);
       console.log(JSON.parse(window.sessionStorage.user).token);
-      // user key가 session에 존재하고, url value와 token이 동일한 경우에만 로그인 허용
+      // user key가 session에 존재하고, url value와 token이 동일한 경우에만 허용
       if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.user).token){
         setUser(JSON.parse(window.sessionStorage.user));
-        setUsertoken(JSON.parse(window.sessionStorage.user).token)
+        setUsertoken(JSON.parse(window.sessionStorage.token));
+        setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
       } else {
         router.push('/');
         alert("잘못된 접근입니다.");
@@ -63,15 +67,32 @@ export default function Main(){
       console.log('로그아웃');
       window.sessionStorage.removeItem('user');
       window.sessionStorage.removeItem('token');
+      window.sessionStorage.removeItem('nickname');
+      window.sessionStorage.removeItem('solvecount');
       router.push('/');
     });
+  }
+
+  /* 순록 데이터 불러오기 */
+  const [deerData, setDeerData] = useState([]);
+  async function getDeer(){
+    let res = await axios.get(BASE_URL+"deer/", {
+      params: {
+        jwt:usertoken
+      },
+    });
+    console.log("getDeer 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setDeerData(datajson);
+    return setCollectionModal(true); 
   }
 
   /* 링크복사 */
   const [urlForm, setUrlForm] = useState();
   useEffect(() => {
     if(!router.isReady) return;
-    setUrlForm("http://localhost:3000/share?value=" + paramValue)
+    setUrlForm(SHARE_URL + "share?value=" + paramValue)
   }, [router.isReady, paramValue])
 
   const copyLinkHandler = async() => {
@@ -84,32 +105,23 @@ export default function Main(){
   }
 
   /* 디데이 계산, 사용자가 푼 퀴즈 갯수 불러오기 */
-  const [quizzesNum, setQuizzesNum] = useState();
+  const [quizzesNum, setQuizzesNum] = useState(); // 남은 퀴즈 갯수
   const [d_Day, setD_Day] = useState();
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,13);
+    var dDay = new Date(2022,11,16);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
-    /* (수정필) jwt(user.token)주고 받아오기로 수정해야함 */
-    axios.get("http://localhost:3000/api/temp")
-    .then(res => {
-      setUserData(res.data[0].ornaments);
-      /* (수정필) 사용자가 완료한 문제 갯수 user.solve_count에 저장되어있음
-      (axios해서 불러올 필요xx solve_count db수정하는 방법 들으면 그때 코드 수정하고 테스트하기) */
-      const solvedNum = res.data[0].solvedNum;
-      if(solvedNum+result>=10){
-        setQuizzesNum(0)
-      } else {
-        setQuizzesNum(10-solvedNum-result)
-      }
-    })
-    .catch(res => {
-      console.log('실패');
-      console.log(res);
-    })
+    /* (수정필) 사용자가 완료한 문제 갯수 user.solve_count에 저장되어있음
+    (axios해서 불러올 필요xx solve_count db수정하는 방법 들으면 그때 코드 수정하고 테스트하기) */
+    // const solvedNum = res.data[0].solvedNum;
+    if(solvedNum+result>=10){
+      setQuizzesNum(0)
+    } else {
+      setQuizzesNum(10-solvedNum-result)
+    }
   }, []);
 
   /* Audio */
@@ -155,7 +167,7 @@ export default function Main(){
   };
 
   // 예시 코드 =======================================================
-  const [값1, set값1] = useState([]);
+  // setUserData(res.data[0].ornaments); // =========================================================> 윤성이 코드
 
   //리스에 있는 데이터
   const [userData, setUserData] = useState({});
@@ -296,7 +308,7 @@ export default function Main(){
               </div>
               <div id="wreath-ornaments-edit" className="wreath_edit_center">
                 <div className="collection">
-                  <button onClick={()=> setCollectionModal(true)} >
+                  <button onClick={()=>getDeer()} >
                     <Image src='/img/collection.png' quality='100' width='95' height='131'/>
                   </button>
                 </div>
@@ -471,7 +483,7 @@ export default function Main(){
           </div>
           {quizzesNum !== 0 ? 
             <div className="quiz-notification bg-red-600 rounded-full">
-              <div className="text-white text-sm font-normal">{quizzesNum}</div>
+              <div className="text-white text-sm font-normal">{solvedNum}</div>
             </div> :
             null
           }
@@ -486,10 +498,10 @@ export default function Main(){
         <GuideModal isVisible={showG_Modal} onClose={()=>setShowG_Modal(false)}/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} user={user} usertoken={usertoken}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} nickname={user.nickname} usertoken={usertoken} deerData={deerData}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={usertoken}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={usertoken}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={usertoken}/>
       </div>
     </div>
     )}

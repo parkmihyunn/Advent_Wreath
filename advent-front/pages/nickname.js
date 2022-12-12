@@ -23,7 +23,7 @@ export default function setName() {
       setParamValue(t_paramvalue)
       if(windowGet !== null && t_paramvalue !== null){
         //setUser(JSON.parse(window.sessionStorage.user))
-        setUsertoken(JSON.parse(window.sessionStorage.user).token)
+        setUsertoken(JSON.parse(window.sessionStorage.token))
       } else {
         router.push('/');
         if(t_paramvalue == null) alert("잘못된 접근입니다.");
@@ -49,6 +49,8 @@ export default function setName() {
     console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
     console.log(datajson);
     window.sessionStorage.user = JSON.stringify(datajson);
+    window.sessionStorage.token = JSON.stringify(datajson.token);
+    window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
     router.push({
       pathname: '/main',
       query: {

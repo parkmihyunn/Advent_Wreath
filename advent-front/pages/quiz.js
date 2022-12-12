@@ -136,6 +136,7 @@ export default function quiz(){
       axios.post(BASE_URL+"solvequestion/",
       {
         jwt:usertoken,
+        src:'/img/ornaments/1.png'
       })
       .then(res => {
         console.log(res);
