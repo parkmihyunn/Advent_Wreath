@@ -44,3 +44,16 @@ class RealWreath(models.Model):
     orn5 = models.SmallIntegerField(default=-1)
     orn6 = models.SmallIntegerField(default=-1)
     orn7 = models.SmallIntegerField(default=-1)
+
+class OrnamentList(models.Model):
+    user_id = models.ForeignKey("accounts.User", related_name = "user_ornament", on_delete = models.CASCADE, db_column = "user_id", unique=True)
+    src1 = models.CharField(max_length = 50,default=-1)
+    src2 = models.CharField(max_length = 50,default=-1)
+    src3 = models.CharField(max_length = 50,default=-1)
+    src4 = models.CharField(max_length = 50,default=-1)
+    src5 = models.CharField(max_length = 50,default=-1)
+    src6 = models.CharField(max_length = 50,default=-1)
+    src7 = models.CharField(max_length = 50,default=-1)
+    src8 = models.CharField(max_length = 50,default=-1)
+    src9 = models.CharField(max_length = 50,default=-1)
+    src10 = models.CharField(max_length = 50,default=-1)

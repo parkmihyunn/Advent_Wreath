@@ -102,15 +102,7 @@ class ChangeNickName(APIView):
         return JsonResponse(datadict)
 
 
-class SolveQuestion(APIView):
-    def post(self, request):
-        user_jwt = request.data.get('jwt',None)
-        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
-        user = User.objects.get(u_id = user_id['id'])
-        user.solve_count += 1
-        user.save()
 
-        return JsonResponse({"응답":"solve_count +1 !"})
 
 class Nickname(APIView):
     def get(self, request):
