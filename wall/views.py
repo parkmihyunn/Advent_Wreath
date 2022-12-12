@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view # function based 이기에 데코레이터를 사용한다.
-from wall.models import quiz,deer,mixDeer,user_A,wreath,RealWreath
-from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer,wreathSerializer#models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
+from wall.models import quiz,deer,mixDeer,user_A,wreath,RealWreath,Sock
+from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer,sockSerializer, wreathSerializer#models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -46,6 +46,9 @@ def allDeer(u_id):
 
 
 
+    
+    
+
 @api_view(['POST'])
 def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
     
@@ -86,6 +89,106 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
     
     return Response(serializer.data) 
 
+class present(APIView):
+    def get(self, req):
+        #req.jwt를 디코드 해서 user_id로 저장
+        if(req.num == 1):
+            
+            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+                Sock.objects.create (
+                    u_id = req.user_id,
+                    sock1_name = req.name,
+                    sock1_img = req.img,
+                    sock2_name = "null",
+                    sock2_img = "null",
+                    sock3_name = "null",
+                    sock3_img = "null",
+                    )      
+                sock.save()       
+            else: 
+                sock = Sock.objects.get(u_id = req.user_id)
+                sock.sock1_name = req.name
+                sock.sock1_img = req.img
+                sock.save()
+            
+        
+        elif(req.num == 2):
+            
+            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+                Sock.objects.create (
+                    u_id = req.user_id,
+                    sock1_name = "null",
+                    sock1_img = "null",
+                    sock2_name = req.name,
+                    sock2_img = req.img,
+                    sock3_name = "null",
+                    sock3_img = "null",
+                    )      
+                sock.save()       
+            else: 
+                sock = Sock.objects.get(u_id = req.user_id)
+                sock.sock2_name = req.name
+                sock.sock2_img = req.img
+                sock.save()
+                
+        elif(req.num == 3):
+            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+                Sock.objects.create (
+                    u_id = req.user_id,
+                    sock1_name = "null",
+                    sock1_img = "null",
+                    sock2_name = "null",
+                    sock2_img = "null",
+                    sock3_name = req.name,
+                    sock3_img = req.img,
+                    )      
+                sock.save()       
+            else: 
+                sock = Sock.objects.get(u_id = req.user_id)
+                sock.sock3_name = req.name
+                sock.sock3_img = req.img
+                sock.save()
+    def post(self, req):
+        #jwt를 디코드 해서 user_id로 저장
+        sock = Sock.objects.get(pk = req.user_id)
+        
+        # datadict = {
+        #         "name" : user.username,
+        #         "exist" : True,
+        #         "solve_count" : user.solve_count,
+        #         "nickname" : user.nickname,
+
+        #     }
+        if(req.num == 1):
+            datadict = {
+                "name" : sock.sock1_name,
+                "url" : sock.sock1_img,
+                
+            }
+            return JsonResponse(datadict)
+            
+        elif(req.num == 2):
+            datadict = {
+                "name" : sock.sock2_name,
+                "url" : sock.sock2_img,
+                
+            }
+            return JsonResponse(datadict)
+            
+        elif(req.num == 3):
+            datadict = {
+                "name" : sock.sock3_name,
+                "url" : sock.sock3_img,
+                
+            }
+            return JsonResponse(datadict)
+        
+
+#         - register : post (or get) 했을때, 프론트에서는 param으로 jwt, img_url, 소원이름, 양말번호를 주면 → 백엔드에서는 해당 유저의 양말 객체에 저장시킨다. 반환필요 X
+# - information :  post (or get) 했을때, 프론트에서는 param으로 jwt와 양말번호를 주면 → 백엔드에서는 해당 유저의 양말 url와 소원이름을 반환해준다.
+    
+    
+        
 
 class quizList(APIView):
     def get(self, request):
