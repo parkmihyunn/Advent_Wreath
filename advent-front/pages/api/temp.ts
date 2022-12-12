@@ -4,11 +4,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
    보유하고 있는 ornaments를 관리하는 interface, main에 띄워야 할 ornaments를 관리할 interface*/
 
 interface ReinDeer { 
-  body: string;
-  bodydeco : string;
-  eye : string;
-  headdeco : string;
-  horn : string;
+  m_body_color: string;
+  m_body_deco : string;
+  m_eye : string;
+  m_hair : string;
+  m_horn : string;
 }
 
 interface Wreath { 
@@ -34,53 +34,47 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
       socks : "a",
       reindeers: [
           {
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_1.png',
+            m_body_deco : '/img/reindeer/body_deco_1.png',
+            m_eye : '/img/reindeer/eye_1.png',
+            m_hair : '/img/reindeer/hair_1.png',
+            m_horn : '/img/reindeer/horn_1.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_2.png',
+            m_body_deco : '/img/reindeer/body_deco_2.png',
+            m_eye : '/img/reindeer/eye_2.png',
+            m_hair : '/img/reindeer/hair_2.png',
+            m_horn : '/img/reindeer/horn_2.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_3.png',
+            m_body_deco : '/img/reindeer/body_deco_3.png',
+            m_eye : '/img/reindeer/eye_3.png',
+            m_hair : '/img/reindeer/hair_3.png',
+            m_horn : '/img/reindeer/horn_3.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_4.png',
+            m_body_deco : '/img/reindeer/body_deco_4.png',
+            m_eye : '/img/reindeer/eye_4.png',
+            m_hair : '/img/reindeer/hair_4.png',
+            m_horn : '/img/reindeer/horn_4.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_5.png',
+            m_body_deco : '/img/reindeer/body_deco_5.png',
+            m_eye : '/img/reindeer/eye_5.png',
+            m_hair : '/img/reindeer/hair_5.png',
+            m_horn : '/img/reindeer/horn_5.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_6.png',
+            m_body_deco : '/img/reindeer/body_deco_6.png',
+            m_eye : '/img/reindeer/eye_6.png',
+            m_hair : '/img/reindeer/hair_6.png',
+            m_horn : '/img/reindeer/horn_6.png'
         },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
-        },{
-            body: '/img/reindeer/body_1.png',
-            bodydeco : '/img/reindeer/bodydeco_1.png',
-            eye : '/img/reindeer/eye_1.png',
-            headdeco : '/img/reindeer/headdeco_1.png',
-            horn : '/img/reindeer/horn_1.png'
+            m_body_color: '/img/reindeer/body_color_7.png',
+            m_body_deco : '/img/reindeer/body_deco_7.png',
+            m_eye : '/img/reindeer/eye_7.png',
+            m_hair : '/img/reindeer/hair_7.png',
+            m_horn : '/img/reindeer/horn_7.png'
         },
       ],
       wreath : [
