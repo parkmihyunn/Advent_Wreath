@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts import views
-#from wall import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('wall.urls'),),
@@ -25,7 +23,6 @@ urlpatterns = [
     path('changenickname/',views.ChangeNickName.as_view(), name="changenickname"),
     path('solvequestion/',views.SolveQuestion.as_view(), name="solvequestion"),
     path('nickname/',views.Nickname.as_view(), name="nickname"),
-#    path('realwreath',views.Realwreathview.as_view(), name="realwreath"),
 
     
 ]
