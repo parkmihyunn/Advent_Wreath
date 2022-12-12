@@ -5,11 +5,10 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
-
 import ReindeerCollectionModal from '../components/reindeerCollectionModal'
-import SocksModal_1 from '../components/socksModal_1'
-import SocksModal_2 from '../components/socksModal_2'
-import SocksModal_3 from '../components/socksModal_3'
+import SocksModal_1 from '../components/share_socksModal_1'
+import SocksModal_2 from '../components/share_socksModal_2'
+import SocksModal_3 from '../components/share_socksModal_3'
 
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
@@ -17,7 +16,7 @@ export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
   const [user, setUser] = useState();
-  const [paramValue, setParamValue] = useState();
+  const [paramValue, setParamValue] = useState(); // url로 전달된 유저jwt토큰
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
@@ -25,13 +24,16 @@ export default function share(){
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
       if(t_paramvalue !== null){
-        /* t_paramvalue 로 백엔드에  */
+        /* t_paramvalue(token)으로 백엔드에 realwreath, socks, reindeer 요청 */
       } else {
         router.push('/');
         alert("잘못된 접근입니다.");
       }
     }
   },[])
+
+  /* 백엔드에서 usertoken 이용하여 nickname 받아오기 */
+  const [nickname, setNickname] = useState(); // token을 이용하여 받아온 nickname
 
   /* 시작화면으로 돌아가기 */
   const [clickGo, setClickGo] = useState(false);
@@ -102,15 +104,15 @@ export default function share(){
   return (
     <Fragment>
     <div className="
-        flex flex-col items-center h-screen
-        overflow-auto bg-cover bg-local
-        bg-[url('../public/img/wood_pattern.png')]
-    ">
+        flex flex-col items-center h-screen overflow-auto bg-cover bg-local
+        bg-[url('../public/img/wood_pattern.png')]"
+    >
       <Head>
       <title>돌아와! 순록!</title>
       <meta name="description" content="콘텐트 내용"/>
       <link rel="icon" href="/favicon.ico" />
       </Head> 
+
       <div className="flex flex-col items-center h-full">
         <div className="flex flex-row max-w-[300px] min-w-[300px] justify-between items-end">
           <h1 className="flex ml-2 mb-0 relative text-lg font-bold text-left text-[#4F3131] pt-4">돌아와 순록!</h1>
@@ -186,10 +188,10 @@ export default function share(){
         </div>
         <div className="flex-1"></div>
         <div className="flex share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} usertoken={paramValue}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={paramValue} nickname={nickname}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={paramValue} nickname={nickname}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={paramValue} nickname={nickname}/>
       </div>
     </div>
     </Fragment>

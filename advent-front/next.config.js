@@ -12,6 +12,9 @@ module.exports = withImages();
 
 module.exports = {
   reactStrictMode: false,
+  images: {
+    domains: ["advent-reindeer-test.s3.ap-northeast-2.amazonaws.com", 'localhost']
+  },
   // async rewrites() {
   //   return [
   //     {

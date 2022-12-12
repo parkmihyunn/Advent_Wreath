@@ -45,6 +45,7 @@ const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
   const handleFileInput = (fileBlob) => {
     if(fileBlob !== null){	 // 파일 등록 한 경우
       const file = fileBlob
+			const t_filetype = file.type
       const t_filename = usertoken + file.name
 
 			const upload = new AWS.S3.ManagedUpload({
@@ -52,6 +53,7 @@ const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
 					Bucket: "advent-reindeer-test",
 					Key: t_filename,
 					Body: file,
+					ContentType: t_filetype,
 				},
 			})
 			const promise = upload.promise()
@@ -105,7 +107,7 @@ const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
 							</div>
 							<div id="input-place" className="absolute top-[78%]">
 								<input type="text" className="h-[38px] w-[260px] border-4 bg-[#8F1717] placeholder:text-white text-white py-5 px-4 rounded-lg" 
-											value={giftName} placeholder="입력해주세요."
+											value={giftName} placeholder="입력해주세요." maxlength="16"
 											onChange={(e) => setGiftName(e.target.value)}
 								/>
 							</div>

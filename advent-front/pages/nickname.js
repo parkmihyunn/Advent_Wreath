@@ -103,9 +103,9 @@ export default function setName() {
           <input type="text" id="nickname" ref={nicknameInput}
                  className="h-[33px] w-full border-4 bg-[#D9DFF8]/[0.3] placeholder:text-[#7789D3] py-5 px-4 rounded-lg"
                  placeholder="사용하실 닉네임을 입력해주세요." autoComplete="off"
-                 maxlength="7" oninput="handleInputLength(this, 6)"
+                 maxlength="10" oninput="handleInputLength(this, 6)"
           />
-          <div className="text-[12px] text[#747474] mt-2 mb-[20px] ml-4">최대 7자 까지 입력 가능하며, 추후에 변경 가능합니다.</div>
+          <div className="text-[12px] text[#747474] mt-2 mb-[20px] ml-4">최대 10자 까지 입력 가능하며, 추후에 변경 가능합니다.</div>
           <button onClick={onSubmit} className ="flex h-[55px] mb-[40px] rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px] justify-center margin-auto">
             닉네임 등록하기
           </button>
