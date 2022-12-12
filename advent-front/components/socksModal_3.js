@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Modal, Link } from "@nextui-org/react";
 import AWS from "aws-sdk"
 
-const SocksModal_2 = ({ isVisible, onClose, user, usertoken }) => {
+const SocksModal_2 = ({ isVisible, onClose, nickname, usertoken }) => {
 
 	/* AWS 설정 객체 업데이트 */
   AWS.config.update({
@@ -81,7 +81,7 @@ const SocksModal_2 = ({ isVisible, onClose, user, usertoken }) => {
 								<Image src='/img/ornaments/6.png' width='100' height='100'></Image>
 							</div>
 							<button className="text-white absolute flex top-[2%] right-[6%] text-[20px]" onClick={()=>onClose()}>x</button>
-							<div className="socks_head">{user.name}님의 소원양말 3</div>
+							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{nickname}님의 소원양말 3</div>
 							<div className="socks_center3">
 								<div id="none_box_1" className="socks_edit_noneBox">
 									<div className="absolute text-[#791818] top-[36%]">

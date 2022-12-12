@@ -10,26 +10,28 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:8000/"
 
 export default function quiz(){
+  /* 순록 모달 */
+  const [showR_Modal, setShowR_Modal] = useState(false);
+
   /* quiz data */
   var quizzes = [
-    // {
-    //   question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
-    //   correct : '100',
-    //   hints : 'https://www.bbc.com/korean/features-59777860',
-    // },{
-    //     question : '영국 감시단체는 오염으로 OOOOO 가까워진다고 경고하였다',
-    //     correct : '회복불가능',
-    //     hints : 'https://www.bbc.com/korean/news-61419228'
-    // }, {
-    //     question : '환경보호 중요성 알리기는 환경보호 실천 방법 리스트 중 몇 번째 목표인가요? ex) 10',
-    //     correct : '25',
-    //     hints : 'https://brunch.co.kr/@hantole/13'
-    // }, {
-    //     question : '지구의 날은 몇 월 며칠 인가요? ex) 0927',
-    //     correct : '0422',
-    //     hints : 'https://www.korea.kr/news/reporterView.do?newsId=148900968'
-    // },
     {
+        question : '몇몇 순록은 얼음이 아닌 눈에 덮인 이끼를 찾아 남쪽으로 무려 OOOkm까지 이동한다',
+        correct : '100',
+        hints : 'https://www.bbc.com/korean/features-59777860',
+    },{
+        question : '영국 감시단체는 오염으로 OOOOO 가까워진다고 경고하였다',
+        correct : '회복불가능',
+        hints : 'https://www.bbc.com/korean/news-61419228'
+    }, {
+        question : '환경보호 중요성 알리기는 환경보호 실천 방법 리스트 중 몇 번째 목표인가요? ex) 10',
+        correct : '25',
+        hints : 'https://brunch.co.kr/@hantole/13'
+    }, {
+        question : '지구의 날은 몇 월 며칠 인가요? ex) 0927',
+        correct : '0422',
+        hints : 'https://www.korea.kr/news/reporterView.do?newsId=148900968'
+    },{
         question : '32개의 글로벌 패션 기업이 체결한 패션 협약에서 0000년까지 온실가스 배출량 제로의 목표를 잡았다 ex) 2022',
         correct : '2050',
         hints : 'https://hypebeast.kr/2019/8/g-7-fashion-pact-kering-emmanuel-macron-prada-nike-hermes-burberry-chanel'
@@ -61,51 +63,51 @@ export default function quiz(){
   const [windowGet, setWindowGet] = useState();  // session에 user라는 이름의 key 있는지 확인 ( 없으면 null )
   const [user, setUser] = useState([]);  // 토큰, 닉네임, solve_count :object
   const [usertoken, setUsertoken] = useState(); // 유저 토큰 :string
+  const [preSolvedNum, setPreSolvedNum] = useState(); // 유저가 푼 문제 갯수
+  const [solvedNum, setSolvedNum] = useState(); // 유저가 푼 문제 갯수
   const router = useRouter();
+
   useEffect(() => {
     if(typeof window !== 'undefined') {
+      var today = new Date();
+      /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
+      var dDay = new Date(2022,11,14);
+      var gap = dDay.getTime() - today.getTime();
+      var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
       const t_windowGet = window.sessionStorage.getItem('user');
       setWindowGet( window.sessionStorage.getItem('user') );
-      console.log("============quiz.js============== t_windowGet, t_paramvalue, window.sesstion.token");
-      console.log(t_windowGet);
       console.log(t_paramvalue);
-      console.log(JSON.parse(window.sessionStorage.user).token);
-      // user key가 session에 존재하고, url value와 token이 동일한 경우에만 로그인 허용
-      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.user).token){
-        setUser(JSON.parse(window.sessionStorage.user));
-        setUsertoken(JSON.parse(window.sessionStorage.user).token)
+      console.log(JSON.parse(window.sessionStorage.token));
+      // user key가 session에 존재하고, url value와 token이 동일하고, 퀴즈가 남아있는 경우만 접근 허용
+      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.token)){
+        const t_testNum = JSON.parse(window.sessionStorage.solvecount) + result
+        if( t_testNum < 10 ){
+          setUser(JSON.parse(window.sessionStorage.user));
+          setUsertoken(JSON.parse(window.sessionStorage.token));
+          setPreSolvedNum(JSON.parse(window.sessionStorage.solvecount));
+          setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
+        }
+        else {console.log(t_testNum)}
       } else {
+        window.sessionStorage.clear();
         router.push('/');
         alert("잘못된 접근입니다.");
       }
     }
   },[])
 
-  /* 유저가 지금까지 푼 퀴즈 갯수 가져오기, quizzes에서 해당하는 퀴즈 꺼내기 */
-  const [sNum, setSNum] = useState();
-  const [data, setData] = useState();
+  /* quizzes에서 해당하는 퀴즈 꺼내기 */
+  const [quizdata, setQuizData] = useState();
   useEffect(() => {
-    axios.get('http://localhost:3000/api/temp')
-    .then( res => {
-      console.log("res.data")
-      console.log(res.data)
-      setSNum(res.data[0].solvedNum);
-    })
-    .catch(res => {
-      console.log('실패');
-      console.log(res);
-    })
-  },[])
-  
-  useEffect(() => {
-    const tmp = quizzes[sNum];
-    setData(tmp);
+    const tmp = quizzes[solvedNum];
+    setQuizData(tmp);
     console.log("====quizData====")
-    console.log(quizzes[sNum])
-  },[sNum])
+    console.log(quizzes[solvedNum])
+  },[solvedNum])
 
   /* 오늘 날짜 */
   const now = new Date();
@@ -129,16 +131,18 @@ export default function quiz(){
   /* 정답 확인 */
   function quizConfirm() {
     const quizInput_t = quizInput.current.value.toLowerCase().trim();
-    let answerResult = data.correct.toLowerCase().trim();
+    let answerResult = quizdata.correct.toLowerCase().trim();
+    const t_solvedNum = solvedNum +1;
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
       axios.post(BASE_URL+"solvequestion/",
       {
         jwt:usertoken,
-        src:'/img/ornaments/1.png'
+        src:'/img/ornaments/'+ t_solvedNum +'.png'
       })
       .then(res => {
+        setSolvedNum(res.data.solve_count);
         console.log(res);
       })
       .catch(res => {
@@ -152,7 +156,12 @@ export default function quiz(){
       document.getElementById('u_anw').readOnly = true;   // input readonly 활성화
       document.getElementById('rd_arrive').classList.remove('hidden');
       document.getElementById('rd_arrive').classList.add('block');
+      document.getElementById('submit-btn').classList.add('hidden');
       setShowConfetti(true);  // confetti 활성화
+      if(typeof window !== 'undefined') {
+      window.sessionStorage.solvecount = JSON.stringify(solvedNum)
+      console.log(window.sessionStorage)
+      }
     } else {
       // 오답 
       document.getElementById('quiz_view_t').classList.remove('block');
@@ -162,8 +171,20 @@ export default function quiz(){
     }
   }
 
-  /* 순록 모달 */
-  const [showR_Modal, setShowR_Modal] = useState(false);
+  /* 순록 모달ON 버튼 클릭시 */
+  const [deerData, setDeerData] = useState();
+  async function getDeer(){
+    let res = await axios.get(BASE_URL+"deer/", {
+      params: {
+        jwt:usertoken
+      },
+    });
+    console.log("getDeer 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setDeerData(datajson[solvedNum-1]);
+    return setShowR_Modal(true); 
+  }
 
   return (
     <div className="
@@ -187,10 +208,10 @@ export default function quiz(){
           </Link>
         </div>
         
-        <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {sNum+1}번째 퀴즈</div>
+        <div className="day-text text-white pt-8 pb-4 text-xl">{month}월 {day}일 {preSolvedNum+1}번째 퀴즈</div>
         <div className="flex-1 w-full text-center m-auto relative">
           <div className="absolute mt-5 hint-btn">
-            <Link href={data ? data.hints : "/main"}><a target="_blank" className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a></Link>
+            <Link href={quizdata ? quizdata.hints : "/main"}><a target="_blank" className="hint-btn text-xs text-white py-1 px-6 mb-1 bg-green-800 rounded-md">ㅤ힌트 보러가기</a></Link>
           </div>
           <div className="hint-btn-img">
             <Image src="/img/hint_btn.png" width='31' height='36'/>
@@ -200,7 +221,7 @@ export default function quiz(){
           <Image className=" w-full max-x-md absolute" src='/img/quiz_back.png' width='430' height='639'/>
           <div className="flex flex-col letter-text1 px-5 relative ">
             <div className="flex text-rose-800 mb-3 max-[374px]:text-xs max-[374px]:mb-0.5 max-[374px]:mt-8">~ 오늘의 퀴즈 ~</div>
-            <div id="quiz" className="flex text-base max-[374px]:text-sm">{data ? data.question: null}</div>
+            <div id="quiz" className="flex text-base max-[374px]:text-sm">{quizdata ? quizdata.question: null}</div>
             <div id="quiz_view_t" className="absolute mb-56 quiz_view_t hidden">
               <Image className=""src='/img/closeBtn_Santa.png' width='52' height='54' />
               <div className="">정답입니다 !</div>
@@ -210,19 +231,19 @@ export default function quiz(){
             </div>
             <div className="quiz_answer">
               <input type="text" ref={quizInput} className="quiz_input" id="u_anw" placeholder="정답 입력하기"/>
-              <button className="submit" onClick={()=>quizConfirm()}>제출</button>
+              <button id="submit-btn" className="submit" onClick={()=>quizConfirm()}>제출</button>
             </div>
           </div>
           <div id="rd_arrive" className="absolute rd-arrive hidden">
             <div className="absolute">
-              <button onClick={()=> setShowR_Modal(true)} className="rd-arrive-btn py-1 px-4 mb-1 rounded-md">ㅤ순록이 돌아왔어요o&#40;≧∇≦o&#41;</button>
+              <button onClick={()=>getDeer()} className="rd-arrive-btn py-1 px-4 mb-1 rounded-md">ㅤ순록이 돌아왔어요o&#40;≧∇≦o&#41;</button>
             </div>
             <div className="arrive-btn-img">
               <Image src="/img/rd_arrive.png" width='48' height='71'/>
             </div>
           </div>
         </div>
-        <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)} usertoken={usertoken}/>
+        <ReinModal isVisible={showR_Modal} onRClose={()=>setShowR_Modal(false)} usertoken={usertoken} nickname={user.nickname} solvedNum={solvedNum} deerData={deerData}/>
     </div>
   );
 }
