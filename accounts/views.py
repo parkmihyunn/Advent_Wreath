@@ -8,6 +8,8 @@ from django.http import JsonResponse
 from accounts.models import User
 from rest_framework.views import APIView
 
+from wall.views import sendMixdeer
+
 # Create your views here.
 SECRET_KEY = "christmas"
 ALGORITHM = "HS256"
@@ -32,6 +34,8 @@ class KakaoLogin(APIView):
             #print("user id : "+user.id+"\n")
             print("user name: "+user.username+"\n")
             #print(jwt_token)
+            
+            sendMixdeer(2566987268)
             datadict = {
                 "name" : user.username,
                 "token" : user.jwt,
@@ -39,6 +43,7 @@ class KakaoLogin(APIView):
                 "solve_count": user.solve_count,
                 "nickname" : user.nickname,
             }
+            
                
             return JsonResponse(datadict)
         else: 

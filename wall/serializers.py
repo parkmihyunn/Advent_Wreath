@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from wall.models import quiz,deer,mixDeer,user_A,wreath
+from wall.models import quiz,deer,mixDeer,user_A,wreath,Sock
 
 
 class quizSerializer(serializers.ModelSerializer):
@@ -10,7 +10,7 @@ class quizSerializer(serializers.ModelSerializer):
 class deerSerializer(serializers.ModelSerializer):
     class Meta:
         model = deer
-        fields = ('horn','hair','eye','body_color','body_deco')
+        fields = ('horn','headdeco','eye','body','bodydeco')
         
 class user_ASerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,6 +27,11 @@ class wreathSerializer(serializers.ModelSerializer):
     class Meta:
         model = wreath
         field = ('user_id','src','width')
+        
+class sockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sock
+        field = ('u_id','sock1_name','sock1_img','sock2_name','sock2_img','sock3_name','sock3_img')
         
         
 

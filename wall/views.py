@@ -33,38 +33,51 @@ def sendWreath(request):
     
     
 
-def sendMixdeer(): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
+@api_view(['POST'])
+def allDeer(u_id):
+    deer = mixDeer.objects.filter(user_id = u_id)
+    serializer = mixdeerSerializer(deer,many = True)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    
+    return Response(serializer.erros, status = status.HTTP_400_BAD_REQUSET)
+
+
+
+@api_view(['POST'])
+def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
     
     # count = 필드 개수
     # 요소마다 랜덤으로 뽑아서 스키마에 넣고
     # 완성된 사슴 리턴
     
-    num = 4
+    num = 6
     ran = random.randint(1,num)
-    
-    _horn = (deer.objects.get(pk = ran)).horn
+    _horn = (deer.objects.get(pk = ran)).horn   
     
     ran = random.randint(1,num)
-    _hair = (deer.objects.get(pk = ran)).hair
+    _hair = (deer.objects.get(pk = ran)).headdeco
     
     ran = random.randint(1,num)
     _eye = (deer.objects.get(pk = ran)).eye
     
     ran = random.randint(1,num)
-    _body_color = (deer.objects.get(pk = ran)).body_color
+    _body_color = (deer.objects.get(pk = ran)).body
     
     ran = random.randint(1,num)
-    _body_deco = (deer.objects.get(pk = ran)).body_deco
+    _body_deco = (deer.objects.get(pk = ran)).bodydeco
     
     
     mixDeer.objects.create(
+            user_id = u_id,
             m_horn = _horn,
             m_hair = _hair,
             m_eye = _eye,
             m_body_color = _body_color,
             m_body_deco = _body_deco
         )
-    
     
     mixDeers = mixDeer.objects.last()
     
