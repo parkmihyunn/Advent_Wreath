@@ -3,34 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Modal, Image } from "@nextui-org/react";
 import axios from 'axios';
 
+/* 만약에 image src가 없어서 빈 이미지가 아니라 뭔가 에러 이미지가뜨면 Image 태그 img로 변경 */
+const fallBackSrc = "/img/reindeer/null_callback.png"   
 
-const ReindeerModal = ({ isVisible, onRClose, usertoken }) => {
+const ReindeerModal = ({ isVisible, onRClose, usertoken, nickname, solvedNum, deerData }) => {
   if(!isVisible) return null;
-  
-  /* 순록 데이터 가져오기 */
-  const [user, setUser] = useState([]);
-  const [refinedData, setRefinedData] = useState({});
-  useEffect(() => {
-    if(typeof window !== 'undefined') {
-      setUser(JSON.parse(window.sessionStorage.user))
-    }
-  },[])
-
-  /* (!!!!!!!!!!!!!!!!!!수정 필!!!!!!!!!!!!!)가장 최근 순록 데이터 불러오기 */
-  useEffect(() => {
-    axios.get("http://localhost:3000/api/temp")
-    .then(res => {
-      console.log('성공');
-      console.log(res.data);
-      const deerNum = res.data[0].reindeers.length
-      setRefinedData(res.data[0].reindeers[deerNum-1])
-      setNumDeer(res.data[0].reindeers.length)
-    })
-    .catch(res => {
-      console.log('실패');
-      console.log(res);
-    })
-  }, []);
 
   return (
     <div>
@@ -38,15 +15,15 @@ const ReindeerModal = ({ isVisible, onRClose, usertoken }) => {
       <Modal.Header className="flex flex-col items-center text-center w-full mt-36" css={{ position: "absolute", zIndex: "$1"}}>
         <div className="flex flex-col items-center text-center w-full">
           <div className="relative w-full mt-10">
-            <div className="relative"><Image src={ refinedData.body} width={93} height={103}/></div>
-            <div className="reindeer1 top-[63%] absolute"><Image src={ refinedData.bodydeco} width={45} height={25}/></div>
-            <div className="reindeer1 top-[28%] absolute"><Image src={ refinedData.eye} width={37} height={8}/></div>
-            <div className="reindeer1 top-[-13%] absolute"><Image src={ refinedData.horn} width={67} height={39}/></div>
-            <div className="reindeer1 top-[-2%] absolute"><Image src={ refinedData.headdeco} width={23} height={14}/></div>
+            <div className="relative"><Image src={ deerData.m_body_color} width={93} height={103} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>
+            <div className="reindeer1 top-[63%] absolute"><Image src={ deerData.m_body_deco} width={45} height={25} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>
+            <div className="reindeer1 top-[28%] absolute"><Image src={ deerData.m_eye} width={37} height={8} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>
+            <div className="reindeer1 top-[-13%] absolute"><Image src={ deerData.m_horn} width={67} height={39} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>
+            <div className="reindeer1 top-[-2%] absolute"><Image src={ deerData.m_hair} width={23} height={14} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>
           </div>
           <div className="relative">
-            <div className="pt-10 font-bold text-xl">{user.solve_count}번째 순록이 도착했어요 ♥</div>
-            <div className="pt-8 text-sm">{user.nickname}님만의 특별한 순록이예요.</div>
+            <div className="pt-10 font-bold text-xl">{solvedNum}번째 순록이 도착했어요 ♥</div>
+            <div className="pt-8 text-sm">{nickname}님만의 특별한 순록이예요.</div>
             <div className="pt-1 text-sm">방문 앞의 순록도감에서 확인할 수 있어요!</div>
           </div>
             <Link href={{

@@ -6,8 +6,8 @@ import AWS from "aws-sdk"
 
 const SOCK_NUM = 1;
 
-const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
-
+const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
+	
 	/*
 	=== 양말 모달 동작 로직 정리 ===
 	1. usertoken으로 백엔드에 get(post)요청 - usertoken, SOCK_NUM을 주고 URL과 WISHNAME을 받아와 STATE에 저장한다. 
@@ -95,7 +95,7 @@ const SocksModal_1 = ({ isVisible, onClose, user, usertoken }) => {
 								<Image src='/img/ornaments/6.png' width='100' height='100'></Image>
 							</div>
 							<button className="text-white absolute flex top-[2%] right-[6%] text-[20px]" onClick={()=>onClose()}>x</button>
-							<div className="socks_head">{user.name}님의 소원양말 1</div>
+							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{nickname}님의 소원양말 1</div>
 							<div className="socks_center">
 								<div id="none_box_1" className="socks_edit_noneBox">
 									<div className="absolute text-[#791818] top-[36%]">

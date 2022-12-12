@@ -45,16 +45,13 @@ export default function Main(){
       setParamValue(t_paramvalue)
       const t_windowGet = window.sessionStorage.getItem('user');
       setWindowGet( window.sessionStorage.getItem('user') );
-      console.log("============main.js============== t_windowGet, t_paramvalue, window.sesstion.token");
-      console.log(t_windowGet);
-      console.log(t_paramvalue);
-      console.log(JSON.parse(window.sessionStorage.user).token);
       // user key가 session에 존재하고, url value와 token이 동일한 경우에만 허용
-      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.user).token){
+      if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.token)){
         setUser(JSON.parse(window.sessionStorage.user));
         setUsertoken(JSON.parse(window.sessionStorage.token));
         setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
       } else {
+        window.sessionStorage.clear();
         router.push('/');
         alert("잘못된 접근입니다.");
       }
@@ -65,10 +62,7 @@ export default function Main(){
   const logoutHandler = () => {
     window.Kakao.Auth.logout(function() {
       console.log('로그아웃');
-      window.sessionStorage.removeItem('user');
-      window.sessionStorage.removeItem('token');
-      window.sessionStorage.removeItem('nickname');
-      window.sessionStorage.removeItem('solvecount');
+      window.sessionStorage.clear();
       router.push('/');
     });
   }
@@ -110,7 +104,7 @@ export default function Main(){
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,16);
+    var dDay = new Date(2022,11,14);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
@@ -122,7 +116,7 @@ export default function Main(){
     } else {
       setQuizzesNum(10-solvedNum-result)
     }
-  }, []);
+  }, [user]);
 
   /* Audio */
   const [play, setPlay] = useState(false);
@@ -483,7 +477,7 @@ export default function Main(){
           </div>
           {quizzesNum !== 0 ? 
             <div className="quiz-notification bg-red-600 rounded-full">
-              <div className="text-white text-sm font-normal">{solvedNum}</div>
+              <div className="text-white text-sm font-normal">{quizzesNum}</div>
             </div> :
             null
           }
@@ -499,9 +493,9 @@ export default function Main(){
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
         <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} nickname={user.nickname} usertoken={usertoken} deerData={deerData}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={usertoken}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={usertoken}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={usertoken}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
       </div>
     </div>
     )}
