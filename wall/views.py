@@ -95,7 +95,8 @@ class present(APIView):
         
         print(111111111111111111111111111111111111111111111111)
         
-        print(request.get('num'))
+        num=request.GET.get('num',None)
+        print(num)
         
         if(num == 1):
             
