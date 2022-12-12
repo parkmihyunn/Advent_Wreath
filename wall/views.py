@@ -91,69 +91,91 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
 
 class present(APIView):
     def get(self, request):
-        #req.jwt를 디코드 해서 user_id로 저장
-        
-        print(111111111111111111111111111111111111111111111111)
         
         num=request.GET.get('num',None)
-        print(num)
-        
+                
         if(num == 1):
             
-            if(Sock.objects.filter(u_id = request.user_id).exists() == False):
+            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
                 Sock.objects.create (
-                    u_id = request.user_id,
-                    sock1_name = req.name,
-                    sock1_img = req.img,
+                    u_id = request.GET.get('user_id',None),
+                    sock1_name = request.GET.get('name',None),
+                    sock1_img = request.GET.get('img',None),
                     sock2_name = "null",
                     sock2_img = "null",
                     sock3_name = "null",
                     sock3_img = "null",
                     )      
-                sock.save()       
-            else: 
-                sock = Sock.objects.get(u_id = req.user_id)
-                sock.sock1_name = req.name
-                sock.sock1_img = req.img
                 sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)       
+            else: 
+                sock = Sock.objects.get(u_id = request.GET.get('user_id',None)),
+                sock.sock1_name = request.GET.get('name',None),
+                sock.sock1_img = request.GET.get('img',None),
+                sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)
             
         
-        elif(req.num == 2):
+        elif(request.GET.get('num',None) == 2):
             
-            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
                 Sock.objects.create (
-                    u_id = req.user_id,
+                    u_id = request.GET.get('user_id',None),
                     sock1_name = "null",
                     sock1_img = "null",
-                    sock2_name = req.name,
-                    sock2_img = req.img,
+                    sock2_name = request.GET.get('name',None),
+                    sock2_img = request.GET.get('img',None),
                     sock3_name = "null",
                     sock3_img = "null",
                     )      
-                sock.save()       
-            else: 
-                sock = Sock.objects.get(u_id = req.user_id)
-                sock.sock2_name = req.name
-                sock.sock2_img = req.img
                 sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)       
+            else: 
+                sock = Sock.objects.get(u_id = request.GET.get('user_id',None)),
+                sock.sock2_name = request.GET.get('name',None),
+                sock.sock2_img = request.GET.get('img',None),
+                sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)
                 
-        elif(req.num == 3):
-            if(Sock.objects.filter(u_id = req.user_id).exists() == False):
+        elif(request.GET.get('num',None) == 3):
+            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
                 Sock.objects.create (
-                    u_id = req.user_id,
+                    u_id = request.GET.get('user_id',None),
                     sock1_name = "null",
                     sock1_img = "null",
                     sock2_name = "null",
                     sock2_img = "null",
-                    sock3_name = req.name,
-                    sock3_img = req.img,
+                    sock3_name = request.GET.get('name',None),
+                    sock3_img = request.GET.get('img',None),
                     )      
-                sock.save()       
-            else: 
-                sock = Sock.objects.get(u_id = req.user_id)
-                sock.sock3_name = req.name
-                sock.sock3_img = req.img
                 sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)       
+            else: 
+                sock = Sock.objects.get(u_id = request.GET.get('user_id',None))
+                sock.sock3_name = request.GET.get('name',None)
+                sock.sock3_img = request.GET.get('img',None)
+                sock.save()
+                data = {
+                    'message' : 'follow!'
+                }
+                return JsonResponse(data=data)
+                
+            
     def post(self, req):
         print(req.data.get('user_id',None))
         #jwt를 디코드 해서 user_id로 저장
