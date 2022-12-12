@@ -92,8 +92,13 @@ class ChangeNickName(APIView):
                 "exist" : True,
                 "solve_count" : user.solve_count,
                 "nickname" : user.nickname,
+
             }
 
+        if type(user_jwt) != str:
+            datadict["token"] = user_jwt.decode('utf-8')
+        else:
+            datadict["token"] = user_jwt
         return JsonResponse(datadict)
 
 
@@ -106,3 +111,15 @@ class SolveQuestion(APIView):
         user.save()
 
         return JsonResponse({"응답":"solve_count +1 !"})
+
+class Nickname(APIView):
+    def get(self, request):
+        user_jwt=request.GET.get('jwt',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        user = User.objects.get(u_id = user_id['id'])
+
+        datadict = {
+              "nickname" : user.nickname,
+        }
+               
+        return JsonResponse(datadict)

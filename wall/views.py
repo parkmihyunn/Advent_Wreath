@@ -9,6 +9,9 @@ from rest_framework.response import Response
 from django.http import Http404
 import random
 from django.http import JsonResponse
+
+
+from accounts.models import User
 import jwt
 
 SECRET_KEY = "christmas"
@@ -166,3 +169,81 @@ class RealWreathView(APIView):
                 ]
             }
         return JsonResponse(datadict)
+
+    def post(self, request):
+        user_jwt = request.data.get('jwt',None)
+        index = request.data.get('index',None)
+        ornament = request.data.get('ornament',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        user = User.objects.get(u_id=user_id)
+        
+        if RealWreath.objects.filter(user_id=user_id['id']).exists():
+                if index==1 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn1 = ornament
+                    user_realwreath.save()
+                if index==2 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn2 = ornament
+                    user_realwreath.save()
+                if index==3 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn3 = ornament
+                    user_realwreath.save()
+                if index==4 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn4 = ornament
+                    user_realwreath.save()
+                if index==5 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn5 = ornament
+                    user_realwreath.save()
+                if index==6 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn6 = ornament
+                    user_realwreath.save()
+                if index==7 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                    user_realwreath.orn7 = ornament
+                    user_realwreath.save()
+
+        else:
+            RealWreath(
+                user_id = user_id,
+
+            ).save()
+            if index==1 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn1 = ornament
+                user_realwreath.save()
+            if index==2 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn2 = ornament
+                user_realwreath.save()
+            if index==3 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn3 = ornament
+                user_realwreath.save()
+            if index==4 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn4 = ornament
+                user_realwreath.save()
+            if index==5 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn5 = ornament
+                user_realwreath.save()
+            if index==6 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn6 = ornament
+                user_realwreath.save()
+            if index==7 : 
+                user_realwreath = RealWreath.objects.get(user_id = user['u_id'])
+                user_realwreath.orn7 = ornament
+                user_realwreath.save()
+
+        return JsonResponse({"응답":"리스저장 완료"})
+
+                
+
+
+            
