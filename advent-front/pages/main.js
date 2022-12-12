@@ -15,6 +15,7 @@ import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
+import VideoModal from '../components/videoModal'
 
 const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
@@ -28,6 +29,7 @@ export default function Main(){
   const [showS1_Modal, setShowS1_Modal] = useState(false);  // 양말1
   const [showS2_Modal, setShowS2_Modal] = useState(false);  // 양말2
   const [showS3_Modal, setShowS3_Modal] = useState(false);  // 양말3
+  const [showVM_Modal, setShowVM_Modal] = useState(false);  // 동영상
   
   /* 로그인 확인 */
   const [paramValue, setParamValue] = useState();  // url의 query :string
@@ -210,6 +212,19 @@ export default function Main(){
   function removeQ7() {
     document.getElementById('qimg7').classList.add('invisible');
   }
+
+  //video
+  function popVideo() {
+    if(user.solve_count >= 10) {
+      setShowVM_Modal(true)
+    }
+  }
+  useEffect(() => {
+    if(user.solve_count == 10) {
+      setShowVM_Modal(true)
+      user.solve_count = user.solve_count + 10
+    }
+  })
   
   return (
     <Fragment>
@@ -449,7 +464,11 @@ export default function Main(){
                 </Popover>
               </div>
             </div>
-            <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
+            <div className="door-handle">
+              <button onClick={popVideo}>
+                <Image src='/img/handle.png' width='76' height='103'/>
+              </button>
+            </div>
             {/* 콜렉션 원래 자리 오너먼트 아래쪽에 있어서 겹쳐서 클릭돼서 위로 올림 */}
           </div>
         </div>
@@ -490,6 +509,7 @@ export default function Main(){
         <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
         <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
         <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
+        <VideoModal isVisible={showVM_Modal} onClose={()=>setShowVM_Modal(false)} user={user} usertoken={usertoken}/>
       </div>
     </div>
     )}
