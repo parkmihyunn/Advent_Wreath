@@ -93,12 +93,14 @@ class present(APIView):
     def get(self, request):
         
         num=request.GET.get('num',None)
+        user_jwt = request.data.get('jwt',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
                 
         if(num == 1):
             
-            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
+            if(Sock.objects.filter(u_id = user_id).exists() == False):
                 Sock.objects.create (
-                    u_id = request.GET.get('user_id',None),
+                    u_id = user_id,
                     sock1_name = request.GET.get('name',None),
                     sock1_img = request.GET.get('img',None),
                     sock2_name = "null",
@@ -112,7 +114,7 @@ class present(APIView):
                 }
                 return JsonResponse(data=data)       
             else: 
-                sock = Sock.objects.get(u_id = request.GET.get('user_id',None)),
+                sock = Sock.objects.get(u_id = user_id),
                 sock.sock1_name = request.GET.get('name',None),
                 sock.sock1_img = request.GET.get('img',None),
                 sock.save()
@@ -124,9 +126,9 @@ class present(APIView):
         
         elif(request.GET.get('num',None) == 2):
             
-            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
+            if(Sock.objects.filter(u_id = user_id).exists() == False):
                 Sock.objects.create (
-                    u_id = request.GET.get('user_id',None),
+                    u_id = user_id,
                     sock1_name = "null",
                     sock1_img = "null",
                     sock2_name = request.GET.get('name',None),
@@ -140,7 +142,7 @@ class present(APIView):
                 }
                 return JsonResponse(data=data)       
             else: 
-                sock = Sock.objects.get(u_id = request.GET.get('user_id',None)),
+                sock = Sock.objects.get(u_id = user_id),
                 sock.sock2_name = request.GET.get('name',None),
                 sock.sock2_img = request.GET.get('img',None),
                 sock.save()
@@ -150,9 +152,9 @@ class present(APIView):
                 return JsonResponse(data=data)
                 
         elif(request.GET.get('num',None) == 3):
-            if(Sock.objects.filter(u_id = request.GET.get('user_id',None)).exists() == False):
+            if(Sock.objects.filter(u_id = user_id).exists() == False):
                 Sock.objects.create (
-                    u_id = request.GET.get('user_id',None),
+                    u_id = user_id,
                     sock1_name = "null",
                     sock1_img = "null",
                     sock2_name = "null",
@@ -166,7 +168,7 @@ class present(APIView):
                 }
                 return JsonResponse(data=data)       
             else: 
-                sock = Sock.objects.get(u_id = request.GET.get('user_id',None))
+                sock = Sock.objects.get(u_id = user_id)
                 sock.sock3_name = request.GET.get('name',None)
                 sock.sock3_img = request.GET.get('img',None)
                 sock.save()
@@ -179,7 +181,10 @@ class present(APIView):
     def post(self, req):
         print(req.data.get('user_id',None))
         #jwt를 디코드 해서 user_id로 저장
-        sock = Sock.objects.get(pk = req.data.get('user_id',None))
+        user_jwt = req.data.get('jwt',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        
+        sock = Sock.objects.get(pk = user_id)
         if(req.data.get('num',None) == 1):
             datadict = {
                 "name" : sock.sock1_name,
