@@ -107,6 +107,7 @@ export default function quiz(){
     setQuizData(tmp);
     console.log("====quizData====")
     console.log(quizzes[solvedNum])
+  //},[solvedNum])
   },[solvedNum])
 
   /* 오늘 날짜 */
@@ -133,6 +134,9 @@ export default function quiz(){
     const quizInput_t = quizInput.current.value.toLowerCase().trim();
     let answerResult = quizdata.correct.toLowerCase().trim();
     const t_solvedNum = solvedNum +1;
+    // 확인후 지워도 됨
+    console.log(t_solvedNum)
+    console.log(usertoken)
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
@@ -159,8 +163,8 @@ export default function quiz(){
       document.getElementById('submit-btn').classList.add('hidden');
       setShowConfetti(true);  // confetti 활성화
       if(typeof window !== 'undefined') {
-      window.sessionStorage.solvecount = JSON.stringify(solvedNum)
-      console.log(window.sessionStorage)
+        window.sessionStorage.solvecount = JSON.stringify(t_solvedNum)
+        console.log(window.sessionStorage)
       }
     } else {
       // 오답 
