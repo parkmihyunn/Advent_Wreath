@@ -317,6 +317,7 @@ class SocksView(APIView):
                 
             else: 
                 return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})
+        return JsonResponse({"error":"num이 1~3을 벗어났습니다"})
                 
             
     def get(self, request):
