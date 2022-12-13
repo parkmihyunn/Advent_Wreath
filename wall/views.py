@@ -282,7 +282,7 @@ class SocksView(APIView):
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
 
-        if(num == '1'):
+        if(num == 1):
             if Sock.objects.filter(user_id=user).exists():
 
                 sock = Sock.objects.get(user_id = user_id['id'])
@@ -293,7 +293,7 @@ class SocksView(APIView):
             else: 
                 return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})
 
-        elif(num == '2'):
+        elif(num == 2):
 
             if Sock.objects.filter(user_id=user).exists():
 
@@ -306,7 +306,7 @@ class SocksView(APIView):
             else: 
                 return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})   
                 
-        elif(num == '3'):
+        elif(num == 3):
             if Sock.objects.filter(user_id=user).exists():
 
                 sock = Sock.objects.get(user_id = user_id['id'])
