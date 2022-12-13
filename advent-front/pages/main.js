@@ -56,7 +56,7 @@ export default function Main(){
         alert("잘못된 접근입니다.");
       }
     }
-  },[])
+  },[console.log(usertoken)])
 
   /* 로그아웃 */
   const logoutHandler = () => {
@@ -314,7 +314,7 @@ export default function Main(){
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData}/>
+                        <WreathEditModal getData={getData} />
                     </Popover.Content>
                 </Popover>
                 <Popover>
