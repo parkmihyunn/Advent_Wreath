@@ -32,6 +32,7 @@ export default function Home() {
     var datajson = res.data;
     console.log(datajson);
     console.log(datajson.token);
+    console.log(datajson.nickname);
     console.log("index.js sessionStorage =======");
     window.sessionStorage.user = JSON.stringify(datajson);
     window.sessionStorage.token = JSON.stringify(datajson.token);

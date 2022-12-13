@@ -13,7 +13,7 @@
     width: 332px;
     height: 414px;
     display: flex;
-    background-color: #D63E3E;
+    background-color: #E17070;
     position: absolute;
     justify-content: center;
     z-index: 0;
@@ -24,7 +24,7 @@
     width: 297px;
     height: 340px;
     display: flex;
-    background-color: #E17070;
+    background-color: #D63E3E;
     position: absolute;
     justify-content: center;
     z-index: 0;
@@ -48,7 +48,7 @@
     width: 83px;
     height: 86px;
     display: flex;
-    background-color: #A33333;
+    background-color: #E17070;
     justify-content: center;
     z-index: 0;
     border-radius: 11px;
