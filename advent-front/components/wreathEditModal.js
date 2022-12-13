@@ -28,8 +28,8 @@ export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ }) => {
         });
         console.log("백서버에서 가져온 오너먼트")
         var datajson = res.data;
-        console.log(datajson.datadict);
-        setRefinedData(datajson.datadict);
+        console.log(datajson.src1);
+        setRefinedData(datajson);
     }
 
     const onClickHandler = (t1) => {

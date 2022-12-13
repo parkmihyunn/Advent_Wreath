@@ -411,11 +411,7 @@ export default function Main(){
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-<<<<<<< HEAD
                         <WreathEditModal getData={getData} user={user} usertoken={usertoken} removeQ={removeQ}/>
-=======
-                        <WreathEditModal getData={getData} />
->>>>>>> 238e42c2c6d659e351a1df1dc81c71f1ab5d3b79
                     </Popover.Content>
                 </Popover>
                 <Popover>
