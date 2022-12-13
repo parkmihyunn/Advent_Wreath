@@ -24,7 +24,6 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
 
     num = 8
     ran = random.randint(2,num)
-    print(deer.objects.get(pk=ran))
     _horn = (deer.objects.get(pk = ran)).horn
     
     ran = random.randint(2,num)
@@ -57,9 +56,13 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
 class deerList(APIView):    
     def get(self, request):
         user_jwt = request.GET.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+
+        if mixDeer.objects.filter(user_id=user_id['id']).exists():
+            pass
+        else:
+            return JsonResponse({"error":"등록된 mixdeer가 없는 사용자입니다."})
+
         deer = list(mixDeer.objects.filter(user_id = user_id['id']).values())
 
         return JsonResponse(deer,safe=False)
@@ -67,11 +70,9 @@ class deerList(APIView):
 class RealWreathView(APIView):    
     def get(self, request):
         user_jwt = request.GET.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+
         user_wreath = RealWreath.objects.get(user_id = user_id['id'])
-        
         datadict = {
                 "ornaments" : [
                     user_wreath.orn1,
@@ -87,8 +88,6 @@ class RealWreathView(APIView):
 
     def post(self, request):
         user_jwt = request.data.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         index = request.data.get('index',None)
         ornament = request.data.get('ornament',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
@@ -123,107 +122,66 @@ class RealWreathView(APIView):
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn7 = ornament
                     user_realwreath.save()
-
         else:
-            RealWreath(
-                user_id = user,
-
-            ).save()
-            if index=='1' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn1 = ornament
-                user_realwreath.save()
-            if index=='2' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn2 = ornament
-                user_realwreath.save()
-            if index=='3' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn3 = ornament
-                user_realwreath.save()
-            if index=='4' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn4 = ornament
-                user_realwreath.save()
-            if index=='5' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn5 = ornament
-                user_realwreath.save()
-            if index=='6' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn6 = ornament
-                user_realwreath.save()
-            if index=='7' : 
-                user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                user_realwreath.orn7 = ornament
-                user_realwreath.save()
-
+            return JsonResponse({"error":"RealWreath DB에 등록되어있지 않은 사용자 입니다."})
         return JsonResponse({"응답":"리스저장 완료"})
 
 def addOrnament(user_id,orn_src):
     user = User.objects.get(u_id = user_id['id'])
     if OrnamentList.objects.filter(user_id=user_id['id']).exists():
-        pass
+        user_ornamentlist = OrnamentList.objects.get(user_id = user.u_id)
+        if user_ornamentlist.src1 =='-1':
+            user_ornamentlist.src1 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src2 == '-1':
+            user_ornamentlist.src2 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src3 == '-1':
+            user_ornamentlist.src3 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src4 == '-1':
+            user_ornamentlist.src4 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src5 == '-1':
+            user_ornamentlist.src5 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src6 == '-1':
+            user_ornamentlist.src6 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src7 == '-1':
+            user_ornamentlist.src7 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src8 == '-1':
+            user_ornamentlist.src8 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src9 == '-1':
+            user_ornamentlist.src9 = orn_src
+            user_ornamentlist.save()
+            return 0
+        if user_ornamentlist.src10 == '-1':
+            user_ornamentlist.src10 = orn_src
+            user_ornamentlist.save()
+            return 0
     else:
-        OrnamentList(
-                user_id = user,
-            ).save()
-    
-    user_ornamentlist = OrnamentList.objects.get(user_id = user.u_id)
-
-    if user_ornamentlist.src1 =='-1':
-        user_ornamentlist.src1 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src2 == '-1':
-        user_ornamentlist.src2 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src3 == '-1':
-        user_ornamentlist.src3 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src4 == '-1':
-        user_ornamentlist.src4 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src5 == '-1':
-        user_ornamentlist.src5 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src6 == '-1':
-        user_ornamentlist.src6 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src7 == '-1':
-        user_ornamentlist.src7 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src8 == '-1':
-        user_ornamentlist.src8 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src9 == '-1':
-        user_ornamentlist.src9 = orn_src
-        user_ornamentlist.save()
-        return 0
-    if user_ornamentlist.src10 == '-1':
-        user_ornamentlist.src10 = orn_src
-        user_ornamentlist.save()
-        return 0
+        return JsonResponse({"error":"Ornamentlist DB에 등록되어있지 않은 사용자 입니다."})
     return JsonResponse({"응답":"오너먼트를 다 받았어요!"})
 
 class OrnamentView(APIView):
-    def post(self,request):
+    def post(self,request): #delete Ornament
         user_jwt = request.data.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         orn_src = request.data.get('src',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
         user_ornamentlist = OrnamentList.objects.get(user_id = user.u_id)
 
-        print(user_ornamentlist.src2)
 
         if user_ornamentlist.src1 == orn_src :
             user_ornamentlist.src2 = '-1'
@@ -258,10 +216,8 @@ class OrnamentView(APIView):
         
         return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 오너먼트 리스트에서 삭제되었습니다!!"})
 
-    def get(self,request):
+    def get(self,request): # give Ornament list
         user_jwt = request.data.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
         user_ornamentlist = OrnamentList.objects.get(user_id = user.u_id)
@@ -284,8 +240,6 @@ class OrnamentView(APIView):
 class SolveQuestion(APIView):
     def post(self, request):
         user_jwt = request.data.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         orn_src = request.data.get('src',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
@@ -303,10 +257,9 @@ class PresentView(APIView):
         
         num=request.data.get('num',None)
         user_jwt = request.data.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
+
         if(num == '1'):
             if Sock.objects.filter(user_id=user).exists():
 
@@ -315,16 +268,9 @@ class PresentView(APIView):
                 sock.sock1_img = request.data.get('img',None)
                 sock.save()
                 return JsonResponse({"1번 양말":"저장되었습니다"})
-                
             else: 
-                Sock(
-                    user_id = user,
-                    sock1_name = request.data.get('name',None),
-                    sock1_img = request.data.get('img',None),
-                    ).save()
+                return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})
 
-                return JsonResponse({"1번 양말":"저장되었습니다"})     
-                
         elif(num == '2'):
 
             if Sock.objects.filter(user_id=user).exists():
@@ -336,13 +282,7 @@ class PresentView(APIView):
                 return JsonResponse({"2번 양말":"저장되었습니다"})
                 
             else: 
-                Sock(
-                    user_id = user,
-                    sock2_name = request.data.get('name',None),
-                    sock2_img = request.data.get('img',None),
-                    ).save()
-
-                return JsonResponse({"2번 양말":"저장되었습니다"})      
+                return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})   
                 
         elif(num == '3'):
             if Sock.objects.filter(user_id=user).exists():
@@ -354,19 +294,11 @@ class PresentView(APIView):
                 return JsonResponse({"3번 양말":"저장되었습니다"})
                 
             else: 
-                Sock(
-                    user_id = user,
-                    sock3_name = request.data.get('name',None),
-                    sock3_img = request.data.get('img',None),
-                    ).save()
-
-                return JsonResponse({"3번 양말":"저장되었습니다"})   
+                return JsonResponse({"error":"Sock DB에 등록되어있지 않은 사용자 입니다."})
                 
             
     def get(self, request):
         user_jwt = request.GET.get('jwt',None)
-        if type(user_jwt) != str:
-                user_jwt = user_jwt.decode('utf-8')
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         sock = Sock.objects.get(user_id = user_id['id'])
         num = request.GET.get('num',None)

@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 
 from accounts.models import User
+from wall.models import RealWreath,OrnamentList,Sock
 from rest_framework.views import APIView
 
 # Create your views here.
@@ -35,22 +36,32 @@ class KakaoLogin(APIView):
             }
                
             return JsonResponse(datadict)
-        else: 
+        else:
+    
+            jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM)
+            if type(jwt_token) == bytes:
+                jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM).decode('utf-8')
+                print("\nit was bytes\n")
             
-            jwt_token_raw = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM)
-            print("below is raw jwt token")
-            print(jwt_token_raw)
-            print("\n")
-            jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM).decode('utf-8')
-            print("below is utf-8 decoded jwt token")
-            print(jwt_token)
-       
+            user_id = kakao_response['id']
             User(
                 u_id=kakao_response['id'],
                 username=kakao_response['properties']['nickname'],
                 jwt=jwt_token
-                
             ).save()
+
+            RealWreath(
+                user_id=user_id
+            ).save()
+
+            OrnamentList(
+                user_id=user_id
+            ).save()
+
+            Sock(
+                user_id=user_id
+            ).save()
+            
 
             user = User.objects.get(u_id=kakao_response['id'])
             datadict = {
@@ -59,11 +70,6 @@ class KakaoLogin(APIView):
                 "solve_count" : user.solve_count,
                 "nickname" : user.nickname,
             }
-
-            if type(jwt_token) != str:
-                datadict["token"] = jwt_token.decode('utf-8')
-            else:
-                datadict["token"] = jwt_token
 
             return JsonResponse(datadict)
 
