@@ -17,8 +17,8 @@ import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
 import VideoModal from '../components/videoModal'
 
-const BASE_URL = "http://localhost:8000/"
 const SHARE_URL = "http://localhost:3000/"
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
@@ -58,7 +58,7 @@ export default function Main(){
         alert("잘못된 접근입니다.");
       }
     }
-  },[])
+  },[console.log(usertoken)])
 
   /* 로그아웃 */
   const logoutHandler = () => {
@@ -83,6 +83,57 @@ export default function Main(){
     setDeerData(datajson);
     return setCollectionModal(true); 
   }
+
+  // 백엔드 api 테스트용 코드
+  // =========== 아래 작동 확인 X =====================
+  // const [deerData, setDeerData] = useState([]);
+  // async function getDeer(){
+  //   const t_src = "/img/ornaments/1.png"
+  //   const t_name = "임시이름"
+  //   const t_num = 1
+  //   let res2 = await axios.post(BASE_URL+"socks/",
+  //     {
+  //       url:t_src,
+  //       jwt:usertoken,
+  //       num:t_num,
+  //       name:t_name,
+  //     });
+  //   console.log("socks 결과 =======");
+  //   var datajson2 = res2.data;
+  //   console.log(datajson2);
+  //   setDeerData(datajson2);
+  // =================================================
+    // =========== 아래 작동 확인 완료 =====================
+    // let res = await axios.get(BASE_URL+"socks/", {
+    //   params: {
+    //     jwt:usertoken,
+    //     num:1
+    //   },
+    // });
+    // console.log("socks 결과 =======");
+    // var datajson = res.data;
+    // console.log(datajson);
+    // setDeerData(datajson);
+    // let res3 = await axios.post(BASE_URL+"ornament/",
+    //   {
+    //     src:t_src,
+    //     jwt:usertoken,
+    //   });
+    // console.log("ornament 결과 =======");
+    // var datajson3 = res3.data;
+    // console.log(datajson3);
+    // setDeerData(datajson3);
+    // let res4 = await axios.get(BASE_URL+"ornament/", {
+    //   params: {
+    //     jwt:usertoken,
+    //   },
+    // });
+    // console.log("ornament 결과 =======");
+    // var datajson4 = res4.data;
+    // console.log(datajson4);
+    // setDeerData(datajson4);
+    // =================================================
+  //}
 
   /* 링크복사 */
   const [urlForm, setUrlForm] = useState();
@@ -110,15 +161,12 @@ export default function Main(){
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
-    /* (수정필) 사용자가 완료한 문제 갯수 user.solve_count에 저장되어있음
-    (axios해서 불러올 필요xx solve_count db수정하는 방법 들으면 그때 코드 수정하고 테스트하기) */
-    // const solvedNum = res.data[0].solvedNum;
     if(solvedNum+result>=10){
       setQuizzesNum(0)
     } else {
       setQuizzesNum(10-solvedNum-result)
     }
-  }, [user]);
+  }, [solvedNum]);  // ===============================> 1213 미현 user -> solvedNum 변경 useEffect 제대로 작동 안하는 경우 여기 확인해보기
 
   /* Audio */
   const [play, setPlay] = useState(false);
@@ -363,7 +411,11 @@ export default function Main(){
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
+<<<<<<< HEAD
                         <WreathEditModal getData={getData} user={user} usertoken={usertoken} removeQ={removeQ}/>
+=======
+                        <WreathEditModal getData={getData} />
+>>>>>>> 238e42c2c6d659e351a1df1dc81c71f1ab5d3b79
                     </Popover.Content>
                 </Popover>
                 <Popover>
@@ -537,7 +589,7 @@ export default function Main(){
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
 
-        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 방 문 공유링크 복사하기</button></div>
+        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 현관 공유링크 복사하기</button></div>
         <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
         
         <div className="flex-1"></div>

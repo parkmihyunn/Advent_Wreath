@@ -91,8 +91,16 @@ export default function quiz(){
           setPreSolvedNum(JSON.parse(window.sessionStorage.solvecount));
           setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
         }
-         {console.log(t_testNum)}
-      }  {
+        else {
+          router.push({
+            pathname: '/main',
+            query: {
+              value:t_paramvalue
+            },
+          },);
+          alert("오늘의 퀴즈가 남아있지 않습니다.");
+        }
+      } else {
         window.sessionStorage.clear();
         router.push('/');
         alert("잘못된 접근입니다.");
@@ -103,11 +111,11 @@ export default function quiz(){
   /* quizzes에서 해당하는 퀴즈 꺼내기 */
   const [quizdata, setQuizData] = useState();
   useEffect(() => {
-    const tmp = quizzes[solvedNum];
+    const tmp = quizzes[preSolvedNum];
     setQuizData(tmp);
     console.log("====quizData====")
-    console.log(quizzes[solvedNum])
-  },[solvedNum])
+    console.log(quizzes[preSolvedNum])
+  },[preSolvedNum])
 
   /* 오늘 날짜 */
   const now = new Date();
@@ -133,6 +141,9 @@ export default function quiz(){
     const quizInput_t = quizInput.current.value.toLowerCase().trim();
     let answerResult = quizdata.correct.toLowerCase().trim();
     const t_solvedNum = solvedNum +1;
+    // 확인후 지워도 됨
+    console.log(t_solvedNum)
+    console.log(usertoken)
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
@@ -159,8 +170,8 @@ export default function quiz(){
       document.getElementById('submit-btn').classList.add('hidden');
       setShowConfetti(true);  // confetti 활성화
       if(typeof window !== 'undefined') {
-      window.sessionStorage.solvecount = JSON.stringify(solvedNum)
-      console.log(window.sessionStorage)
+        window.sessionStorage.solvecount = JSON.stringify(t_solvedNum)
+        console.log(window.sessionStorage)
       }
     }  {
       // 오답 
@@ -182,7 +193,7 @@ export default function quiz(){
     console.log("getDeer 결과 =======");
     var datajson = res.data;
     console.log(datajson);
-    setDeerData(datajson[solvedNum-1]);
+    setDeerData(datajson[preSolvedNum]);
     return setShowR_Modal(true); 
   }
 

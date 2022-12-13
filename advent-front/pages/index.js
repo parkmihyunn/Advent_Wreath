@@ -32,13 +32,12 @@ export default function Home() {
     var datajson = res.data;
     console.log(datajson);
     console.log(datajson.token);
-    console.log(datajson.nickname);
-    console.log("index.js sessionStorage =======");
     window.sessionStorage.user = JSON.stringify(datajson);
     window.sessionStorage.token = JSON.stringify(datajson.token);
     window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
-    const t_name = datajson.nickname;
-    if(t_name == "undefined") {
+    console.log("===========index.js SessionStorage=======================");
+    console.log(window.sessionStorage);
+    if(datajson.nickname == '임시닉네임') {
       router.push({
         pathname: '/nickname',
         query: {

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Image from 'next/image';
 import { Modal, Link } from "@nextui-org/react";
 import AWS from "aws-sdk"
+import axios from 'axios';
 
 const SOCK_NUM = 1;
 
@@ -38,7 +39,6 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
 	const onCickImageUpload = () => {
     imageInput.current.click();
   };
-
   const encodeFileToBase64 = (fileBlob) => {
     console.log(fileBlob);
     console.log(fileBlob.name)
@@ -55,11 +55,12 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
 
   /* 이미지 가져오고 업로드 하는 핸들러 button 눌렸을때 실행할 것 */
   const handleFileInput = (fileBlob) => {
-    if(fileBlob !== null){	 // 파일 등록 한 경우
+		// 파일 등록 O
+    if(fileBlob !== null){
       const file = fileBlob
 			const t_filetype = file.type
       const t_filename = usertoken + file.name
-
+			const t_fileURL = "https://advent-reindeer-test.s3.ap-northeast-2.amazonaws.com/"+t_filename;
 			const upload = new AWS.S3.ManagedUpload({
 				params: {
 					Bucket: "advent-reindeer-test",
@@ -71,16 +72,27 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
 			const promise = upload.promise()
 			promise.then(
 				function (data) {
-					alert("이미지 업로드에 성공했습니다.")
 					/* 백엔드에 t_filename, jwt, giftName, sock_number(=1) 넘겨주기*/
+					let res = axios.post(BASE_URL+"socks/",
+					{
+						jwt:usertoken,
+						name:giftName,
+						url:t_fileURL,
+						num:SOCK_NUM,
+					});
+					console.log(les.data)
 					onClose()
+					alert("이미지 업로드에 성공했습니다.")
 				},
 				function (err) {
 					return alert(err.message)
 				}
 			)
     }
-		else { return onClose() }	
+		// 파일 등록 X
+		else { 
+			return onClose() 
+		}	
   }
 
 	if(!isVisible) return null;
@@ -103,7 +115,7 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
 									</div>
 									{imageSrc && <img src={imageSrc} alt="preview-img"/>}
 								</div>	
-								<div id="upload" className="absolute top-[113%] w-[62px] h-[21px] flex bg-[#FF929D] justify-center z-0 rounded-full"
+								<div id="upload" className="absolute top-[113%] w-[62px] h-[21px] flex justify-center z-0 rounded-full text-[11px] bg-[#EF3939]"
 										onClick={ ()=> {onCickImageUpload()}}
 								>
 									<input type="file" onChange = {(e)=>{encodeFileToBase64(e.target.files[0])}}

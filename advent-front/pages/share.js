@@ -10,30 +10,57 @@ import SocksModal_1 from '../components/share_socksModal_1'
 import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_q.png"
 
 export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
   const [user, setUser] = useState();
-  const [paramValue, setParamValue] = useState(); // url로 전달된 유저jwt토큰
+  const [usertoken, setUsertoken] = useState(); // url로 전달된 유저jwt토큰
+  const [nickname, setNickname] = useState(""); // jwt로 받은 유저닉네임
   const router = useRouter();
   useEffect(() => {
     if(typeof window !== 'undefined') {
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
-      setParamValue(t_paramvalue)
+      setUsertoken(t_paramvalue)
       if(t_paramvalue !== null){
         /* t_paramvalue(token)으로 백엔드에 realwreath, socks, reindeer 요청 */
-      } else {
+        axios.get(BASE_URL+"nickname/",{
+          params: {
+            jwt:t_paramvalue
+          },}
+        )
+        .then(res => {
+          setNickname(res.data.nickname);
+        })
+        .catch(res => {
+          console.log('실패');
+          console.log(res);
+        })
+      } 
+      else {
         router.push('/');
         alert("잘못된 접근입니다.");
       }
     }
   },[])
 
-  /* 백엔드에서 usertoken 이용하여 nickname 받아오기 */
-  const [nickname, setNickname] = useState(); // token을 이용하여 받아온 nickname
+  /* 순록 데이터 불러오기 */
+  const [deerData, setDeerData] = useState([]);
+  async function getDeer(){
+    let res = await axios.get(BASE_URL+"deer/", {
+      params: {
+        jwt:usertoken
+      },
+    });
+    console.log("getDeer 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setDeerData(datajson);
+    return setCollectionModal(true); 
+  }
 
   /* 시작화면으로 돌아가기 */
   const [clickGo, setClickGo] = useState(false);
@@ -134,7 +161,7 @@ export default function share(){
           <div className="door-top">
             <div className="flex justify-between">  
               <h1 className="ml-8 text-white text-base font-normal align-bottom">
-                {user}님의 소원양말을 열어보세요
+                {nickname}님의 소원양말
               </h1>
             </div>
             <div className="px-10 relative">
@@ -174,24 +201,24 @@ export default function share(){
               </div>
             </div>
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
-            <div className="collection">
-              <button onClick={()=> setCollectionModal(true)} >
+            <div id="collection"className="absolute w-[95px] h-[131px] top-[84%] left-[65%] text-align">
+              <button onClick={()=> getDeer()} >
                 <Image src='/img/collection.png' quality='100' width='95' height='131'/>
               </button>
             </div>
           </div>
         </div>
         <div id="go-index" className="relative min-w-[320px]">
-          <button onClick={()=>setClickGo(true)} className="text-xs px-6 py-2.5 text-white bg-[#B30000] m-auto block relative">저도 크리스마스 방문 꾸미러 갈래요!</button>
-          <div className="share-go-index top-[55%] left-[13%]"><Image src='/img/ornaments/santa.png' width='39' height='44'/></div>
-          <div className="share-go-index top-[49%] left-[86%]"><Image src='/img/ornaments/socks.png' width='35' height='57'/></div>
+          <button onClick={()=>setClickGo(true)} className="text-xs px-6 py-2.5 text-white bg-[#B30000] m-auto mt-[10px] block relative">저도 크리스마스 방문 꾸미러 갈래요!</button>
+          <div className="share-go-index top-[68%] left-[13%]"><Image src='/img/ornaments/santa.png' width='39' height='44'/></div>
+          <div className="share-go-index top-[56%] left-[86%]"><Image src='/img/ornaments/socks.png' width='35' height='57'/></div>
         </div>
         <div className="flex-1"></div>
         <div className="flex share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} usertoken={paramValue}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={paramValue} nickname={nickname}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={paramValue} nickname={nickname}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={paramValue} nickname={nickname}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} usertoken={usertoken} nickname={nickname} deerData={deerData}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={usertoken} nickname={nickname}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={usertoken} nickname={nickname}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={usertoken} nickname={nickname}/>
       </div>
     </div>
     </Fragment>
