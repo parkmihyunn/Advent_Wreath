@@ -287,7 +287,7 @@ class SocksView(APIView):
 
                 sock = Sock.objects.get(user_id = user_id['id'])
                 sock.sock1_name = request.data.get('name',None)
-                sock.sock1_img = request.data.get('img',None)
+                sock.sock1_img = request.data.get('url',None)
                 sock.save()
                 return JsonResponse({"1번 양말":"저장되었습니다"})
             else: 
@@ -299,7 +299,7 @@ class SocksView(APIView):
 
                 sock = Sock.objects.get(user_id = user_id['id'])
                 sock.sock2_name = request.data.get('name',None)
-                sock.sock2_img = request.data.get('img',None)
+                sock.sock2_img = request.data.get('url',None)
                 sock.save()
                 return JsonResponse({"2번 양말":"저장되었습니다"})
                 
@@ -311,7 +311,7 @@ class SocksView(APIView):
 
                 sock = Sock.objects.get(user_id = user_id['id'])
                 sock.sock3_name = request.data.get('name',None)
-                sock.sock3_img = request.data.get('img',None)
+                sock.sock3_img = request.data.get('url',None)
                 sock.save()
                 return JsonResponse({"3번 양말":"저장되었습니다"})
                 
