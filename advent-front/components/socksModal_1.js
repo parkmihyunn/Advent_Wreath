@@ -115,7 +115,7 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken }) => {
 									</div>
 									{imageSrc && <img src={imageSrc} alt="preview-img"/>}
 								</div>	
-								<div id="upload" className="absolute top-[113%] w-[62px] h-[21px] flex bg-[#FF929D] justify-center z-0 rounded-full"
+								<div id="upload" className="absolute top-[113%] w-[62px] h-[21px] flex justify-center z-0 rounded-full text-[11px] bg-[#EF3939]"
 										onClick={ ()=> {onCickImageUpload()}}
 								>
 									<input type="file" onChange = {(e)=>{encodeFileToBase64(e.target.files[0])}}
