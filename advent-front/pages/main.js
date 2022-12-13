@@ -16,8 +16,8 @@ import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
 
-const BASE_URL = "http://localhost:8000/"
 const SHARE_URL = "http://localhost:3000/"
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
@@ -108,15 +108,12 @@ export default function Main(){
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
-    /* (수정필) 사용자가 완료한 문제 갯수 user.solve_count에 저장되어있음
-    (axios해서 불러올 필요xx solve_count db수정하는 방법 들으면 그때 코드 수정하고 테스트하기) */
-    // const solvedNum = res.data[0].solvedNum;
     if(solvedNum+result>=10){
       setQuizzesNum(0)
     } else {
       setQuizzesNum(10-solvedNum-result)
     }
-  }, [user]);
+  }, [solvedNum]);  // ===============================> 1213 미현 user -> solvedNum 변경 useEffect 제대로 작동 안하는 경우 여기 확인해보기
 
   /* Audio */
   const [play, setPlay] = useState(false);
