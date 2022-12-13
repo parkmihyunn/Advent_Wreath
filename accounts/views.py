@@ -69,6 +69,7 @@ class KakaoLogin(APIView):
                 "exist" : False,
                 "solve_count" : user.solve_count,
                 "nickname" : user.nickname,
+                "jwt" : user.jwt,
             }
 
             return JsonResponse(datadict)

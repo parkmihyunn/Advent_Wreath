@@ -48,12 +48,12 @@ class OrnamentList(models.Model):
 
 class Sock(models.Model):
     user_id = models.ForeignKey("accounts.User", related_name = "user_sock", on_delete = models.CASCADE, db_column = "u_id", unique=True)
-    sock1_name = models.CharField(max_length=200,default=null)
-    sock1_img = models.CharField(max_length=200,default=null)
-    sock2_name = models.CharField(max_length=200,default=null)
-    sock2_img = models.CharField(max_length=200,default=null)
-    sock3_name = models.CharField(max_length=200,default=null)
-    sock3_img = models.CharField(max_length=200,default=null)
+    sock1_name = models.CharField(max_length=200,default=None)
+    sock1_img = models.CharField(max_length=200,default=None)
+    sock2_name = models.CharField(max_length=200,default=None)
+    sock2_img = models.CharField(max_length=200,default=None)
+    sock3_name = models.CharField(max_length=200,default=None)
+    sock3_img = models.CharField(max_length=200,default=None)
 
     def __str__(self):
         return str(str(self.user_id)+"님의 소원양말")
