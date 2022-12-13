@@ -27,6 +27,11 @@ class KakaoLogin(APIView):
 
         if User.objects.filter(u_id=kakao_response['id']).exists():
             user= User.objects.get(u_id=kakao_response['id'])
+            # user.username = "시험용"
+            # user.jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjU0MjQ5MzM5Mn0.Q5Oz0fbeFIqzfY8xewNxxXhu-MyMPpoMIjEDm25YKGM"
+            # user.u_id = "2542493392"
+            
+            user.save()
             datadict = {
                 "name" : user.username,
                 "token" : user.jwt,
@@ -34,6 +39,17 @@ class KakaoLogin(APIView):
                 "solve_count": user.solve_count,
                 "nickname" : user.nickname,
             }
+            # RealWreath(
+            #     user_id=User.objects.get(u_id=user.u_id)
+            # ).save()
+
+            # OrnamentList(
+            #     user_id=User.objects.get(u_id=user.u_id)
+            # ).save()
+
+            # Sock(
+            #     user_id=User.objects.get(u_id=user.u_id)
+            # ).save()
                
             return JsonResponse(datadict)
         else:
@@ -67,7 +83,7 @@ class KakaoLogin(APIView):
                 "exist" : False,
                 "solve_count" : user.solve_count,
                 "nickname" : user.nickname,
-                "jwt" : user.jwt,
+                "token" : user.jwt,
             }
 
             return JsonResponse(datadict)

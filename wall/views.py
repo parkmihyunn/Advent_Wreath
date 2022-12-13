@@ -184,40 +184,41 @@ class OrnamentView(APIView):
 
 
         if user_ornamentlist.src1 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src1 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src2 == orn_src :
             user_ornamentlist.src2 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src3 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src3 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src4 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src4 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src5 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src5 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src6 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src6 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src7 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src7 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src8 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src8 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src9 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src9 = '-1'
             user_ornamentlist.save()
         if user_ornamentlist.src10 == orn_src :
-            user_ornamentlist.src2 = '-1'
+            user_ornamentlist.src10 = '-1'
             user_ornamentlist.save()
         
         return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 오너먼트 리스트에서 삭제되었습니다!!"})
 
     def get(self,request): # give Ornament list
-        user_jwt = request.data.get('jwt',None)
+        user_jwt = request.GET.get('jwt',None)
+        print(type(user_jwt))
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id = user_id['id'])
         user_ornamentlist = OrnamentList.objects.get(user_id = user.u_id)
@@ -252,7 +253,7 @@ class SolveQuestion(APIView):
         return JsonResponse({"solve_count":solve_count})
                 
 
-class PresentView(APIView):
+class SocksView(APIView):
     def post(self, request):
         
         num=request.data.get('num',None)
