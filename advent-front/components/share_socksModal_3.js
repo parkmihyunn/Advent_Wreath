@@ -22,7 +22,7 @@ const Share_SocksModal_3 = ({ isVisible, onClose, usertoken, nickname }) => {
 								<Image src='/img/ornaments/6.png' width='100' height='100'></Image>
 							</div>
 							<button className="text-white absolute flex top-[2%] right-[6%] text-[20px]" onClick={()=>onClose()}>x</button>
-							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{NICKNAME}님의 소원양말 3</div>
+							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{nickname}님의 소원양말 3</div>
 							<div className="socks_center3">
 								<div className="socks_giftImg">
 									{ null_img !== null

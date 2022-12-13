@@ -32,12 +32,11 @@ export default function Home() {
     var datajson = res.data;
     console.log(datajson);
     console.log(datajson.token);
-    console.log("index.js sessionStorage =======");
     window.sessionStorage.user = JSON.stringify(datajson);
     window.sessionStorage.token = JSON.stringify(datajson.token);
     window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
     const t_name = datajson.nickname;
-    if(t_name == "undefined") {
+    if(t_name === 'undefined') {
       router.push({
         pathname: '/nickname',
         query: {
