@@ -41,8 +41,6 @@ class KakaoLogin(APIView):
             jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM)
             if type(jwt_token) == bytes:
                 jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM).decode('utf-8')
-                print("\nit was bytes\n")
-            
             user_id = kakao_response['id']
             User(
                 u_id=kakao_response['id'],
