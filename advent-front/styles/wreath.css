@@ -22,7 +22,7 @@
 
 .wreath_edit_orna_group {
     width: 297px;
-    height: 312px;
+    height: 340px;
     display: flex;
     background-color: #E17070;
     position: absolute;
@@ -52,6 +52,29 @@
     justify-content: center;
     z-index: 0;
     border-radius: 11px;
+}
+
+.wreath_edit_save {
+    position: absolute;
+    width: 62px;
+    height: 21px;
+    left: 118px;
+    top: 306px;
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 10.5px;
+}
+
+.wreath_edit_saveText {
+    position: absolute;
+    text-align: center;
+    left: 9px;
+    top: 5px;
+    font-family: 'ELAND Choice';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 12px;
+    color: #FFFFFF;
 }
 
 .wreath_head {

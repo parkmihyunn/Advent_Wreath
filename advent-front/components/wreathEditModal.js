@@ -30,7 +30,7 @@ export const WreathEditModal = ({ wreathSrc, getData }) => {
 
     return (
         <Grid.Container
-            css={{ borderRadius: "13px", minWidth: "297px", minHeight: "312px" }}>
+            css={{ borderRadius: "13px", minWidth: "297px", minHeight: "340px" }}>
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-cols-3 gap-2">
@@ -45,6 +45,9 @@ export const WreathEditModal = ({ wreathSrc, getData }) => {
                             </button>
                         </div>
                         )}
+                    <Button className="wreath_edit_save">
+                        <div className="wreath_edit_saveText">변경저장</div>
+                    </Button>
                     </div>
                 </div>
             </Grid>
