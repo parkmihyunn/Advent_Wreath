@@ -23,15 +23,9 @@ class KakaoLogin(APIView):
             }
         kakao_response=requests.post(url,headers=headers)
         kakao_response=json.loads(kakao_response.text)
-        
-        print("\nkakao_response : "+str(kakao_response)+"\n")
+
         if User.objects.filter(u_id=kakao_response['id']).exists():
-            print("User.objects.filter if문안으로 들어왔습니다!")
             user= User.objects.get(u_id=kakao_response['id'])
-            #jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code,ALGORITHM)
-            #print("user id : "+user.id+"\n")
-            print("user name: "+user.username+"\n")
-            #print(jwt_token)
             datadict = {
                 "name" : user.username,
                 "token" : user.jwt,
@@ -42,26 +36,17 @@ class KakaoLogin(APIView):
                
             return JsonResponse(datadict)
         else: 
-            print("\nelse문안으로 들어왔습니다!\n")
-            
-            #jwt_token = jwt.encode({'id':user.id}, SECRET_PRE+kakao_access_code, ALGORITHM)
+
             jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM)
        
             User(
                 u_id=kakao_response['id'],
-                #user_email=kakao_response['kakao_account'].get('email',None),
                 username=kakao_response['properties']['nickname'],
                 jwt=jwt_token
                 
             ).save()
 
             user = User.objects.get(u_id=kakao_response['id'])
-            
-            print(user.u_id)
-            print(user.username)
-            print(user.jwt)
-
-
             datadict = {
                 "name" : user.username,
                 "exist" : False,
@@ -76,7 +61,7 @@ class KakaoLogin(APIView):
 
             return JsonResponse(datadict)
 
-# 미현누나 부탁
+
 class ChangeNickName(APIView):
     def post(self, request):
         user_jwt = request.data.get('jwt',None)

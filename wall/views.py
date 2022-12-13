@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view # function based 이기에 데코레이터를 사용한다.
-from wall.models import quiz,deer,mixDeer,user_A,wreath,RealWreath,OrnamentList
+from wall.models import quiz,deer,mixDeer,user_A,wreath,RealWreath,OrnamentList,Sock
 from wall.serializers import quizSerializer,deerSerializer,mixdeerSerializer,user_ASerializer,wreathSerializer#models안의 quiz와 우리가 만든 serializer 도 가지고 오자.
 from rest_framework import status
 from rest_framework.views import APIView
@@ -35,10 +35,6 @@ def sendWreath(request):
     
 
 def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
-    print("sendMixdeer에 들어왔습니다.")
-    # count = 필드 개수
-    # 요소마다 랜덤으로 뽑아서 스키마에 넣고
-    # 완성된 사슴 리턴
     user = User.objects.get(u_id = u_id['id'])
 
     num = 8
@@ -68,11 +64,8 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
             m_body_deco = _body_deco
         )
     
-    
     mixDeers = mixDeer.objects.last()
-    
     serializer = mixdeerSerializer(mixDeers,many = False)
-    print("sendMixdeer를 끝마칩니다.")
     
     return Response(serializer.data)
 
@@ -83,7 +76,6 @@ class deerList(APIView):
         deer = list(mixDeer.objects.filter(user_id = user_id['id']).values())
 
         return JsonResponse(deer,safe=False)
-
 
 class RealWreathView(APIView):    
     def get(self, request):
@@ -107,9 +99,7 @@ class RealWreathView(APIView):
     def post(self, request):
         user_jwt = request.data.get('jwt',None)
         index = request.data.get('index',None)
-        print("index : "+index)
         ornament = request.data.get('ornament',None)
-        print("ornament : "+ornament)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id=user_id['id'])
         
@@ -180,7 +170,6 @@ class RealWreathView(APIView):
         return JsonResponse({"응답":"리스저장 완료"})
 
 def addOrnament(user_id,orn_src):
-    print("addOrnament함수에 들어왔습니다")
     user = User.objects.get(u_id = user_id['id'])
     if OrnamentList.objects.filter(user_id=user_id['id']).exists():
         pass
@@ -312,5 +301,100 @@ class SolveQuestion(APIView):
         return JsonResponse({"solve_count":solve_count})
                 
 
+class PresentView(APIView):
+    def post(self, request):
+        
+        num=request.data.get('num',None)
+        user_jwt = request.data.get('jwt',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        user = User.objects.get(u_id = user_id['id'])
+        print(user)
+        print(type(user))
+        if(num == '1'):
+            if Sock.objects.filter(user_id=user).exists():
 
+                sock = Sock.objects.get(user_id = user_id['id'])
+                sock.sock1_name = request.data.get('name',None)
+                sock.sock1_img = request.data.get('img',None)
+                sock.save()
+                return JsonResponse({"1번 양말":"저장되었습니다"})
+                
+            else: 
+                Sock(
+                    user_id = user,
+                    sock1_name = request.data.get('name',None),
+                    sock1_img = request.data.get('img',None),
+                    ).save()
+
+                return JsonResponse({"1번 양말":"저장되었습니다"})     
+                
+        elif(num == '2'):
+
+            if Sock.objects.filter(user_id=user).exists():
+
+                sock = Sock.objects.get(user_id = user_id['id'])
+                sock.sock2_name = request.data.get('name',None)
+                sock.sock2_img = request.data.get('img',None)
+                sock.save()
+                return JsonResponse({"2번 양말":"저장되었습니다"})
+                
+            else: 
+                Sock(
+                    user_id = user,
+                    sock2_name = request.data.get('name',None),
+                    sock2_img = request.data.get('img',None),
+                    ).save()
+
+                return JsonResponse({"2번 양말":"저장되었습니다"})      
+                
+        elif(num == '3'):
+            if Sock.objects.filter(user_id=user).exists():
+
+                sock = Sock.objects.get(user_id = user_id['id'])
+                sock.sock3_name = request.data.get('name',None)
+                sock.sock3_img = request.data.get('img',None)
+                sock.save()
+                return JsonResponse({"3번 양말":"저장되었습니다"})
+                
+            else: 
+                Sock(
+                    user_id = user,
+                    sock3_name = request.data.get('name',None),
+                    sock3_img = request.data.get('img',None),
+                    ).save()
+
+                return JsonResponse({"3번 양말":"저장되었습니다"})   
+                
+            
+    def get(self, request):
+        #jwt를 디코드 해서 user_id로 저장
+        user_jwt = request.GET.get('jwt',None)
+        user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
+        sock = Sock.objects.get(user_id = user_id['id'])
+        num = request.GET.get('num',None)
+
+        if(num == '1'):
+            datadict = {
+                "name" : sock.sock1_name,
+                "url" : sock.sock1_img,
+            }
+            return JsonResponse(datadict)
+            
+        elif(num=='2'):
+            datadict = {
+                "name" : sock.sock2_name,
+                "url" : sock.sock2_img,
+            }
+            return JsonResponse(datadict)
+            
+        elif(num=='3'):
+            datadict = {
+                "name" : sock.sock3_name,
+                "url" : sock.sock3_img,
+            }
+            return JsonResponse(datadict)
+
+        
+        else: 
+            return JsonResponse({"error":"num이 1~3을 벗어낫습니다"})
             
