@@ -51,15 +51,15 @@ class KakaoLogin(APIView):
             ).save()
 
             RealWreath(
-                user_id=user_id
+                user_id=User.objects.get(u_id=user_id)
             ).save()
 
             OrnamentList(
-                user_id=user_id
+                user_id=User.objects.get(u_id=user_id)
             ).save()
 
             Sock(
-                user_id=user_id
+                user_id=User.objects.get(u_id=user_id)
             ).save()
             
 
