@@ -48,10 +48,21 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
             m_body_deco = _body_deco
         )
     
-    mixDeers = mixDeer.objects.last()
-    serializer = mixdeerSerializer(mixDeers,many = False)
+    #가장 최근에 얻은 걸 내보내줘야
     
-    return Response(serializer.data)
+    datadict = {
+        "user_id" : user,
+        "m_horn" : _horn,
+        "m_hair" : _hair,
+        "m_eye" : _eye,
+        "m_body_color" : _body_color,
+        "m_body_deco" : _body_deco
+    }
+    
+    
+    
+    return JsonResponse(datadict)
+
 
 class deerList(APIView):    
     def get(self, request):
@@ -133,43 +144,43 @@ def addOrnament(user_id,orn_src):
         if user_ornamentlist.src1 =='-1':
             user_ornamentlist.src1 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"1번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src2 == '-1':
             user_ornamentlist.src2 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"2번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src3 == '-1':
             user_ornamentlist.src3 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"3번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src4 == '-1':
             user_ornamentlist.src4 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"4번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src5 == '-1':
             user_ornamentlist.src5 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"5번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src6 == '-1':
             user_ornamentlist.src6 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"6번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src7 == '-1':
             user_ornamentlist.src7 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"7번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src8 == '-1':
             user_ornamentlist.src8 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"8번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src9 == '-1':
             user_ornamentlist.src9 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"9번 오너먼트 자리에 src를 저장했습니다!"})
         if user_ornamentlist.src10 == '-1':
             user_ornamentlist.src10 = orn_src
             user_ornamentlist.save()
-            return 0
+            return JsonResponse({"응답":"10번 오너먼트 자리에 src를 저장했습니다!"})
     else:
         return JsonResponse({"error":"Ornamentlist DB에 등록되어있지 않은 사용자 입니다."})
     return JsonResponse({"응답":"오너먼트를 다 받았어요!"})
