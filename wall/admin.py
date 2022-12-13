@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import quiz
-# Register your models here.
+from .models import    mixDeer, deer, RealWreath, Sock
 
-admin.site.register(quiz)
+# Register your models here.
+admin.site.register(mixDeer)
+admin.site.register(deer)
+admin.site.register(RealWreath)
+admin.site.register(Sock)
