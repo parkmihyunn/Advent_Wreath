@@ -186,35 +186,45 @@ class OrnamentView(APIView):
         if user_ornamentlist.src1 == orn_src :
             user_ornamentlist.src1 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 1번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src2 == orn_src :
             user_ornamentlist.src2 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 2번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src3 == orn_src :
             user_ornamentlist.src3 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 3번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src4 == orn_src :
             user_ornamentlist.src4 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 4번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src5 == orn_src :
             user_ornamentlist.src5 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 5번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src6 == orn_src :
             user_ornamentlist.src6 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 6번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src7 == orn_src :
             user_ornamentlist.src7 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 7번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src8 == orn_src :
             user_ornamentlist.src8 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 8번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src9 == orn_src :
             user_ornamentlist.src9 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 9번자리에서 삭제되었습니다!!"})
         if user_ornamentlist.src10 == orn_src :
             user_ornamentlist.src10 = '-1'
             user_ornamentlist.save()
+            return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 10번자리에서 삭제되었습니다!!"})
         
-        return JsonResponse({" 응답 ":" 클릭하신 오너먼트가 오너먼트 리스트에서 삭제되었습니다!!"})
+        return JsonResponse({" 응답 ":" 삭제된 오너먼트가 없습니다"})
 
     def get(self,request): # give Ornament list
         user_jwt = request.GET.get('jwt',None)
