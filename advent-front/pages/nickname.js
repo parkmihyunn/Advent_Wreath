@@ -11,7 +11,6 @@ export default function setName() {
   
   /* 로그인 확인 */
   const router = useRouter();
-  // const [user, setUser] = useState([]);
   const [usertoken, setUsertoken] =  useState();
   const [windowGet, setWindowGet] = useState();
   const [paramValue, setParamValue] = useState();
@@ -21,10 +20,10 @@ export default function setName() {
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setParamValue(t_paramvalue)
-      if(windowGet !== null && t_paramvalue !== null){
-        //setUser(JSON.parse(window.sessionStorage.user))
-        setUsertoken(JSON.parse(window.sessionStorage.user).token)
+      if(windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.token)){
+        setUsertoken(JSON.parse(window.sessionStorage.token))
       } else {
+        window.sessionStorage.clear();
         router.push('/');
         if(t_paramvalue == null) alert("잘못된 접근입니다.");
         else alert("로그인 후 이용해주세요.");
@@ -49,19 +48,14 @@ export default function setName() {
     console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
     console.log(datajson);
     window.sessionStorage.user = JSON.stringify(datajson);
+    window.sessionStorage.token = JSON.stringify(datajson.token);
+    window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
     router.push({
       pathname: '/main',
       query: {
         value:token
       },
     },);
-  }
-
-  /* 글자수 제한 */
-  function handleInputLength(el, max) {
-    if(el.value.length > max) {
-      el.value = el.value.substr(0, max);
-    }
   }
 
   return (
@@ -103,7 +97,7 @@ export default function setName() {
           <input type="text" id="nickname" ref={nicknameInput}
                  className="h-[33px] w-full border-4 bg-[#D9DFF8]/[0.3] placeholder:text-[#7789D3] py-5 px-4 rounded-lg"
                  placeholder="사용하실 닉네임을 입력해주세요." autoComplete="off"
-                 maxlength="10" oninput="handleInputLength(this, 6)"
+                 maxLength="10"
           />
           <div className="text-[12px] text[#747474] mt-2 mb-[20px] ml-4">최대 10자 까지 입력 가능하며, 추후에 변경 가능합니다.</div>
           <button onClick={onSubmit} className ="flex h-[55px] mb-[40px] rounded-xl items-center bg-[#BD2E2E] text-white font-bold text-[18px] justify-center margin-auto">
