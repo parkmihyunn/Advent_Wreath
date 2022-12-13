@@ -36,8 +36,14 @@ class KakaoLogin(APIView):
                
             return JsonResponse(datadict)
         else: 
-
+            
+            jwt_token_raw = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM)
+            print("below is raw jwt token")
+            print(jwt_token_raw)
+            print("\n")
             jwt_token = jwt.encode({'id':kakao_response['id']}, SECRET_KEY, ALGORITHM).decode('utf-8')
+            print("below is utf-8 decoded jwt token")
+            print(jwt_token)
        
             User(
                 u_id=kakao_response['id'],
