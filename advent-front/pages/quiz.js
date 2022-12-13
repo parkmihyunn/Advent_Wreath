@@ -91,8 +91,8 @@ export default function quiz(){
           setPreSolvedNum(JSON.parse(window.sessionStorage.solvecount));
           setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
         }
-        else {console.log(t_testNum)}
-      } else {
+         {console.log(t_testNum)}
+      }  {
         window.sessionStorage.clear();
         router.push('/');
         alert("잘못된 접근입니다.");
@@ -162,7 +162,7 @@ export default function quiz(){
       window.sessionStorage.solvecount = JSON.stringify(solvedNum)
       console.log(window.sessionStorage)
       }
-    } else {
+    }  {
       // 오답 
       document.getElementById('quiz_view_t').classList.remove('block');
       document.getElementById('quiz_view_t').classList.add('hidden');
