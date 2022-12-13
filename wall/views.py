@@ -22,20 +22,20 @@ ALGORITHM = "HS256"
 def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수 구해야 함. 랜덤으로
     user = User.objects.get(u_id = u_id['id'])
 
-    num = 8
-    ran = random.randint(2,num)
+    num = 7
+    ran = random.randint(1,num)
     _horn = (deer.objects.get(pk = ran)).horn
     
-    ran = random.randint(2,num)
+    ran = random.randint(1,num)
     _hair = (deer.objects.get(pk = ran)).hair
     
-    ran = random.randint(2,num)
+    ran = random.randint(1,num)
     _eye = (deer.objects.get(pk = ran)).eye
     
-    ran = random.randint(2,num)
+    ran = random.randint(1,num)
     _body_color = (deer.objects.get(pk = ran)).body_color
     
-    ran = random.randint(2,num)
+    ran = random.randint(1,num)
     _body_deco = (deer.objects.get(pk = ran)).body_deco
     
     
