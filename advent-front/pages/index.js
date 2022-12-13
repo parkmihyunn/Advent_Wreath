@@ -37,7 +37,7 @@ export default function Home() {
     window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
     console.log("===========index.js SessionStorage=======================");
     console.log(window.sessionStorage);
-    if(datajson.nickname == 'undefined') {
+    if(datajson.nickname == '임시닉네임') {
       router.push({
         pathname: '/nickname',
         query: {

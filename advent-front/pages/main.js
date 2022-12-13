@@ -82,6 +82,57 @@ export default function Main(){
     return setCollectionModal(true); 
   }
 
+  // 백엔드 api 테스트용 코드
+  // =========== 아래 작동 확인 X =====================
+  // const [deerData, setDeerData] = useState([]);
+  // async function getDeer(){
+  //   const t_src = "/img/ornaments/1.png"
+  //   const t_name = "임시이름"
+  //   const t_num = 1
+  //   let res2 = await axios.post(BASE_URL+"socks/",
+  //     {
+  //       url:t_src,
+  //       jwt:usertoken,
+  //       num:t_num,
+  //       name:t_name,
+  //     });
+  //   console.log("socks 결과 =======");
+  //   var datajson2 = res2.data;
+  //   console.log(datajson2);
+  //   setDeerData(datajson2);
+  // =================================================
+    // =========== 아래 작동 확인 완료 =====================
+    // let res = await axios.get(BASE_URL+"socks/", {
+    //   params: {
+    //     jwt:usertoken,
+    //     num:1
+    //   },
+    // });
+    // console.log("socks 결과 =======");
+    // var datajson = res.data;
+    // console.log(datajson);
+    // setDeerData(datajson);
+    // let res3 = await axios.post(BASE_URL+"ornament/",
+    //   {
+    //     src:t_src,
+    //     jwt:usertoken,
+    //   });
+    // console.log("ornament 결과 =======");
+    // var datajson3 = res3.data;
+    // console.log(datajson3);
+    // setDeerData(datajson3);
+    // let res4 = await axios.get(BASE_URL+"ornament/", {
+    //   params: {
+    //     jwt:usertoken,
+    //   },
+    // });
+    // console.log("ornament 결과 =======");
+    // var datajson4 = res4.data;
+    // console.log(datajson4);
+    // setDeerData(datajson4);
+    // =================================================
+  //}
+
   /* 링크복사 */
   const [urlForm, setUrlForm] = useState();
   useEffect(() => {
@@ -481,7 +532,7 @@ export default function Main(){
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
 
-        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 방 문 공유링크 복사하기</button></div>
+        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 현관 공유링크 복사하기</button></div>
         <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
         
         <div className="flex-1"></div>
