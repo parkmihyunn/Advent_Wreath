@@ -34,8 +34,8 @@ export const WreathEditModal = ({ wreathSrc, getData }) => {
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-cols-3 gap-2">
-                        {refinedData.map((el) =>
-                        <div className="wreath_edit_orna_box">
+                        {refinedData.map((el,index) =>
+                        <div className="wreath_edit_orna_box" key={index}>
                             <button onClick={() => {
                                 onClickHandler(el.src);
                                 console.log("click");

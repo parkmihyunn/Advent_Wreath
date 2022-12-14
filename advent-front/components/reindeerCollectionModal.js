@@ -45,8 +45,8 @@ const ReindeerCollectionModal = ({ isVisible, onClose, nickname ,usertoken, deer
 					{nickname}님의 순록 도감
 				</div>
 				<div id="reindeer-set" className="max-h-[440px] overflow-y-scroll grid grid-cols-2 gap-3 justify-items-center">
-					{deerData.map((v) =>
-						<div id="one-white-box" className="bg-white p-2 rounded-md relative">
+					{deerData.map((v,index) =>
+						<div id="one-white-box" className="bg-white p-2 rounded-md relative" key={index}>
 							<div id="inner-white-box" className="bg-[#D4C7AD] mx-[0px] pt-3.5 px-[3px] relative">
 								<div className="min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px]"/>
 								<div className="top-[10%] left-[29%] absolute drop-shadow-xl"><Image src={v.m_horn} width={44} height={25} onError={(e) => (e.currentTarget.src = fallBackSrc)}/></div>

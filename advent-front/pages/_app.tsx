@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <NextUIProvider>
-      <script src="https://developers.kakao.com/sdk/js/kakao.js">
+      <script src="https://developers.kakao.com/sdk/js/kakao.js" defer>
       </script>
       <Component {...pageProps} />
     </NextUIProvider>
