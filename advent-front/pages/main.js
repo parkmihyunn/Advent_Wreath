@@ -94,11 +94,43 @@ export default function Main(){
         num:1
       },
     });
-    console.log("socks 결과 =======");
+    console.log("socks1 결과 =======");
     var datajson = res.data;
     console.log(datajson);
     setSock1Data(datajson);
     return setShowS1_Modal(true);
+  }
+
+  /* 양말2 데이터 불러오기(button 클릭 실행) */
+  const [sock2Data, setSock2Data] = useState();
+  async function getSock2(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:2
+      },
+    });
+    console.log("socks2 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock2Data(datajson);
+    return setShowS2_Modal(true);
+  }
+
+  /* 양말3 데이터 불러오기(button 클릭 실행) */
+  const [sock3Data, setSock3Data] = useState();
+  async function getSock3(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:3
+      },
+    });
+    console.log("socks3 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock3Data(datajson);
+    return setShowS3_Modal(true);
   }
 
   // 백엔드 api 테스트용 코드
@@ -211,8 +243,6 @@ export default function Main(){
     }
   }, [play]);
 
-  //양말편집창 모달
-  const { setVisible, bindings } = useModal();
   //이미지 이름 가져오기
   const [giftName, setGiftName] = useState('');
   //이미지 사진 가져오기
@@ -453,12 +483,12 @@ export default function Main(){
                 </button>
               </div>
               <div className="sock-2">
-                <button onClick={()=> setShowS2_Modal(true)}>
+                <button onClick={()=> getSock2()}>
                   <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
                 </button>
               </div>
               <div className="sock-3">
-                <button onClick={()=> setShowS3_Modal(true)}>
+                <button onClick={()=> getSock3()}>
                   <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
                 </button>
               </div>
