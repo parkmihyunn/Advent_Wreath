@@ -36,8 +36,8 @@ export default function share(){
           setNickname(res.data.nickname);
         })
         .catch(res => {
-          console.log('실패');
-          console.log(res);
+          router.push('/');
+          alert("잘못된 공유주소입니다.");
         })
       } 
       else {
@@ -62,6 +62,54 @@ export default function share(){
     return setCollectionModal(true); 
   }
 
+  /* 양말1 데이터 불러오기(button 클릭 실행) */
+  const [sock1Data, setSock1Data] = useState();
+  async function getSock1(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:1
+      },
+    });
+    console.log("socks1 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock1Data(datajson);
+    return setShowS1_Modal(true);
+  }
+
+  /* 양말2 데이터 불러오기(button 클릭 실행) */
+  const [sock2Data, setSock2Data] = useState();
+  async function getSock2(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:2
+      },
+    });
+    console.log("socks2 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock2Data(datajson);
+    return setShowS2_Modal(true);
+  }
+
+  /* 양말3 데이터 불러오기(button 클릭 실행) */
+  const [sock3Data, setSock3Data] = useState();
+  async function getSock3(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:3
+      },
+    });
+    console.log("socks3 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock3Data(datajson);
+    return setShowS3_Modal(true);
+  }
+
   /* 시작화면으로 돌아가기 */
   const [clickGo, setClickGo] = useState(false);
   useEffect(() => {
@@ -80,14 +128,6 @@ export default function share(){
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
-    axios.get("http://localhost:3000/api/temp")
-    .then(res => {
-      setUserData(res.data[0].ornaments);
-    })
-    .catch(res => {
-      console.log('실패');
-      console.log(res);
-    })
   }, []);
 
   /* Audio */
@@ -169,17 +209,17 @@ export default function share(){
                 <Image src='/img/socks_line.png' width='350' height='50'/>
               </div>
               <div className="sock-1">
-                <button onClick={()=> setShowS1_Modal(true)}>
+                <button onClick={()=>getSock1()}>
                   <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
                 </button>
               </div>
               <div className="sock-2">
-                <button onClick={()=> setShowS2_Modal(true)}>
+                <button onClick={()=>getSock2()}>
                   <Image src='/img/sock_2.png' width='79.07' height='109.33p'/>
                 </button>
               </div>
               <div className="sock-3">
-                <button onClick={()=> setShowS3_Modal(true)}>
+                <button onClick={()=>getSock3()}>
                   <Image src='/img/sock_3.png' width='82.98' height='107.38'/>
                 </button>
               </div>
@@ -216,9 +256,9 @@ export default function share(){
         <div className="flex-1"></div>
         <div className="flex share-btm"><Image className="max-x-md" src='/img/share/package_btm.png' width='425' height='238'/></div>
         <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} usertoken={usertoken} nickname={nickname} deerData={deerData}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={usertoken} nickname={nickname}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={usertoken} nickname={nickname}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={usertoken} nickname={nickname}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} usertoken={usertoken} nickname={nickname} sockData={sock1Data}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} usertoken={usertoken} nickname={nickname} sockData={sock2Data}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} usertoken={usertoken} nickname={nickname} sockData={sock3Data}/>
       </div>
     </div>
     </Fragment>
