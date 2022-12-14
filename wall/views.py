@@ -71,7 +71,8 @@ class deerList(APIView):
         if mixDeer.objects.filter(user_id=user_id['id']).exists():
             pass
         else:
-            return JsonResponse({"error":"등록된 mixdeer가 없는 사용자입니다."})
+            deer = list()
+            return JsonResponse(deer, safe=False)
 
         deer = list(mixDeer.objects.filter(user_id = user_id['id']).values())
 
