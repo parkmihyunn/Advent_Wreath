@@ -120,13 +120,13 @@ class RealWreathView(APIView):
                     user_realwreath.orn3 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 3번 자리에 저장되었습니다!"})
-                if index=='4' : 
+                if index==4 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn4 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 4번 자리에 저장되었습니다!"})
-                if index=='5' : 
-                    user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                if index==5 : 
+                    user_realwreath = RealWreath.objects.get(user_id = user['id'])
                     user_realwreath.orn5 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 5번 자리에 저장되었습니다!"})
