@@ -105,37 +105,37 @@ class RealWreathView(APIView):
         user = User.objects.get(u_id=user_id['id'])
         
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
-                if index=='1' : 
+                if index== 1 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn1 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 1번자리에 저장되었습니다!"})
-                if index=='2' : 
+                if index== 2 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn2 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 2번 자리에 저장되었습니다!"})
-                if index=='3' : 
+                if index== 3 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn3 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 3번 자리에 저장되었습니다!"})
-                if index=='4' : 
+                if index== 4 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn4 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 4번 자리에 저장되었습니다!"})
-                if index=='5' : 
+                if index== 5 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn5 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 5번 자리에 저장되었습니다!"})
-                if index=='6' : 
+                if index== 6  : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn6 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 6번 자리에 저장되었습니다!"})
-                if index=='7' : 
+                if index== 7 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn7 = src
                     user_realwreath.save()
