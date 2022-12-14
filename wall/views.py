@@ -106,7 +106,7 @@ class RealWreathView(APIView):
         
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
                 if index== 1 : 
-                    user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    user_realwreath = RealWreath.objects.get(user_id = user)
                     user_realwreath.orn1 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 1번자리에 저장되었습니다!"})
@@ -116,7 +116,7 @@ class RealWreathView(APIView):
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 2번 자리에 저장되었습니다!"})
                 if index=='3' : 
-                    user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    user_realwreath = RealWreath.objects.get(user_id = user['id'])
                     user_realwreath.orn3 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 3번 자리에 저장되었습니다!"})
