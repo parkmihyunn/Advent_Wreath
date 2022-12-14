@@ -25,6 +25,7 @@ export default function share(){
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setUsertoken(t_paramvalue)
+      realWreath(t_paramvalue)
       if(t_paramvalue !== null){
         /* t_paramvalue(token)으로 백엔드에 realwreath, socks, reindeer 요청 */
         axios.get(BASE_URL+"nickname/",{
@@ -123,6 +124,20 @@ export default function share(){
     });
   };
 
+  var trueWreath = [];
+  async function realWreath(usertoken){
+    let res = await axios.get(BASE_URL+"realwreath/", {
+      params: {
+        jwt:usertoken,
+      },
+    });
+    console.log("realwreath 결과 =======");
+    var trueWreath = res.data.ornaments;
+    console.log(trueWreath[0]);
+    //setRefinedData(datajson);
+    //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
+  }
+
   const [showCollectionModal, setCollectionModal] = useState(false);
   const [showS1_Modal, setShowS1_Modal] = useState(false);
   const [showS2_Modal, setShowS2_Modal] = useState(false);
@@ -200,6 +215,29 @@ export default function share(){
                   }
               </div>
             </div>
+
+            <div className="orna-q1">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q2">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q3">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q4">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q5">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q6">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+            <div className="orna-q7">
+              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+            </div>
+
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
             <div id="collection"className="absolute w-[95px] h-[131px] top-[84%] left-[65%] text-align">
               <button onClick={()=> getDeer()} >
