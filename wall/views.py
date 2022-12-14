@@ -51,7 +51,6 @@ def sendMixdeer(u_id): # 완성된 사슴 객체 보내기, 사슴 객체 개수
     #가장 최근에 얻은 걸 내보내줘야
     
     datadict = {
-        "user_id" : user,
         "m_horn" : _horn,
         "m_hair" : _hair,
         "m_eye" : _eye,
