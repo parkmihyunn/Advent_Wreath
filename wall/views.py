@@ -103,7 +103,7 @@ class RealWreathView(APIView):
         src = request.data.get('src',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id=user_id['id'])
-        
+        data ={"any":"data at 6. 저장됨."}
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
                 if index== 1 : 
                     user_realwreath = RealWreath.objects.get(user_id = user)
@@ -134,7 +134,7 @@ class RealWreathView(APIView):
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn6 = src
                     user_realwreath.save()
-                    return JsonResponse({"응답":"src가 리스의 6번 자리에 저장되었습니다!"})
+                    return JsonResponse(data)
                 if index=='7' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     user_realwreath.orn7 = src
