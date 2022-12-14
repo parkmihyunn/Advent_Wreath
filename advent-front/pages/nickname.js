@@ -39,23 +39,26 @@ export default function setName() {
     const nicknameInput_t = nicknameInput.current.value;
     const token = usertoken;
     console.log(token);
-    let res = await axios.post(BASE_URL+"changenickname/",
-      {
-        nickname:nicknameInput_t,
-        jwt:token,
-      });
-    var datajson = res.data;
-    console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
-    console.log(datajson);
-    window.sessionStorage.user = JSON.stringify(datajson);
-    window.sessionStorage.token = JSON.stringify(datajson.token);
-    window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
-    router.push({
-      pathname: '/main',
-      query: {
-        value:token
-      },
-    },);
+    if(!nicknameInput_t) return alert("닉네임을 입력해주세요");
+    else {
+      let res = await axios.post(BASE_URL+"changenickname/",
+        {
+          nickname:nicknameInput_t,
+          jwt:token,
+        });
+      var datajson = res.data;
+      console.log("닉네임 설정 후, 다시 받아온 사용자 정보 =======");
+      console.log(datajson);
+      window.sessionStorage.user = JSON.stringify(datajson);
+      window.sessionStorage.token = JSON.stringify(datajson.token);
+      window.sessionStorage.solvecount = JSON.stringify(datajson.solve_count);
+      router.push({
+        pathname: '/main',
+        query: {
+          value:token
+        },
+      },);
+    }
   }
 
   return (
