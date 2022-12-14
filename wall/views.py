@@ -100,42 +100,49 @@ class RealWreathView(APIView):
     def post(self, request):
         user_jwt = request.data.get('jwt',None)
         index = request.data.get('index',None)
-        ornament = request.data.get('ornament',None)
+        src = request.data.get('src',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id=user_id['id'])
         
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
                 if index=='1' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn1 = ornament
+                    user_realwreath.orn1 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 1번자리에 저장되었습니다!"})
                 if index=='2' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn2 = ornament
+                    user_realwreath.orn2 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 2번 자리에 저장되었습니다!"})
                 if index=='3' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn3 = ornament
+                    user_realwreath.orn3 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 3번 자리에 저장되었습니다!"})
                 if index=='4' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn4 = ornament
+                    user_realwreath.orn4 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 4번 자리에 저장되었습니다!"})
                 if index=='5' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn5 = ornament
+                    user_realwreath.orn5 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 5번 자리에 저장되었습니다!"})
                 if index=='6' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn6 = ornament
+                    user_realwreath.orn6 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 6번 자리에 저장되었습니다!"})
                 if index=='7' : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
-                    user_realwreath.orn7 = ornament
+                    user_realwreath.orn7 = src
                     user_realwreath.save()
+                    return JsonResponse({"응답":"src가 리스의 7번 자리에 저장되었습니다!"})
         else:
             return JsonResponse({"error":"RealWreath DB에 등록되어있지 않은 사용자 입니다."})
-        return JsonResponse({"응답":"리스저장 완료"})
+        
 
 def addOrnament(user_id,orn_src):
     user = User.objects.get(u_id = user_id['id'])
