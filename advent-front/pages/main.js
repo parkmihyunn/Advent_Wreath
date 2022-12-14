@@ -67,7 +67,7 @@ export default function Main(){
     });
   }
 
-  /* 순록 데이터 불러오기 */
+  /* 순록 데이터 불러오기(button 클릭 실행) */
   const [deerData, setDeerData] = useState([]);
   async function getDeer(){
     let res = await axios.get(BASE_URL+"deer/", {
@@ -82,55 +82,79 @@ export default function Main(){
     return setCollectionModal(true); 
   }
 
+  /* 양말1 데이터 불러오기(button 클릭 실행) */
+  const [sock1Data, setSock1Data] = useState();
+  async function getSock1(){
+  let res = await axios.get(BASE_URL+"socks/", {
+      params: {
+        jwt:usertoken,
+        num:1
+      },
+    });
+    console.log("socks 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    setSock1Data(datajson);
+    return setShowS1_Modal(true);
+  }
+
   // 백엔드 api 테스트용 코드
-  // =========== 아래 작동 확인 X =====================
   // const [deerData, setDeerData] = useState([]);
   // async function getDeer(){
   //   const t_src = "/img/ornaments/1.png"
   //   const t_name = "임시이름"
   //   const t_num = 1
+  // =========== 아래 작동 확인 완료 =====================
+
   //   let res2 = await axios.post(BASE_URL+"socks/",
   //     {
   //       url:t_src,
   //       jwt:usertoken,
-  //       num:t_num,
+  //       num:1,
   //       name:t_name,
   //     });
   //   console.log("socks 결과 =======");
   //   var datajson2 = res2.data;
   //   console.log(datajson2);
   //   setDeerData(datajson2);
+  //   let res = await axios.get(BASE_URL+"socks/", {
+  //     params: {
+  //       jwt:usertoken,
+  //       num:1
+  //     },
+  //   });
+  //   console.log("socks 결과 =======");
+  //   var datajson = res.data;
+  //   console.log(datajson);
+  //   setDeerData(datajson);
+  // let res3 = await axios.post(BASE_URL+"ornament/",
+  //   {
+  //     src:t_src,
+  //     jwt:usertoken,
+  //   });
+  // console.log("ornament 결과 =======");
+  // var datajson3 = res3.data;
+  // console.log(datajson3);
+  // setDeerData(datajson3);
+  // let res4 = await axios.get(BASE_URL+"ornament/", {
+  //   params: {
+  //     jwt:usertoken,
+  //   },
+  // });
+  // console.log("ornament 결과 =======");
+  // var datajson4 = res4.data;
+  // console.log(datajson4);
+  // setDeerData(datajson4);
+  //   let res5 = await axios.get(BASE_URL+"realwreath/", {
+  //     params: {
+  //       jwt:usertoken,
+  //     },
+  //   });
+  //   console.log("realwreath 결과 =======");
+  //   var datajson5 = res5.data;
+  //   console.log(datajson5);
+  //   setDeerData(datajson5);
   // =================================================
-    // =========== 아래 작동 확인 완료 =====================
-    // let res = await axios.get(BASE_URL+"socks/", {
-    //   params: {
-    //     jwt:usertoken,
-    //     num:1
-    //   },
-    // });
-    // console.log("socks 결과 =======");
-    // var datajson = res.data;
-    // console.log(datajson);
-    // setDeerData(datajson);
-    // let res3 = await axios.post(BASE_URL+"ornament/",
-    //   {
-    //     src:t_src,
-    //     jwt:usertoken,
-    //   });
-    // console.log("ornament 결과 =======");
-    // var datajson3 = res3.data;
-    // console.log(datajson3);
-    // setDeerData(datajson3);
-    // let res4 = await axios.get(BASE_URL+"ornament/", {
-    //   params: {
-    //     jwt:usertoken,
-    //   },
-    // });
-    // console.log("ornament 결과 =======");
-    // var datajson4 = res4.data;
-    // console.log(datajson4);
-    // setDeerData(datajson4);
-    // =================================================
   //}
 
   /* 링크복사 */
@@ -317,7 +341,7 @@ export default function Main(){
                 <Image src='/img/socks_line.png' width='350' height='50'/>
               </div>
               <div className="sock-1">
-                <button onClick={()=> setShowS1_Modal(true)}>
+                <button onClick={()=>getSock1()}>
                   <Image src='/img/sock_1.png' width='83.95' height='102.5'/>
                 </button>
               </div>
@@ -541,7 +565,7 @@ export default function Main(){
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
         <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} nickname={user.nickname} usertoken={usertoken} deerData={deerData}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock1Data}/>
         <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
         <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} nickname={user.nickname} usertoken={usertoken}/>
       </div>
