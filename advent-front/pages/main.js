@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { Fragment, useState, useRef, useEffect, useCallback } from 'react'
+import React, { Fragment, useState, useRef, useEffect, useCallback, lazy } from 'react'
 import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
@@ -313,6 +313,40 @@ export default function Main(){
       user.solve_count = user.solve_count + 10
     }
   })
+
+  const [refinedData, setRefinedData] = useState([]);
+  async function wreathResponse() {
+    let res = await axios.get(BASE_URL+"ornament/", {
+        params: {
+            jwt:usertoken
+        },
+    });
+    console.log("백서버에서 가져온 오너먼트")
+    var datajson = res.data;
+    console.log(datajson);
+    setRefinedData(datajson);
+    console.log(refinedData);
+    return WreathEditModal;
+  }
+  useEffect(() => {
+    wreathResponse();
+  });
+
+  async function realWreath() {
+    let res2 = await axios.get(BASE_URL+"realwreath/", {
+        params: {
+            jwt:usertoken
+        },
+    });
+    console.log("백서버에서 가져온 리얼리스")
+    var datajson = res2.data;
+    console.log(datajson);
+    console.log(datajson.ornaments[0]);
+    setUserData(datajson);
+  }
+  useEffect(() => {
+    realWreath();
+  });
   
   return (
     <Fragment>
@@ -406,17 +440,17 @@ export default function Main(){
                 {/* 1번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg" className="wreath_orna_q1" onClick={()=>removeQ1()}>
+                        <button id = "qimg" className="wreath_orna_q1" onClick={()=> {removeQ1(); wreathResponse();}}>
                             <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width='60' height='60'/>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData} user={user} usertoken={usertoken} removeQ={removeQ}/>
+                        <WreathEditModal getData={getData} user={user} usertoken={usertoken} removeQ={removeQ} refinedData={refinedData}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg" className="wreath_orna_q1" onClick={()=>removeQ1()}>
+                        <button id = "qimg" className="wreath_orna_q1" onClick={()=>{removeQ1(); wreathResponse();}}>
                             <Image src={wreathSrc} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 

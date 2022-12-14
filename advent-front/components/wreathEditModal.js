@@ -6,9 +6,9 @@ import axios from 'axios';
 
 const BASE_URL = "http://localhost:8000/"
 
-export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ }) => {
+export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ, wreathResponse, refinedData }) => {
 
-    const [refinedData, setRefinedData] = useState([]);
+    // const [refinedData, setRefinedData] = useState([]);
     const [isSelect, setIsSelect] = useState([]);
 
     // useEffect(() => {
@@ -19,17 +19,24 @@ export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ }) => {
     //     });
     // }, []);
 
-    async function wreathResponse() {
-        console.log(usertoken);
-        let res = await axios.get(BASE_URL+"ornament/", {
-            params: {
-                jwt:usertoken
-            },
-        });
-        console.log("백서버에서 가져온 오너먼트")
-        var datajson = res.data;
-        console.log(datajson.src1);
-        setRefinedData(datajson);
+    // async function wreathResponse() {
+    //     console.log(usertoken);
+    //     let res = await axios.get(BASE_URL+"ornament/", {
+    //         params: {
+    //             jwt:usertoken
+    //         },
+    //     });
+    //     console.log("오너먼트")
+    //     var datajson = res.data;
+    //     console.log(refinedData);
+    //     // setRefinedData(datajson);
+    // }
+
+
+    function wreathResponse() {
+        console.log("오너먼트")
+        console.log(refinedData);
+        // setRefinedData(datajson);
     }
 
     const onClickHandler = (t1) => {
@@ -44,13 +51,19 @@ export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ }) => {
         getData(wreathSrc)
     })
 
+    function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
+
+    //const key = Object.keys(refinedData);
+
     return (
         <Grid.Container
             css={{ borderRadius: "13px", minWidth: "297px", minHeight: "340px" }}>
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-cols-3 gap-2">
-                        {refinedData.map((el) =>
+                        {/* {refinedData.map((el) =>
                         <div className="wreath_edit_orna_box">
                             <button onClick={() => {
                                 onClickHandler(el.src);
@@ -61,7 +74,7 @@ export const WreathEditModal = ({ wreathSrc, getData, usertoken, removeQ }) => {
                                 <Image src={el.src} width='54' height='54'/>
                             </button>
                         </div>
-                        )}
+                        )} */}
                         <div className="mt-10 mb-10">
                             <button onClick={()=>wreathResponse()} className="wreath_edit_save">
                                 <div className="wreath_edit_saveText">변경저장</div>
