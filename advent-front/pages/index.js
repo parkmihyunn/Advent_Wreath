@@ -81,7 +81,7 @@ export default function Home() {
         </div>
 
         <div id="middle-artwork" className="mt-[47px] mb-[80px]">
-          <Image src='/img/start_artwork.png' width='320' height='339.51'/>
+          <Image src='/img/start_artwork.png' quality='100' width='320' height='339.51'/>
           <div className="place-items-center items-center pt-3 text-center text-[17px] text-[#13277A] font-bold">
             " 사라진 순록을 찾아주세요! " 
           </div>
