@@ -30,6 +30,7 @@ export default function Main(){
   const [showS1_Modal, setShowS1_Modal] = useState(false);  // 양말1
   const [showS2_Modal, setShowS2_Modal] = useState(false);  // 양말2
   const [showS3_Modal, setShowS3_Modal] = useState(false);  // 양말3
+  const [showWreathEdit, setShowWreathEdit] = useState(false);  // 리스 편집
   const [showVM_Modal, setShowVM_Modal] = useState(false);  // 동영상
   
   /* 로그인 확인 */
@@ -133,65 +134,6 @@ export default function Main(){
     return setShowS3_Modal(true);
   }
 
-  // 백엔드 api 테스트용 코드
-  // const [deerData, setDeerData] = useState([]);
-  // async function getDeer(){
-  //   const t_src = "/img/ornaments/1.png"
-  //   const t_name = "임시이름"
-  //   const t_num = 1
-  // =========== 아래 작동 확인 완료 =====================
-
-  //   let res2 = await axios.post(BASE_URL+"socks/",
-  //     {
-  //       url:t_src,
-  //       jwt:usertoken,
-  //       num:1,
-  //       name:t_name,
-  //     });
-  //   console.log("socks 결과 =======");
-  //   var datajson2 = res2.data;
-  //   console.log(datajson2);
-  //   setDeerData(datajson2);
-  //   let res = await axios.get(BASE_URL+"socks/", {
-  //     params: {
-  //       jwt:usertoken,
-  //       num:1
-  //     },
-  //   });
-  //   console.log("socks 결과 =======");
-  //   var datajson = res.data;
-  //   console.log(datajson);
-  //   setDeerData(datajson);
-  // let res3 = await axios.post(BASE_URL+"ornament/",
-  //   {
-  //     src:t_src,
-  //     jwt:usertoken,
-  //   });
-  // console.log("ornament 결과 =======");
-  // var datajson3 = res3.data;
-  // console.log(datajson3);
-  // setDeerData(datajson3);
-  // let res4 = await axios.get(BASE_URL+"ornament/", {
-  //   params: {
-  //     jwt:usertoken,
-  //   },
-  // });
-  // console.log("ornament 결과 =======");
-  // var datajson4 = res4.data;
-  // console.log(datajson4);
-  // setDeerData(datajson4);
-  //   let res5 = await axios.get(BASE_URL+"realwreath/", {
-  //     params: {
-  //       jwt:usertoken,
-  //     },
-  //   });
-  //   console.log("realwreath 결과 =======");
-  //   var datajson5 = res5.data;
-  //   console.log(datajson5);
-  //   setDeerData(datajson5);
-  // =================================================
-  //}
-
   /* 링크복사 */
   const [urlForm, setUrlForm] = useState();
   useEffect(() => {
@@ -214,7 +156,7 @@ export default function Main(){
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,20);
+    var dDay = new Date(2022,11,14);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
@@ -243,20 +185,20 @@ export default function Main(){
     }
   }, [play]);
 
-  //이미지 이름 가져오기
-  const [giftName, setGiftName] = useState('');
-  //이미지 사진 가져오기
-  const [imageSrc, setImageSrc] = useState('');
-  const encodeFileToBase64 = (fileBlob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-          setImageSrc(reader.result);
-          resolve();
-      };
-    });
-  };
+  // //이미지 이름 가져오기
+  // const [giftName, setGiftName] = useState('');
+  // //이미지 사진 가져오기
+  // const [imageSrc, setImageSrc] = useState('');
+  // const encodeFileToBase64 = (fileBlob) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(fileBlob);
+  //   return new Promise((resolve) => {
+  //     reader.onload = () => {
+  //         setImageSrc(reader.result);
+  //         resolve();
+  //     };
+  //   });
+  // };
 
   // useRef를 이용해 input태그에 접근하기
   const imageInput = useRef();
@@ -524,7 +466,7 @@ export default function Main(){
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={1}/>
+                        <WreathEditModal getData={getData} removeQ={removeQ} usertoken={usertoken} refinedData={refinedData} index={1}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
