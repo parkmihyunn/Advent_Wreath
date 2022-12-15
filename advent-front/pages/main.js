@@ -156,9 +156,10 @@ export default function Main(){
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,14);
+    var dDay = new Date(2022,11,15);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+    if(result <0 ) result = 0;
     setD_Day(result);
     if(solvedNum+result>=10){
       setQuizzesNum(0)

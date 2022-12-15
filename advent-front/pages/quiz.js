@@ -74,6 +74,7 @@ export default function quiz(){
       var dDay = new Date(2022,11,14);
       var gap = dDay.getTime() - today.getTime();
       var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+      if(result <0 ) result = 0;
 
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
@@ -85,6 +86,7 @@ export default function quiz(){
       // user key가 session에 존재하고, url value와 token이 동일하고, 퀴즈가 남아있는 경우만 접근 허용
       if(t_windowGet !== null && t_paramvalue == JSON.parse(window.sessionStorage.token)){
         const t_testNum = JSON.parse(window.sessionStorage.solvecount) + result
+        console.log(t_testNum);
         if( t_testNum < 10 ){
           setUser(JSON.parse(window.sessionStorage.user));
           setUsertoken(JSON.parse(window.sessionStorage.token));
