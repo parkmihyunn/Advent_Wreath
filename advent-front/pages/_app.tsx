@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         console.log("Kakao.init()")
       }
     } catch(e) { console.log(e)}
-  }, [window.Kakao.isInitialized()])
+  }, [])
 
   return (
     <NextUIProvider>
