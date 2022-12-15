@@ -705,10 +705,10 @@ export default function Main(){
         <GuideModal isVisible={showG_Modal} onClose={()=>setShowG_Modal(false)}/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} user={user} usertoken={usertoken} deerData={deerData}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} nickname={user.nickname} deerData={deerData}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock1Data}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock2Data}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock3Data}/>
         <VideoModal isVisible={showVM_Modal} onClose={()=>setShowVM_Modal(false)} user={user} usertoken={usertoken}/>
       </div>
     </div>
