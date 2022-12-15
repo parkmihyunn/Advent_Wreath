@@ -107,11 +107,20 @@ class RealWreathView(APIView):
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
                 if index== 1 : 
                     user_realwreath = RealWreath.objects.get(user_id = user)
+                    if user_realwreath.orn1 != (-1):
+                        print("오너먼트가 1번자리에 원래 존재했어요")
+                        print("아래는 원래 존재했던 오너먼트에요")
+                        print(user_realwreath.orn1)
+                        print("================================")
+                        addOrnament(user_id,user_realwreath.orn1)
+                        print("예전에 있던 오너먼트를 오너먼트 리스트에 추가했어요")
                     user_realwreath.orn1 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 1번자리에 저장되었습니다!"})
-                if index=='2' : 
+                if index==2 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    if user_realwreath.orn2 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn1)
                     user_realwreath.orn2 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 2번 자리에 저장되었습니다!"})
