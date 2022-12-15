@@ -173,7 +173,7 @@ export default function quiz(){
         window.sessionStorage.solvecount = JSON.stringify(t_solvedNum)
         console.log(window.sessionStorage)
       }
-    } else {
+    }  {
       // 오답 
       document.getElementById('quiz_view_t').classList.remove('block');
       document.getElementById('quiz_view_t').classList.add('hidden');

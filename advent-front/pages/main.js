@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { Fragment, useState, useRef, useEffect } from 'react'
+import React, { Fragment, useState, useRef, useEffect, useCallback, lazy } from 'react'
 import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
@@ -15,6 +15,7 @@ import SocksModal_1 from '../components/socksModal_1'
 import SocksModal_2 from '../components/socksModal_2'
 import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
+import VideoModal from '../components/videoModal'
 
 const SHARE_URL = "http://localhost:3000/"
 const BASE_URL = "http://localhost:8000/"
@@ -29,6 +30,7 @@ export default function Main(){
   const [showS1_Modal, setShowS1_Modal] = useState(false);  // 양말1
   const [showS2_Modal, setShowS2_Modal] = useState(false);  // 양말2
   const [showS3_Modal, setShowS3_Modal] = useState(false);  // 양말3
+  const [showVM_Modal, setShowVM_Modal] = useState(false);  // 동영상
   
   /* 로그인 확인 */
   const [paramValue, setParamValue] = useState();  // url의 query :string
@@ -50,6 +52,7 @@ export default function Main(){
         setUser(JSON.parse(window.sessionStorage.user));
         setUsertoken(JSON.parse(window.sessionStorage.token));
         setSolvedNum(JSON.parse(window.sessionStorage.solvecount));
+        realWreath(JSON.parse(window.sessionStorage.token))
       } else {
         window.sessionStorage.clear();
         router.push('/');
@@ -211,7 +214,7 @@ export default function Main(){
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,14);
+    var dDay = new Date(2022,11,20);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
@@ -297,28 +300,132 @@ export default function Main(){
   const getData7 = (wreathSrc7) => {
     setWreathSrc7(wreathSrc7);
   }
-  function removeQ() {
-    document.getElementById('qimg').classList.add('invisible');
+
+  //
+  var removeWhat = [];
+  const removeQ = useCallback(() => {
+    console.log("removeWhat: " + removeWhat)
+    if (removeWhat == 1) {
+      document.getElementById('qimg').classList.add('invisible');
+      console.log("1");
+    }
+    else if(removeWhat == 2) {
+      document.getElementById('qimg2').classList.add('invisible');
+      console.log("2");
+    }
+    else if(removeWhat == 3) {
+      document.getElementById('qimg3').classList.add('invisible');
+    }
+    else if(removeWhat == 4) {
+      document.getElementById('qimg4').classList.add('invisible');
+    }
+    else if(removeWhat == 5) {
+      document.getElementById('qimg5').classList.add('invisible');
+    }
+    else if(removeWhat == 6) {
+      document.getElementById('qimg6').classList.add('invisible');
+    }
+    else if(removeWhat == 7) {
+      document.getElementById('qimg7').classList.add('invisible');
+    }
+  })
+  // function removeQ() {
+  //   document.getElementById('qimg').classList.add('invisible');
+  // }
+  const removeQ1 = useCallback(() =>  {
+    removeWhat = 1;
+    console.log("remove" + removeWhat);
+  })
+  const removeQ2 = useCallback(() =>  {
+    removeWhat = 2;
+    console.log("remove" + removeWhat);
+  })
+  const removeQ3 = useCallback(() => {
+    removeWhat = 3;
+  })
+  const removeQ4 = useCallback(() => {
+    removeWhat = 4;
+  })
+  const removeQ5 = useCallback(() => {
+    removeWhat = 5;
+  })
+  const removeQ6 = useCallback(() => {
+    removeWhat = 6;
+  })
+  const removeQ7 = useCallback(() => {
+    removeWhat = 7;
+  })
+
+  //video
+  function popVideo() {
+    if(user.solve_count >= 10) {
+      setShowVM_Modal(true)
+    }
   }
-  function removeQ2() {
-    document.getElementById('qimg2').classList.add('invisible');
+  useEffect(() => {
+    if(user.solve_count == 10) {
+      setShowVM_Modal(true)
+      user.solve_count = user.solve_count + 10
+    }
+  })
+
+  const [refinedData, setRefinedData] = useState([]);
+  async function Ornament(){
+    let res = await axios.get(BASE_URL+"ornament/", {
+      params: {
+        jwt:usertoken,
+      },
+    });
+    console.log("refinedData 결과 =======");
+    var datajson = res.data;
+    console.log(datajson);
+    //setRefinedData(datajson);
+    var picked = [];
+    const keys = Object.keys(datajson);
+    //const values = Object.values(datajson);
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i] // 각각의 키
+      const value = datajson[key] // 각각의 키에 해당하는 각각의 값
+      if(value != -1) {
+          picked[i] = value
+      }
+    }
+    console.log("picked");
+    console.log(picked);
+    setRefinedData(picked);
   }
-  function removeQ3() {
-    document.getElementById('qimg3').classList.add('invisible');
+
+  //const [refinedData, setRefinedData] = useState([]);
+  // async function realWreath(){
+  //   let res = await axios.get(BASE_URL+"realwreath/", {
+  //     params: {
+  //       jwt:usertoken,
+  //     },
+  //   });
+  //   console.log("realwreath 결과 =======");
+  //   var datajson = res.data.ornaments;
+  //   console.log(datajson[1]);
+  //   //setRefinedData(datajson);
+  //   //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
+  // };
+  const [trueWreath, setTrueWreath] = useState([]);
+  useEffect(() => {
+    console.log(trueWreath)
+  })
+  async function realWreath(usertoken){
+    let res = await axios.get(BASE_URL+"realwreath/", {
+      params: {
+        jwt:usertoken,
+      },
+    });
+    console.log("realwreath 결과 =======");
+    setTrueWreath(res.data.ornaments);
+    console.log(trueWreath);
+    //setRefinedData(datajson);
+    //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
   }
-  function removeQ4() {
-    document.getElementById('qimg4').classList.add('invisible');
-  }
-  function removeQ5() {
-    document.getElementById('qimg5').classList.add('invisible');
-  }
-  function removeQ6() {
-    document.getElementById('qimg6').classList.add('invisible');
-  }
-  function removeQ7() {
-    document.getElementById('qimg7').classList.add('invisible');
-  }
-  
+
   return (
     <Fragment>
     { (windowGet !== null && paramValue !== null) && (
@@ -411,153 +518,157 @@ export default function Main(){
                 {/* 1번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg" onClick={removeQ} className="wreath_orna_q1">
-                            <Image src={userData[0]?.src ? userData[0].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg" className="wreath_orna_q1" onClick={()=> {removeQ1(); Ornament();}}>
+                            <Image src={(trueWreath[0] == -1) ? DEFAULT_IMG : trueWreath[0]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData} />
+                        <WreathEditModal getData={getData} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={1}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg" onClick={removeQ} className="wreath_orna_q1">
+                        <button id = "qimg" className="wreath_orna_q1" onClick={()=>{removeQ1(); Ornament();}}>
                             <Image src={wreathSrc} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData}/>
+                        <WreathEditModal getData={getData} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={1}/>
                     </Popover.Content>
                 </Popover>
                 {/* 2번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg2" onClick={removeQ2} className="wreath_orna_q2">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg2" className="wreath_orna_q2" onClick={()=>{removeQ2(); Ornament();}}>
+                            <Image src={(trueWreath[1] == -1) ? DEFAULT_IMG : trueWreath[1]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData2}/>
+                        <WreathEditModal getData={getData2} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={2}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg2" onClick={removeQ2} className="wreath_orna_q2">
+                        <button id = "qimg2" className="wreath_orna_q2" onClick={()=>{removeQ2();Ornament();}}>
                             <Image src={wreathSrc2} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData2}/>
+                        <WreathEditModal getData={getData2} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={2}/>
                     </Popover.Content>
                 </Popover>
                 {/* 3번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg3" onClick={removeQ3} className="wreath_orna_q3">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg3" className="wreath_orna_q3" onClick={()=>{removeQ3(); Ornament();}}>
+                            <Image src={(trueWreath[2] == -1) ? DEFAULT_IMG : trueWreath[2]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData3}/>
+                        <WreathEditModal getData={getData3} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={3}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg3" onClick={removeQ3} className="wreath_orna_q3">
+                        <button id = "qimg3" className="wreath_orna_q3" onClick={()=>{removeQ3(); Ornament();}}>
                             <Image src={wreathSrc3} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData3}/>
+                        <WreathEditModal getData={getData3} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={3}/>
                     </Popover.Content>
                 </Popover>
                 {/* 4번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg4" onClick={removeQ4} className="wreath_orna_q4">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg4" className="wreath_orna_q4" onClick={()=>{removeQ4();Ornament();}}>
+                            <Image src={(trueWreath[3] == -1) ? DEFAULT_IMG : trueWreath[3]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData4}/>
+                        <WreathEditModal getData={getData4} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={4}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg4" onClick={removeQ4} className="wreath_orna_q4">
+                        <button id = "qimg4" className="wreath_orna_q4" onClick={()=>{removeQ4();Ornament();}}>
                             <Image src={wreathSrc4} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData4}/>
+                        <WreathEditModal getData={getData4} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={4}/>
                     </Popover.Content>
                 </Popover>
                 {/* 5번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg5" onClick={removeQ5} className="wreath_orna_q5">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg5" className="wreath_orna_q5" onClick={()=>{removeQ5();Ornament();}}>
+                            <Image src={(trueWreath[4] == -1) ? DEFAULT_IMG : trueWreath[4]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData}/>
+                        <WreathEditModal getData={getData5} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={5}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg5" onClick={removeQ5} className="wreath_orna_q5">
+                        <button id = "qimg5" className="wreath_orna_q5" onClick={()=>{removeQ5();Ornament();}}>
                             <Image src={wreathSrc5} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData5}/>
+                        <WreathEditModal getData={getData5} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={5}/>
                     </Popover.Content>
                 </Popover>
                 {/* 6번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg6" onClick={removeQ6} className="wreath_orna_q6">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg6" className="wreath_orna_q6" onClick={()=>{removeQ6();Ornament();}}>
+                            <Image src={(trueWreath[5] == -1) ? DEFAULT_IMG : trueWreath[5]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData}/>
+                        <WreathEditModal getData={getData6} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={6}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg6" onClick={removeQ6} className="wreath_orna_q6">
+                        <button id = "qimg6" className="wreath_orna_q6" onClick={()=>{removeQ6();Ornament();}}>
                             <Image src={wreathSrc6} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData6}/>
+                        <WreathEditModal getData={getData6} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={6}/>
                     </Popover.Content>
                 </Popover>
                 {/* 7번 */}
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg7" onClick={removeQ7} className="wreath_orna_q7">
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                        <button id = "qimg7" className="wreath_orna_q7" onClick={()=>{removeQ7();Ornament();}}>
+                            <Image src={(trueWreath[6] == -1) ? DEFAULT_IMG : trueWreath[6]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <WreathEditModal getData={getData}/>
+                        <WreathEditModal getData={getData7} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={7}/>
                     </Popover.Content>
                 </Popover>
                 <Popover>
                     <Popover.Trigger>
-                        <button id = "qimg7" onClick={removeQ7} className="wreath_orna_q7">
+                        <button id = "qimg7" className="wreath_orna_q7" onClick={()=>{removeQ7();Ornament();}}>
                             <Image src={wreathSrc7} width='60' height='60'></Image>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
-                        <WreathEditModal getData={getData7}/>
+                        <WreathEditModal getData={getData7} removeQ={removeQ} user={user} usertoken={usertoken} refinedData={refinedData} index={7}/>
                     </Popover.Content>
                 </Popover>
               </div>
             </div>
-            <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
+            <div className="door-handle">
+              <button onClick={popVideo}>
+                <Image src='/img/handle.png' width='76' height='103'/>
+              </button>
+            </div>
             {/* 콜렉션 원래 자리 오너먼트 아래쪽에 있어서 겹쳐서 클릭돼서 위로 올림 */}
           </div>
         </div>
@@ -594,10 +705,11 @@ export default function Main(){
         <GuideModal isVisible={showG_Modal} onClose={()=>setShowG_Modal(false)}/>
         <QuizModal isVisible={showQ_Modal} onClose={()=>setShowQ_Modal(false)} usertoken={usertoken}/>
         <NoQuizModal  isVisible={showNq_Modal} onClose={()=>setShowNq_Modal(false)}/>
-        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} nickname={user.nickname} usertoken={usertoken} deerData={deerData}/>
-        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock1Data}/>
-        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock2Data}/>
-        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} nickname={user.nickname} usertoken={usertoken} sockData={sock3Data}/>
+        <ReindeerCollectionModal isVisible={showCollectionModal} onClose={()=>setCollectionModal(false)} user={user} usertoken={usertoken} deerData={deerData}/>
+        <SocksModal_1 isVisible={showS1_Modal} onClose={()=>setShowS1_Modal(false)} user={user} usertoken={usertoken}/>
+        <SocksModal_2 isVisible={showS2_Modal} onClose={()=>setShowS2_Modal(false)} user={user} usertoken={usertoken}/>
+        <SocksModal_3 isVisible={showS3_Modal} onClose={()=>setShowS3_Modal(false)} user={user} usertoken={usertoken}/>
+        <VideoModal isVisible={showVM_Modal} onClose={()=>setShowVM_Modal(false)} user={user} usertoken={usertoken}/>
       </div>
     </div>
     )}
