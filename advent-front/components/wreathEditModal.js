@@ -77,7 +77,7 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
-                        {refinedData.map((el) =>
+                        {(refinedData.length != 0) ? refinedData.map((el) =>
                         <div id="ornaBox" className="wreath_edit_orna_box">
                             <button onClick={() => {
                                 onClickHandler(el);
@@ -88,7 +88,12 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
                                 <Image src={el} width='54' height='54'/>
                             </button>
                         </div>
-                        )}
+                        ) :
+                        <div>
+                            <p className="no_ornament">매일 도착하는 새로운 퀴즈를 풀고</p>
+                            <p className="no_ornament2">오너먼트를 획득해보세요!</p>
+                        </div>    
+                        }
                         <div className="mt-10 mb-10">
                             <button onClick={()=>{wreathResponse(); wreathPost();}} className="wreath_edit_save col-span-3">
                                 <div className="wreath_edit_saveText">변경저장</div>
