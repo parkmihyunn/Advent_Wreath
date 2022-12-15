@@ -59,8 +59,8 @@ export const WreathEditModal = ({ getData, removeQ, usertoken, refinedData, inde
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
-                        {(refinedData.length != 0) ? refinedData.map((el) =>
-                        <div id="ornaBox" className="wreath_edit_orna_box">
+                        {(refinedData.length != 0) ? refinedData.map((el,index) =>
+                        <div id="ornaBox" className="wreath_edit_orna_box" key={index}>
                             <button onClick={() => {
                                 onClickHandler(el);
                                 console.log("click");

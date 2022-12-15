@@ -121,10 +121,10 @@ const SocksModal_1 = ({ isVisible, onClose, nickname, usertoken, sockData }) => 
 								{imageSrc && <img className="rounded-2xl max-w-[214px] max-h-[194px]" src={imageSrc} alt="preview-img"/>}
 							</div>	
 							<div id="upload" className="absolute top-[113%] w-[62px] h-[21px] flex justify-center z-0 rounded-full text-[11px] bg-[#EF3939]"
-									onClick={ ()=>{onCickImageUpload()}}
+									onClick={ ()=>{onCickImageUpload()}} 
 							>
 								<input type="file" onChange = {(e)=>{encodeFileToBase64(e.target.files[0])}}
-											ref={imageInput} style={{ display: "none" }}
+											ref={imageInput} style={{ display: "none" }} accept="image/gif, image/jpeg, image/png"
 								/>
 								<div className="absolute text-white top-[16%]">
 									<div className="font-bold text-[11px]">사진등록</div>

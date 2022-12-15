@@ -116,7 +116,7 @@ const SocksModal_2 = ({ isVisible, onClose, nickname, usertoken, sockData }) => 
 									onClick={ ()=>{onCickImageUpload()}}
 							>
 								<input type="file" onChange = {(e)=>{encodeFileToBase64(e.target.files[0])}}
-											ref={imageInput} style={{ display: "none" }}
+											ref={imageInput} style={{ display: "none" }} accept="image/gif, image/jpeg, image/png"
 								/>
 								<div className="absolute text-white top-[16%]">
 									<div className="font-bold text-[11px]">사진등록</div>
