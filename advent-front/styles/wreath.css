@@ -54,6 +54,38 @@
     border-radius: 11px;
 }
 
+.no_ornament {
+    position: absolute;
+    width: 240px;
+    height: 230px;
+    left: 43px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.no_ornament2 {
+    position: absolute;
+    width: 240px;
+    height: 320px;
+    left: 65px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
 .wreath_edit_save {
     position: absolute;
     width: 62px;
