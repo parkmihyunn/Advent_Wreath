@@ -6,7 +6,7 @@ import axios from 'axios';
 /* 만약에 image src가 없어서 빈 이미지가 아니라 뭔가 에러 이미지가뜨면 Image 태그 img로 변경 */
 const fallBackSrc = "/img/reindeer/null_callback.png"
 
-const ReindeerCollectionModal = ({ isVisible, onClose, nickname ,usertoken, deerData }) => {
+const ReindeerCollectionModal = ({ isVisible, onClose, nickname , deerData }) => {
   if(!isVisible) return null;
 	
 	/* 1 ~ 7 세트 보고싶을때 활성화 */
