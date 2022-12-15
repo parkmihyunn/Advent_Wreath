@@ -11,7 +11,7 @@ import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
 const BASE_URL = "http://localhost:8000/"
-const DEFAULT_IMG = "/img/ornaments/orna_q.png"
+const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 
 export default function share(){
 
@@ -164,7 +164,10 @@ export default function share(){
     });
   };
 
-  var trueWreath = [];
+  const [trueWreath, setTrueWreath] = useState([]);
+  useEffect(() => {
+    console.log(trueWreath)
+  })
   async function realWreath(usertoken){
     let res = await axios.get(BASE_URL+"realwreath/", {
       params: {
@@ -172,8 +175,8 @@ export default function share(){
       },
     });
     console.log("realwreath 결과 =======");
-    var trueWreath = res.data.ornaments;
-    console.log(trueWreath[0]);
+    setTrueWreath(res.data.ornaments);
+    console.log(trueWreath);
     //setRefinedData(datajson);
     //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
   }
@@ -257,25 +260,25 @@ export default function share(){
             </div>
 
             <div className="orna-q1">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[0] == -1) ? DEFAULT_IMG : trueWreath[0]} width='60' height='60'/>
             </div>
             <div className="orna-q2">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[1] == -1) ? DEFAULT_IMG : trueWreath[1]} width='60' height='60'/>
             </div>
             <div className="orna-q3">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[2] == -1) ? DEFAULT_IMG : trueWreath[2]} width='60' height='60'/>
             </div>
             <div className="orna-q4">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[3] == -1) ? DEFAULT_IMG : trueWreath[3]} width='60' height='60'/>
             </div>
             <div className="orna-q5">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[4] == -1) ? DEFAULT_IMG : trueWreath[4]} width='60' height='60'/>
             </div>
             <div className="orna-q6">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[5] == -1) ? DEFAULT_IMG : trueWreath[5]} width='60' height='60'/>
             </div>
             <div className="orna-q7">
-              <Image src={(trueWreath[0] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+              <Image src={(trueWreath[6] == -1) ? DEFAULT_IMG : trueWreath[6]} width='60' height='60'/>
             </div>
 
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>

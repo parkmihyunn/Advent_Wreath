@@ -29,15 +29,21 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
         console.log("+++++++++++++++++++++++++");
         console.log(index)
         console.log(isSelect.src)
-        let res2 = await axios.post(BASE_URL+"realwreath/", 
+        if (isSelect.src == undefined) {
+            isSelect.src = [];
+        } 
+        else {
+            let res2 = await axios.post(BASE_URL+"realwreath/", 
             {
               jwt:usertoken,
               index:index,
               src:isSelect.src,
             });
-        var datajson2 = res2.data;
-        console.log("리얼리스 오너먼트 post =======");
-        console.log(datajson2);
+            var datajson2 = res2.data;
+            console.log("리얼리스 오너먼트 post =======");
+            console.log(datajson2);
+        }
+
     }
 
     const onClickHandler = (t1) => {

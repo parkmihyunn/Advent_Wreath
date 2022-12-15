@@ -409,7 +409,10 @@ export default function Main(){
   //   //setRefinedData(datajson);
   //   //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
   // };
-  var trueWreath = [];
+  const [trueWreath, setTrueWreath] = useState([]);
+  useEffect(() => {
+    console.log(trueWreath)
+  })
   async function realWreath(usertoken){
     let res = await axios.get(BASE_URL+"realwreath/", {
       params: {
@@ -417,14 +420,11 @@ export default function Main(){
       },
     });
     console.log("realwreath 결과 =======");
-    var trueWreath = res.data.ornaments;
-    console.log(trueWreath[0]);
+    setTrueWreath(res.data.ornaments);
+    console.log(trueWreath);
     //setRefinedData(datajson);
     //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
   }
-  useEffect(() => {
-    console.log(trueWreath[0])
-  })
 
   return (
     <Fragment>
@@ -519,7 +519,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg" className="wreath_orna_q1" onClick={()=> {removeQ1(); Ornament();}}>
-                            <Image src={trueWreath[0]} width='60' height='60'/>
+                            <Image src={(trueWreath[0] == -1) ? DEFAULT_IMG : trueWreath[0]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger> 
                     <Popover.Content>
@@ -540,7 +540,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg2" className="wreath_orna_q2" onClick={()=>{removeQ2(); Ornament();}}>
-                            <Image src={(trueWreath[1] == -1) ? trueWreath[0] : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[1] == -1) ? DEFAULT_IMG : trueWreath[1]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
@@ -561,7 +561,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg3" className="wreath_orna_q3" onClick={()=>{removeQ3(); Ornament();}}>
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[2] == -1) ? DEFAULT_IMG : trueWreath[2]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
@@ -582,7 +582,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg4" className="wreath_orna_q4" onClick={()=>{removeQ4();Ornament();}}>
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[3] == -1) ? DEFAULT_IMG : trueWreath[3]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
@@ -603,7 +603,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg5" className="wreath_orna_q5" onClick={()=>{removeQ5();Ornament();}}>
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[4] == -1) ? DEFAULT_IMG : trueWreath[4]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
@@ -624,7 +624,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg6" className="wreath_orna_q6" onClick={()=>{removeQ6();Ornament();}}>
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[5] == -1) ? DEFAULT_IMG : trueWreath[5]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
@@ -645,7 +645,7 @@ export default function Main(){
                 <Popover>
                     <Popover.Trigger>
                         <button id = "qimg7" className="wreath_orna_q7" onClick={()=>{removeQ7();Ornament();}}>
-                            <Image src={userData[1]?.src ? userData[1].src : DEFAULT_IMG} width='60' height='60'/>
+                            <Image src={(trueWreath[6] == -1) ? DEFAULT_IMG : trueWreath[6]} width='60' height='60'/>
                         </button>
                     </Popover.Trigger>
                     <Popover.Content>
