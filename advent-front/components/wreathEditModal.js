@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
-import { useRouter } from 'next/router'
 import axios from 'axios';
 
 const BASE_URL = "http://localhost:8000/"
 
-export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData, index }) => {
+export const WreathEditModal = ({ getData, removeQ, usertoken, refinedData, index }) => {
 
     const [isSelect, setIsSelect] = useState([]);
-
-    const wreathResponse = async() => {
-        console.log(usertoken);
-        console.log("~~~~~~~~~~~~~~~~")
-        console.log(isSelect)
-        let res = await axios.post(BASE_URL+"ornament/", 
-            {
-              jwt:usertoken,
-              src:isSelect.src,
-            });
-        var datajson = res.data;
-        console.log("오너먼트 post =======");
-        console.log(datajson);
-    }
 
     const wreathPost = async() => {
         console.log(usertoken);
@@ -30,8 +15,9 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
         console.log(index)
         console.log(isSelect.src)
         if (isSelect.src == undefined) {
-            isSelect.src = [];
-        } 
+            setIsSelect([])
+            alert("변경사항이 없습니다.")
+        }
         else {
             let res2 = await axios.post(BASE_URL+"realwreath/", 
             {
@@ -42,8 +28,19 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
             var datajson2 = res2.data;
             console.log("리얼리스 오너먼트 post =======");
             console.log(datajson2);
+            console.log(usertoken);
+            console.log("~~~~~~~~~~~~~~~~")
+            
+            let res = await axios.post(BASE_URL+"ornament/", 
+                {
+                    jwt:usertoken,
+                    src:isSelect.src,
+                });
+            var datajson = res.data;
+            console.log("오너먼트 post =======");
+            console.log(datajson);
+            alert("저장되었습니다.")
         }
-
     }
 
     const onClickHandler = (t1) => {
@@ -55,21 +52,6 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
     useEffect(() => {
         getData(isSelect.src);
     })
-
-    // function pickOrna() {
-    //     for (let i = 0; i < keys.length; i++) {
-    //         const key = keys[i] // 각각의 키
-    //         const value = refinedData[key] // 각각의 키에 해당하는 각각의 값
-    //         if(value != -1) {
-    //             picked[i] = value
-    //         }
-    //     }
-    //     console.log("picked");
-    //     console.log(picked);
-    // }
-    // var picked = [];
-    // const keys = Object.keys(refinedData);
-    // const values = Object.values(refinedData);
 
     return (
         <Grid.Container
@@ -90,7 +72,7 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
                         </div>
                         )}
                         <div className="mt-10 mb-10">
-                            <button onClick={()=>{wreathResponse(); wreathPost();}} className="wreath_edit_save col-span-3">
+                            <button onClick={()=>{wreathPost()}} className="wreath_edit_save col-span-3">
                                 <div className="wreath_edit_saveText">변경저장</div>
                             </button>
                         </div>
@@ -98,7 +80,6 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
                 </div>
             </Grid>
         </Grid.Container>
-        
     );
 };
 
