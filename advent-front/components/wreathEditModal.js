@@ -76,7 +76,7 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
             css={{ borderRadius: "13px", minWidth: "297px", minHeight: "340px" }}>
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
                         {refinedData.map((el) =>
                         <div id="ornaBox" className="wreath_edit_orna_box">
                             <button onClick={() => {
@@ -90,7 +90,7 @@ export const WreathEditModal = ({ getData, removeQ, user, usertoken, refinedData
                         </div>
                         )}
                         <div className="mt-10 mb-10">
-                            <button onClick={()=>{wreathResponse(); wreathPost();}} className="wreath_edit_save">
+                            <button onClick={()=>{wreathResponse(); wreathPost();}} className="wreath_edit_save col-span-3">
                                 <div className="wreath_edit_saveText">변경저장</div>
                             </button>
                         </div>
