@@ -10,7 +10,7 @@ import SocksModal_1 from '../components/share_socksModal_1'
 import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 
 export default function share(){
@@ -191,7 +191,7 @@ export default function share(){
     <div className="
         flex flex-col items-center h-screen overflow-auto bg-cover bg-local
         bg-[url('../public/img/wood_pattern.png')]"
-    >
+    onContextMenu={e => e.preventDefault()}>
       <Head>
       <title>돌아와 순록!</title>
       <meta name="description" content="콘텐트 내용"/>
