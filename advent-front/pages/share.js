@@ -11,12 +11,11 @@ import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
 const BASE_URL = "http://localhost:8000/"
-const DEFAULT_IMG = "/img/ornaments/orna_q.png"
+const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 
 export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
-  const [user, setUser] = useState();
   const [usertoken, setUsertoken] = useState(); // url로 전달된 유저jwt토큰
   const [nickname, setNickname] = useState(""); // jwt로 받은 유저닉네임
   const router = useRouter();
@@ -25,6 +24,7 @@ export default function share(){
       const params = new URLSearchParams(location.search);
       const t_paramvalue = params.get("value");
       setUsertoken(t_paramvalue)
+      realWreath(t_paramvalue)
       if(t_paramvalue !== null){
         /* t_paramvalue(token)으로 백엔드에 realwreath, socks, reindeer 요청 */
         axios.get(BASE_URL+"nickname/",{
@@ -39,7 +39,7 @@ export default function share(){
           router.push('/');
           alert("잘못된 공유주소입니다.");
         })
-      } 
+      }
       else {
         router.push('/');
         alert("잘못된 접근입니다.");
@@ -118,13 +118,12 @@ export default function share(){
     }
   },[clickGo])
 
-  /* 디데이 계산, 오너먼트 데이터 불러오기 */
-  const [userData, setUserData] = useState({});
+  /* 디데이 계산 */
   const [d_Day, setD_Day] = useState();
   useEffect(() => {
     var today = new Date();
     /* 테스트 원하는 경우 목표 날짜 수정후 확인 */
-    var dDay = new Date(2022,11,25);
+    var dDay = new Date(2022,11,26);
     var gap = dDay.getTime() - today.getTime();
     var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
     setD_Day(result);
@@ -148,6 +147,8 @@ export default function share(){
     }
   }, [play]);
 
+  //오너먼트 데이터 불러오기
+  const [userData, setUserData] = useState({}); 
   //이미지 이름 가져오기
   const [giftName, setGiftName] = useState('');
   //이미지 사진 가져오기
@@ -163,6 +164,23 @@ export default function share(){
     });
   };
 
+  const [trueWreath, setTrueWreath] = useState([]);
+  useEffect(() => {
+    console.log(trueWreath)
+  })
+  async function realWreath(usertoken){
+    let res = await axios.get(BASE_URL+"realwreath/", {
+      params: {
+        jwt:usertoken,
+      },
+    });
+    console.log("realwreath 결과 =======");
+    setTrueWreath(res.data.ornaments);
+    console.log(trueWreath);
+    //setRefinedData(datajson);
+    //return WreathEditModal({ getData, removeQ, user, usertoken, refinedData }); 
+  }
+
   const [showCollectionModal, setCollectionModal] = useState(false);
   const [showS1_Modal, setShowS1_Modal] = useState(false);
   const [showS2_Modal, setShowS2_Modal] = useState(false);
@@ -175,7 +193,7 @@ export default function share(){
         bg-[url('../public/img/wood_pattern.png')]"
     >
       <Head>
-      <title>돌아와! 순록!</title>
+      <title>돌아와 순록!</title>
       <meta name="description" content="콘텐트 내용"/>
       <link rel="icon" href="/favicon.ico" />
       </Head> 
@@ -240,6 +258,29 @@ export default function share(){
                   }
               </div>
             </div>
+
+            <div className="orna-q1">
+              <Image src={(trueWreath[0] == -1) ? DEFAULT_IMG : trueWreath[0]} width='60' height='60'/>
+            </div>
+            <div className="orna-q2">
+              <Image src={(trueWreath[1] == -1) ? DEFAULT_IMG : trueWreath[1]} width='60' height='60'/>
+            </div>
+            <div className="orna-q3">
+              <Image src={(trueWreath[2] == -1) ? DEFAULT_IMG : trueWreath[2]} width='60' height='60'/>
+            </div>
+            <div className="orna-q4">
+              <Image src={(trueWreath[3] == -1) ? DEFAULT_IMG : trueWreath[3]} width='60' height='60'/>
+            </div>
+            <div className="orna-q5">
+              <Image src={(trueWreath[4] == -1) ? DEFAULT_IMG : trueWreath[4]} width='60' height='60'/>
+            </div>
+            <div className="orna-q6">
+              <Image src={(trueWreath[5] == -1) ? DEFAULT_IMG : trueWreath[5]} width='60' height='60'/>
+            </div>
+            <div className="orna-q7">
+              <Image src={(trueWreath[6] == -1) ? DEFAULT_IMG : trueWreath[6]} width='60' height='60'/>
+            </div>
+
             <div className="door-handle"><Image src='/img/handle.png' width='76' height='103'/></div>
             <div id="collection"className="absolute w-[95px] h-[131px] top-[84%] left-[65%] text-align">
               <button onClick={()=> getDeer()} >

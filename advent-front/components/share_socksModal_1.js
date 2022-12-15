@@ -19,7 +19,7 @@ const Share_SocksModal_1 = ({ isVisible, onClose, nickname, sockData }) => {
 							<button className="text-white absolute flex top-[2%] right-[6%] text-[20px]" onClick={()=>onClose()}>x</button>
 							<div className="pt-[70px] h-[20px] w-[300px] top-[10%] text-white text-center text-[18px]">{nickname}님의 소원양말 1</div>
 							<div className="socks_center">
-								<div className="socks_giftImg">
+								<div className="socks_edit_noneBox">
 									{ sockData.url !== null
 										?
 										<img src={sockData.url} className="rounded-2xl max-w-[214px] max-h-[194px]"></img>
