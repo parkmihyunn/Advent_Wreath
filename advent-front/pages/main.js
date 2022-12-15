@@ -69,7 +69,9 @@ export default function Main(){
   //video
   function popVideo() {
     if(solvedNum >= 10) {
-      setShowVM_Modal(true)
+      setShowVM_Modal(true);
+    } else {
+      alert("🎄크리스마스까지 기다려 주세요🎄")
     }
   }
 
