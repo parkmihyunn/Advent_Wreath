@@ -16,7 +16,6 @@ const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
-  const [user, setUser] = useState();
   const [usertoken, setUsertoken] = useState(); // url로 전달된 유저jwt토큰
   const [nickname, setNickname] = useState(""); // jwt로 받은 유저닉네임
   const router = useRouter();
@@ -40,7 +39,7 @@ export default function share(){
           router.push('/');
           alert("잘못된 공유주소입니다.");
         })
-      } 
+      }
       else {
         router.push('/');
         alert("잘못된 접근입니다.");

@@ -22,12 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         console.log("Kakao.init()")
       }
     } catch(e) { console.log(e)}
-  }, [])
+  }, [window.Kakao.isInitialized()])
 
   return (
     <NextUIProvider>
-      <script defer src="https://developers.kakao.com/sdk/js/kakao.js">
-      </script>
+      <script async src="https://developers.kakao.com/sdk/js/kakao.js"></script>
       <Component {...pageProps} />
     </NextUIProvider>
   );
