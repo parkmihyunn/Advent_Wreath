@@ -149,7 +149,7 @@ export default function quiz(){
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
-      axios.post(BASE_URL+"solvequestion/",
+      axios.post(process.env.NEXT_PUBLIC_MY_BACK+"solvequestion/",
       {
         jwt:usertoken,
         src:'/img/ornaments/'+ t_solvedNum +'.png'
@@ -187,7 +187,7 @@ export default function quiz(){
   /* 순록 모달ON 버튼 클릭시 */
   const [deerData, setDeerData] = useState();
   async function getDeer(){
-    let res = await axios.get(BASE_URL+"deer/", {
+    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"deer/", {
       params: {
         jwt:usertoken
       },
@@ -204,7 +204,7 @@ export default function quiz(){
         flex flex-col h-screen relative
         overflow-auto bg-cover bg-local
         bg-[url('../public/img/wood_pattern_dark.png')]
-    ">
+    " onContextMenu={e => e.preventDefault()}>
         <Head>
           <title>돌아와! 순록!</title>
           <meta name="description" content="콘텐트 내용" />

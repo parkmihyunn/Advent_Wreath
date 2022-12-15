@@ -36,7 +36,7 @@ const ReindeerCollectionModal = ({ isVisible, onClose, nickname , deerData }) =>
   };
 
 	return (
-		<div>
+		<div  onContextMenu={e => e.preventDefault()}>
 		<Modal css={{background:"transparent",}} noPadding open={isVisible} onClose={onClose} width={300} height={464} animated={false}>
 			<div className="flex flex-col items-center h-[464px] w-[300px] overflow-scroll bg-cover bg-scroll
 											bg-[url('../public/img/collection_bg.png')]"
