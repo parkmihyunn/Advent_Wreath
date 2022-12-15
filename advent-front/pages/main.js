@@ -301,8 +301,9 @@ export default function Main(){
     setWreathSrc7(wreathSrc7);
   }
 
-  //
-  var removeWhat = [];
+  //리스 오너먼트들
+  // var removeWhat = [];
+  const [removeWhat, setRemoveWhat] = useState([]);
   const removeQ = useCallback(() => {
     console.log("removeWhat: " + removeWhat)
     if (removeWhat == 1) {
@@ -333,27 +334,27 @@ export default function Main(){
   //   document.getElementById('qimg').classList.add('invisible');
   // }
   const removeQ1 = useCallback(() =>  {
-    removeWhat = 1;
+    setRemoveWhat(1);
     console.log("remove" + removeWhat);
   })
   const removeQ2 = useCallback(() =>  {
-    removeWhat = 2;
+    setRemoveWhat(2);
     console.log("remove" + removeWhat);
   })
   const removeQ3 = useCallback(() => {
-    removeWhat = 3;
+    setRemoveWhat(3);
   })
   const removeQ4 = useCallback(() => {
-    removeWhat = 4;
+    setRemoveWhat(4);
   })
   const removeQ5 = useCallback(() => {
-    removeWhat = 5;
+    setRemoveWhat(5);
   })
   const removeQ6 = useCallback(() => {
-    removeWhat = 6;
+    setRemoveWhat(6);
   })
   const removeQ7 = useCallback(() => {
-    removeWhat = 7;
+    setRemoveWhat(7);
   })
 
   //video
