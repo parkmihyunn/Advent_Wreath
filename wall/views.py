@@ -103,49 +103,53 @@ class RealWreathView(APIView):
         src = request.data.get('src',None)
         user_id = jwt.decode(user_jwt,SECRET_KEY,algorithms=ALGORITHM)
         user = User.objects.get(u_id=user_id['id'])
-        data ={"any":"data at 6. 저장됨."}
         if RealWreath.objects.filter(user_id=user_id['id']).exists():
                 if index== 1 : 
                     user_realwreath = RealWreath.objects.get(user_id = user)
                     if user_realwreath.orn1 != (-1):
-                        print("오너먼트가 1번자리에 원래 존재했어요")
-                        print("아래는 원래 존재했던 오너먼트에요")
-                        print(user_realwreath.orn1)
-                        print("================================")
                         addOrnament(user_id,user_realwreath.orn1)
-                        print("예전에 있던 오너먼트를 오너먼트 리스트에 추가했어요")
                     user_realwreath.orn1 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 1번자리에 저장되었습니다!"})
                 if index==2 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
                     if user_realwreath.orn2 != (-1):
-                        addOrnament(user_id['id'],user_realwreath.orn1)
+                        addOrnament(user_id['id'],user_realwreath.orn2)
                     user_realwreath.orn2 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 2번 자리에 저장되었습니다!"})
-                if index=='3' : 
+                if index==3 : 
                     user_realwreath = RealWreath.objects.get(user_id = user['id'])
+                    if user_realwreath.orn3 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn3)
                     user_realwreath.orn3 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 3번 자리에 저장되었습니다!"})
                 if index==4 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    if user_realwreath.orn4 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn4)
                     user_realwreath.orn4 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 4번 자리에 저장되었습니다!"})
                 if index==5 : 
                     user_realwreath = RealWreath.objects.get(user_id = user['id'])
+                    if user_realwreath.orn5 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn5)
                     user_realwreath.orn5 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 5번 자리에 저장되었습니다!"})
-                if index=='6' : 
+                if index==6 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    if user_realwreath.orn6 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn6)
                     user_realwreath.orn6 = src
                     user_realwreath.save()
-                    return JsonResponse(data)
-                if index=='7' : 
+                    return JsonResponse({"응답":"src가 리스의 6번 자리에 저장되었습니다!"})
+                if index==7 : 
                     user_realwreath = RealWreath.objects.get(user_id = user.u_id)
+                    if user_realwreath.orn7 != (-1):
+                        addOrnament(user_id['id'],user_realwreath.orn7)
                     user_realwreath.orn7 = src
                     user_realwreath.save()
                     return JsonResponse({"응답":"src가 리스의 7번 자리에 저장되었습니다!"})
