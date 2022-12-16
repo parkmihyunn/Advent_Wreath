@@ -9,7 +9,7 @@ import axios from 'axios';
 sockData 에는 name과 url 키 있음 
 */
 const SOCK_NUM = 3;
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 
 const SocksModal_3 = ({ isVisible, onClose, nickname, usertoken, sockData }) => {
 	if(!isVisible) return null;

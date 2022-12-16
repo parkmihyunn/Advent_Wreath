@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 
 export const WreathEditModal = ({ getData, removeQ, usertoken, refinedData, index }) => {
 
