@@ -8,7 +8,7 @@ const Share_SocksModal_3 = ({ isVisible, onClose, nickname, sockData }) => {
 	if(!isVisible) return null;
 
 	return (
-		<div>
+		<div  onContextMenu={e => e.preventDefault()}>
 		<Modal css={{background:"transparent",}} noPadding open={isVisible} onClose={onClose} width={335} height={624} animated={false}>
 				<div className="inset-0 bg-opacity-75 flex justify-center items-center z-0 overflow-scroll bg-cover bg-scroll h-[684px] w-[335px]">
 					<div className="socks_back">
