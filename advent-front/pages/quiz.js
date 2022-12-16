@@ -149,7 +149,7 @@ export default function quiz(){
     if (quizInput_t == answerResult && typeof window !== 'undefined') {
       // 정답 
       /* 백엔드 서버로 solvedQuiz 갯수 증가 */
-      axios.post(process.env.NEXT_PUBLIC_MY_BACK+"solvequestion/",
+      axios.post(BASE_URL+"solvequestion/",
       {
         jwt:usertoken,
         src:'/img/ornaments/'+ t_solvedNum +'.png'
@@ -187,7 +187,7 @@ export default function quiz(){
   /* 순록 모달ON 버튼 클릭시 */
   const [deerData, setDeerData] = useState();
   async function getDeer(){
-    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"deer/", {
+    let res = await axios.get(BASE_URL+"deer/", {
       params: {
         jwt:usertoken
       },
@@ -196,6 +196,7 @@ export default function quiz(){
     var datajson = res.data;
     console.log(datajson);
     setDeerData(datajson[preSolvedNum]);
+    console.log(datajson[preSolvedNum])
     return setShowR_Modal(true); 
   }
 
