@@ -41,7 +41,7 @@ export default function setName() {
     console.log(token);
     if(!nicknameInput_t) return alert("닉네임을 입력해주세요");
     else {
-      let res = await axios.post(BASE_URL+"changenickname/",
+      let res = await axios.post(process.env.NEXT_PUBLIC_MY_BACK+"changenickname/",
         {
           nickname:nicknameInput_t,
           jwt:token,
