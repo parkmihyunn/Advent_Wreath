@@ -10,7 +10,7 @@ import SocksModal_1 from '../components/share_socksModal_1'
 import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
-const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 
 export default function share(){
@@ -73,19 +73,9 @@ export default function share(){
     });
     console.log("socks1 결과 =======");
     var datajson = res.data;
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock1Data(tmp);
-      return setShowS1_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock1Data(datajson);
-      return setShowS1_Modal(true);
-    }
+    console.log(datajson);
+    setSock1Data(datajson);
+    return setShowS1_Modal(true);
   }
 
   /* 양말2 데이터 불러오기(button 클릭 실행) */
@@ -99,19 +89,9 @@ export default function share(){
     });
     console.log("socks2 결과 =======");
     var datajson = res.data;
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock2Data(tmp);
-      return setShowS2_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock2Data(datajson);
-      return setShowS2_Modal(true);
-    }
+    console.log(datajson);
+    setSock2Data(datajson);
+    return setShowS2_Modal(true);
   }
 
   /* 양말3 데이터 불러오기(button 클릭 실행) */
@@ -126,19 +106,8 @@ export default function share(){
     console.log("socks3 결과 =======");
     var datajson = res.data;
     console.log(datajson);
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock3Data(tmp);
-      return setShowS3_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock3Data(datajson);
-      return setShowS3_Modal(true);
-    }
+    setSock3Data(datajson);
+    return setShowS3_Modal(true);
   }
 
   /* 시작화면으로 돌아가기 */
