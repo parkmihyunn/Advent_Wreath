@@ -9,7 +9,7 @@ import axios from 'axios';
 sockData 에는 name과 url 키 있음 
 */
 const SOCK_NUM = 2;
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 
 const SocksModal_2 = ({ isVisible, onClose, nickname, usertoken, sockData }) => {
 	if(!isVisible) return null;
@@ -95,7 +95,7 @@ const SocksModal_2 = ({ isVisible, onClose, nickname, usertoken, sockData }) => 
   }
 
 	return (
-		<div>
+		<div  onContextMenu={e => e.preventDefault()}>
 		<Modal css={{background:"transparent",}} noPadding open={isVisible} onClose={onCloseHandler} preventClose width={335} height={624} animated={false}>
 			<div className="inset-0 bg-opacity-75 flex justify-center items-center z-0 overflow-scroll bg-cover bg-scroll h-[684px] w-[335px]">
 				<div className="socks_back">
@@ -116,7 +116,7 @@ const SocksModal_2 = ({ isVisible, onClose, nickname, usertoken, sockData }) => 
 									onClick={ ()=>{onCickImageUpload()}}
 							>
 								<input type="file" onChange = {(e)=>{encodeFileToBase64(e.target.files[0])}}
-											ref={imageInput} style={{ display: "none" }}
+											ref={imageInput} style={{ display: "none" }} accept="image/gif, image/jpeg, image/png"
 								/>
 								<div className="absolute text-white top-[16%]">
 									<div className="font-bold text-[11px]">사진등록</div>

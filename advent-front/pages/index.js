@@ -23,11 +23,11 @@ export default function Home() {
   }
 
   const kakaoResponse = async(authObj)=>{
-    let res = await axios.get(BASE_URL+"rest-auth/kakao/", {
+    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"rest-auth/kakao/", {
       params: {
         code:authObj.access_token
       },
-    });
+    }, );
     console.log("백서버에서 받아온 사용자 정보 =======");
     var datajson = res.data;
     console.log(datajson);
@@ -59,7 +59,7 @@ export default function Home() {
       flex flex-col items-center h-screen
       overflow-auto bg-auto bg-center bg-local pt-[54px]
       bg-[url('../public/img/start_bg.png')]
-    ">
+    " onContextMenu={e => e.preventDefault()}>
       <Head>
         <title>돌아와 순록!</title>
         <meta name="description" content="콘텐트 내용" />

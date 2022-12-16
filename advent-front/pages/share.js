@@ -10,13 +10,12 @@ import SocksModal_1 from '../components/share_socksModal_1'
 import SocksModal_2 from '../components/share_socksModal_2'
 import SocksModal_3 from '../components/share_socksModal_3'
 
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 const DEFAULT_IMG = "/img/reindeer/null_callback.png"
 
 export default function share(){
 
   /* 링크의 사용자 정보 불러오기 */
-  const [user, setUser] = useState();
   const [usertoken, setUsertoken] = useState(); // url로 전달된 유저jwt토큰
   const [nickname, setNickname] = useState(""); // jwt로 받은 유저닉네임
   const router = useRouter();
@@ -40,7 +39,7 @@ export default function share(){
           router.push('/');
           alert("잘못된 공유주소입니다.");
         })
-      } 
+      }
       else {
         router.push('/');
         alert("잘못된 접근입니다.");
@@ -74,9 +73,19 @@ export default function share(){
     });
     console.log("socks1 결과 =======");
     var datajson = res.data;
-    console.log(datajson);
-    setSock1Data(datajson);
-    return setShowS1_Modal(true);
+    if(datajson.url=="null" && datajson.name=="null"){
+      const tmp = {
+        url : null,
+        name : null,
+      }
+      console.log(tmp);
+      setSock1Data(tmp);
+      return setShowS1_Modal(true);
+    }else{
+      console.log(datajson);
+      setSock1Data(datajson);
+      return setShowS1_Modal(true);
+    }
   }
 
   /* 양말2 데이터 불러오기(button 클릭 실행) */
@@ -90,9 +99,19 @@ export default function share(){
     });
     console.log("socks2 결과 =======");
     var datajson = res.data;
-    console.log(datajson);
-    setSock2Data(datajson);
-    return setShowS2_Modal(true);
+    if(datajson.url=="null" && datajson.name=="null"){
+      const tmp = {
+        url : null,
+        name : null,
+      }
+      console.log(tmp);
+      setSock2Data(tmp);
+      return setShowS2_Modal(true);
+    }else{
+      console.log(datajson);
+      setSock2Data(datajson);
+      return setShowS2_Modal(true);
+    }
   }
 
   /* 양말3 데이터 불러오기(button 클릭 실행) */
@@ -107,8 +126,19 @@ export default function share(){
     console.log("socks3 결과 =======");
     var datajson = res.data;
     console.log(datajson);
-    setSock3Data(datajson);
-    return setShowS3_Modal(true);
+    if(datajson.url=="null" && datajson.name=="null"){
+      const tmp = {
+        url : null,
+        name : null,
+      }
+      console.log(tmp);
+      setSock3Data(tmp);
+      return setShowS3_Modal(true);
+    }else{
+      console.log(datajson);
+      setSock3Data(datajson);
+      return setShowS3_Modal(true);
+    }
   }
 
   /* 시작화면으로 돌아가기 */
@@ -192,7 +222,7 @@ export default function share(){
     <div className="
         flex flex-col items-center h-screen overflow-auto bg-cover bg-local
         bg-[url('../public/img/wood_pattern.png')]"
-    >
+    onContextMenu={e => e.preventDefault()}>
       <Head>
       <title>돌아와 순록!</title>
       <meta name="description" content="콘텐트 내용"/>

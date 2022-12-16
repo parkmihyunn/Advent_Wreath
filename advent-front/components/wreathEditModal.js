@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Text, Button, Grid, Row } from "@nextui-org/react";
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:8000/"
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BACK
 
 export const WreathEditModal = ({ getData, removeQ, usertoken, refinedData, index }) => {
 
@@ -55,12 +55,12 @@ export const WreathEditModal = ({ getData, removeQ, usertoken, refinedData, inde
 
     return (
         <Grid.Container
-            css={{ borderRadius: "13px", minWidth: "297px", minHeight: "340px" }}>
+            css={{ borderRadius: "13px", minWidth: "297px", minHeight: "340px" }}  onContextMenu={e => e.preventDefault()}>
             <Grid>
                 <div className="wreath_edit_orna_group overflow-scroll">
                     <div className="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
-                        {(refinedData.length != 0) ? refinedData.map((el) =>
-                        <div id="ornaBox" className="wreath_edit_orna_box">
+                        {(refinedData.length != 0) ? refinedData.map((el,index) =>
+                        <div id="ornaBox" className="wreath_edit_orna_box" key={index}>
                             <button onClick={() => {
                                 onClickHandler(el);
                                 console.log("click");
