@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Fragment, useState, useRef, useEffect, useCallback, lazy } from 'react'
 import { Popover, Modal, useModal, Switch, Spacer } from '@nextui-org/react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {Howl, Howler} from 'howler';
 import axios from 'axios';
 import Layout from '../components/layout'
@@ -17,8 +18,9 @@ import SocksModal_3 from '../components/socksModal_3'
 import { WreathEditModal } from '../components/wreathEditModal'
 import VideoModal from '../components/videoModal'
 
-const SHARE_URL = "https://comeback-reindeer/"
-const BASE_URL = "http://localhost:8000/"  
+
+const SHARE_URL = "https://www.comeback-reindeer/"
+const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
@@ -89,7 +91,7 @@ export default function Main(){
   /* 순록 데이터 불러오기(button 클릭 실행) */
   const [deerData, setDeerData] = useState([]);
   async function getDeer(){
-    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"deer/", {
+    let res = await axios.get(BASE_URL+"deer/", {
       params: {
         jwt:usertoken
       },
@@ -104,7 +106,7 @@ export default function Main(){
   /* 양말1 데이터 불러오기(button 클릭 실행) */
   const [sock1Data, setSock1Data] = useState();
   async function getSock1(){
-  let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"socks/", {
+  let res = await axios.get(BASE_URL+"socks/", {
       params: {
         jwt:usertoken,
         num:1
@@ -112,25 +114,15 @@ export default function Main(){
     });
     console.log("socks1 결과 =======");
     var datajson = res.data;
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock1Data(tmp);
-      return setShowS1_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock1Data(datajson);
-      return setShowS1_Modal(true);
-    }
+    console.log(datajson);
+    setSock1Data(datajson);
+    return setShowS1_Modal(true);
   }
 
   /* 양말2 데이터 불러오기(button 클릭 실행) */
   const [sock2Data, setSock2Data] = useState();
   async function getSock2(){
-  let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"socks/", {
+  let res = await axios.get(BASE_URL+"socks/", {
       params: {
         jwt:usertoken,
         num:2
@@ -138,25 +130,15 @@ export default function Main(){
     });
     console.log("socks2 결과 =======");
     var datajson = res.data;
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock2Data(tmp);
-      return setShowS2_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock2Data(datajson);
-      return setShowS2_Modal(true);
-    }
+    console.log(datajson);
+    setSock2Data(datajson);
+    return setShowS2_Modal(true);
   }
 
   /* 양말3 데이터 불러오기(button 클릭 실행) */
   const [sock3Data, setSock3Data] = useState();
   async function getSock3(){
-  let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"socks/", {
+  let res = await axios.get(BASE_URL+"socks/", {
       params: {
         jwt:usertoken,
         num:3
@@ -164,19 +146,9 @@ export default function Main(){
     });
     console.log("socks3 결과 =======");
     var datajson = res.data;
-    if(datajson.url=="null" && datajson.name=="null"){
-      const tmp = {
-        url : null,
-        name : null,
-      }
-      console.log(tmp);
-      setSock3Data(tmp);
-      return setShowS3_Modal(true);
-    }else{
-      console.log(datajson);
-      setSock3Data(datajson);
-      return setShowS3_Modal(true);
-    }
+    console.log(datajson);
+    setSock3Data(datajson);
+    return setShowS3_Modal(true);
   }
 
   /* 링크복사 */
@@ -347,7 +319,7 @@ export default function Main(){
 
   const [refinedData, setRefinedData] = useState([]);
   async function Ornament(){
-    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"ornament/", {
+    let res = await axios.get(BASE_URL+"ornament/", {
       params: {
         jwt:usertoken,
       },
@@ -374,7 +346,7 @@ export default function Main(){
 
   //const [refinedData, setRefinedData] = useState([]);
   // async function realWreath(){
-  //   let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"realwreath/", {
+  //   let res = await axios.get(BASE_URL+"realwreath/", {
   //     params: {
   //       jwt:usertoken,
   //     },
@@ -390,7 +362,7 @@ export default function Main(){
     console.log(trueWreath)
   })
   async function realWreath(usertoken){
-    let res = await axios.get(process.env.NEXT_PUBLIC_MY_BACK+"realwreath/", {
+    let res = await axios.get(BASE_URL+"realwreath/", {
       params: {
         jwt:usertoken,
       },
@@ -672,8 +644,11 @@ export default function Main(){
           }
           <div className="quiz-deco"><Image src='/img/quiz_deco.png' width='272' height='89'/></div>
         </div>
-
-        <div className="w-full flex justify-center mt-10"><button onClick={copyLinkHandler} className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">내 현관 공유링크 복사하기</button></div>
+        <CopyToClipboard text={urlForm} className="w-full flex justify-center mt-10" onCopy={() => alert("클립보드에 복사되었습니다.")}>
+          <button className="drop-shadow-md w-[270px] text-white text-[16px] bg-[#BD2E2E] rounded-xl py-3 px-3 block">
+            내 현관 공유링크 복사하기
+          </button>
+        </CopyToClipboard>
         <div className="w-full flex justify-center mb-10"><button onClick={logoutHandler} className="drop-shadow-md w-[270px] text-white text-[14px] bg-[#737373] rounded-xl py-3 px-3 mt-2.5 block">로그아웃</button></div>
         
         <div className="flex-1"></div>

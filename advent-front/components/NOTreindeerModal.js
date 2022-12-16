@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Image } from "@nextui-org/react";
+import axios from 'axios';
 
+/* 만약에 image src가 없어서 빈 이미지가 아니라 뭔가 에러 이미지가뜨면 Image 태그 img로 변경 */
 const fallBackSrc = "/img/reindeer/null_callback.png"   
 
 const ReindeerModal = ({ isVisible, onRClose, usertoken, nickname, solvedNum, deerData }) => {
   if(!isVisible) return null;
 
   return (
-    <div onContextMenu={e => e.preventDefault()} >
+    <div  onContextMenu={e => e.preventDefault()}>
       <Modal css={{background:"transparent"}} noPadding open={isVisible} preventClose onClose={onRClose} width={300} height={563} animated={false}>
         <Modal.Header className="flex flex-col items-center text-center w-full" css={{ position: "absolute", zIndex: "$1"}}>
           <div className="flex flex-col items-center text-center">
