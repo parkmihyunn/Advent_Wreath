@@ -22,6 +22,8 @@ const BASE_URL = "http://localhost:8000/"
 const DEFAULT_IMG = "/img/ornaments/orna_none.png"
 
 export default function Main(){
+  console.warn = console.error = () => {};
+  
   /* 모달 STATE */
   const [showG_Modal, setShowG_Modal] = useState(false);  // 가이드
   const [showQ_Modal, setShowQ_Modal] = useState(false);  // 퀴즈 있음
@@ -64,12 +66,14 @@ export default function Main(){
         alert("잘못된 접근입니다.");
       }
     }
-  },[console.log(usertoken)])
+  },[])
 
   //video
   function popVideo() {
     if(solvedNum >= 10) {
-      setShowVM_Modal(true)
+      setShowVM_Modal(true);
+    } else {
+      alert("🎄크리스마스까지 기다려 주세요🎄")
     }
   }
 
