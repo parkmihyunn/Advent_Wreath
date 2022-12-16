@@ -13,8 +13,8 @@ const VideoModal = ({ isVisible, onClose, user, usertoken }) => {
 				<div className="inset-0 bg-opacity-75 flex justify-center items-center z-0 overflow-scroll bg-cover bg-scroll h-full w-full">
 					<video
                         src="/video/testVideo.mp4"
-                        width="335"
-                        height="624"
+                        width="300"
+                        height="584"
                         controls="controls"
                         autoPlay="autoplay">
                     </video>
