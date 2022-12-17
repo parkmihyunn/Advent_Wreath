@@ -9,14 +9,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
     jwt = models.CharField(blank=False, null=True, unique=True,max_length=100)
     solve_count = models.SmallIntegerField(default=0, blank=False, null = False)
-<<<<<<< HEAD
-    nickname = models.CharField(max_length=100, blank=False, null=False, default="undefiend")
-    sock_image_url1 = models.CharField(null=True, max_length=1000)
-    sock_image_url2 = models.CharField(null=True, max_length=1000)
-    sock_image_url3 = models.CharField(null=True, max_length=1000)
-=======
     nickname = models.CharField(max_length=100, blank=False, null=False, default="임시닉네임")
->>>>>>> 484da55050583991e0adfa141bae607a9b085fea
 
     def __str__(self):
         return str(self.username)

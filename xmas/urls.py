@@ -21,10 +21,6 @@ urlpatterns = [
     path('',include('wall.urls'),),
     path('rest-auth/kakao/', views.KakaoLogin.as_view(), name='kakao_login'),
     path('changenickname/',views.ChangeNickName.as_view(), name="changenickname"),
-<<<<<<< HEAD
-    path('solvequestion/',views.SolveQuestion.as_view(), name="solvequestion"),
-=======
->>>>>>> 484da55050583991e0adfa141bae607a9b085fea
     path('nickname/',views.Nickname.as_view(), name="nickname"),
 
     
